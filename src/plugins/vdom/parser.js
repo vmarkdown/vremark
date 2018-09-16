@@ -34,7 +34,7 @@ Parser.prototype.parse = function(nodes, index) {
     let children = (node.children && node.children.length>0)?this.parse(node.children):[];
     // return this.renderer[node.type](node, children, index);
 
-    return this.renderer[node.type].apply(this.renderer, [this.renderer.h, node, index, children]);
+    return this.renderer[node.type].apply(this.renderer, [this.renderer.h(), node, index, children]);
 };
 
 module.exports = Parser;

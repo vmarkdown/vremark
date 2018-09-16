@@ -19,6 +19,7 @@ const config = {
         ]
     },
     externals: {
+        'vremark-plugin-katex': 'vremarkPluginKatex'
     },
     plugins: [
     ]
@@ -46,12 +47,20 @@ module.exports = [
             vremark: './src/index.js'
         }
     }),
+    // merge(config, {
+    //     entry:{
+    //         'example-react-main': './examples/react/main.js'
+    //     },
+    //     externals: {
+    //         'vremark-plugin-katex': 'vremarkPluginKatex'
+    //     }
+    // }),
     merge(config, {
         entry:{
-            'example-react-main': './examples/react/main.js'
+            'example-vue-main': './examples/vue/main.js'
         },
         externals: {
-            'vremark-plugin-katex': 'vremarkPluginKatex'
+
         }
     }),
     // merge({

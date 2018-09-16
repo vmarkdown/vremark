@@ -8570,7 +8570,7 @@ Parser.prototype.parse = function(nodes, index) {
     let children = (node.children && node.children.length>0)?this.parse(node.children):[];
     // return this.renderer[node.type](node, children, index);
 
-    return this.renderer[node.type].apply(this.renderer, [this.renderer.h, node, index, children]);
+    return this.renderer[node.type].apply(this.renderer, [this.renderer.h(), node, index, children]);
 };
 
 module.exports = Parser;
@@ -8585,14 +8585,14 @@ module.exports = Parser;
 
 function Renderer(options) {
     this.options = options || {};
-    this.h = options.h;
+    this._h = options.h;
 }
 
 Renderer.prototype.h = function(h) {
     if(h) {
-        this.h = h;
+        this._h = h;
     }
-    return this.h;
+    return this._h;
 };
 
 Renderer.prototype.root = function(h, node, index, children) {};
