@@ -1,4 +1,4 @@
-const Renderer = require('./renderer');
+// const Renderer = require('./renderer');
 
 const isArray = (function isArray() {
     if (Array.isArray) return Array.isArray;
@@ -9,10 +9,11 @@ const isArray = (function isArray() {
 
 function Parser(options) {
     this.options = options;
-    this.renderer =  new Renderer(options);
+    // this.renderer =  new Renderer(options);
+    this.renderer = options.renderer;
 }
 
-Parser.prototype.parse = function(nodes) {
+Parser.prototype.parse = function(nodes, index) {
 
     if(!nodes) return null;
 
@@ -20,7 +21,7 @@ Parser.prototype.parse = function(nodes) {
         let vnodes = [];
         for(let i=0;i<nodes.length;i++){
             let node = nodes[i];
-            vnodes.push(this.parse(node));
+            vnodes.push(this.parse(node, i));
         }
         return vnodes;
     }
@@ -30,8 +31,10 @@ Parser.prototype.parse = function(nodes) {
         throw new Error('renderer no method:'+ node.type);
     }
 
-    let children = node.children?this.parse(node.children):[];
-    return this.renderer[node.type](node, children);
+    let children = (node.children && node.children.length>0)?this.parse(node.children):[];
+    // return this.renderer[node.type](node, children, index);
+
+    return this.renderer[node.type].apply(this.renderer, [this.renderer.h, node, index, children]);
 };
 
 module.exports = Parser;

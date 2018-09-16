@@ -48,7 +48,7 @@ module.exports = [
     }),
     merge(config, {
         entry:{
-            main: './examples/main.js'
+            'example-react-main': './examples/react/main.js'
         },
         externals: {
             'vremark-plugin-katex': 'vremarkPluginKatex'

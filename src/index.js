@@ -16,6 +16,7 @@ function vremark(options) {
         .use(vdom, options);
 }
 
+vremark.Renderer = require('./renderers/renderer');
 module.exports = vremark;
 
 
