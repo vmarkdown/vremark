@@ -34,14 +34,14 @@ module.exports = [
     //         library: "vremarkPluginVdom"
     //     },
     // }),
-    merge(config, {
-        entry:{
-            'vremark-plugin-katex': './src/plugins/katex/index.js'
-        },
-        output: {
-            library: "vremarkPluginKatex"
-        },
-    }),
+    // merge(config, {
+    //     entry:{
+    //         'vremark-plugin-katex': './src/plugins/katex/index.js'
+    //     },
+    //     output: {
+    //         library: "vremarkPluginKatex"
+    //     },
+    // }),
     merge(config, {
         entry:{
             vremark: './src/index.js'
@@ -55,9 +55,17 @@ module.exports = [
     //         'vremark-plugin-katex': 'vremarkPluginKatex'
     //     }
     // }),
+    // merge(config, {
+    //     entry:{
+    //         'example-vue-main': './examples/vue/main.js'
+    //     },
+    //     externals: {
+    //
+    //     }
+    // }),
     merge(config, {
         entry:{
-            'example-vue-main': './examples/vue/main.js'
+            'example-virtual-dom-main': './examples/virtual-dom/index.js'
         },
         externals: {
 
