@@ -1,6 +1,4 @@
-// console.log(vremark);
-
-const md = require('./md/dillinger.txt');
+const md = require('./md/test.txt');
 
 const vremarkPluginKatex = require('vremark-plugin-katex');
 
@@ -10,26 +8,14 @@ const processor = vremark({h: React.createElement})
 const file = processor.processSync(md);
 const vdom = file.contents;
 
-ReactDOM.render(
-    vdom,
-    document.getElementById('app')
-);
+const previewIframe = document.getElementById('preview');
 
-// console.time('parse');
+previewIframe.onload = function () {
 
-// const processor = vremark({}).use(vremarkPluginVdom, {
-//     h: React.createElement
-// });
+    ReactDOM.render(
+        vdom,
+        previewIframe.contentDocument.body
+    );
 
+};
 
-// const file = processor.processSync(md);
-//
-// console.timeEnd('parse');
-//
-// const ast = processor.parse(md);
-// console.log(ast);
-//
-// console.log(file);
-//
-// const vdom = file.contents;
-//

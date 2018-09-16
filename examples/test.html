@@ -4,27 +4,29 @@
     <meta charset="UTF-8">
     <title>test</title>
 
-    <link rel="stylesheet" href="//cdn.bootcss.com/github-markdown-css/2.10.0/github-markdown.min.css">
-    <link rel="stylesheet" href="//cdn.bootcss.com/KaTeX/0.10.0-alpha/katex.min.css">
-
-
     <script src="//cdn.bootcss.com/react/16.4.0/umd/react.development.js"></script>
     <script src="//cdn.bootcss.com/react-dom/16.4.0/umd/react-dom.development.js"></script>
 
-
     <script src="../dist/vremark.js"></script>
-    <!--<script src="../dist/vremark-plugin-vdom.js"></script>-->
     <script src="../dist/vremark-plugin-katex.js"></script>
 
     <style>
-        #app {
-            padding: 30px 80px;
+        html,body{
+            padding: 0;
+            margin: 0;
+            height: 100%;
+        }
+
+        #preview{
+            width: 100%;
+            height: 99%;
         }
     </style>
 </head>
 <body>
 
-<div id="app"></div>
+<iframe id="preview" src="./preview.html" frameborder="0" sandbox="allow-same-origin"></iframe>
+
 <script src="../dist/main.js"></script>
 
 </body>
