@@ -26,6 +26,18 @@ const config = {
 };
 
 module.exports = [
+    merge(config, {
+        entry:{
+            vremark: './src/index.js'
+        }
+    }),
+
+    merge(config, {
+        entry:{
+            'example-react-main': './examples/react/index.js'
+        }
+    }),
+
     // merge(config, {
     //     entry:{
     //         'vremark-plugin-vdom': './src/plugins/vdom/index.js'
@@ -42,19 +54,8 @@ module.exports = [
     //         library: "vremarkPluginKatex"
     //     },
     // }),
-    merge(config, {
-        entry:{
-            vremark: './src/index.js'
-        }
-    }),
-    // merge(config, {
-    //     entry:{
-    //         'example-react-main': './examples/react/main.js'
-    //     },
-    //     externals: {
-    //         'vremark-plugin-katex': 'vremarkPluginKatex'
-    //     }
-    // }),
+
+
     // merge(config, {
     //     entry:{
     //         'example-vue-main': './examples/vue/main.js'
@@ -63,14 +64,14 @@ module.exports = [
     //
     //     }
     // }),
-    merge(config, {
-        entry:{
-            'example-virtual-dom-main': './examples/virtual-dom/index.js'
-        },
-        externals: {
-
-        }
-    }),
+    // merge(config, {
+    //     entry:{
+    //         'example-virtual-dom-main': './examples/virtual-dom/index.js'
+    //     },
+    //     externals: {
+    //
+    //     }
+    // }),
     // merge({
     //     entry:{
     //         vmarkdown: './src/index.js'

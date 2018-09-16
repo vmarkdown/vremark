@@ -1,12 +1,12 @@
 /**
  * Renderer
  */
-const uniqueId = (function () {
-    let index = 0;
-    return function uniqueId(prefix) {
-        return prefix + index++;
-    }
-})();
+
+let index = 0;
+function uniqueId(prefix) {
+    return prefix + index++;
+}
+
 
 function Renderer(options) {
     this.options = options || {};
@@ -15,7 +15,7 @@ function Renderer(options) {
 Renderer.prototype.root = function(node, children) {
     const h = this.options.h;
     return h('div', {
-        key: uniqueId('root_'),
+        key: uniqueId('div_'),
         className: 'markdown-body'
     }, children);
 };
@@ -31,21 +31,17 @@ Renderer.prototype.inlineCode = function(node) {
 
 
 Renderer.prototype.math = function(node) {
-    console.log('math');
+    debugger
     const h = this.options.h;
-    return h('p', {
-        key: uniqueId('math_'),
-        dangerouslySetInnerHTML: {
-            __html: node.renderedValue
-        }
-    });
+    return h('div', {
+        key: uniqueId('inlineMath_')
+    }, node.value);
 };
 
 Renderer.prototype.inlineMath = function(node) {
-    console.log('inlineMath');
     const h = this.options.h;
     return h('span', {
-        key: uniqueId('inlineMath_'),
+        key: uniqueId('html_'),
         dangerouslySetInnerHTML: {
             __html: node.renderedValue
         }
@@ -75,12 +71,25 @@ Renderer.prototype.blockquote = function(node, children) {
 
 Renderer.prototype.html = function(node, children) {
     const h = this.options.h;
+
     return h('div', {
         key: uniqueId('html_'),
         dangerouslySetInnerHTML: {
             __html: node.value
         }
     });
+
+    // return h('div', {
+    //     key: uniqueId('html_'),
+    //     'data-render': 'html'
+    // }, node.value);
+
+    // debugger
+    // const h = this.options.h;
+    // return h('div', {
+    //     key: uniqueId('html_'),
+    //     'data-render': 'html'
+    // }, node.value);
 };
 
 Renderer.prototype.heading = function(node, children) {
@@ -172,11 +181,7 @@ Renderer.prototype.emphasis = function(node, children) {
 Renderer.prototype.codespan = function(text) {
 };
 
-Renderer.prototype.break = function() {
-    const h = this.options.h;
-    return h('br', {
-        key: uniqueId('break_')
-    });
+Renderer.prototype.br = function() {
 };
 
 Renderer.prototype.delete = function(node, children) {
@@ -196,32 +201,23 @@ Renderer.prototype.link = function(node, children) {
 };
 
 Renderer.prototype.linkReference = function(node, children) {
-    const h = this.options.h;
-    return h('a', {
-        key: uniqueId('linkReference_'),
-        href: node.url,
-        title: node.title
-    }, children);
+    // debugger
+    // const h = this.options.h;
+    // return h('a', {
+    //     key: uniqueId('link_'),
+    //     href: node.url,
+    //     title: node.title
+    // }, children);
 };
 
-Renderer.prototype.definition = function(node) {
-    const h = this.options.h;
-    return h('div', {
-            key: uniqueId('definition_'),
-            style: {
-                height: 0,
-                visibility: 'hidden'
-            }
-        },
-        h('a', {
-            key: uniqueId('definition_'),
-            href: node.url,
-            'data-identifier': node.identifier
-        }, [
-            '['+node.identifier+']: ',
-            node.url
-        ])
-    );
+Renderer.prototype.definition = function(node, children) {
+    // debugger
+    // const h = this.options.h;
+    // return h('a', {
+    //     key: uniqueId('link_'),
+    //     href: node.url,
+    //     title: node.title
+    // }, children);
 };
 
 
