@@ -1,9 +1,9 @@
 {
   "scripts": {
-    "dev": "webpack -w"
+    "dev": "webpack -w --config ./examples/webpack.config.js --example react"
   },
   "devDependencies": {
-    "raw-loader": "^0.5.1",
+    "text-loader": "^0.0.1",
     "webpack": "^4.17.2",
     "webpack-cli": "^3.1.0",
     "webpack-merge": "^4.1.4"
@@ -20,6 +20,7 @@
     "remark-html-katex": "^1.1.1",
     "remark-math": "^1.0.4",
     "remark-rehype": "^3.0.1",
+    "remark-render": "^0.0.2",
     "remark-stringify": "^5.0.0",
     "remark-toc": "^5.0.0",
     "remark-vdom": "^6.0.0",
