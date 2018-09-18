@@ -12,13 +12,14 @@ const h = React.createElement;
 const processor = vremark().data({
     'h': h,
     'flowchart': window.flowchart,
-    'mermaid': window.mermaid
+    'mermaid': window.mermaid,
+    'katex': window.katex,
 });
     // .use(render, {
     //     renderer: renderer
     // });
 
-const mdText = require('../md/mermaid.md');
+const mdText = require('../md/maxiang.md');
 
 
 // const file = processor.processSync(mdText);

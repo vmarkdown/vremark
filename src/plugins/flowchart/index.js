@@ -25,7 +25,7 @@ module.exports = function flowchartPlugin(options = {}) {
             container.parentElement.removeChild(container);
 
             node.className = 'vremark-flowchart';
-            node.type = 'flow';
+            node.type = 'html'; //'flow';
             node.value = innerHTML;
 
         });

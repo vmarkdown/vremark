@@ -64,6 +64,14 @@ Note right of Bob: Bob thinks
 Bob-->Alice: I am good thanks!
 ```
 
+```mermaid
+sequenceDiagram
+
+Alice->Bob: Hello Bob, how are you?
+Note right of Bob: Bob thinks
+Bob-->Alice: I am good thanks!
+```
+
 > **提示：**想了解更多，请查看**流程图**[语法][3]以及**时序图**[语法][4]。
 
 ### 复选框

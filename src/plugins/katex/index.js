@@ -1,9 +1,13 @@
 const visit = require('unist-util-visit')
-const katex = require('katex')
+// const katex = require('katex')
 const position = require('unist-util-position')
 
 module.exports = function plugin (opts = {}) {
-  if (opts.throwOnError == null) opts.throwOnError = false
+
+
+    var katex = opts.katex || this.data('katex') || window['katex'];
+
+    if (opts.throwOnError == null) opts.throwOnError = false
   return function transform (node, file) {
     function renderContent (element) {
       let renderedValue
