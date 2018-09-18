@@ -9,8 +9,8 @@
 
 
     <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/7.3/styles/default.css">
-    <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/7.3/styles/solarized_dark.css">
-    <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.12.0/styles/atom-one-light.min.css">
+    <!--<link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/7.3/styles/solarized_dark.css">-->
+    <!--<link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.12.0/styles/atom-one-light.min.css">-->
 
     <link rel="stylesheet" href="../../vremark.css">
 
@@ -21,6 +21,7 @@
     <script src="//cdn.bootcss.com/raphael/2.2.7/raphael.js"></script>
     <script src="//cdn.bootcss.com/flowchart/1.11.0/flowchart.js"></script>
 
+    <script src="//cdn.bootcss.com/mermaid/8.0.0-rc.8/mermaid.js"></script>
     <!--<script src="../../dist/vremark.js"></script>-->
     <!--<script src="../../dist/vremark-plugin-katex.js"></script>-->
 
@@ -39,6 +40,16 @@
             margin-top: 40px;
             padding: 40px;
         }
+
+        .mermaid-container{
+            width: 600px;height: 400px;
+            margin: 0 auto;
+            background-color: rgba(169, 169, 169, 0.24);
+        }
+
+        #graphDiv{
+            height: 100%;
+        }
     </style>
 </head>
 <body>
@@ -50,7 +61,78 @@
 
 <script src="../dist/example-react-main.js"></script>
 
+<!--<div class="mermaid-container">-->
+    <!--<div id="mermaid"></div>-->
+    <!--<div id="graphDiv"></div>-->
 
+    <!--<pre><code class="lang-mermaid">-->
+<!--</code></pre>-->
+
+</div>
+
+<script>
+
+    // mermaid.initialize({
+    //     flowchart:{
+    //         htmlLabels: false
+    //     }
+    // });
+    //
+    // mermaid.mermaidAPI.initialize({
+    //     startOnLoad: true
+    // })
+    //
+    // var graphDefinition = 'graph TB\na-->b'
+    // // var cb = function(svgGraph) {
+    // //     console.log(svgGraph)
+    // //     document.getElementById('graphDiv').innerHTML = svgGraph
+    // // }
+    // var svgGraph = mermaid.mermaidAPI.render('id1',graphDefinition)
+    // document.getElementById('graphDiv').innerHTML = svgGraph
+
+
+    // console.log(mermaid.mermaidAPI.parse(graphDefinition))
+
+    // mermaid.initialize({
+   //      theme: 'default'
+   //  });
+   //
+   //  var config = mermaid.mermaidAPI.getConfig();
+   //
+   //  debugger
+   //  // mermaid.init(undefined, document.querySelectorAll('.lang-mermaid'))
+   //  var element = document.querySelector("#graphDiv");
+   //
+   //  mermaid.mermaidAPI.render('#mermaid', `graph LR
+   // A-. text .-&gt; B`, function (svgCode, bindFunctions) {
+   //      element.innerHTML = svgCode;
+   //  }, element);
+
+
+    // mermaid.flowchartConfig = {
+    //     width: '100%'
+    // };
+
+    // var graphDefinition = `graph TD
+    // B["fa:fa-twitter for peace"]
+    // B-->C[fa:fa-ban forbidden]
+    // B-->D(fa:fa-spinner);
+    // B-->E(A fa:fa-camera-retro perhaps?);`;
+    //
+    // // console.log(mermaid.parse(textStr));
+    //
+    //
+    // var element = document.querySelector("#graphDiv");
+    //
+    // var insertSvg = function(svgCode, bindFunctions){
+    //     element.innerHTML = svgCode;
+    // };
+    //
+    // var graph = mermaid.render('graphDiv', graphDefinition, insertSvg);
+
+
+
+</script>
 
 </body>
 </html>

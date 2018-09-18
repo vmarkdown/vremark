@@ -1,35 +1,11 @@
-``` javascript
-'use strict';
+```mermaid
+sequenceDiagram
+    Alice ->> Bob: Hello Bob, how are you?
+    Bob-->>John: How about you John?
+    Bob--x Alice: I am good thanks!
+    Bob-x John: I am good thanks!
+    Note right of John: Bob thinks a long<br/>long time, so long<br/>that the text does<br/>not fit on a row.
 
-var hljs = require('highlight.js')
-var line = require('./highlightjs-line-numbers');
-const visit = require('unist-util-visit');
-
-module.exports = function checkbox(options = {}) {
-
-    var lineNumbers = options.lineNumbers;
-
-    return function transformer(root) {
-
-        return visit(root, 'code', function (node) {
-
-            var lang = node.lang;
-
-            if (!lang || !hljs.getLanguage(lang)) {
-                return;
-            }
-
-            var h = hljs.highlight(lang, node.value);
-            var html = lineNumbers?line.addLineNumbersBlockFor(h.value, 1):h.value;
-            var wrap = '<pre class="highlight-code highlight-code-line-numbers"><code class="hljs hljs-dark '+h.language+'">'+ html +'</code></pre>';
-            node.value = wrap;
-            node.type = 'html';
-
-        });
-
-    };
-
-};
-
-
+    Bob-->Alice: Checking with John...
+    Alice->John: Yes... John, how are you?
 ```

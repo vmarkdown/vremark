@@ -11,13 +11,14 @@ const h = React.createElement;
 
 const processor = vremark().data({
     'h': h,
-    'flowchart': flowchart
+    'flowchart': window.flowchart,
+    'mermaid': window.mermaid
 });
     // .use(render, {
     //     renderer: renderer
     // });
 
-const mdText = require('../md/test.md');
+const mdText = require('../md/mermaid.md');
 
 
 // const file = processor.processSync(mdText);
