@@ -12,7 +12,8 @@ const breaks = require('remark-breaks');
 const highlight = require('./plugins/highlight/index');
 
 module.exports = unified()
-    .use(parse, {}).use(highlight)
+    .use(parse, {})
+    .use(highlight, {lineNumbers: false})
     //basic
     .use(toc, {
         // heading: '[TOC]'

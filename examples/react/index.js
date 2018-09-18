@@ -46,11 +46,11 @@ processor.process(mdText, function(err, file) {
 
 
 
-// (function () {
-//     const vnode = processor.parse(mdText);
-//     const vdom = processor.runSync(vnode);
-//     console.log(vdom);
-// })();
+(function () {
+    const vnode = processor.parse(mdText);
+    const vdom = processor.runSync(vnode);
+    console.log(vdom);
+})();
 
 
 //====================================================================================
