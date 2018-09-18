@@ -15,3 +15,18 @@ highlight
 
 
 Breaks support
+
+
+katex
+
+
+
+// custom cache 
+
+flowchart
+
+
+
+mermaid
+https://mermaidjs.github.io/
+

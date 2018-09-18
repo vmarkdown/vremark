@@ -9,12 +9,15 @@ const h = React.createElement;
 //     rootClassName: 'markdown-body'
 // });
 
-const processor = vremark().data('h', h);
+const processor = vremark().data({
+    'h': h,
+    'flowchart': flowchart
+});
     // .use(render, {
     //     renderer: renderer
     // });
 
-const mdText = require('../md/maxiang.md');
+const mdText = require('../md/test.md');
 
 
 // const file = processor.processSync(mdText);
@@ -28,6 +31,7 @@ processor.process(mdText, function(err, file) {
     console.log(file);
 
     const vdom = file.contents;
+
     ReactDOM.render(
         vdom,
         document.getElementById('preview')
@@ -37,11 +41,16 @@ processor.process(mdText, function(err, file) {
 });
 
 
-(function () {
-    const vnode = processor.parse(mdText);
-    const vdom = processor.runSync(vnode);
-    console.log(vdom);
-})();
+
+
+
+
+
+// (function () {
+//     const vnode = processor.parse(mdText);
+//     const vdom = processor.runSync(vnode);
+//     console.log(vdom);
+// })();
 
 
 //====================================================================================
