@@ -34,8 +34,9 @@ module.exports = function plugin (opts = {}) {
       }
 
       // const childAst = parseMathHtml(renderedValue).children[0]
-        element.renderedValue =renderedValue;
+      //   element.renderedValue =renderedValue;
       // element.data.hChildren = [childAst]
+        element.value = renderedValue;
     }
 
     visit(node, 'inlineMath', renderContent)

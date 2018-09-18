@@ -2,15 +2,13 @@ const unified = require('unified');
 const parse = require('remark-parse');
 const toc = require('remark-toc');
 const math = require('remark-math');
+const katex = require('./plugins/katex/index');
 const linkReference = require('./plugins/linkReference/index');
 const paragraphHTML2Text = require('./plugins/paragraph-html-to-text/index');
 const checkbox = require('./plugins/checkbox/index');
-// const render = require('remark-render');
+const render = require('remark-render');
 const breaks = require('remark-breaks');
 const highlight = require('./plugins/highlight/index');
-
-
-// const Renderer = require('remark-render/renderers/react-renderer');
 
 module.exports = unified()
         .use(parse, {}).use(highlight)
@@ -21,9 +19,9 @@ module.exports = unified()
         .use(paragraphHTML2Text, {})
         .use(checkbox, {})
         .use(breaks)
-        .use(math, {})
+        .use(math, {}).use(katex, {})
 
-        // .use(render, {})
+        .use(render, {mode: 'react'})
         .freeze();
 
 // module.exports = unified().use(parse).use(stringify).freeze();
