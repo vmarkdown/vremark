@@ -11,3 +11,7 @@ Breakdance is a node.js library for converting HTML to markdown.
 http://breakdance.io/plugins.html
 
 highlight
+
+
+
+Breaks support

@@ -13,14 +13,32 @@ const processor = vremark()
         renderer: renderer
     });
 
-console.log(processor);
 
-const file = processor.processSync('# h1');
+
+const mdText = require('../md/maxiang.md');
+
+
+
+
+
+const file = processor.processSync(mdText);
 const vdom = file.contents;
+console.log(vdom);
+
 ReactDOM.render(
     vdom,
     document.getElementById('preview')
 );
+
+
+(function () {
+    const vnode = processor.parse(mdText);
+    const vdom = processor.runSync(vnode);
+    console.log(vdom);
+})();
+
+
+
 
 // const Renderer = require('../../src/renderers/react/renderer');
 //
