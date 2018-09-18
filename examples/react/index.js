@@ -20,8 +20,8 @@ const processor = vremark().data({
     //     renderer: renderer
     // });
 
-const mdText = require('../md/maxiang.md');
-// const mdText = require('../md/test.md');
+// const mdText = require('../md/maxiang.md');
+const mdText = require('../md/toc.md');
 
 // const file = processor.processSync(mdText);
 // const vdom = file.contents;

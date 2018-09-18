@@ -1,6 +1,7 @@
 const unified = require('unified');
 const parse = require('remark-parse');
-const toc = require('remark-toc');
+// const toc = require('./plugins/toc/index');
+const toc = require('./plugins/toc/index');
 const math = require('remark-math');
 const katex = require('./plugins/katex/index');
 const linkReference = require('./plugins/linkReference/index');
