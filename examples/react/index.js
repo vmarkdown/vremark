@@ -14,13 +14,14 @@ const processor = vremark().data({
     'flowchart': window.flowchart,
     'mermaid': window.mermaid,
     'katex': window.katex,
+    'Diagram': window.Diagram,
 });
     // .use(render, {
     //     renderer: renderer
     // });
 
 const mdText = require('../md/maxiang.md');
-
+// const mdText = require('../md/test.md');
 
 // const file = processor.processSync(mdText);
 // const vdom = file.contents;
@@ -49,8 +50,13 @@ processor.process(mdText, function(err, file) {
 
 
 (function () {
+    console.time('parse');
+
     const vnode = processor.parse(mdText);
     const vdom = processor.runSync(vnode);
+
+    console.timeEnd('parse');
+
     console.log(vdom);
 })();
 

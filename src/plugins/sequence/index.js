@@ -2,7 +2,7 @@ const visit = require('unist-util-visit');
 
 module.exports = function (options = {}) {
 
-    var sequence = options.sequence || this.data('sequence') || window['sequence'];
+    var Diagram = options.Diagram || this.data('Diagram') || window['Diagram'];
 
     return function transformer(root) {
 
@@ -12,22 +12,20 @@ module.exports = function (options = {}) {
                 return;
             }
 
-            // var container = document.createElement("div");
-            // container.style.width = 0;
-            // container.style.height = 0;
-            // document.body.appendChild(container);
-            //
-            // var code = node.value;
-            // var diagram = flowchart.parse(code);
-            // diagram.drawSVG(container);
-            //
-            // var innerHTML = container.innerHTML;
-            // container.parentElement.removeChild(container);
-            //
-            // node.className = 'vremark-flowchart';
-            // node.type = 'html'; //'flow';
-            // node.value = innerHTML;
+            var code = node.value;
+            var diagram = Diagram.parse(code);
 
+            var container = document.createElement('div');
+            container.style.width = 0;
+            container.style.height = 0;
+            document.body.appendChild(container);
+            diagram.drawSVG(container, {theme: 'simple'});
+            var innerHTML = container.innerHTML;
+            container.parentElement.removeChild(container);
+
+            node.className = 'vremark-sequence';
+            node.type = 'html';
+            node.value = innerHTML;
         });
 
     };
