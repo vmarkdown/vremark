@@ -1,13 +1,18 @@
 'use strict';
 
 var slug = require('remark-slug');
-var util = require('mdast-util-toc');
+// var util = require('mdast-util-toc');
+var util = require('./lib/index');
 
 module.exports = toc;
 
 var DEFAULT_HEADING = 'toc|table[ -]of[ -]contents?';
 
 function toc(options) {
+
+
+  console.dir(options);
+
   var settings = options || {};
   var heading = settings.heading || DEFAULT_HEADING;
   var depth = settings.maxDepth || 6;
