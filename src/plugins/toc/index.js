@@ -38,6 +38,6 @@ function toc(options) {
         toc.props.className = 'vremark-toc';
         toc.children = [ result.map ];
 
-        self.data('toc', toc);
+        // self.data('toc', toc);
     }
 }

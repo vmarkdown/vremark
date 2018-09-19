@@ -1,10 +1,12 @@
 'use strict';
 
-var hljs = require('highlight.js')
+// var hljs = require('highlight.js')
 var line = require('./highlightjs-line-numbers');
 const visit = require('unist-util-visit');
 
 module.exports = function checkbox(options = {}) {
+
+    var hljs = options.hljs || this.data('hljs') || window['hljs'];
 
     var lineNumbers = options.lineNumbers;
 

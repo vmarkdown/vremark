@@ -1,6 +1,7 @@
 {
   "scripts": {
-    "dev": "webpack -w --config ./examples/webpack.config.js --example react"
+    "dev": "webpack -w --config ./examples/webpack.config.js --example react",
+    "dist": "webpack --config ./webpack.config.js"
   },
   "devDependencies": {
     "text-loader": "^0.0.1",

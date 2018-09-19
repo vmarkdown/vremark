@@ -4,14 +4,15 @@ const h = React.createElement;
 
 const processor = vremark().data({
     'h': h,
+    'hljs': window.hljs,
     'flowchart': window.flowchart,
     'mermaid': window.mermaid,
     'katex': window.katex,
     'Diagram': window.Diagram,
 });
 
-// const mdText = require('../md/maxiang.md');
-const mdText = require('../md/test.md');
+const mdText = require('../md/maxiang.md');
+// const mdText = require('../md/test.md');
 
 // const file = processor.processSync(mdText);
 // const vdom = file.contents;
