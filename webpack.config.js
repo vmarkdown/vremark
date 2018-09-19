@@ -1,5 +1,6 @@
 const path = require('path');
 const merge = require('webpack-merge');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 const config = {
     mode: 'none',
@@ -17,7 +18,18 @@ const config = {
         // 'vremark-plugin-katex': 'vremarkPluginKatex'
     },
     plugins: [
-    ]
+    ],
+    optimization: {
+        minimizer: [
+            new UglifyJsPlugin({
+                uglifyOptions: {
+                    output: {
+                        comments: false
+                    }
+                }
+            })
+        ]
+    }
 };
 
 module.exports = [
