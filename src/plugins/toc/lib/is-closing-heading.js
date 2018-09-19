@@ -20,5 +20,7 @@ var HEADING = 'heading';
  * @return {boolean} - Whether znode is a closing heading.
  */
 function isClosingHeading(node, depth) {
-    return depth && node && node.type === HEADING && node.depth <= depth;
+    return depth && node
+        // && node.type === HEADING
+        && node.depth <= depth;
 }

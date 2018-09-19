@@ -13,8 +13,11 @@ module.exports = function flowchartPlugin(options = {}) {
             }
 
             var container = document.createElement("div");
-            container.style.width = 0;
-            container.style.height = 0;
+            container.style.width = '0';
+            container.style.height = '0';
+            container.style.position = 'absolute';
+            container.style.top = '0';
+            container.style.left = '0';
             document.body.appendChild(container);
 
             var code = node.value;
@@ -24,7 +27,8 @@ module.exports = function flowchartPlugin(options = {}) {
             var innerHTML = container.innerHTML;
             container.parentElement.removeChild(container);
 
-            node.className = 'vremark-flowchart';
+            node.props = node.props?node.props:{};
+            node.props.className = 'vremark-flowchart';
             node.type = 'html'; //'flow';
             node.value = innerHTML;
 

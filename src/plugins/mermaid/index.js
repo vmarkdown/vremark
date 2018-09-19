@@ -2,7 +2,6 @@ const visit = require('unist-util-visit');
 
 var index = 0;
 
-
 module.exports = function mermaidPlugin(options = {}) {
 
     var mermaid = options.mermaid || this.data('mermaid') || window['mermaid'];
@@ -29,7 +28,9 @@ module.exports = function mermaidPlugin(options = {}) {
 
             var svgGraph = mermaid.mermaidAPI.render('id1'+index++, graphDefinition);
 
-            node.className = 'vremark-mermaid';
+            node.props = node.props?node.props:{};
+            node.props.className = 'vremark-mermaid';
+            // node.className = 'vremark-mermaid';
             node.type = 'html';
             node.value = svgGraph;
 

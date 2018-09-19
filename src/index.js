@@ -1,7 +1,7 @@
 const unified = require('unified');
 const parse = require('remark-parse');
 // const toc = require('./plugins/toc/index');
-// const toc = require('./plugins/toc/index');
+const toc = require('./plugins/toc/index');
 const math = require('remark-math');
 const katex = require('./plugins/katex/index');
 const linkReference = require('./plugins/linkReference/index');
@@ -18,9 +18,9 @@ module.exports = unified()
     .use(parse, {})
     .use(highlight, {lineNumbers: false})
     //basic
-    // .use(toc, {
-    //     // heading: '[TOC]'
-    // })
+    .use(toc, {
+        // heading: '[TOC]'
+    })
     .use(linkReference, {})
     .use(paragraphHTML2Text, {})
     .use(checkbox, {})
@@ -32,7 +32,10 @@ module.exports = unified()
     .use(mermaid, {})
     .use(sequence, {})
 
-    .use(render, {mode: 'react'})
+    .use(render, {
+        mode: 'react',
+        rootClassName: 'wysiwyg'
+    })
     .freeze();
 
 // module.exports = unified().use(parse).use(stringify).freeze();
