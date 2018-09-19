@@ -6,15 +6,17 @@ module.exports = function mermaidPlugin(options = {}) {
 
     var mermaid = options.mermaid || this.data('mermaid') || window['mermaid'];
 
-    mermaid.initialize({
-        flowchart:{
-            htmlLabels: false
-        }
-    });
+    if(mermaid){
+        mermaid.initialize({
+            flowchart:{
+                htmlLabels: false
+            }
+        });
 
-    mermaid.mermaidAPI.initialize({
-        startOnLoad: true
-    });
+        mermaid.mermaidAPI.initialize({
+            startOnLoad: true
+        });
+    }
 
     return function transformer(root) {
 

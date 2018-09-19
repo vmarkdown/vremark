@@ -6,6 +6,10 @@ module.exports = function (options = {}) {
 
     return function transformer(root) {
 
+        if(!Diagram){
+            return;
+        }
+
         visit(root, 'code', function (node) {
 
             if(node.lang !== 'sequence') {

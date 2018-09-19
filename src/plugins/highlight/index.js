@@ -12,6 +12,10 @@ module.exports = function checkbox(options = {}) {
 
     return function transformer(root) {
 
+        if(!hljs){
+            return;
+        }
+
         return visit(root, 'code', function (node) {
 
             var lang = node.lang;

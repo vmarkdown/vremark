@@ -6,6 +6,10 @@ module.exports = function flowchartPlugin(options = {}) {
 
     return function transformer(root) {
 
+        if(!flowchart){
+            return;
+        }
+
         visit(root, 'code', function (node) {
 
             if(node.lang !== 'flow') {
