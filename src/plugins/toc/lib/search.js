@@ -43,96 +43,6 @@ function search(root, expression, maxDepth) {
     slugs.reset();
 
 
-    // visit(root, 'linkReference', function (node) {
-    //
-    //     console.log(node);
-    //
-    //     if(node.identifier === 'toc' && node.referenceType === 'shortcut') {
-    //
-    //         // debugger
-    //
-    //         var result = toc(root);
-    //         console.log(result);
-    //         // node.children.push(result.map);
-    //
-    //         // node.type = 'list';
-    //         // node.children = result.map.children;
-    //
-    //     }
-    //
-    // });
-
-
-    // visit(root, 'linkReference', function(child, index, parent) {
-    //     var value = toString(child);
-    //     var id =
-    //         child.data && child.data.hProperties && child.data.hProperties.id;
-    //     id = slugs.slug(id || value);
-    //
-    //     // if (parent !== root) {
-    //     //     return;
-    //     // }
-    //
-    //     if (lookingForToc) {
-    //         if (isClosingHeading(child, depth)) {
-    //             closingIndex = index;
-    //             lookingForToc = false;
-    //         }
-    //
-    //         if (isOpeningHeading(child, depth, expression)) {
-    //             headingIndex = index + 1;
-    //             depth = child.depth;
-    //         }
-    //     }
-    //
-    //     if (!lookingForToc && value && child.depth <= maxDepth) {
-    //         map.push({
-    //             depth: child.depth,
-    //             value: value,
-    //             id: id
-    //         });
-    //     }
-    // });
-
-
-    /*
-     * Visit all headings in `root`.
-     * We `slug` all headings (to account for duplicates),
-     * but only create a TOC from top-level headings.
-     */
-
-    // visit(root, HEADING, function(child, index, parent) {
-    //     var value = toString(child);
-    //     var id =
-    //         child.data && child.data.hProperties && child.data.hProperties.id;
-    //     id = slugs.slug(id || value);
-    //
-    //     if (parent !== root) {
-    //         return;
-    //     }
-    //
-    //     if (lookingForToc) {
-    //         if (isClosingHeading(child, depth)) {
-    //             closingIndex = index;
-    //             lookingForToc = false;
-    //         }
-    //
-    //         if (isOpeningHeading(child, depth, expression)) {
-    //             headingIndex = index + 1;
-    //             depth = child.depth;
-    //         }
-    //     }
-    //
-    //     if (!lookingForToc && value && child.depth <= maxDepth) {
-    //         map.push({
-    //             depth: child.depth,
-    //             value: value,
-    //             id: id
-    //         });
-    //     }
-    // });
-
-
 
     var tocNode = null;
     var nodes = [];
@@ -158,11 +68,6 @@ function search(root, expression, maxDepth) {
 
 
         if (lookingForToc) {
-            // if (isClosingHeading(child, depth)) {
-            //     closingIndex = index;
-            //     lookingForToc = false;
-            // }
-
             if (isOpeningHeading(child, depth, expression)) {
 
                 closingIndex = index;
@@ -190,15 +95,6 @@ function search(root, expression, maxDepth) {
         nodes.forEach(function (item) {
             parse.apply(this, item);
         });
-
-
-        // nodes.forEach(function (item) {
-        //
-        //     debugger
-        //
-        // });
-
-
     }
 
     if (headingIndex && !closingIndex) {
@@ -210,18 +106,6 @@ function search(root, expression, maxDepth) {
         closingIndex = -1;
         map = [];
     }
-
-    // if (headingIndex === null || headingIndex === -1 || !map) {
-    // }
-    // else{
-    //     tocNode[2].children = map;
-    // }
-
-
-
-
-
-
 
 
     return {
