@@ -1,4 +1,4 @@
-.vremark-flowchart {
+.vremark-flowchart, .vremark-sequence {
     text-align: center;
 }
 
@@ -33,4 +33,5 @@
 }
 
 .hljs-line{
+    line-height: 1.5em;
 }

@@ -3,11 +3,6 @@ const vremark = require('../../src/index');
 // const React = require('react');
 
 const h = React.createElement;
-// const Renderer = require('remark-render/renderers/react-renderer');
-// const renderer = new Renderer({
-//     h: h,
-//     rootClassName: 'markdown-body'
-// });
 
 const processor = vremark().data({
     'h': h,
@@ -20,8 +15,8 @@ const processor = vremark().data({
     //     renderer: renderer
     // });
 
-// const mdText = require('../md/maxiang.md');
-const mdText = require('../md/toc.md');
+const mdText = require('../md/maxiang.md');
+// const mdText = require('../md/toc.md');
 
 // const file = processor.processSync(mdText);
 // const vdom = file.contents;
@@ -56,7 +51,7 @@ processor.process(mdText, function(err, file) {
     const vdom = processor.runSync(vnode);
 
     console.timeEnd('parse');
-
+    console.log(vnode);
     console.log(vdom);
 })();
 

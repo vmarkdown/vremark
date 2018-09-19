@@ -43,19 +43,6 @@ function search(root, expression, maxDepth) {
     slugs.reset();
 
 
-
-    var tocNode = null;
-    var nodes = [];
-
-    visit(root, 'linkReference', function (child, index, parent) {
-        // nodes.push([child, index, parent]);
-        tocNode = [child, index, parent];
-    });
-
-    visit(root, HEADING, function(child, index, parent) {
-        nodes.push([child, index, parent]);
-    });
-
     function parse(child, index, parent) {
         var value = toString(child);
         var id =
@@ -90,12 +77,37 @@ function search(root, expression, maxDepth) {
         }
     }
 
+    var tocNode = null;
+    var nodes = [];
+
+    visit(root, 'linkReference', function (child, index, parent) {
+        // nodes.push([child, index, parent]);
+        if(child.identifier === 'toc'){
+            tocNode = [child, index, parent];
+        }
+    });
+
     if(tocNode){
-        parse.apply(this, tocNode);
-        nodes.forEach(function (item) {
-            parse.apply(this, item);
+
+        visit(root, HEADING, function(child, index, parent) {
+            nodes.push([child, index, parent]);
         });
+
+        if(tocNode){
+            parse.apply(this, tocNode);
+            nodes.forEach(function (item) {
+                parse.apply(this, item);
+            });
+        }
+
     }
+
+
+
+
+
+
+
 
     if (headingIndex && !closingIndex) {
         closingIndex = length + 1;

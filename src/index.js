@@ -1,6 +1,5 @@
 const unified = require('unified');
 const parse = require('remark-parse');
-// const toc = require('./plugins/toc/index');
 const toc = require('./plugins/toc/index');
 const math = require('remark-math');
 const katex = require('./plugins/katex/index');
@@ -16,7 +15,7 @@ const highlight = require('./plugins/highlight/index');
 
 module.exports = unified()
     .use(parse, {})
-    .use(highlight, {lineNumbers: false})
+    .use(highlight, {lineNumbers: true})
     //basic
     .use(toc, {
         // heading: '[TOC]'
@@ -37,24 +36,6 @@ module.exports = unified()
         rootClassName: 'wysiwyg'
     })
     .freeze();
-
-// module.exports = unified().use(parse).use(stringify).freeze();
-
-// function vremark(options) {
-//     return unified()
-//         .use(parse, options)
-//         .use(toc, {
-//             // heading: '[TOC]'
-//         })
-//         .use(linkReference, options)
-//         .use(paragraphHTML, options)
-//         .use(checkbox, options)
-//         .use(math, options)
-//         .use(render, options);
-// }
-//
-// vremark.Renderer = require('./renderers/renderer');
-// module.exports = vremark;
 
 
 
