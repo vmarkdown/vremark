@@ -1,7 +1,5 @@
 const vremark = require('../../src/index');
 
-// const React = require('react');
-
 const h = React.createElement;
 
 const processor = vremark().data({
@@ -11,12 +9,9 @@ const processor = vremark().data({
     'katex': window.katex,
     'Diagram': window.Diagram,
 });
-    // .use(render, {
-    //     renderer: renderer
-    // });
 
-const mdText = require('../md/maxiang.md');
-// const mdText = require('../md/toc.md');
+// const mdText = require('../md/maxiang.md');
+const mdText = require('../md/test.md');
 
 // const file = processor.processSync(mdText);
 // const vdom = file.contents;
@@ -44,16 +39,16 @@ processor.process(mdText, function(err, file) {
 
 
 
-(function () {
-    console.time('parse');
-
-    const vnode = processor.parse(mdText);
-    const vdom = processor.runSync(vnode);
-
-    console.timeEnd('parse');
-    console.log(vnode);
-    console.log(vdom);
-})();
+// (function () {
+//     console.time('parse');
+//
+//     const vnode = processor.parse(mdText);
+//     const vdom = processor.runSync(vnode);
+//
+//     console.timeEnd('parse');
+//     console.log(vnode);
+//     console.log(vdom);
+// })();
 
 
 //====================================================================================

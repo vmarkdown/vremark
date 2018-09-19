@@ -9,6 +9,8 @@ var DEFAULT_HEADING = 'toc|table[ -]of[ -]contents?';
 
 function toc(options) {
 
+    var self = this;
+
     var settings = options || {};
     var heading = settings.heading || DEFAULT_HEADING;
     var depth = settings.maxDepth || 6;
@@ -35,5 +37,7 @@ function toc(options) {
         toc.props = toc.props?toc.props:{};
         toc.props.className = 'vremark-toc';
         toc.children = [ result.map ];
+
+        self.data('toc', toc);
     }
 }
