@@ -31,8 +31,8 @@ module.exports = function flowchartPlugin(options = {}) {
             var innerHTML = container.innerHTML;
             container.parentElement.removeChild(container);
 
-            node.props = node.props?node.props:{};
-            node.props.className = 'vremark-flowchart';
+            node.properties = node.properties?node.properties:{};
+            node.properties.className = 'vremark-flowchart';
             node.type = 'html'; //'flow';
             node.value = innerHTML;
 

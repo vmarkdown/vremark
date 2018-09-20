@@ -34,9 +34,10 @@ function toc(options) {
         }
 
         var toc = result.toc;
-        toc.props = toc.props?toc.props:{};
-        toc.props.className = 'vremark-toc';
+        toc.properties = toc.properties?toc.properties:{};
+        toc.properties.className = 'vremark-toc';
         toc.children = [ result.map ];
+        toc.tagName = 'div';
 
         // self.data('toc', toc);
     }

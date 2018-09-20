@@ -27,8 +27,8 @@ module.exports = function (options = {}) {
             var innerHTML = container.innerHTML;
             container.parentElement.removeChild(container);
 
-            node.props = node.props?node.props:{};
-            node.props.className = 'vremark-sequence';
+            node.properties = node.properties?node.properties:{};
+            node.properties.className = 'vremark-sequence';
             node.type = 'html';
             node.value = innerHTML;
         });

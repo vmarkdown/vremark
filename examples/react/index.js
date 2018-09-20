@@ -1,9 +1,11 @@
 const vremark = require('../../src/index');
+const renderer = require('remark-react-renderer');
 
 const h = React.createElement;
 
 const processor = vremark().data({
     'h': h,
+    'renderer': renderer,
     'hljs': window.hljs,
     'flowchart': window.flowchart,
     'mermaid': window.mermaid,
@@ -18,7 +20,10 @@ const mdText = require('../md/maxiang.md');
 // const vdom = file.contents;
 // console.log(vdom);
 
+console.time('parse');
 processor.process(mdText, function(err, file) {
+    console.timeEnd('parse');
+
     if(err){
         throw err;
     }
@@ -30,6 +35,7 @@ processor.process(mdText, function(err, file) {
         vdom,
         document.getElementById('preview')
     );
+
 
 
 });

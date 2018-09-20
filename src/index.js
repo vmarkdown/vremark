@@ -32,7 +32,6 @@ module.exports = unified()
     .use(sequence, {})
 
     .use(render, {
-        mode: 'react',
         rootClassName: 'wysiwyg'
     })
     .freeze();

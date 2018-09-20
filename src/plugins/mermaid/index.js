@@ -30,8 +30,8 @@ module.exports = function mermaidPlugin(options = {}) {
 
             var svgGraph = mermaid.mermaidAPI.render('id1'+index++, graphDefinition);
 
-            node.props = node.props?node.props:{};
-            node.props.className = 'vremark-mermaid';
+            node.properties = node.properties?node.properties:{};
+            node.properties.className = 'vremark-mermaid';
             // node.className = 'vremark-mermaid';
             node.type = 'html';
             node.value = svgGraph;
