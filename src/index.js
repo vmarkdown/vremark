@@ -15,7 +15,6 @@ const highlight = require('./plugins/highlight/index');
 
 module.exports = unified()
     .use(parse, {})
-    .use(highlight, {lineNumbers: true})
     //basic
     .use(toc, {
         // heading: '[TOC]'
@@ -26,6 +25,7 @@ module.exports = unified()
     .use(breaks)
 
     //ext
+    .use(highlight, {lineNumbers: true})
     .use(math, {}).use(katex, {})
     .use(flowchart, {})
     .use(mermaid, {})

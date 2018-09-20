@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "dev": "webpack -w --config ./examples/webpack.config.js --example react",
+    "dev": "webpack -w --config ./examples/webpack.config.js --example preact",
     "dist": "webpack --config ./webpack.config.js"
   },
   "devDependencies": {
@@ -22,6 +22,7 @@
     "remark-html": "^8.0.0",
     "remark-html-katex": "^1.1.1",
     "remark-math": "^1.0.4",
+    "remark-preact-renderer": "^0.0.1",
     "remark-react-renderer": "^0.0.1",
     "remark-rehype": "^3.0.1",
     "remark-render": "^0.0.11",
