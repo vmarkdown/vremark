@@ -1,122 +1,98 @@
 const vremark = require('../../src/index');
 const renderer = require('remark-preact-renderer');
 
-const h = preact.h;
+const math = require('remark-math');
+const katex = require('../../src/plugins/katex/index');
+const highlight = require('../../src/plugins/highlight/index');
+const flowchart = require('../../src/plugins/flowchart/index');
+const sequence = require('../../src/plugins/sequence/index');
+const mermaid = require('../../src/plugins/mermaid/index');
 
-const processor = vremark().data({
-    'h': h,
-    'renderer': renderer,
-    'hljs': window.hljs,
-    'flowchart': window.flowchart,
-    'mermaid': window.mermaid,
-    'katex': window.katex,
-    'Diagram': window.Diagram,
-});
+
+const { h, render } = preact;
+
+const processor = vremark()
+    .use(math).use(katex, {
+        'katex': window.katex
+    }).use(flowchart, {
+        'flowchart': window.flowchart
+    }).use(highlight, {
+        'hljs': window.hljs
+    }).use(sequence, {
+        'Diagram': window.Diagram
+    }).use(mermaid, {
+        'mermaid': window.mermaid
+    }).data({
+        'settings': {
+            'h': h,
+            'renderer': renderer,
+            'rootClassName': 'wysiwyg'
+        }
+    });
 
 const mdText = require('../md/maxiang.md');
 // const mdText = require('../md/test.md');
 
-// const file = processor.processSync(mdText);
-// const vdom = file.contents;
-// console.log(vdom);
-
 console.time('parse');
-processor.process(mdText, function(err, file) {
-    console.timeEnd('parse');
+const file = processor.processSync(mdText);
+console.timeEnd('parse');
 
-    if(err){
-        throw err;
-    }
-    console.log(file);
+const vdom = file.contents;
+console.log(vdom);
 
-    const vdom = file.contents;
+console.time('render');
+render(vdom, document.getElementById('preview'));
+console.timeEnd('render');
 
-    // ReactDOM.render(
-    //     vdom,
-    //     document.getElementById('preview')
-    // );
-    preact.render(vdom, document.getElementById('preview'));
+// console.time('parse');
+// processor.process(mdText, function(err, file) {
+//     console.timeEnd('parse');
+//
+//     if(err){
+//         throw err;
+//     }
+//     console.log(file);
+//
+//     const vdom = file.contents;
+//     preact.render(vdom, document.getElementById('preview'));
+// });
+
+// $('.wysiwyg > ')
+
+// const wysiwyg = document.getElementById('preview').children[0];
+// wysiwyg.children.forE
+
+var lines = [];
+
+$('.wysiwyg').children().each(function (i, node) {
+
+    console.log(node);
+    console.log();
+
+    var top = $(node).offset().top;
+    var line = $(node).data('line-start');
+    lines.push({
+        top: top,
+        line: line
+    });
+
 });
 
+console.log(lines);
 
+function findLine(top) {
+    for(var i=0;i<lines.length-1;i++) {
+        if(top>=lines[i].top && top<=lines[i+1].top){
+            return lines[i];
+        }
+    }
+    return null;
+}
 
+$(window).scroll(function () {
 
+    var top = $(window).scrollTop();
 
-
-
-// (function () {
-//     console.time('parse');
-//
-//     const vnode = processor.parse(mdText);
-//     const vdom = processor.runSync(vnode);
-//
-//     console.timeEnd('parse');
-//     console.log(vnode);
-//     console.log(vdom);
-// })();
-
-
-//====================================================================================
-// const render = require('remark-render');
-// const vremark = require('../../src/index');
-//
-// const h = React.createElement;
-// const Renderer = require('remark-render/renderers/react-renderer');
-// const renderer = new Renderer({
-//     h: h,
-//     rootClassName: 'markdown-body'
-// });
-//
-// const processor = vremark()
-//     .use(render, {
-//         renderer: renderer
-//     });
-//
-//
-//
-// const mdText = require('../md/maxiang.md');
-//
-//
-//
-//
-//
-// const file = processor.processSync(mdText);
-// const vdom = file.contents;
-// console.log(vdom);
-//
-// ReactDOM.render(
-//     vdom,
-//     document.getElementById('preview')
-// );
-//
-//
-// (function () {
-//     const vnode = processor.parse(mdText);
-//     const vdom = processor.runSync(vnode);
-//     console.log(vdom);
-// })();
-
-//====================================================================================
-
-
-// const Renderer = require('../../src/renderers/react/renderer');
-//
-// const h = React.createElement;
-// const renderer = new Renderer({
-//     h: h,
-//     rootClassName: 'markdown-body'
-// });
-//
-// const vremarkPluginKatex = require('vremark-plugin-katex');
-// // const mdText = require('../md/test.txt');
-//
-// const processor = vremark({
-//     renderer: renderer
-// }).use(vremarkPluginKatex);
-//
-// const file = processor.processSync(md);
-// const vdom = file.contents;
-// ReactDOM.render(
-//     vdom,
-//     document.getElementById('preview')
-// );
+    console.log(top);
+    console.log(findLine(top));
+});

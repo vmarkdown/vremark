@@ -1,5 +1,5 @@
 const visit = require('unist-util-visit');
-const position = require('unist-util-position');
+// const position = require('unist-util-position');
 
 module.exports = function plugin(opts = {}) {
     var katex = this.data('katex') || opts.katex || window['katex'];
@@ -23,10 +23,10 @@ module.exports = function plugin(opts = {}) {
                 if (opts.throwOnError) {
                     throw err
                 } else {
-                    file.message(
-                        err.message,
-                        position.start(element)
-                    )
+                    // file.message(
+                    //     err.message,
+                    //     position.start(element)
+                    // )
 
                     try {
                         renderedValue = katex.renderToString(element.value, {
