@@ -12,16 +12,24 @@ const mermaid = require('../../src/plugins/mermaid/index');
 const { h, render } = preact;
 
 const processor = vremark()
+    // .use(function plugin(options) {
+    //     return function transform(root) {
+    //
+    //         debugger
+    //
+    //         return root;
+    //     }
+    // })
     .use(highlight, {
-        'hljs': window.hljs
+        // 'hljs': window.hljs
     }).use(math).use(katex, {
-        'katex': window.katex
+        // 'katex': window.katex
     }).use(flowchart, {
-        'flowchart': window.flowchart
+        // 'flowchart': window.flowchart
     }).use(sequence, {
-        'Diagram': window.Diagram
+        // 'Diagram': window.Diagram
     }).use(mermaid, {
-        'mermaid': window.mermaid
+        // 'mermaid': window.mermaid
     }).data({
         'settings': {
             'h': h,

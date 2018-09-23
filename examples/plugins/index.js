@@ -45,3 +45,8 @@ console.log(vdom);
 console.time('render');
 render(vdom, document.getElementById('preview'));
 console.timeEnd('render');
+
+
+// const unified = require('unified');
+// const parse = require('remark-parse');
+// console.log(unified().use(parse).parse(file));

@@ -21,7 +21,11 @@ const config = {
         ]
     },
     externals: {
-        'vremark-plugin-katex': 'vremarkPluginKatex'
+        // 'vremark-plugin-katex': 'vremarkPluginKatex'
+        'flowchart.js': 'flowchart',
+        'highlight.js': 'hljs',
+        'katex': 'katex',
+        'mermaid': 'mermaid'
     },
     plugins: [
 

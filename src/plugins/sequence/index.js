@@ -3,15 +3,7 @@ var Diagram =  require('./sequence-diagram');
 
 module.exports = function (options = {}) {
 
-    // var Diagram = options.Diagram || this.data('Diagram') || window['Diagram'];
-    //
-    // if(!Diagram){
-    //     return;
-    // }
-
     return function transformer(root) {
-
-        console.log(Diagram);
 
         visit(root, 'code', function (node) {
 

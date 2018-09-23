@@ -1,56 +1,47 @@
 var visit = require('unist-util-visit');
-// const position = require('unist-util-position');
 var katex = require('katex');
 
 module.exports = function plugin(opts = {}) {
-    // var katex = this.data('katex') || opts.katex || window['katex'];
-    //
-    // if(!katex){
-    //     return;
-    // }
 
     if (opts.throwOnError == null) opts.throwOnError = false;
 
-    return function transform(node, file) {
-
-        function renderContent(element) {
-            let renderedValue
-            const isMath = element.type === 'math'
-            try {
-                renderedValue = katex.renderToString(element.value, {
-                    displayMode: isMath
-                })
-            } catch (err) {
-                if (opts.throwOnError) {
-                    throw err
-                } else {
-                    // file.message(
-                    //     err.message,
-                    //     position.start(element)
-                    // )
-
-                    try {
-                        renderedValue = katex.renderToString(element.value, {
-                            displayMode: isMath,
-                            throwOnError: false,
-                            errorColor: opts.errorColor
-                        })
-                    } catch (err) {
-                        renderedValue = '<code class="katex" style="color: ' + opts.errorColor + '">' + element.value + '</code>'
-                    }
-                }
+    function renderContent(node, displayMode) {
+        try {
+            var html = katex.renderToString(node.value, {
+                displayMode: displayMode,
+                throwOnError: false
+            });
+            if(!displayMode){
+                html = html.replace('<span class="katex">','<span class="katex vremark-katex">');
             }
+            else{
+                html = html.replace('<span class="katex-display">','<span class="katex-display vremark-katex-display">');
+            }
+            node.value = html;
 
-            // const childAst = parseMathHtml(renderedValue).children[0]
-            //   element.renderedValue =renderedValue;
-            // element.data.hChildren = [childAst]
-            element.value = renderedValue;
+        } catch (e) {
+            if (e instanceof katex.ParseError) {
+                // KaTeX can't parse the expression
+                var html = ("Error in LaTeX '" + texString + "': " + e.message)
+                    .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+                node.value = html;
+            } else {
+                // throw e;  // other error
+            }
         }
+    }
 
-        visit(node, 'inlineMath', renderContent);
-        visit(node, 'math', renderContent);
+    return function transform(root) {
 
-        return node
+        visit(root, 'inlineMath', function (node) {
+            renderContent(node, false);
+        });
+
+        visit(root, 'math', function (node) {
+            renderContent(node, true);
+        });
+
+        return root;
     }
 
 };

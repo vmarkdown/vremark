@@ -38,3 +38,5 @@ tag
 
 
 dynamic load plugin 
+
+math $$ display mode

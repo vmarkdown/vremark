@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "dev": "webpack -w --config ./examples/webpack.config.js --example plugins",
+    "dev": "webpack -w --config ./examples/webpack.config.js --example preact",
     "dist": "webpack --config ./webpack.config.js"
   },
   "devDependencies": {

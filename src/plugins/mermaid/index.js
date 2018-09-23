@@ -5,12 +5,6 @@ var index = 0;
 
 module.exports = function mermaidPlugin(options = {}) {
 
-    // var mermaid = options.mermaid || this.data('mermaid') || window['mermaid'];
-    //
-    // if(!mermaid){
-    //     return
-    // }
-
     mermaid.initialize({
         flowchart:{
             htmlLabels: false
@@ -31,11 +25,10 @@ module.exports = function mermaidPlugin(options = {}) {
 
             var graphDefinition = node.value;
 
-            var svgGraph = mermaid.mermaidAPI.render('id1'+index++, graphDefinition);
+            var svgGraph = mermaid.mermaidAPI.render('mermaid_'+index++, graphDefinition);
 
             node.properties = node.properties?node.properties:{};
             node.properties.className = 'vremark-mermaid';
-            // node.className = 'vremark-mermaid';
             node.type = 'html';
             node.value = svgGraph;
 
