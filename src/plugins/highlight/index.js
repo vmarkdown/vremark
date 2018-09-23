@@ -1,20 +1,20 @@
 'use strict';
-
 // var hljs = require('highlight.js')
 var line = require('./highlightjs-line-numbers');
-const visit = require('unist-util-visit');
+var visit = require('unist-util-visit');
+var hljs = require('highlight.js');
 
 module.exports = function checkbox(options = {}) {
 
-    var hljs = options.hljs || this.data('hljs') || window['hljs'];
+    // var hljs = options.hljs || this.data('hljs') || window['hljs'];
+    //
+    // if(!hljs){
+    //     return;
+    // }
 
     var lineNumbers = options.lineNumbers;
 
     return function transformer(root) {
-
-        if(!hljs){
-            return;
-        }
 
         return visit(root, 'code', function (node) {
 

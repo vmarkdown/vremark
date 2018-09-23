@@ -1,14 +1,17 @@
-const visit = require('unist-util-visit');
+var visit = require('unist-util-visit');
+var Diagram =  require('./sequence-diagram');
 
 module.exports = function (options = {}) {
 
-    var Diagram = options.Diagram || this.data('Diagram') || window['Diagram'];
+    // var Diagram = options.Diagram || this.data('Diagram') || window['Diagram'];
+    //
+    // if(!Diagram){
+    //     return;
+    // }
 
     return function transformer(root) {
 
-        if(!Diagram){
-            return;
-        }
+        console.log(Diagram);
 
         visit(root, 'code', function (node) {
 
@@ -22,8 +25,12 @@ module.exports = function (options = {}) {
             var container = document.createElement('div');
             container.style.width = 0;
             container.style.height = 0;
+            // container.style.width = '400';
+            // container.style.height = '400';
+
             document.body.appendChild(container);
             diagram.drawSVG(container, {theme: 'simple'});
+
             var innerHTML = container.innerHTML;
             container.parentElement.removeChild(container);
 

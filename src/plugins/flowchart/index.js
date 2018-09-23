@@ -1,14 +1,15 @@
 const visit = require('unist-util-visit');
 
+var flowchart = require('flowchart.js');
+
 module.exports = function flowchartPlugin(options = {}) {
 
-    var flowchart = options.flowchart || this.data('flowchart') || window['flowchart'];
+    // var flowchart = options.flowchart || this.data('flowchart') || window['flowchart'];
+    // if(!flowchart){
+    //     return;
+    // }
 
     return function transformer(root) {
-
-        if(!flowchart){
-            return;
-        }
 
         visit(root, 'code', function (node) {
 

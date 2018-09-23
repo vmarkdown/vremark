@@ -1,11 +1,14 @@
 {
   "scripts": {
-    "dev": "webpack -w --config ./examples/webpack.config.js --example preact",
+    "dev": "webpack -w --config ./examples/webpack.config.js --example plugins",
     "dist": "webpack --config ./webpack.config.js"
   },
   "devDependencies": {
+    "github-slugger": "^1.2.0",
+    "mdast-util-to-string": "^1.0.5",
     "remark-math": "^1.0.4",
-    "remark-preact-renderer": "^0.0.1",
+    "remark-preact-renderer": "^0.0.3",
+    "remark-slug": "^5.1.0",
     "text-loader": "^0.0.1",
     "webpack": "^4.17.2",
     "webpack-cli": "^3.1.0",

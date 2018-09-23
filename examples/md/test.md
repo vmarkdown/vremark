@@ -1,3 +1,5 @@
-- [x] 已完成事项
-- [ ] 待办事项1
-- [ ] 待办事项2
+```sequence
+Alice->Bob: Hello Bob, how are you?
+Note right of Bob: Bob thinks
+Bob-->Alice: I am good thanks中文!
+```

@@ -12,12 +12,12 @@ const mermaid = require('../../src/plugins/mermaid/index');
 const { h, render } = preact;
 
 const processor = vremark()
-    .use(math).use(katex, {
+    .use(highlight, {
+        'hljs': window.hljs
+    }).use(math).use(katex, {
         'katex': window.katex
     }).use(flowchart, {
         'flowchart': window.flowchart
-    }).use(highlight, {
-        'hljs': window.hljs
     }).use(sequence, {
         'Diagram': window.Diagram
     }).use(mermaid, {
@@ -62,6 +62,7 @@ console.timeEnd('render');
 // const wysiwyg = document.getElementById('preview').children[0];
 // wysiwyg.children.forE
 
+/*
 var lines = [];
 
 $('.wysiwyg').children().each(function (i, node) {
@@ -70,7 +71,7 @@ $('.wysiwyg').children().each(function (i, node) {
     console.log();
 
     var top = $(node).offset().top;
-    var line = $(node).data('line-start');
+    var line = $(node).data('line');
     lines.push({
         top: top,
         line: line
@@ -95,4 +96,4 @@ $(window).scroll(function () {
 
     console.log(top);
     console.log(findLine(top));
-});
+});*/

@@ -1,16 +1,17 @@
-const visit = require('unist-util-visit');
+var visit = require('unist-util-visit');
 // const position = require('unist-util-position');
+var katex = require('katex');
 
 module.exports = function plugin(opts = {}) {
-    var katex = this.data('katex') || opts.katex || window['katex'];
+    // var katex = this.data('katex') || opts.katex || window['katex'];
+    //
+    // if(!katex){
+    //     return;
+    // }
 
     if (opts.throwOnError == null) opts.throwOnError = false;
 
     return function transform(node, file) {
-
-        if(!katex){
-            return null;
-        }
 
         function renderContent(element) {
             let renderedValue
@@ -51,4 +52,5 @@ module.exports = function plugin(opts = {}) {
 
         return node
     }
+
 };

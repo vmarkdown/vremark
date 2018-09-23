@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vremark react example</title>
+
+
+    <link rel="stylesheet" href="//cdn.bootcss.com/github-markdown-css/2.10.0/github-markdown.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/7.3/styles/default.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.12.0/styles/atom-one-light.min.css">
+
+    <link rel="stylesheet" href="../../vremark.css">
+
+    <script src="//cdn.bootcss.com/preact/8.2.9/preact.dev.js"></script>
+
+    <style>
+        html,body{
+            padding: 0;
+            margin: 0;
+            height: 100%;
+        }
+
+        body{
+            overflow-y: hidden;
+            /*padding: 40px;*/
+            box-sizing: border-box;
+            padding-top: 100px;
+            padding-bottom: 100px;
+        }
+
+        .line-active {
+            background-color: rgba(255, 0, 0, 0.12);
+            /*border: 2px solid rgb(0, 0, 0);*/
+        }
+        /*.line-active:after {*/
+            /*content: '==';*/
+            /*background-color: red;*/
+            /*display: block;*/
+        /*}*/
+
+
+        .markdown-body{
+            /*overflow-y: auto;*/
+            /*height: 100%;*/
+            /*position: relative;*/
+        }
+
+        .container{
+            width: 100%;
+            height: 100%;
+            display: flex;
+        }
+
+        .container .panel{
+            width: 50%;
+            border: 1px solid darkgray;
+            box-sizing: border-box;
+        }
+
+
+        #markdown{
+            overflow-y: auto;
+            height: 100%;
+        }
+
+
+        #preview{
+            max-width: 400px;
+            margin: 0 auto;
+            /*margin-top: 60px;*/
+            /*margin-bottom: 60px;*/
+            overflow-y: auto;
+            height: 100%;
+
+        }
+
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <div id="markdown" class="panel"></div>
+
+    <div id="preview" class="panel"></div>
+
+</div>
+
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.js"></script>
+<script src="../dist/example-scroll-main.js"></script>
+
+</body>
+</html>

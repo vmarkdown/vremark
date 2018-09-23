@@ -1,22 +1,25 @@
-const visit = require('unist-util-visit');
+var visit = require('unist-util-visit');
+var mermaid = require('mermaid');
 
 var index = 0;
 
 module.exports = function mermaidPlugin(options = {}) {
 
-    var mermaid = options.mermaid || this.data('mermaid') || window['mermaid'];
+    // var mermaid = options.mermaid || this.data('mermaid') || window['mermaid'];
+    //
+    // if(!mermaid){
+    //     return
+    // }
 
-    if(mermaid){
-        mermaid.initialize({
-            flowchart:{
-                htmlLabels: false
-            }
-        });
+    mermaid.initialize({
+        flowchart:{
+            htmlLabels: false
+        }
+    });
 
-        mermaid.mermaidAPI.initialize({
-            startOnLoad: true
-        });
-    }
+    mermaid.mermaidAPI.initialize({
+        startOnLoad: true
+    });
 
     return function transformer(root) {
 
