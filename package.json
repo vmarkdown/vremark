@@ -1,7 +1,8 @@
 {
   "scripts": {
     "dev": "webpack -w --config ./examples/webpack.config.js --example preact",
-    "dist": "webpack --config ./webpack.config.js"
+    "build": "webpack --config ./webpack.config.js",
+    "dist": "NODE_ENV=production webpack -p --config ./webpack.config.js"
   },
   "devDependencies": {
     "github-slugger": "^1.2.0",

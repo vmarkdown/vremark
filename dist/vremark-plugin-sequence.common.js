@@ -1,14 +1,5 @@
-(function webpackUniversalModuleDefinition(root, factory) {
-	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory();
-	else if(typeof define === 'function' && define.amd)
-		define([], factory);
-	else if(typeof exports === 'object')
-		exports["vremark-plugin-sequence"] = factory();
-	else
-		root["vremark-plugin-sequence"] = factory();
-})(window, function() {
-return /******/ (function(modules) { // webpackBootstrap
+module.exports =
+/******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
 /******/
@@ -371,9 +362,9 @@ function ok() {
 /* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(process, module, global) {// var _ = require('underscore');
-var WebFont = __webpack_require__(8);
-var Snap = __webpack_require__(9);
+/* WEBPACK VAR INJECTION */(function(process, module, global) {var _ = __webpack_require__(8);
+var WebFont = __webpack_require__(9);
+var Snap = __webpack_require__(10);
 
 "use strict";
 
@@ -2321,6 +2312,12 @@ module.exports = g;
 
 /***/ }),
 /* 8 */
+/***/ (function(module, exports) {
+
+module.exports = require("underscore");
+
+/***/ }),
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_RESULT__;/* Web Font Loader v1.6.6 - (c) Adobe Systems, Google. License: Apache 2.0 */
@@ -2899,7 +2896,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/* Web Font Loader v1.6.6 - (c) Adobe Systems,
 
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports) {
 
 // Snap.svg 0.5.0
@@ -11691,4 +11688,3 @@ var eve = (function (glob) {
 
 /***/ })
 /******/ ]);
-});

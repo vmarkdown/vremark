@@ -1,4 +1,4 @@
-// var _ = require('underscore');
+var _ = require('underscore');
 var WebFont = require('./webfont');
 var Snap = require('./snap.svg');
 

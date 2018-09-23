@@ -1,14 +1,5 @@
-(function webpackUniversalModuleDefinition(root, factory) {
-	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory(require("katex"));
-	else if(typeof define === 'function' && define.amd)
-		define(["katex"], factory);
-	else if(typeof exports === 'object')
-		exports["vremark-plugin-katex"] = factory(require("katex"));
-	else
-		root["vremark-plugin-katex"] = factory(root["katex"]);
-})(window, function(__WEBPACK_EXTERNAL_MODULE__4__) {
-return /******/ (function(modules) { // webpackBootstrap
+module.exports =
+/******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
 /******/
@@ -99,53 +90,44 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ (function(module, exports, __webpack_require__) {
 
 var visit = __webpack_require__(1);
-var katex = __webpack_require__(4);
+var mermaid = __webpack_require__(4);
 
-module.exports = function plugin(opts = {}) {
+var index = 0;
 
-    if (opts.throwOnError == null) opts.throwOnError = false;
+module.exports = function mermaidPlugin(options = {}) {
 
-    function renderContent(node, displayMode) {
-        try {
-            var html = katex.renderToString(node.value, {
-                displayMode: displayMode,
-                throwOnError: false
-            });
-            if(!displayMode){
-                html = html.replace('<span class="katex">','<span class="katex vremark-katex">');
-            }
-            else{
-                html = html.replace('<span class="katex-display">','<span class="katex-display vremark-katex-display">');
-            }
-            node.value = html;
-
-        } catch (e) {
-            if (e instanceof katex.ParseError) {
-                // KaTeX can't parse the expression
-                var html = ("Error in LaTeX '" + texString + "': " + e.message)
-                    .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-                node.value = html;
-            } else {
-                // throw e;  // other error
-            }
+    mermaid.initialize({
+        flowchart:{
+            htmlLabels: false
         }
-    }
+    });
 
-    return function transform(root) {
+    mermaid.mermaidAPI.initialize({
+        startOnLoad: true
+    });
 
-        visit(root, 'inlineMath', function (node) {
-            renderContent(node, false);
+    return function transformer(root) {
+
+        visit(root, 'code', function (node) {
+
+            if(node.lang !== 'mermaid') {
+                return;
+            }
+
+            var graphDefinition = node.value;
+
+            var svgGraph = mermaid.mermaidAPI.render('mermaid_'+index++, graphDefinition);
+
+            node.properties = node.properties?node.properties:{};
+            node.properties.className = 'vremark-mermaid';
+            node.type = 'html';
+            node.value = svgGraph;
+
         });
 
-        visit(root, 'math', function (node) {
-            renderContent(node, true);
-        });
-
-        return root;
-    }
+    };
 
 };
-
 
 /***/ }),
 /* 1 */
@@ -382,8 +364,7 @@ function ok() {
 /* 4 */
 /***/ (function(module, exports) {
 
-module.exports = __WEBPACK_EXTERNAL_MODULE__4__;
+module.exports = require("mermaid");
 
 /***/ })
 /******/ ]);
-});

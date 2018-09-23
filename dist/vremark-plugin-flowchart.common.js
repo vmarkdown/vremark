@@ -1,14 +1,5 @@
-(function webpackUniversalModuleDefinition(root, factory) {
-	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory(require("flowchart"));
-	else if(typeof define === 'function' && define.amd)
-		define(["flowchart"], factory);
-	else if(typeof exports === 'object')
-		exports["vremark-plugin-flowchart"] = factory(require("flowchart"));
-	else
-		root["vremark-plugin-flowchart"] = factory(root["flowchart"]);
-})(window, function(__WEBPACK_EXTERNAL_MODULE__4__) {
-return /******/ (function(modules) { // webpackBootstrap
+module.exports =
+/******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
 /******/
@@ -385,8 +376,7 @@ function ok() {
 /* 4 */
 /***/ (function(module, exports) {
 
-module.exports = __WEBPACK_EXTERNAL_MODULE__4__;
+module.exports = require("flowchart");
 
 /***/ })
 /******/ ]);
-});

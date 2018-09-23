@@ -1,13 +1,17 @@
 const path = require('path');
 const merge = require('webpack-merge');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const production = (process.env.NODE_ENV === 'production');
 
 const config = {
     mode: 'none',
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: '[name].js',
-        libraryTarget: "umd",
+        // filename: '[name].common.js',
+        filename: production?'[name].common.min.js':'[name].common.js',
+        // libraryTarget: "umd",
+        libraryTarget: "commonjs2",
+
         library: "[name]",
         // libraryExport: 'default'
     },
@@ -77,7 +81,7 @@ module.exports = [
             'vremark-plugin-sequence': './src/plugins/sequence/index.js'
         },
         externals: {
-            // 'underscore': '_'
+            'underscore': 'underscore'
         },
     }),
     merge(config, {
@@ -85,7 +89,6 @@ module.exports = [
             'vremark-plugin-toc': './src/plugins/toc/index.js'
         },
         externals: {
-            // 'underscore': '_'
         },
     })
 ];

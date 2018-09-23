@@ -1,14 +1,5 @@
-(function webpackUniversalModuleDefinition(root, factory) {
-	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory(require("hljs"));
-	else if(typeof define === 'function' && define.amd)
-		define(["hljs"], factory);
-	else if(typeof exports === 'object')
-		exports["vremark-plugin-highlight"] = factory(require("hljs"));
-	else
-		root["vremark-plugin-highlight"] = factory(root["hljs"]);
-})(window, function(__WEBPACK_EXTERNAL_MODULE__5__) {
-return /******/ (function(modules) { // webpackBootstrap
+module.exports =
+/******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
 /******/
@@ -462,8 +453,7 @@ function ok() {
 /* 5 */
 /***/ (function(module, exports) {
 
-module.exports = __WEBPACK_EXTERNAL_MODULE__5__;
+module.exports = require("hljs");
 
 /***/ })
 /******/ ]);
-});
