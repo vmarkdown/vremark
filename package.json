@@ -7,7 +7,7 @@
     "github-slugger": "^1.2.0",
     "mdast-util-to-string": "^1.0.5",
     "remark-math": "^1.0.4",
-    "remark-preact-renderer": "^0.0.3",
+    "remark-preact-renderer": "^0.0.4",
     "remark-slug": "^5.1.0",
     "text-loader": "^0.0.1",
     "webpack": "^4.17.2",
