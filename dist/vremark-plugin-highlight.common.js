@@ -453,7 +453,7 @@ function ok() {
 /* 5 */
 /***/ (function(module, exports) {
 
-module.exports = require("hljs");
+module.exports = require("highlight.js");
 
 /***/ })
 /******/ ]);

@@ -376,7 +376,7 @@ function ok() {
 /* 4 */
 /***/ (function(module, exports) {
 
-module.exports = require("flowchart");
+module.exports = require("flowchart.js");
 
 /***/ })
 /******/ ]);

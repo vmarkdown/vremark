@@ -47,7 +47,7 @@ module.exports = [
             'vremark-plugin-flowchart': './src/plugins/flowchart/index.js'
         },
         externals: {
-            'flowchart.js': 'flowchart',
+            'flowchart.js': 'flowchart.js',
             'Raphael': 'Raphael',
             'raphael': 'Raphael'
         },
@@ -57,7 +57,7 @@ module.exports = [
             'vremark-plugin-highlight': './src/plugins/highlight/index.js'
         },
         externals: {
-            'highlight.js': 'hljs'
+            'highlight.js': 'highlight.js'
         },
     }),
     merge(config, {
