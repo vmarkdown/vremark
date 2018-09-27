@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "dev": "webpack -w --config ./examples/webpack.config.js --example preact",
+    "dev": "webpack -w --config ./examples/webpack.config.js --example editor",
     "build": "webpack --config ./webpack.config.js",
     "dist": "NODE_ENV=production webpack -p --config ./webpack.config.js"
   },

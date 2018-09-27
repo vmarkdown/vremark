@@ -25,7 +25,8 @@ const config = {
         'flowchart.js': 'flowchart',
         'highlight.js': 'hljs',
         'katex': 'katex',
-        'mermaid': 'mermaid'
+        'mermaid': 'mermaid',
+        'underscore': '_'
     },
     plugins: [
 

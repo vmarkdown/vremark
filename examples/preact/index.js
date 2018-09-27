@@ -8,7 +8,6 @@ const flowchart = require('../../src/plugins/flowchart/index');
 const sequence = require('../../src/plugins/sequence/index');
 const mermaid = require('../../src/plugins/mermaid/index');
 
-
 const { h, render } = preact;
 
 const processor = vremark()
