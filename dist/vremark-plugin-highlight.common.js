@@ -103,6 +103,8 @@ module.exports = function checkbox(options = {}) {
     // if(!hljs){
     //     return;
     // }
+    //            html+='<div style="border-left: 1px solid #a8a8a8;position: absolute;top: 0;left: 51px;height: 100%;"></div>';
+
 
     var lineNumbers = options.lineNumbers;
 

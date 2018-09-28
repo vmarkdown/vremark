@@ -1,4 +1,4 @@
-/*
+
 const { h, render, Component } = preact;
 const processor = require('./processor');
 
@@ -36,13 +36,14 @@ const editor = new CodeMirrorEditor(document.getElementById('editor'), {
 
 });
 
-// editor.on("change",  function () {
-//     setValue();
-// });
-// setValue();
+editor.on("change",  function () {
+    setValue();
+});
+setValue();
 
-*/
 
+
+/*
 const { h, render, Component } = preact;
 var dom0 = h('div',{className: "markdown-body",key: 0},[
     h('h3',{key: 0},[
@@ -92,3 +93,6 @@ class Preview extends Component {
 }
 
 render(h(Preview), document.getElementById('preview'));
+*/
+
+

@@ -18,6 +18,6 @@
   "dependencies": {
     "remark": "^9.0.0",
     "remark-parse": "^5.0.0",
-    "remark-render": "^0.0.13"
+    "remark-render": "^0.0.14"
   }
 }
