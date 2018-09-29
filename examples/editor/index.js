@@ -14,8 +14,8 @@ class MarkownPreview extends Component {
         console.time('parse');
         const file = processor.processSync(markdown);
         const vdom = file.contents;
-        console.log('vdom====================');
-        console.log(vdom);
+        // console.log('vdom====================');
+        // console.log(vdom);
         console.timeEnd('parse');
         return vdom;
     }
@@ -36,12 +36,42 @@ const editor = new CodeMirrorEditor(document.getElementById('editor'), {
 
 });
 
-editor.on("change",  function () {
-    setValue();
-});
+editor.setValue(
+`# h1
+
+hello[^hello]  
+
+这是一个链接到谷歌的[^脚注]。
+
+[^脚注]: http://www.google.com
+[^hello]: hello
+`);
+
 setValue();
 
 
+
+
+
+
+
+
+function parseValue() {
+    const value = editor.getValue();
+    const file = processor.runSync(processor.parse(value));
+    console.log(file);
+}
+
+editor.on("change",  function () {
+    parseValue();
+});
+parseValue();
+
+
+
+editor.on("change",  function () {
+    setValue();
+});
 
 /*
 const { h, render, Component } = preact;

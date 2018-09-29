@@ -12,7 +12,7 @@ http://breakdance.io/plugins.html
 
 highlight
 
-
+footnote
 
 Breaks support
 
@@ -34,7 +34,7 @@ https://mermaidjs.github.io/mermaid-live-editor
 
 tag
 
-@(示例笔记本)[马克飞象|帮助|Markdown]
+@(notebook)[mark|help|Markdown]
 
 
 dynamic load plugin 
