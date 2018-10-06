@@ -93,10 +93,14 @@ const unified = __webpack_require__(1);
 const parse = __webpack_require__(16);
 const render = __webpack_require__(88);
 const paragraphHTML2Text = __webpack_require__(94);
+const footnote = __webpack_require__(95);
 
 module.exports = unified()
-    .use(parse, {})
+    .use(parse, {
+        footnotes: true
+    })
     .use(paragraphHTML2Text, {})
+    .use(footnote, {})
     .use(render, {})
     .freeze();
 
@@ -8060,6 +8064,10 @@ var Compiler = __webpack_require__(90);
 module.exports = function plugin(options) {
     var Local = unherit(Compiler);
     Local.prototype.options = xtend(Local.prototype.options, this.data('settings'), options);
+
+    var h = this.data('h');
+    h && (Local.prototype.options.h = h);
+
     this.Compiler = Local;
 };
 
@@ -8076,7 +8084,9 @@ var Parser = __webpack_require__(92);
 
 function Compiler(root, file) {
 
-    createKey(root);
+    if(this.options.key) {
+        createKey(root);
+    }
 
     this.root = root;
     this.file = file;
@@ -8178,16 +8188,18 @@ Parser.prototype.parseNode = function(node, parent) {
     if(!node) return null;
     var children = this.parseNodes(node.children, node);
     var h = this.h;
-    return this.options.renderer[node.type].apply(null, [h, node, children, parent]);
+    return this.options.renderer[node.type].apply(null, [h, node, children, parent, this.options]);
 };
 
 Parser.prototype.parse = function(root) {
     try {
+        /*
         root.properties = {
             key: 0,
             className: this.options.rootClassName || 'markdown-body'
         };
         this.options.rootTagName && (root.tagName = this.options.rootTagName);
+        */
         return this.parseNode(root);
     }
     catch (e) {
@@ -8215,57 +8227,57 @@ module.exports = {
  *              node.key is node index if node in array for key. default is 0 (如果当前节点在数组中，返回当前节点在数组中的序列，这是为了构建数组key)
      * @param {*} children node create element children (当前节点的子节点)
      */
-    root : function(h, node, children) {},
+    root : function(h, node, children, options) {},
 
-    text : function(h, node, children) {},
+    text : function(h, node, children, options) {},
 
-    inlineCode : function(h, node, children) {},
+    inlineCode : function(h, node, children, options) {},
 
-    blockquote : function(h, node, children) {},
+    blockquote : function(h, node, children, options) {},
 
-    heading : function(h, node, children) {},
+    heading : function(h, node, children, options) {},
 
-    thematicBreak : function(h, node, children) {},
+    thematicBreak : function(h, node, children, options) {},
 
-    list : function(h, node, children) {},
+    list : function(h, node, children, options) {},
 
-    listItem : function(h, node, children) {},
+    listItem : function(h, node, children, options) {},
 
-    checkbox : function(h, node, children) {},
+    checkbox : function(h, node, children, options) {},
 
-    paragraph : function(h, node, children) {},
+    paragraph : function(h, node, children, options) {},
 
-    table : function(h, node, children) {},
+    table : function(h, node, children, options) {},
 
-    tableRow : function(h, node, children) {},
+    tableRow : function(h, node, children, options) {},
 
-    tableCell : function(h, node, children) {},
+    tableCell : function(h, node, children, options) {},
 
-    strong : function(h, node, children) {},
+    strong : function(h, node, children, options) {},
 
-    emphasis : function(h, node, children) {},
+    emphasis : function(h, node, children, options) {},
 
-    break : function(h, node, children) {},
+    break : function(h, node, children, options) {},
 
-    delete : function(h, node, children) {},
+    delete : function(h, node, children, options) {},
 
-    link : function(h, node, children) {},
+    link : function(h, node, children, options) {},
 
-    linkReference : function(h, node, children) {},
+    linkReference : function(h, node, children, options) {},
 
-    definition : function(h, node, children) {},
+    definition : function(h, node, children, options) {},
 
-    image : function(h, node, children) {},
+    image : function(h, node, children, options) {},
 
-    imageReference : function(h, node, children) {},
+    imageReference : function(h, node, children, options) {},
 
-    math : function(h, node, children) {},
+    math : function(h, node, children, options) {},
 
-    inlineMath : function(h, node, children) {},
+    inlineMath : function(h, node, children, options) {},
 
-    html : function(h, node, children) {},
+    html : function(h, node, children, options) {},
 
-    code : function(h, node, children) {},
+    code : function(h, node, children, options) {},
 };
 
 /***/ }),
@@ -8290,6 +8302,189 @@ module.exports = function paragraphHTML(options = {}) {
     };
 
 };
+
+/***/ }),
+/* 95 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var visit = __webpack_require__(40);
+var remove = __webpack_require__(96);
+
+module.exports = function checkbox(options = {}) {
+
+    return function transformer(root) {
+
+        visit(root, 'footnote', function (node) {
+            var children = node.children;
+            if(children.length>0) {
+                children[0].value = '[^'+children[0].value+']';
+            }
+        });
+
+        var index = 1;
+        var fndefs = [];
+        var fndefKeys = {};
+
+        visit(root, 'footnoteReference', function (fnref) {
+
+            fnref.ref = 'fnref:'+fnref.identifier;
+            fnref.def = 'fndef:'+fnref.identifier;
+
+            if(fndefKeys[fnref.identifier]) {
+                fnref.value = fndefKeys[fnref.identifier];
+            } else {
+                fnref.value = index++;
+            }
+
+            var hasDef = false;
+
+            visit(root, {type: 'footnoteDefinition', identifier: fnref.identifier} , function (fndef) {
+
+                hasDef = true;
+
+                fndef.ref = 'fnref:'+fndef.identifier;
+                fndef.def = 'fndef:'+fndef.identifier;
+
+                if(!fndefKeys[fnref.identifier]) {
+                    visit(fndef, 'paragraph', function (node) {
+
+                        if( node.children.length === 0) {
+                            return;
+                        }
+
+                        var children = node.children;
+                        var position = children[0].position;
+
+                        var reverseNode = {
+                            url: '#' + fndef.ref,
+                            type: 'link',
+                            position: position,
+                            children:[
+                                {
+                                    type: 'text',
+                                    value: ' ↩',
+                                    position: position
+                                }
+                            ]
+                        };
+
+                        node.children.push(reverseNode);
+
+                    });
+
+                    fndefs.push(fndef);
+                }
+
+                fndefKeys[fndef.identifier] = fnref.value;
+
+            });
+
+            if(!hasDef){
+                fnref.type = 'text';
+                fnref.value = '[^'+fnref.identifier+']';
+            }
+        });
+
+        if( fndefs.length>0 ) {
+            remove(root, 'footnoteDefinition');
+
+            var children = [];
+            fndefs.forEach(function (fndef) {
+                children.push({
+                    type: 'listItem',
+                    children: [fndef],
+                    position: fndef.position
+                });
+            });
+
+            root.children.push({
+                type: 'thematicBreak',
+                position: children[0].position
+            });
+
+            root.children.push({
+                ordered: true,
+                type: 'list',
+                properties: {
+                    className: 'footnotes'
+                },
+                children: children,
+                position: children[0].position
+            });
+        }
+
+    };
+
+};
+
+/***/ }),
+/* 96 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var is = __webpack_require__(42)
+
+module.exports = remove
+
+function remove(ast, opts, test) {
+  var cascade
+
+  if (!test) {
+    test = opts
+    opts = {}
+  }
+
+  cascade = opts.cascade
+  cascade = cascade === null || cascade === undefined ? true : cascade
+
+  return preorder(ast, null, null)
+
+  // Check and remove nodes recursively in preorder.
+  // For each composite node, modify its children array in-place.
+  function preorder(node, nodeIndex, parent) {
+    var children
+    var length
+    var index
+    var position
+    var child
+
+    if (is(test, node, nodeIndex, parent)) {
+      return null
+    }
+
+    children = node.children
+
+    if (!children || children.length === 0) {
+      return node
+    }
+
+    // Move all living children to the beginning of the children array.
+    position = 0
+    length = children.length
+    index = -1
+
+    while (++index < length) {
+      child = preorder(children[index], index, node)
+
+      if (child) {
+        children[position++] = child
+      }
+    }
+
+    // Cascade delete.
+    if (cascade && position === 0) {
+      return null
+    }
+
+    // Drop other nodes.
+    children.length = position
+
+    return node
+  }
+}
+
 
 /***/ })
 /******/ ]);

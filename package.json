@@ -7,6 +7,7 @@
   },
   "devDependencies": {
     "css-loader": "^1.0.0",
+    "style-loader": "^0.23.0",
     "github-slugger": "^1.2.0",
     "html-webpack-plugin": "^3.2.0",
     "mdast-util-to-string": "^1.0.5",
@@ -14,7 +15,7 @@
     "remark-preact-renderer": "^0.0.6",
     "remark-slug": "^5.1.0",
     "remark-vue-renderer": "^0.0.2",
-    "style-loader": "^0.23.0",
+
     "text-loader": "^0.0.1",
     "webpack": "^4.17.2",
     "webpack-cli": "^3.1.0",
