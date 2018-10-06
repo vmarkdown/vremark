@@ -14,10 +14,18 @@ module.exports = function checkbox(options = {}) {
 
         var index = 1;
         var fndefs = [];
+        var fndefKeys = {};
+
         visit(root, 'footnoteReference', function (fnref) {
+
             fnref.ref = 'fnref:'+fnref.identifier;
             fnref.def = 'fndef:'+fnref.identifier;
-            fnref.value = index++;
+
+            if(fndefKeys[fnref.identifier]) {
+                fnref.value = fndefKeys[fnref.identifier];
+            } else {
+                fnref.value = index++;
+            }
 
             var hasDef = false;
 
@@ -28,33 +36,37 @@ module.exports = function checkbox(options = {}) {
                 fndef.ref = 'fnref:'+fndef.identifier;
                 fndef.def = 'fndef:'+fndef.identifier;
 
-                visit(fndef, 'paragraph', function (node) {
+                if(!fndefKeys[fnref.identifier]) {
+                    visit(fndef, 'paragraph', function (node) {
 
-                    if( node.children.length === 0) {
-                        return;
-                    }
+                        if( node.children.length === 0) {
+                            return;
+                        }
 
-                    var children = node.children;
-                    var position = children[0].position;
+                        var children = node.children;
+                        var position = children[0].position;
 
-                    var reverseNode = {
-                        url: '#' + fndef.ref,
-                        type: 'link',
-                        position: position,
-                        children:[
-                            {
-                                type: 'text',
-                                value: ' ↩',
-                                position: position
-                            }
-                        ]
-                    };
+                        var reverseNode = {
+                            url: '#' + fndef.ref,
+                            type: 'link',
+                            position: position,
+                            children:[
+                                {
+                                    type: 'text',
+                                    value: ' ↩',
+                                    position: position
+                                }
+                            ]
+                        };
 
-                    node.children.push(reverseNode);
+                        node.children.push(reverseNode);
 
-                });
+                    });
 
-                fndefs.push(fndef);
+                    fndefs.push(fndef);
+                }
+
+                fndefKeys[fndef.identifier] = fnref.value;
 
             });
 

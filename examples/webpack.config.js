@@ -1,19 +1,29 @@
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 const merge = require('webpack-merge');
 
 const example = process.argv.slice(-1)[0];
 
+console.log('example:', example);
+
 const config = {
     mode: 'none',
     output: {
-        path: path.resolve(__dirname, 'dist'),
+        path: path.resolve(__dirname, 'www'),
         filename: '[name].js',
-        libraryTarget: "umd",
-        library: "[name]",
+        // libraryTarget: "umd",
+        // library: "[name]",
         // libraryExport: 'default'
     },
     module: {
         rules: [
+            {
+                test: /\.css$/,
+                use: [
+                    { loader: "style-loader" },
+                    { loader: "css-loader" }
+                ]
+            },
             {
                 test: /\.md$/,
                 use: 'text-loader'
@@ -21,7 +31,6 @@ const config = {
         ]
     },
     externals: {
-        // 'vremark-plugin-katex': 'vremarkPluginKatex'
         'flowchart.js': 'flowchart',
         'highlight.js': 'hljs',
         'katex': 'katex',
@@ -29,8 +38,15 @@ const config = {
         'underscore': '_'
     },
     plugins: [
-
-    ]
+        new HtmlWebpackPlugin({
+            filename: 'index.html',
+            template: 'examples/'+example+'/index.html'
+        })
+    ],
+    devServer: {
+        // hotOnly: true,
+        contentBase: path.join(__dirname, "www")
+    }
 };
 
 const entry = {};
