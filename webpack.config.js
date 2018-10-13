@@ -8,12 +8,16 @@ const config = {
     output: {
         path: path.resolve(__dirname, 'dist'),
         // filename: '[name].common.js',
-        filename: production?'[name].common.min.js':'[name].common.js',
+        // filename: production?'[name].common.min.js':'[name].common.js',
         // libraryTarget: "umd",
-        libraryTarget: "commonjs2",
+        // libraryTarget: "commonjs2",
 
         library: "[name]",
         // libraryExport: 'default'
+
+
+        filename: production?'[name].min.js':'[name].js',
+        libraryTarget: "umd"
     },
     resolve: {
         alias: {
@@ -56,10 +60,6 @@ module.exports = [
     merge(config, {
         entry:{
             'lowlight': path.resolve(__dirname, 'src/lib/lowlight.js')
-        },
-        output: {
-            filename: production?'[name].min.js':'[name].js',
-            libraryTarget: "umd"
         },
     }),
 
