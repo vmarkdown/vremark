@@ -15,6 +15,12 @@ const config = {
         // library: "[name]",
         // libraryExport: 'default'
     },
+    resolve: {
+        alias: {
+            'rehype-vdom': path.resolve(__dirname, '../src/lib/rehype-vdom.common.js'),
+            'hast-util-to-vdom': path.resolve(__dirname, '../src/lib/hast-util-to-vdom.common.js')
+        }
+    },
     module: {
         rules: [
             {
@@ -45,6 +51,8 @@ const config = {
     ],
     devServer: {
         // hotOnly: true,
+        inline: false,
+        hot: false,
         contentBase: path.join(__dirname, "www")
     }
 };

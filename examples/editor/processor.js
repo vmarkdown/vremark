@@ -8,7 +8,10 @@ const flowchart = require('../../src/plugins/flowchart/index');
 const sequence = require('../../src/plugins/sequence/index');
 const mermaid = require('../../src/plugins/mermaid/index');
 
+const hashid = require('../../src/plugins/hashid/index');
+
 const processor = vremark()
+    .use(hashid)
     // .use(function plugin(options) {
     //     return function transform(root) {
     //         root.children.forEach(function (node, i) {
