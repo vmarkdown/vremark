@@ -15,12 +15,18 @@ const config = {
         library: "[name]",
         // libraryExport: 'default'
     },
+    resolve: {
+        alias: {
+            'hast-util-to-vdom': path.resolve(__dirname, 'src/lib/hast-util-to-vdom.common.js')
+        }
+    },
     module: {
     },
-    externals: {
-        // 'react': 'React',
-        // 'vremark-plugin-katex': 'vremarkPluginKatex'
-    },
+    // externals: {
+    //     'lowlight': 'lowlight'
+    //     // 'react': 'React',
+    //     // 'vremark-plugin-katex': 'vremarkPluginKatex'
+    // },
     plugins: [
     ],
     optimization: {
@@ -40,8 +46,26 @@ module.exports = [
     merge(config, {
         entry:{
             vremark: './src/index.js'
-        }
+        },
+        externals: {
+            'lowlight': 'lowlight',
+            'katex': 'katex'
+        },
     }),
+
+    merge(config, {
+        entry:{
+            'lowlight': path.resolve(__dirname, 'src/lib/lowlight.js')
+        },
+        output: {
+            filename: production?'[name].min.js':'[name].js',
+            libraryTarget: "umd"
+        },
+    }),
+
+
+
+    /*
     merge(config, {
         entry:{
             'vremark-plugin-flowchart': './src/plugins/flowchart/index.js'
@@ -91,5 +115,6 @@ module.exports = [
         externals: {
         },
     })
+    */
 ];
 

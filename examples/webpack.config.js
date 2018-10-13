@@ -37,11 +37,12 @@ const config = {
         ]
     },
     externals: {
-        'flowchart.js': 'flowchart',
-        'highlight.js': 'hljs',
+        // 'flowchart.js': 'flowchart',
+        // 'highlight.js': 'hljs',
+        'lowlight': 'lowlight',
         'katex': 'katex',
-        'mermaid': 'mermaid',
-        'underscore': '_'
+        // 'mermaid': 'mermaid',
+        // 'underscore': '_'
     },
     plugins: [
         new HtmlWebpackPlugin({

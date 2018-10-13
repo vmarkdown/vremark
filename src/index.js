@@ -39,7 +39,7 @@ function parse(markdown, options = {}) {
 
     processor = processor.use(remark2rehype);
 
-    if(options.katex) {
+    if(options.math && options.katex) {
         processor = processor.use(katex);
     }
 

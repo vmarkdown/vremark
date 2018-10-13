@@ -1,8 +1,7 @@
 {
   "scripts": {
     "dev": "webpack-dev-server --config ./examples/webpack.config.js --example test",
-    "dev1": "webpack -w --config ./examples/webpack.config.js --example editor",
-    "build": "webpack --config ./webpack.config.js",
+    "build": "webpack --display-modules --config ./webpack.config.js",
     "dist": "NODE_ENV=production webpack -p --config ./webpack.config.js"
   },
   "devDependencies": {
