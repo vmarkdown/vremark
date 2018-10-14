@@ -1,20 +1,25 @@
 const unified = require('unified');
 const remarkParse = require('remark-parse');
 const remark2rehype = require('remark-rehype');
+// const remark2rehype = require('./lib/remark-rehype');
 const breaks  = require('remark-breaks');
 const hashid = require('./plugins/hashid/index');
 const math = require('remark-math');
 const katex = require('rehype-katex');
 const highlight = require('rehype-highlight');
 
+const newline = require('./plugins/newline/index');
+
 const toVdom = require('hast-util-to-vdom');
 
 const defaultOptions = {
     breaks: true,
     hashid: true,
+    highlight: true,
+
     math: true,
     katex: true,
-    highlight: true
+
 };
 
 function parse(markdown, options = {}) {
@@ -39,6 +44,7 @@ function parse(markdown, options = {}) {
 
     processor = processor.use(remark2rehype);
 
+
     if(options.math && options.katex) {
         processor = processor.use(katex);
     }
@@ -49,6 +55,8 @@ function parse(markdown, options = {}) {
                 ignoreMissing: true
             });
     }
+
+    processor = processor.use(newline);
 
     const mdast = processor.parse(markdown);
     const hast = processor.runSync(mdast);

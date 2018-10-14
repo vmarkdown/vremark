@@ -1,5 +1,5 @@
 ### 代码块
-``` python1
+``` python
 @requires_authorization
 def somefunc(param1='', param2=0):
     '''A docstring'''
