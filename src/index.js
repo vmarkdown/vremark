@@ -56,7 +56,7 @@ function parse(markdown, options = {}) {
             });
     }
 
-    processor = processor.use(newline);
+    // processor = processor.use(newline);
 
     const mdast = processor.parse(markdown);
     const hast = processor.runSync(mdast);

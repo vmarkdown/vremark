@@ -1,7 +1,7 @@
 const vremark = require('../../src/index');
 
 
-let md = require('../md/large.md');
+let md = require('../md/test.md');
 
 const app = new Vue({
     el: '#app',
@@ -17,13 +17,12 @@ const app = new Vue({
         console.time('all');
 
         const hast = vremark.parse(md, {
-            breaks: false
-            ,
+            breaks: false,
             hashid: false,
-            highlight: false,
+            highlight: true,
 
-            math: false,
-            katex: false,
+            math: true,
+            katex: true,
         });
 
 
