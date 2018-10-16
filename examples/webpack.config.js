@@ -49,8 +49,8 @@ const config = {
         // 'highlight.js': 'hljs',
         'lowlight': 'lowlight',
         'katex': 'katex',
-        // 'mermaid': 'mermaid',
-        'underscore': '_'
+        'underscore': '_',
+        'mermaid': 'mermaid'
     },
     plugins: [
         new HtmlWebpackPlugin({

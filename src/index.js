@@ -11,6 +11,7 @@ const hashid = require('./plugins/hashid/index');
 const math = require('remark-math');
 const flowchart = require('./plugins/remark-flowchart');
 const sequence = require('./plugins/remark-sequence');
+const mermaid = require('./plugins/remark-mermaid');
 
 //rehype
 const remark2rehype = require('./lib/remark-rehype');
@@ -30,7 +31,8 @@ const defaultOptions = {
     },
 
     flowchart: true,
-    sequence: true
+    sequence: true,
+    mermaid: true,
 };
 
 function createProcessor(options) {
@@ -55,6 +57,9 @@ function createProcessor(options) {
         processor = processor.use(sequence, {});
     }
 
+    if(options.mermaid) {
+        processor = processor.use(mermaid, {});
+    }
 
     if(options.math) {
         processor = processor.use(math, {
