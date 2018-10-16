@@ -15,6 +15,7 @@ const flowchart = require('./plugins/remark-flowchart');
 const rehype = require('./lib/remark-rehype');
 const katex = require('rehype-katex');
 const highlight = require('rehype-highlight');
+const footnote = require('./plugins/rehype-footnote/index');
 
 const toVdom = require('hast-util-to-vdom');
 
@@ -28,7 +29,6 @@ const defaultOptions = {
     },
 
     flowchart: true
-
 };
 
 function createProcessor(options) {
@@ -78,7 +78,13 @@ function createProcessor(options) {
                 ignoreMissing: true
             });
     }
+
+    processor = processor.use(footnote);
+
     // rehype end
+
+
+
 
     return processor;
 }
@@ -93,7 +99,7 @@ function _parse(markdown, options = {}) {
 
 function render(hast, options) {
     if(options.rootClassName) {
-        options.rootClassName = ['vremark'].concat(options.rootClassName);
+        options.rootClassName = ['vremark-body'].concat(options.rootClassName);
     }
     return toVdom(hast, options);
 }
