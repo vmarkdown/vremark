@@ -16,10 +16,10 @@ var cdata = '<!\\[CDATA\\[[\\s\\S]*?\\]\\]>';
 exports.openCloseTag = new RegExp('^(?:' + openTag + '|' + closeTag + ')');
 
 exports.tag = new RegExp('^(?:' +
-  openTag + '|' +
-  closeTag + '|' +
-  comment + '|' +
-  processing + '|' +
-  declaration + '|' +
-  cdata +
-')');
+    openTag + '|' +
+    closeTag + '|' +
+    comment + '|' +
+    processing + '|' +
+    declaration + '|' +
+    cdata +
+    ')');

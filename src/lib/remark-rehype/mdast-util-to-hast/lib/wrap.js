@@ -11,25 +11,25 @@ function wrap(nodes, loose) {
 /* Wrap `nodes` with newlines between each entry.
  * Optionally adds newlines at the start and end. */
 function wrap1(nodes, loose) {
-  var result = []
-  var index = -1
-  var length = nodes.length
+    var result = []
+    var index = -1
+    var length = nodes.length
 
-  if (loose) {
-    result.push(u('text', '\n'))
-  }
-
-  while (++index < length) {
-    if (index) {
-      result.push(u('text', '\n'))
+    if (loose) {
+        result.push(u('text', '\n'))
     }
 
-    result.push(nodes[index])
-  }
+    while (++index < length) {
+        if (index) {
+            result.push(u('text', '\n'))
+        }
 
-  if (loose && nodes.length !== 0) {
-    result.push(u('text', '\n'))
-  }
+        result.push(nodes[index])
+    }
 
-  return result
+    if (loose && nodes.length !== 0) {
+        result.push(u('text', '\n'))
+    }
+
+    return result
 }

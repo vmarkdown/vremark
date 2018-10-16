@@ -17,129 +17,129 @@ var MAILTO_LENGTH = MAILTO.length;
 
 /* Tokenise a link. */
 function autoLink(eat, value, silent) {
-  var self;
-  var subvalue;
-  var length;
-  var index;
-  var queue;
-  var character;
-  var hasAtCharacter;
-  var link;
-  var now;
-  var content;
-  var tokenizers;
-  var exit;
+    var self;
+    var subvalue;
+    var length;
+    var index;
+    var queue;
+    var character;
+    var hasAtCharacter;
+    var link;
+    var now;
+    var content;
+    var tokenizers;
+    var exit;
 
-  if (value.charAt(0) !== C_LT) {
-    return;
-  }
+    if (value.charAt(0) !== C_LT) {
+        return;
+    }
 
-  self = this;
-  subvalue = '';
-  length = value.length;
-  index = 0;
-  queue = '';
-  hasAtCharacter = false;
-  link = '';
+    self = this;
+    subvalue = '';
+    length = value.length;
+    index = 0;
+    queue = '';
+    hasAtCharacter = false;
+    link = '';
 
-  index++;
-  subvalue = C_LT;
+    index++;
+    subvalue = C_LT;
 
-  while (index < length) {
+    while (index < length) {
+        character = value.charAt(index);
+
+        if (
+            whitespace(character) ||
+            character === C_GT ||
+            character === C_AT_SIGN ||
+            (character === ':' && value.charAt(index + 1) === C_SLASH)
+        ) {
+            break;
+        }
+
+        queue += character;
+        index++;
+    }
+
+    if (!queue) {
+        return;
+    }
+
+    link += queue;
+    queue = '';
+
     character = value.charAt(index);
-
-    if (
-      whitespace(character) ||
-      character === C_GT ||
-      character === C_AT_SIGN ||
-      (character === ':' && value.charAt(index + 1) === C_SLASH)
-    ) {
-      break;
-    }
-
-    queue += character;
+    link += character;
     index++;
-  }
 
-  if (!queue) {
-    return;
-  }
-
-  link += queue;
-  queue = '';
-
-  character = value.charAt(index);
-  link += character;
-  index++;
-
-  if (character === C_AT_SIGN) {
-    hasAtCharacter = true;
-  } else {
-    if (
-      character !== ':' ||
-      value.charAt(index + 1) !== C_SLASH
-    ) {
-      return;
-    }
-
-    link += C_SLASH;
-    index++;
-  }
-
-  while (index < length) {
-    character = value.charAt(index);
-
-    if (whitespace(character) || character === C_GT) {
-      break;
-    }
-
-    queue += character;
-    index++;
-  }
-
-  character = value.charAt(index);
-
-  if (!queue || character !== C_GT) {
-    return;
-  }
-
-  /* istanbul ignore if - never used (yet) */
-  if (silent) {
-    return true;
-  }
-
-  link += queue;
-  content = link;
-  subvalue += link + character;
-  now = eat.now();
-  now.column++;
-  now.offset++;
-
-  if (hasAtCharacter) {
-    if (link.slice(0, MAILTO_LENGTH).toLowerCase() === MAILTO) {
-      content = content.substr(MAILTO_LENGTH);
-      now.column += MAILTO_LENGTH;
-      now.offset += MAILTO_LENGTH;
+    if (character === C_AT_SIGN) {
+        hasAtCharacter = true;
     } else {
-      link = MAILTO + link;
+        if (
+            character !== ':' ||
+            value.charAt(index + 1) !== C_SLASH
+        ) {
+            return;
+        }
+
+        link += C_SLASH;
+        index++;
     }
-  }
 
-  /* Temporarily remove all tokenizers except text in autolinks. */
-  tokenizers = self.inlineTokenizers;
-  self.inlineTokenizers = {text: tokenizers.text};
+    while (index < length) {
+        character = value.charAt(index);
 
-  exit = self.enterLink();
+        if (whitespace(character) || character === C_GT) {
+            break;
+        }
 
-  content = self.tokenizeInline(content, now);
+        queue += character;
+        index++;
+    }
 
-  self.inlineTokenizers = tokenizers;
-  exit();
+    character = value.charAt(index);
 
-  return eat(subvalue)({
-    type: 'link',
-    title: null,
-    url: decode(link, {nonTerminated: false}),
-    children: content
-  });
+    if (!queue || character !== C_GT) {
+        return;
+    }
+
+    /* istanbul ignore if - never used (yet) */
+    if (silent) {
+        return true;
+    }
+
+    link += queue;
+    content = link;
+    subvalue += link + character;
+    now = eat.now();
+    now.column++;
+    now.offset++;
+
+    if (hasAtCharacter) {
+        if (link.slice(0, MAILTO_LENGTH).toLowerCase() === MAILTO) {
+            content = content.substr(MAILTO_LENGTH);
+            now.column += MAILTO_LENGTH;
+            now.offset += MAILTO_LENGTH;
+        } else {
+            link = MAILTO + link;
+        }
+    }
+
+    /* Temporarily remove all tokenizers except text in autolinks. */
+    tokenizers = self.inlineTokenizers;
+    self.inlineTokenizers = {text: tokenizers.text};
+
+    exit = self.enterLink();
+
+    content = self.tokenizeInline(content, now);
+
+    self.inlineTokenizers = tokenizers;
+    exit();
+
+    return eat(subvalue)({
+        type: 'link',
+        title: null,
+        url: decode(link, {nonTerminated: false}),
+        children: content
+    });
 }

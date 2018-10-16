@@ -8,18 +8,18 @@ var all = require('../all')
 
 /* Transform a reference to a link. */
 function linkReference(h, node) {
-  var def = h.definition(node.identifier)
-  var props
+    var def = h.definition(node.identifier)
+    var props
 
-  if (!def) {
-    return revert(h, node)
-  }
+    if (!def) {
+        return revert(h, node)
+    }
 
-  props = {href: normalize(def.url || ''), target: '_blank'}
+    props = {href: normalize(def.url || ''), target: '_blank'}
 
-  if (def.title !== null && def.title !== undefined) {
-    props.title = def.title
-  }
+    if (def.title !== null && def.title !== undefined) {
+        props.title = def.title
+    }
 
-  return h(node, 'a', props, all(h, node))
+    return h(node, 'a', props, all(h, node))
 }

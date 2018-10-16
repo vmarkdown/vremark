@@ -7,38 +7,38 @@ var all = require('./all')
 
 /* Return the content of a reference without definition as markdown. */
 function revert(h, node) {
-  var subtype = node.referenceType
-  var suffix = ']'
-  var contents
-  var head
-  var tail
+    var subtype = node.referenceType
+    var suffix = ']'
+    var contents
+    var head
+    var tail
 
-  if (subtype === 'collapsed') {
-    suffix += '[]'
-  } else if (subtype === 'full') {
-    suffix += '[' + node.identifier + ']'
-  }
+    if (subtype === 'collapsed') {
+        suffix += '[]'
+    } else if (subtype === 'full') {
+        suffix += '[' + node.identifier + ']'
+    }
 
-  if (node.type === 'imageReference') {
-    return u('text', {position: node.position}, '![' + node.alt + suffix)
-  }
+    if (node.type === 'imageReference') {
+        return u('text', {position: node.position}, '![' + node.alt + suffix)
+    }
 
-  contents = all(h, node)
-  head = contents[0]
+    contents = all(h, node)
+    head = contents[0]
 
-  if (head && head.type === 'text') {
-    head.value = '[' + head.value
-  } else {
-    contents.unshift(u('text', {position: node.position}, '['))
-  }
+    if (head && head.type === 'text') {
+        head.value = '[' + head.value
+    } else {
+        contents.unshift(u('text', {position: node.position}, '['))
+    }
 
-  tail = contents[contents.length - 1]
+    tail = contents[contents.length - 1]
 
-  if (tail && tail.type === 'text') {
-    tail.value += suffix
-  } else {
-    contents.push(u('text', {position: node.position}, suffix))
-  }
+    if (tail && tail.type === 'text') {
+        tail.value += suffix
+    } else {
+        contents.push(u('text', {position: node.position}, suffix))
+    }
 
-  return contents
+    return contents
 }

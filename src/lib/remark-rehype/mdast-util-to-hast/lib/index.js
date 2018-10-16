@@ -14,88 +14,88 @@ var handlers = require('./handlers')
 
 /* Factory to transform. */
 function factory(tree, options) {
-  var settings = options || {}
-  var dangerous = settings.allowDangerousHTML
+    var settings = options || {}
+    var dangerous = settings.allowDangerousHTML
 
-  h.dangerous = dangerous
-  h.definition = definitions(tree, settings)
-  h.footnotes = []
-  h.augment = augment
-  h.handlers = xtend(handlers, settings.handlers || {})
+    h.dangerous = dangerous
+    h.definition = definitions(tree, settings)
+    h.footnotes = []
+    h.augment = augment
+    h.handlers = xtend(handlers, settings.handlers || {})
 
-  visit(tree, 'footnoteDefinition', visitor)
+    visit(tree, 'footnoteDefinition', visitor)
 
-  return h
+    return h
 
-  /* Finalise the created `right`, a HAST node, from
-   * `left`, an MDAST node.   */
-  function augment(left, right) {
-    var data
-    var ctx
+    /* Finalise the created `right`, a HAST node, from
+     * `left`, an MDAST node.   */
+    function augment(left, right) {
+        var data
+        var ctx
 
-    /* Handle `data.hName`, `data.hProperties, `hChildren`. */
-    if (left && 'data' in left) {
-      data = left.data
+        /* Handle `data.hName`, `data.hProperties, `hChildren`. */
+        if (left && 'data' in left) {
+            data = left.data
 
-      if (right.type === 'element' && data.hName) {
-        right.tagName = data.hName
-      }
+            if (right.type === 'element' && data.hName) {
+                right.tagName = data.hName
+            }
 
-      if (right.type === 'element' && data.hProperties) {
-        right.properties = xtend(right.properties, data.hProperties)
-      }
+            if (right.type === 'element' && data.hProperties) {
+                right.properties = xtend(right.properties, data.hProperties)
+            }
 
-      if (right.children && data.hChildren) {
-        right.children = data.hChildren
-      }
+            if (right.children && data.hChildren) {
+                right.children = data.hChildren
+            }
+        }
+
+        ctx = left && left.position ? left : {position: left}
+
+        if (!generated(ctx)) {
+            right.position = {
+                start: position.start(ctx),
+                end: position.end(ctx)
+            }
+        }
+
+        return right
     }
 
-    ctx = left && left.position ? left : {position: left}
+    /* Create an element for a `node`. */
+    function h(node, tagName, props, children) {
+        if (
+            (children === undefined || children === null) &&
+            typeof props === 'object' &&
+            'length' in props
+        ) {
+            children = props
+            props = {}
+        }
 
-    if (!generated(ctx)) {
-      right.position = {
-        start: position.start(ctx),
-        end: position.end(ctx)
-      }
+        return augment(node, {
+            type: 'element',
+            tagName: tagName,
+            properties: props || {},
+            children: children || []
+        })
     }
 
-    return right
-  }
-
-  /* Create an element for a `node`. */
-  function h(node, tagName, props, children) {
-    if (
-      (children === undefined || children === null) &&
-      typeof props === 'object' &&
-      'length' in props
-    ) {
-      children = props
-      props = {}
+    function visitor(definition) {
+        h.footnotes.push(definition)
     }
-
-    return augment(node, {
-      type: 'element',
-      tagName: tagName,
-      properties: props || {},
-      children: children || []
-    })
-  }
-
-  function visitor(definition) {
-    h.footnotes.push(definition)
-  }
 }
 
 /* Transform `tree`, which is an MDAST node, to a HAST node. */
 function toHAST(tree, options) {
-  var h = factory(tree, options)
-  var node = one(h, tree)
-  var footnotes = footer(h)
+    var h = factory(tree, options)
+    var node = one(h, tree)
+    var footnotes = footer(h)
 
-  if (node && node.children && footnotes) {
-    // node.children = node.children.concat(u('text', '\n'), footnotes)
-    node.children = node.children.concat(footnotes)
-  }
+    if (node && node.children && footnotes) {
+        // node.children = node.children.concat(u('text', '\n'), footnotes)
+        node.children = node.children.concat(footnotes)
+    }
 
-  return node
+    return node
 }

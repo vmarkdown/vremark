@@ -7,12 +7,12 @@ var all = require('../all')
 
 /* Transform a list. */
 function list(h, node) {
-  var props = {}
-  var name = node.ordered ? 'ol' : 'ul'
+    var props = {}
+    var name = node.ordered ? 'ol' : 'ul'
 
-  if (typeof node.start === 'number' && node.start !== 1) {
-    props.start = node.start
-  }
+    if (typeof node.start === 'number' && node.start !== 1) {
+        props.start = node.start
+    }
 
-  return h(node, name, props, wrap(all(h, node), true))
+    return h(node, name, props, wrap(all(h, node), true))
 }

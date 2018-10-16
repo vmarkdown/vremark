@@ -8,47 +8,47 @@ var wrap = require('./wrap')
 
 /* Transform all footnote definitions, if any. */
 function generateFootnotes(h) {
-  var footnotes = h.footnotes
-  var length = footnotes.length
-  var index = -1
-  var listItems = []
-  var def
+    var footnotes = h.footnotes
+    var length = footnotes.length
+    var index = -1
+    var listItems = []
+    var def
 
-  if (!length) {
-    return null
-  }
-
-  while (++index < length) {
-    def = footnotes[index]
-
-    listItems[index] = {
-      type: 'listItem',
-      data: {hProperties: {id: 'fn-' + def.identifier}},
-      children: def.children.concat({
-        type: 'link',
-        url: '#fnref-' + def.identifier,
-        target: '_self',
-        data: {hProperties: {className: ['footnote-backref']}},
-        children: [{type: 'text', value: '↩'}]
-      }),
-      position: def.position
+    if (!length) {
+        return null
     }
-  }
 
-  return h(
-    null,
-    'div',
-    {className: ['footnotes']},
-    wrap(
-      [
-        thematicBreak(h),
-        list(h, {
-          type: 'list',
-          ordered: true,
-          children: listItems
-        })
-      ],
-      true
+    while (++index < length) {
+        def = footnotes[index]
+
+        listItems[index] = {
+            type: 'listItem',
+            data: {hProperties: {id: 'fn-' + def.identifier}},
+            children: def.children.concat({
+                type: 'link',
+                url: '#fnref-' + def.identifier,
+                target: '_self',
+                data: {hProperties: {className: ['footnote-backref']}},
+                children: [{type: 'text', value: '↩'}]
+            }),
+            position: def.position
+        }
+    }
+
+    return h(
+        null,
+        'div',
+        {className: ['footnotes']},
+        wrap(
+            [
+                thematicBreak(h),
+                list(h, {
+                    type: 'list',
+                    ordered: true,
+                    children: listItems
+                })
+            ],
+            true
+        )
     )
-  )
 }

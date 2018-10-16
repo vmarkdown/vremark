@@ -6,29 +6,29 @@ module.exports = escape;
 escape.locator = locate;
 
 function escape(eat, value, silent) {
-  var self = this;
-  var character;
-  var node;
+    var self = this;
+    var character;
+    var node;
 
-  if (value.charAt(0) === '\\') {
-    character = value.charAt(1);
+    if (value.charAt(0) === '\\') {
+        character = value.charAt(1);
 
-    if (self.escape.indexOf(character) !== -1) {
-      /* istanbul ignore if - never used (yet) */
-      if (silent) {
-        return true;
-      }
+        if (self.escape.indexOf(character) !== -1) {
+            /* istanbul ignore if - never used (yet) */
+            if (silent) {
+                return true;
+            }
 
-      if (character === '\n') {
-        node = {type: 'break'};
-      } else {
-        node = {
-          type: 'text',
-          value: character
-        };
-      }
+            if (character === '\n') {
+                node = {type: 'break'};
+            } else {
+                node = {
+                    type: 'text',
+                    value: character
+                };
+            }
 
-      return eat('\\' + character)(node);
+            return eat('\\' + character)(node);
+        }
     }
-  }
 }

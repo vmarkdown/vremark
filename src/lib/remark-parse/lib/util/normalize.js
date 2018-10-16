@@ -7,5 +7,5 @@ module.exports = normalize;
 /* Normalize an identifier.  Collapses multiple white space
  * characters into a single space, and removes casing. */
 function normalize(value) {
-  return collapseWhiteSpace(value).toLowerCase();
+    return collapseWhiteSpace(value).toLowerCase();
 }

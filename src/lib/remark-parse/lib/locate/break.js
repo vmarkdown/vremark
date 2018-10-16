@@ -3,15 +3,15 @@
 module.exports = locate;
 
 function locate(value, fromIndex) {
-  var index = value.indexOf('\n', fromIndex);
+    var index = value.indexOf('\n', fromIndex);
 
-  while (index > fromIndex) {
-    if (value.charAt(index - 1) !== ' ') {
-      break;
+    while (index > fromIndex) {
+        if (value.charAt(index - 1) !== ' ') {
+            break;
+        }
+
+        index--;
     }
 
-    index--;
-  }
-
-  return index;
+    return index;
 }

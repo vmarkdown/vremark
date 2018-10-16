@@ -7,5 +7,5 @@ var trimLines = require('trim-lines')
 
 /* Transform text. */
 function text(h, node) {
-  return h.augment(node, u('text', {position: node.position}, trimLines(node.value)))
+    return h.augment(node, u('text', {position: node.position}, trimLines(node.value)))
 }

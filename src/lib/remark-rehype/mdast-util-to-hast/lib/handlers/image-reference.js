@@ -7,18 +7,18 @@ var revert = require('../revert')
 
 /* Transform a reference to an image. */
 function imageReference(h, node) {
-  var def = h.definition(node.identifier)
-  var props
+    var def = h.definition(node.identifier)
+    var props
 
-  if (!def) {
-    return revert(h, node)
-  }
+    if (!def) {
+        return revert(h, node)
+    }
 
-  props = {src: normalize(def.url || ''), alt: node.alt}
+    props = {src: normalize(def.url || ''), alt: node.alt}
 
-  if (def.title !== null && def.title !== undefined) {
-    props.title = def.title
-  }
+    if (def.title !== null && def.title !== undefined) {
+        props.title = def.title
+    }
 
-  return h(node, 'img', props)
+    return h(node, 'img', props)
 }

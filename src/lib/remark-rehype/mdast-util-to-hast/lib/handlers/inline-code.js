@@ -7,5 +7,5 @@ var u = require('unist-builder')
 
 /* Transform inline code. */
 function inlineCode(h, node) {
-  return h(node, 'code', [u('text', {position: node.position}, collapse(node.value))])
+    return h(node, 'code', [u('text', {position: node.position}, collapse(node.value))])
 }

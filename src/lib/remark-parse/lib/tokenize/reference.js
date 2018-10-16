@@ -19,188 +19,188 @@ var C_BRACKET_OPEN = '[';
 var C_BRACKET_CLOSE = ']';
 
 function reference(eat, value, silent) {
-  var self = this;
-  var character = value.charAt(0);
-  var index = 0;
-  var length = value.length;
-  var subvalue = '';
-  var intro = '';
-  var type = T_LINK;
-  var referenceType = REFERENCE_TYPE_SHORTCUT;
-  var content;
-  var identifier;
-  var now;
-  var node;
-  var exit;
-  var queue;
-  var bracketed;
-  var depth;
+    var self = this;
+    var character = value.charAt(0);
+    var index = 0;
+    var length = value.length;
+    var subvalue = '';
+    var intro = '';
+    var type = T_LINK;
+    var referenceType = REFERENCE_TYPE_SHORTCUT;
+    var content;
+    var identifier;
+    var now;
+    var node;
+    var exit;
+    var queue;
+    var bracketed;
+    var depth;
 
-  /* Check whether we’re eating an image. */
-  if (character === '!') {
-    type = T_IMAGE;
-    intro = character;
-    character = value.charAt(++index);
-  }
-
-  if (character !== C_BRACKET_OPEN) {
-    return;
-  }
-
-  index++;
-  intro += character;
-  queue = '';
-
-  /* Check whether we’re eating a footnote. */
-  if (self.options.footnotes && value.charAt(index) === C_CARET) {
-    /* Exit if `![^` is found, so the `!` will be seen as text after this,
-     * and we’ll enter this function again when `[^` is found. */
-    if (type === T_IMAGE) {
-      return;
+    /* Check whether we’re eating an image. */
+    if (character === '!') {
+        type = T_IMAGE;
+        intro = character;
+        character = value.charAt(++index);
     }
 
-    intro += C_CARET;
-    index++;
-    type = T_FOOTNOTE;
-  }
-
-  /* Eat the text. */
-  depth = 0;
-
-  while (index < length) {
-    character = value.charAt(index);
-
-    if (character === C_BRACKET_OPEN) {
-      bracketed = true;
-      depth++;
-    } else if (character === C_BRACKET_CLOSE) {
-      if (!depth) {
-        break;
-      }
-
-      depth--;
+    if (character !== C_BRACKET_OPEN) {
+        return;
     }
 
-    if (character === C_BACKSLASH) {
-      queue += C_BACKSLASH;
-      character = value.charAt(++index);
+    index++;
+    intro += character;
+    queue = '';
+
+    /* Check whether we’re eating a footnote. */
+    if (self.options.footnotes && value.charAt(index) === C_CARET) {
+        /* Exit if `![^` is found, so the `!` will be seen as text after this,
+         * and we’ll enter this function again when `[^` is found. */
+        if (type === T_IMAGE) {
+            return;
+        }
+
+        intro += C_CARET;
+        index++;
+        type = T_FOOTNOTE;
     }
 
-    queue += character;
-    index++;
-  }
-
-  subvalue = queue;
-  content = queue;
-  character = value.charAt(index);
-
-  if (character !== C_BRACKET_CLOSE) {
-    return;
-  }
-
-  index++;
-  subvalue += character;
-  queue = '';
-
-  while (index < length) {
-    character = value.charAt(index);
-
-    if (!whitespace(character)) {
-      break;
-    }
-
-    queue += character;
-    index++;
-  }
-
-  character = value.charAt(index);
-
-  /* Inline footnotes cannot have an identifier. */
-  if (type !== T_FOOTNOTE && character === C_BRACKET_OPEN) {
-    identifier = '';
-    queue += character;
-    index++;
+    /* Eat the text. */
+    depth = 0;
 
     while (index < length) {
-      character = value.charAt(index);
+        character = value.charAt(index);
 
-      if (character === C_BRACKET_OPEN || character === C_BRACKET_CLOSE) {
-        break;
-      }
+        if (character === C_BRACKET_OPEN) {
+            bracketed = true;
+            depth++;
+        } else if (character === C_BRACKET_CLOSE) {
+            if (!depth) {
+                break;
+            }
 
-      if (character === C_BACKSLASH) {
-        identifier += C_BACKSLASH;
-        character = value.charAt(++index);
-      }
+            depth--;
+        }
 
-      identifier += character;
-      index++;
+        if (character === C_BACKSLASH) {
+            queue += C_BACKSLASH;
+            character = value.charAt(++index);
+        }
+
+        queue += character;
+        index++;
+    }
+
+    subvalue = queue;
+    content = queue;
+    character = value.charAt(index);
+
+    if (character !== C_BRACKET_CLOSE) {
+        return;
+    }
+
+    index++;
+    subvalue += character;
+    queue = '';
+
+    while (index < length) {
+        character = value.charAt(index);
+
+        if (!whitespace(character)) {
+            break;
+        }
+
+        queue += character;
+        index++;
     }
 
     character = value.charAt(index);
 
-    if (character === C_BRACKET_CLOSE) {
-      referenceType = identifier ? REFERENCE_TYPE_FULL : REFERENCE_TYPE_COLLAPSED;
-      queue += identifier + character;
-      index++;
+    /* Inline footnotes cannot have an identifier. */
+    if (type !== T_FOOTNOTE && character === C_BRACKET_OPEN) {
+        identifier = '';
+        queue += character;
+        index++;
+
+        while (index < length) {
+            character = value.charAt(index);
+
+            if (character === C_BRACKET_OPEN || character === C_BRACKET_CLOSE) {
+                break;
+            }
+
+            if (character === C_BACKSLASH) {
+                identifier += C_BACKSLASH;
+                character = value.charAt(++index);
+            }
+
+            identifier += character;
+            index++;
+        }
+
+        character = value.charAt(index);
+
+        if (character === C_BRACKET_CLOSE) {
+            referenceType = identifier ? REFERENCE_TYPE_FULL : REFERENCE_TYPE_COLLAPSED;
+            queue += identifier + character;
+            index++;
+        } else {
+            identifier = '';
+        }
+
+        subvalue += queue;
+        queue = '';
     } else {
-      identifier = '';
+        if (!content) {
+            return;
+        }
+
+        identifier = content;
     }
 
-    subvalue += queue;
-    queue = '';
-  } else {
-    if (!content) {
-      return;
+    /* Brackets cannot be inside the identifier. */
+    if (referenceType !== REFERENCE_TYPE_FULL && bracketed) {
+        return;
     }
 
-    identifier = content;
-  }
+    subvalue = intro + subvalue;
 
-  /* Brackets cannot be inside the identifier. */
-  if (referenceType !== REFERENCE_TYPE_FULL && bracketed) {
-    return;
-  }
+    if (type === T_LINK && self.inLink) {
+        return null;
+    }
 
-  subvalue = intro + subvalue;
+    /* istanbul ignore if - never used (yet) */
+    if (silent) {
+        return true;
+    }
 
-  if (type === T_LINK && self.inLink) {
-    return null;
-  }
+    if (type === T_FOOTNOTE && content.indexOf(' ') !== -1) {
+        return eat(subvalue)({
+            type: 'footnote',
+            children: this.tokenizeInline(content, eat.now())
+        });
+    }
 
-  /* istanbul ignore if - never used (yet) */
-  if (silent) {
-    return true;
-  }
+    now = eat.now();
+    now.column += intro.length;
+    now.offset += intro.length;
+    identifier = referenceType === REFERENCE_TYPE_FULL ? identifier : content;
 
-  if (type === T_FOOTNOTE && content.indexOf(' ') !== -1) {
-    return eat(subvalue)({
-      type: 'footnote',
-      children: this.tokenizeInline(content, eat.now())
-    });
-  }
+    node = {
+        type: type + 'Reference',
+        identifier: normalize(identifier)
+    };
 
-  now = eat.now();
-  now.column += intro.length;
-  now.offset += intro.length;
-  identifier = referenceType === REFERENCE_TYPE_FULL ? identifier : content;
+    if (type === T_LINK || type === T_IMAGE) {
+        node.referenceType = referenceType;
+    }
 
-  node = {
-    type: type + 'Reference',
-    identifier: normalize(identifier)
-  };
+    if (type === T_LINK) {
+        exit = self.enterLink();
+        node.children = self.tokenizeInline(content, now);
+        exit();
+    } else if (type === T_IMAGE) {
+        node.alt = self.decode.raw(self.unescape(content), now) || null;
+    }
 
-  if (type === T_LINK || type === T_IMAGE) {
-    node.referenceType = referenceType;
-  }
-
-  if (type === T_LINK) {
-    exit = self.enterLink();
-    node.children = self.tokenizeInline(content, now);
-    exit();
-  } else if (type === T_IMAGE) {
-    node.alt = self.decode.raw(self.unescape(content), now) || null;
-  }
-
-  return eat(subvalue)(node);
+    return eat(subvalue)(node);
 }

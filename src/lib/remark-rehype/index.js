@@ -10,33 +10,33 @@ module.exports = remark2rehype
  * Without destination, returns the HAST tree: further
  * plug-ins run on that tree (mutate-mode). */
 function remark2rehype(destination, options) {
-  if (destination && !destination.process) {
-    options = destination
-    destination = null
-  }
+    if (destination && !destination.process) {
+        options = destination
+        destination = null
+    }
 
-  return destination ? bridge(destination, options) : mutate(options)
+    return destination ? bridge(destination, options) : mutate(options)
 }
 
 /* Bridge-mode.  Runs the destination with the new HAST
  * tree. */
 function bridge(destination, options) {
-  return transformer
+    return transformer
 
-  function transformer(node, file, next) {
-    destination.run(mdast2hast(node, options), file, done)
+    function transformer(node, file, next) {
+        destination.run(mdast2hast(node, options), file, done)
 
-    function done(err) {
-      next(err)
+        function done(err) {
+            next(err)
+        }
     }
-  }
 }
 
 /* Mutate-mode.  Further transformers run on the HAST tree. */
 function mutate(options) {
-  return transformer
+    return transformer
 
-  function transformer(node) {
-    return mdast2hast(node, options)
-  }
+    function transformer(node) {
+        return mdast2hast(node, options)
+    }
 }

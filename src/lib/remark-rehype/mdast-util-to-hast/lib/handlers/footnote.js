@@ -6,32 +6,32 @@ var footnoteReference = require('./footnote-reference')
 
 /* Transform an inline footnote. */
 function footnote(h, node) {
-  var identifiers = []
-  var identifier = 1
-  var footnotes = h.footnotes
-  var length = footnotes.length
-  var index = -1
+    var identifiers = []
+    var identifier = 1
+    var footnotes = h.footnotes
+    var length = footnotes.length
+    var index = -1
 
-  while (++index < length) {
-    identifiers[index] = footnotes[index].identifier
-  }
+    while (++index < length) {
+        identifiers[index] = footnotes[index].identifier
+    }
 
-  while (identifiers.indexOf(String(identifier)) !== -1) {
-    identifier++
-  }
+    while (identifiers.indexOf(String(identifier)) !== -1) {
+        identifier++
+    }
 
-  identifier = String(identifier)
+    identifier = String(identifier)
 
-  footnotes.push({
-    type: 'footnoteDefinition',
-    identifier: identifier,
-    children: [{type: 'paragraph', children: node.children}],
-    position: node.position
-  })
+    footnotes.push({
+        type: 'footnoteDefinition',
+        identifier: identifier,
+        children: [{type: 'paragraph', children: node.children}],
+        position: node.position
+    })
 
-  return footnoteReference(h, {
-    type: 'footnoteReference',
-    identifier: identifier,
-    position: node.position
-  })
+    return footnoteReference(h, {
+        type: 'footnoteReference',
+        identifier: identifier,
+        position: node.position
+    })
 }

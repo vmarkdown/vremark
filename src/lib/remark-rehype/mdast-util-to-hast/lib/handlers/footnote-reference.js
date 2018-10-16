@@ -6,11 +6,11 @@ var u = require('unist-builder')
 
 /* Transform a reference to a footnote. */
 function footnoteReference(h, node) {
-  var identifier = node.identifier
+    var identifier = node.identifier
 
-  return h(node.position, 'sup', {id: 'fnref-' + identifier}, [
-    h(node, 'a', {href: '#fn-' + identifier, className: ['footnote-ref']}, [
-      u('text', {position: node.position}, identifier)
+    return h(node.position, 'sup', {id: 'fnref-' + identifier}, [
+        h(node, 'a', {href: '#fn-' + identifier, className: ['footnote-ref']}, [
+            u('text', {position: node.position}, identifier)
+        ])
     ])
-  ])
 }

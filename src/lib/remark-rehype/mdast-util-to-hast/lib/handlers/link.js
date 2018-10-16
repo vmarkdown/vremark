@@ -11,13 +11,13 @@ function link(h, node) {
     var isEmailAddress = href && href.startsWith('mailto:');
     var props = {href: href};
 
-    if(node.target) {
+    if (node.target) {
         props.target = node.target;
     }
-    else if(isEmailAddress) {
+    else if (isEmailAddress) {
 
     }
-    else{
+    else {
         props.target = '_blank';
     }
 

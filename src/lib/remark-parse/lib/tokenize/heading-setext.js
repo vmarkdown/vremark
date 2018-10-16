@@ -18,90 +18,90 @@ SETEXT_MARKERS[C_EQUALS] = 1;
 SETEXT_MARKERS[C_DASH] = 2;
 
 function setextHeading(eat, value, silent) {
-  var self = this;
-  var now = eat.now();
-  var length = value.length;
-  var index = -1;
-  var subvalue = '';
-  var content;
-  var queue;
-  var character;
-  var marker;
-  var depth;
+    var self = this;
+    var now = eat.now();
+    var length = value.length;
+    var index = -1;
+    var subvalue = '';
+    var content;
+    var queue;
+    var character;
+    var marker;
+    var depth;
 
-  /* Eat initial indentation. */
-  while (++index < length) {
-    character = value.charAt(index);
+    /* Eat initial indentation. */
+    while (++index < length) {
+        character = value.charAt(index);
 
-    if (character !== C_SPACE || index >= MAX_HEADING_INDENT) {
-      index--;
-      break;
+        if (character !== C_SPACE || index >= MAX_HEADING_INDENT) {
+            index--;
+            break;
+        }
+
+        subvalue += character;
+    }
+
+    /* Eat content. */
+    content = '';
+    queue = '';
+
+    while (++index < length) {
+        character = value.charAt(index);
+
+        if (character === C_NEWLINE) {
+            index--;
+            break;
+        }
+
+        if (character === C_SPACE || character === C_TAB) {
+            queue += character;
+        } else {
+            content += queue + character;
+            queue = '';
+        }
+    }
+
+    now.column += subvalue.length;
+    now.offset += subvalue.length;
+    subvalue += content + queue;
+
+    /* Ensure the content is followed by a newline and a
+     * valid marker. */
+    character = value.charAt(++index);
+    marker = value.charAt(++index);
+
+    if (character !== C_NEWLINE || !SETEXT_MARKERS[marker]) {
+        return;
     }
 
     subvalue += character;
-  }
 
-  /* Eat content. */
-  content = '';
-  queue = '';
+    /* Eat Setext-line. */
+    queue = marker;
+    depth = SETEXT_MARKERS[marker];
 
-  while (++index < length) {
-    character = value.charAt(index);
+    while (++index < length) {
+        character = value.charAt(index);
 
-    if (character === C_NEWLINE) {
-      index--;
-      break;
+        if (character !== marker) {
+            if (character !== C_NEWLINE) {
+                return;
+            }
+
+            index--;
+            break;
+        }
+
+        queue += character;
     }
 
-    if (character === C_SPACE || character === C_TAB) {
-      queue += character;
-    } else {
-      content += queue + character;
-      queue = '';
-    }
-  }
-
-  now.column += subvalue.length;
-  now.offset += subvalue.length;
-  subvalue += content + queue;
-
-  /* Ensure the content is followed by a newline and a
-   * valid marker. */
-  character = value.charAt(++index);
-  marker = value.charAt(++index);
-
-  if (character !== C_NEWLINE || !SETEXT_MARKERS[marker]) {
-    return;
-  }
-
-  subvalue += character;
-
-  /* Eat Setext-line. */
-  queue = marker;
-  depth = SETEXT_MARKERS[marker];
-
-  while (++index < length) {
-    character = value.charAt(index);
-
-    if (character !== marker) {
-      if (character !== C_NEWLINE) {
-        return;
-      }
-
-      index--;
-      break;
+    if (silent) {
+        return true;
     }
 
-    queue += character;
-  }
-
-  if (silent) {
-    return true;
-  }
-
-  return eat(subvalue + queue)({
-    type: 'heading',
-    depth: depth,
-    children: self.tokenizeInline(content, now)
-  });
+    return eat(subvalue + queue)({
+        type: 'heading',
+        depth: depth,
+        children: self.tokenizeInline(content, now)
+    });
 }
