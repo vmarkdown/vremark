@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.js"></script>
+
+</head>
+<body>
+<div id="app"></div>
+<script>
+
+    var html = '<div>html</div>';
+
+    new Vue({
+        el: '#app',
+        render(h) {
+            return h('div',{},[
+
+                h('span',{
+                    domProps: {
+                        innerHTML: html
+                    }
+                }),
+
+                h('div',{},'======')
+            ]);
+        }
+    })
+</script>
+</body>
+</html>

@@ -51,6 +51,7 @@ const app = new Vue({
             rootClassName: 'markdown-body',
             mode1: function (node) {
 
+                // debugger
                 var props = {
                     attrs: {},
                     domProps: {}
@@ -73,6 +74,11 @@ const app = new Vue({
                         props.attrs[key] = node.properties[key];
                     });
 
+                }
+
+                if(node.type === "raw"){
+                    node.tagName = node.tagName || 'div';
+                    props.domProps.innerHTML = node.value;
                 }
 
                 return props;

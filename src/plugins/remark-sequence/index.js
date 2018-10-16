@@ -23,9 +23,9 @@ module.exports = function plugin(options = {}) {
 
     return function transformer(root) {
 
-        visit(root, {
-            type: 'code',
-            lang: "sequence"
+        visit(root, function (node) {
+            return node.type === 'code' &&
+                (node.lang === "sequence" || node.lang === "seq")
         }, function (node) {
 
             var container = createTempContainer();

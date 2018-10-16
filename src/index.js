@@ -13,7 +13,7 @@ const flowchart = require('./plugins/remark-flowchart');
 const sequence = require('./plugins/remark-sequence');
 
 //rehype
-const rehype = require('./lib/remark-rehype');
+const remark2rehype = require('./lib/remark-rehype');
 const katex = require('rehype-katex');
 const highlight = require('rehype-highlight');
 const footnote = require('./plugins/rehype-footnote/index');
@@ -39,7 +39,8 @@ function createProcessor(options) {
 
     // remark start
     processor = processor.use(parse, {
-        footnotes: true
+        footnotes: true,
+        pedantic: true // fix md error
     });
 
     if(options.breaks) {
@@ -72,7 +73,9 @@ function createProcessor(options) {
 
     // rehype start
 
-    processor = processor.use(rehype);
+    processor = processor.use(remark2rehype, {
+        allowDangerousHTML: true
+    });
 
 
     if(options.math && options.math.katex) {
@@ -100,6 +103,7 @@ function _parse(markdown, options = {}) {
     options = Object.assign({}, defaultOptions, options);
     const processor = createProcessor(options);
     const mdast = processor.parse(markdown);
+    console.log(mdast);
     const hast = processor.runSync(mdast);
     return hast;
 }
