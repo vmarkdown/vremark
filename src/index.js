@@ -10,6 +10,7 @@ const breaks  = require('remark-breaks');
 const hashid = require('./plugins/hashid/index');
 const math = require('remark-math');
 const flowchart = require('./plugins/remark-flowchart');
+const sequence = require('./plugins/remark-sequence');
 
 //rehype
 const rehype = require('./lib/remark-rehype');
@@ -28,7 +29,8 @@ const defaultOptions = {
         katex: true,
     },
 
-    flowchart: true
+    flowchart: true,
+    sequence: true
 };
 
 function createProcessor(options) {
@@ -47,6 +49,11 @@ function createProcessor(options) {
     if(options.flowchart) {
         processor = processor.use(flowchart, {});
     }
+
+    if(options.sequence) {
+        processor = processor.use(sequence, {});
+    }
+
 
     if(options.math) {
         processor = processor.use(math, {
