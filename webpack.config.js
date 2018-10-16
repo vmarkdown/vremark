@@ -26,6 +26,23 @@ const config = {
         }
     },
     module: {
+        rules: [
+            {
+                test: /\.css$/,
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    "css-loader"
+                ]
+            },
+            {
+                test: /\.(sa|sc|c)ss$/,
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    'css-loader',
+                    'sass-loader',
+                ]
+            }
+        ]
     },
     // externals: {
     //     'lowlight': 'lowlight'
@@ -33,6 +50,9 @@ const config = {
     //     // 'vremark-plugin-katex': 'vremarkPluginKatex'
     // },
     plugins: [
+        new MiniCssExtractPlugin({
+            filename: '[name].css'
+        })
     ],
     optimization: {
         minimizer: [
@@ -53,14 +73,14 @@ module.exports = [
             vremark: './src/index.js'
         },
         externals: {
+            'flowchart.js': 'flowchart',
             'lowlight': 'lowlight',
-            'katex': 'katex'
+            'katex': 'katex',
+            'underscore': '_'
         },
         plugins: [
-            new MiniCssExtractPlugin({
-                filename: '[name].css'
-            })
-        ],
+
+        ]
     }),
     merge(config, {
         entry:{
