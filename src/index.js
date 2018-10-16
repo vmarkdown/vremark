@@ -1,14 +1,14 @@
 const unified = require('unified');
-const remarkParse = require('remark-parse');
-const remark2rehype = require('remark-rehype');
-// const remark2rehype = require('./lib/remark-rehype');
+const remarkParse = require('./lib/remark-parse');
+const rehype = require('./lib/remark-rehype');
+// const remarkParse = require('remark-parse');
+// const rehype = require('remark-rehype');
 const breaks  = require('remark-breaks');
 const hashid = require('./plugins/hashid/index');
 const math = require('remark-math');
 const katex = require('rehype-katex');
 const highlight = require('rehype-highlight');
-
-const newline = require('./plugins/newline/index');
+const flowchart = require('./plugins/rehype-flowchart');
 
 const toVdom = require('hast-util-to-vdom');
 
@@ -17,8 +17,11 @@ const defaultOptions = {
     hashid: true,
     highlight: true,
 
-    math: true,
-    katex: true,
+    math: {
+        katex: true,
+    },
+
+    flowchart: true
 
 };
 
@@ -35,17 +38,19 @@ function parse(markdown, options = {}) {
         processor = processor.use(breaks);
     }
     if(options.hashid) {
-        processor = processor.use(hashid);
+        processor = processor.use(hashid, {
+            c: 'content'
+        });
     }
 
     if(options.math) {
         processor = processor.use(math);
     }
 
-    processor = processor.use(remark2rehype);
+    processor = processor.use(rehype);
 
 
-    if(options.math && options.katex) {
+    if(options.math && options.math.katex) {
         processor = processor.use(katex);
     }
 
@@ -56,7 +61,9 @@ function parse(markdown, options = {}) {
             });
     }
 
-    // processor = processor.use(newline);
+    if(options.flowchart) {
+        processor = processor.use(flowchart, {});
+    }
 
     const mdast = processor.parse(markdown);
     const hast = processor.runSync(mdast);

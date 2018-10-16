@@ -21,7 +21,7 @@ const config = {
     },
     resolve: {
         alias: {
-            'hast-util-to-vdom': path.resolve(__dirname, 'src/lib/hast-util-to-vdom.common.js')
+            // 'hast-util-to-vdom': path.resolve(__dirname, 'src/lib/hast-util-to-vdom.common.js')
         }
     },
     module: {

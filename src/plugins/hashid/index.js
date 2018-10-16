@@ -28,6 +28,10 @@ function createHashid(node) {
     createHashids(node.children);
 }
 
+/*
+* options
+*   options. content position default: position
+* */
 
 module.exports = function plugin(options = {}) {
     return function transformer(root) {

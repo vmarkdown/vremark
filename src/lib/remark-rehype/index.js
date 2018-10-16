@@ -1,6 +1,6 @@
 'use strict'
 
-var mdast2hast = require('../mdast-util-to-hast')
+var mdast2hast = require('./mdast-util-to-hast')
 
 module.exports = remark2rehype
 
