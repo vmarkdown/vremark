@@ -1,18 +1,7 @@
 var visit = require('unist-util-visit');
 var mermaid = require('mermaid');
-var index = 0;
 
-mermaid.initialize({
-    flowchart:{
-        htmlLabels: false
-    }
-});
-
-mermaid.startOnLoad = true;
-
-mermaid.mermaidAPI.initialize({
-    startOnLoad: true
-});
+mermaid.initialize({ startOnLoad: false });
 
 module.exports = function plugin(options = {}) {
 
@@ -23,9 +12,7 @@ module.exports = function plugin(options = {}) {
             lang: "mermaid"
         }, function (node) {
 
-            var graphDefinition = node.value;
-            var innerHTML = mermaid.mermaidAPI.render('mermaid_'+index++, graphDefinition);
-
+            var innerHTML = mermaid.render('mermaid', node.value);
             node.properties = node.properties?node.properties:{};
             node.properties.className = 'remark-mermaid';
             node.properties.innerHTML = innerHTML;
