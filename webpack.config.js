@@ -2,6 +2,7 @@ const path = require('path');
 const merge = require('webpack-merge');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const production = (process.env.NODE_ENV === 'production');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const config = {
     mode: 'none',
@@ -55,66 +56,16 @@ module.exports = [
             'lowlight': 'lowlight',
             'katex': 'katex'
         },
+        plugins: [
+            new MiniCssExtractPlugin({
+                filename: '[name].css'
+            })
+        ],
     }),
-
     merge(config, {
         entry:{
             'lowlight': path.resolve(__dirname, 'src/lib/lowlight.js')
         },
-    }),
-
-
-
-    /*
-    merge(config, {
-        entry:{
-            'vremark-plugin-flowchart': './src/plugins/flowchart/index.js'
-        },
-        externals: {
-            'flowchart.js': 'flowchart.js',
-            'Raphael': 'Raphael',
-            'raphael': 'Raphael'
-        },
-    }),
-    merge(config, {
-        entry:{
-            'vremark-plugin-highlight': './src/plugins/highlight/index.js'
-        },
-        externals: {
-            'highlight.js': 'highlight.js'
-        },
-    }),
-    merge(config, {
-        entry:{
-            'vremark-plugin-katex': './src/plugins/katex/index.js'
-        },
-        externals: {
-            'katex': 'katex'
-        },
-    }),
-    merge(config, {
-        entry:{
-            'vremark-plugin-mermaid': './src/plugins/mermaid/index.js'
-        },
-        externals: {
-            'mermaid': 'mermaid'
-        },
-    }),
-    merge(config, {
-        entry:{
-            'vremark-plugin-sequence': './src/plugins/sequence/index.js'
-        },
-        externals: {
-            'underscore': 'underscore'
-        },
-    }),
-    merge(config, {
-        entry:{
-            'vremark-plugin-toc': './src/plugins/toc/index.js'
-        },
-        externals: {
-        },
     })
-    */
 ];
 

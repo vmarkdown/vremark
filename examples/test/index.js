@@ -48,7 +48,51 @@ const app = new Vue({
             h: h,
             mode: 'vue',
             rootTagName: 'main',
-            rootClassName: 'markdown-body'
+            rootClassName: 'markdown-body',
+            mode1: function (node) {
+
+                var props = {
+                    attrs: {},
+                    domProps: {}
+                };
+
+                if(node.properties){
+
+                    if(node.properties.className) {
+                        props['class'] = node.properties.className;
+                    }
+
+                    if(node.properties.innerHTML) {
+                        props.domProps.innerHTML = node.properties.innerHTML;
+                    }
+
+                    Object.keys(node.properties).forEach(function (key) {
+                        if( key ==='className' || key==='innerHTML' ){
+                            return;
+                        }
+                        props.attrs[key] = node.properties[key];
+                    });
+
+                }
+
+                return props;
+
+                // return node.properties;
+                // if(!node.properties) return {};
+                // var props = {
+                //     attrs: node.properties,
+                //     domProps: {}
+                // };
+                // if(node.properties.className) {
+                //     props['class'] = node.properties.className;
+                //     delete props.attrs.className;
+                // }
+                // if(node.properties.innerHTML) {
+                //     props.domProps.innerHTML = node.properties.innerHTML;
+                //     delete props.attrs.innerHTML;
+                // }
+                // return props;
+            }
         });
         console.timeEnd('render');
 

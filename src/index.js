@@ -1,14 +1,20 @@
+require('./index.scss');
+
 const unified = require('unified');
-const remarkParse = require('./lib/remark-parse');
-const rehype = require('./lib/remark-rehype');
 // const remarkParse = require('remark-parse');
 // const rehype = require('remark-rehype');
+
+//remark
+const parse = require('./lib/remark-parse');
 const breaks  = require('remark-breaks');
 const hashid = require('./plugins/hashid/index');
 const math = require('remark-math');
+const flowchart = require('./plugins/remark-flowchart');
+
+//rehype
+const rehype = require('./lib/remark-rehype');
 const katex = require('rehype-katex');
 const highlight = require('rehype-highlight');
-const flowchart = require('./plugins/rehype-flowchart');
 
 const toVdom = require('hast-util-to-vdom');
 
@@ -25,27 +31,39 @@ const defaultOptions = {
 
 };
 
-function parse(markdown, options = {}) {
+function createProcessor(options) {
 
-    options = Object.assign({}, defaultOptions, options);
+    let processor = unified();
 
-    let processor = unified()
-        .use(remarkParse, {
-            footnotes: true
-        });
+    // remark start
+    processor = processor.use(parse, {
+        footnotes: true
+    });
 
     if(options.breaks) {
         processor = processor.use(breaks);
     }
-    if(options.hashid) {
-        processor = processor.use(hashid, {
-            c: 'content'
-        });
+
+    if(options.flowchart) {
+        processor = processor.use(flowchart, {});
     }
 
     if(options.math) {
-        processor = processor.use(math);
+        processor = processor.use(math, {
+            inlineMathDouble: true,
+            inlineMathDoubleDisplay: true
+        });
     }
+
+    // if(options.hashid) {
+    //     processor = processor.use(hashid, {
+    //         c: 'content'
+    //     });
+    // }
+
+    // remark end
+
+    // rehype start
 
     processor = processor.use(rehype);
 
@@ -60,27 +78,33 @@ function parse(markdown, options = {}) {
                 ignoreMissing: true
             });
     }
+    // rehype end
 
-    if(options.flowchart) {
-        processor = processor.use(flowchart, {});
-    }
+    return processor;
+}
 
+function _parse(markdown, options = {}) {
+    options = Object.assign({}, defaultOptions, options);
+    const processor = createProcessor(options);
     const mdast = processor.parse(markdown);
     const hast = processor.runSync(mdast);
     return hast;
 }
 
 function render(hast, options) {
+    if(options.rootClassName) {
+        options.rootClassName = ['vremark'].concat(options.rootClassName);
+    }
     return toVdom(hast, options);
 }
 
 function vremark(markdown, options) {
-    const hast = parse(markdown);
+    const hast = _parse(markdown);
     const vdom = render(hast, options);
     return vdom;
 }
 
-vremark.parse = parse;
+vremark.parse = _parse;
 vremark.render = render;
 
 module.exports = vremark;

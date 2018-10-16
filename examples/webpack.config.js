@@ -24,15 +24,23 @@ const config = {
     module: {
         rules: [
             {
+                test: /\.md$/,
+                use: 'text-loader'
+            },
+            {
                 test: /\.css$/,
                 use: [
-                    { loader: "style-loader" },
-                    { loader: "css-loader" }
+                    "style-loader",
+                    "css-loader"
                 ]
             },
             {
-                test: /\.md$/,
-                use: 'text-loader'
+                test: /\.scss$/,
+                use: [
+                    "style-loader",
+                    "css-loader",
+                    "sass-loader"
+                ]
             }
         ]
     },

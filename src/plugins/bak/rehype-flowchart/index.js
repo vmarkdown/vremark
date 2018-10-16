@@ -22,7 +22,43 @@ module.exports = function plugin(options = {}) {
 
     return function transformer(root) {
 
-// debugger
+
+
+
+        // visit(root, function (node) {
+        //     return node.properties && node.properties.lang === 'flow'
+        // }, function (pre) {
+        //
+        //     visit(pre, "text", function (node) {
+        //
+        //
+        //         var container = createTempContainer();
+        //         var value = node.value;
+        //
+        //         var diagram = flowchart.parse(value);
+        //         diagram.drawSVG(container);
+        //
+        //         var innerHTML = container.innerHTML;
+        //         // container.parentElement.removeChild(container);
+        //
+        //         // node.properties = node.properties?node.properties:{};
+        //         // node.properties.className = 'vremark-flowchart';
+        //         // node.type = 'html'; //'flow';
+        //         // node.value = innerHTML;
+        //
+        //         diagram.clean();
+        //
+        //         pre.children = [];
+        //         pre.properties = pre.properties?pre.properties:{};
+        //         pre.properties.className = 'vremark-flowchart';
+        //         pre.tagName = 'div';
+        //         pre.html = innerHTML;
+        //
+        //
+        //     });
+        //
+        // });
+
 
 
         // visit(root, 'code', function (node) {
