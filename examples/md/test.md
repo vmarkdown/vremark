@@ -69,7 +69,13 @@ cond(no)->op
 以及时序图:
 
 ```sequence
-Alice->Bob: Hello Bob, how are you?
+Alice->Bob: Hello Bob, how are you?111
+Note right of Bob: Bob thinks
+Bob-->Alice: I am good thanks!
+```
+
+```sequence
+Alice->Bob: Hello Bob, how are you?222
 Note right of Bob: Bob thinks
 Bob-->Alice: I am good thanks!
 ```

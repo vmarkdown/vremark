@@ -35,6 +35,7 @@ module.exports = function plugin(options = {}) {
             diagram.drawSVG(container, {theme: 'simple'});
             var innerHTML = container.innerHTML;
             // diagram.clean();
+            container.parentNode.removeChild(container);
 
             node.properties = node.properties?node.properties:{};
             node.properties.className = 'remark-sequence';
@@ -45,38 +46,3 @@ module.exports = function plugin(options = {}) {
     };
 
 };
-//
-// module.exports = function (options = {}) {
-//
-//     return function transformer(root) {
-//
-//         visit(root, 'code', function (node) {
-//
-//             if(node.lang !== 'sequence') {
-//                 return;
-//             }
-//
-//             var code = node.value;
-//             var diagram = Diagram.parse(code);
-//
-//             var container = document.createElement('div');
-//             container.style.width = 0;
-//             container.style.height = 0;
-//             // container.style.width = '400';
-//             // container.style.height = '400';
-//
-//             document.body.appendChild(container);
-//             diagram.drawSVG(container, {theme: 'simple'});
-//
-//             var innerHTML = container.innerHTML;
-//             container.parentElement.removeChild(container);
-//
-//             // node.properties = node.properties?node.properties:{};
-//             // node.properties.className = 'vremark-sequence';
-//             // node.type = 'html';
-//             // node.value = innerHTML;
-//         });
-//
-//     };
-//
-// };
