@@ -1,45 +1,49 @@
-##MaHua是什么?
-一个在线编辑markdown文档的编辑器
+# 欢迎使用 MWeb
 
-向Mac下优秀的markdown编辑器mou致敬
+MWeb 是专业的 Markdown 写作、记笔记、静态博客生成软件，目前已支持 Mac，iPad 和 iPhone。MWeb 有以下特色：
 
-##MaHua有哪些功能？
+## 软件本身：===========
 
-* 方便的`导入导出`功能
-    *  直接把一个markdown的文本文件拖放到当前这个页面就可以了
-    *  导出为一个html格式的文件，样式一点也不会丢失
-* 编辑和预览`同步滚动`，所见即所得（右上角设置）
-* `VIM快捷键`支持，方便vim党们快速的操作 （右上角设置）
-* 强大的`自定义CSS`功能，方便定制自己的展示
-* 有数量也有质量的`主题`,编辑器和预览区域
-* 完美兼容`Github`的markdown语法
-* 预览区域`代码高亮`
-* 所有选项自动记忆
+* 使用原生的 macOS 技术打造，追求与系统的完美结合。
+* 原则上，首先是追求界面简洁和高性能，然后才是强大易用，功能全面。
 
-##有问题反馈
-在使用中有任何问题，欢迎反馈给我，可以用以下联系方式跟我交流
+## Markdown 语法：
 
-* 邮件(dev.hubo#gmail.com, 把#换成@)
-* QQ: 287759234
-* weibo: [@草依山](http://weibo.com/ihubo)
-* twitter: [@ihubo](http://twitter.com/ihubo)
+* 使用 Github Flavored Markdown 语法，简称 GFM 语法。
+* 支持表格、TOC、LaTeX、代码块、任务列表、脚注等。
+* 画图库支持 mermaid, viz, echarts, plantuml, sequence, flow。
 
-##捐助开发者
-在兴趣的驱动下,写一个`免费`的东西，有欣喜，也还有汗水，希望你喜欢我的作品，同时也能支持一下。
-当然，有钱捧个钱场（右上角的爱心标志，支持支付宝和PayPal捐助），没钱捧个人场，谢谢各位。
+## Markdown 辅助：
 
-##感激
-感谢以下的项目,排名不分先后
+* 支持截图并粘贴、复制并粘贴、拖拽等方式插入图片并直接显示在编辑器内。
+* 在兼容 Markdown 语法的情况下支持设置图片宽度。
+* 好用的表格插入和 LaTeX 书写辅助。
 
-* [mou](http://mouapp.com/)
-* [ace](http://ace.ajax.org/)
-* [jquery](http://jquery.com)
+## Markdown 输出：
 
-##关于作者
+* 支持导出为图片、HTML、Epub、PDF、RTF、Docx。
+* 支持发布到 Wordrpess、支持 Metaweblog API 协议的服务、Wordpress.com、印象笔记（Evernote）、Blogger、Medium、Tumblr。
+* 图片上传服务（图床）支持 Google Photos、Imgur、七牛云、又拍云和自定义的图床服务。
 
-```javascript
-  var ihubo = {
-    nickName  : "草依山",
-    site : "http://jser.me"
-  }
-```
+## Markdown 笔记：
+
+* 强大的文档库支持分类树和标签管理文档，文档可归类于多个分类，可以把分类整个导出为 Epub、PDF 和生成静态网站。非常合适用于笔记、个人知识收集、管理和输出。
+* 快速笔记：随意增加笔记及图片等素材，支持以天为单位把增加的素材组合在一个文档内，方便整理及记录历史收集情况。
+* 快速搜索：目前已支持全局快捷键调出搜索。
+
+## 外部 Markdown 文档：
+
+* 外部 Markdown 文档使用外部模式管理。外部模式使用目录树的方式编辑和管理你的 markdown 文档，还能很好的支持 gitbook、JekyII、hexo 等等编辑和图片插入。
+
+## MWeb 文档：
+
+如果要更详细了解 MWeb，建议你一定要去看一下官网的帮助文档，网址为：<https://zh.mweb.im/help.html>。我们建议在使用文档库之前，一定要阅读一下  [MWeb 文档库详细介绍](https://zh.mweb.im/mweb-library.html) 这篇文章，以便更好的使用文档库。
+
+## 帮助我们改进 MWeb
+
+如果你喜欢 MWeb，想让它变得更好，你可以：
+
+1. 推荐 MWeb，让更多的人知道。
+2. 给我们发反馈和建议：<coderforart+2333@gmail.com>
+3. 在 Mac App Store 上评价 （如果是在 MAS 上购买的话）。
+

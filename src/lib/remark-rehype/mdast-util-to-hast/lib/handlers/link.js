@@ -6,12 +6,24 @@ var all = require('../all')
 module.exports = link
 
 /* Transform a link. */
-function link(h, node) {//console.log(node)
-  var props = {href: normalize(node.url), target: node.target || '_blank'}
+function link(h, node) {
+    var href = normalize(node.url);
+    var isEmailAddress = href && href.startsWith('mailto:');
+    var props = {href: href};
 
-  if (node.title !== null && node.title !== undefined) {
-    props.title = node.title;
-  }
+    if(node.target) {
+        props.target = node.target;
+    }
+    else if(isEmailAddress) {
 
-  return h(node, 'a', props, all(h, node))
+    }
+    else{
+        props.target = '_blank';
+    }
+
+    if (node.title !== null && node.title !== undefined) {
+        props.title = node.title;
+    }
+
+    return h(node, 'a', props, all(h, node))
 }
