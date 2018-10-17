@@ -23,6 +23,7 @@ const katex = require('rehype-katex');
 const highlight = require('rehype-highlight');
 const footnote = require('./plugins/rehype-footnote/index');
 const html2hast = require('./plugins/rehype-html2hast');
+const raw = require('rehype-raw');
 
 
 const toVdom = require('hast-util-to-vdom');
@@ -40,7 +41,8 @@ const defaultOptions = {
     sequence: true,
     mermaid: true,
     plantuml: true,
-    html2hast: true
+    html2hast: true,
+    raw: true
 };
 
 function createProcessor(options) {
@@ -97,6 +99,9 @@ function createProcessor(options) {
         allowDangerousHTML: true
     });
 
+    if(options.raw) {
+        processor = processor.use(raw, {});
+    }
 
     if(options.math && options.math.katex) {
         processor = processor.use(katex);
@@ -109,9 +114,9 @@ function createProcessor(options) {
             });
     }
 
-    if(options.html2hast) {
-        processor = processor.use(html2hast, {});
-    }
+    // if(options.html2hast) {
+    //     processor = processor.use(html2hast, {});
+    // }
 
     processor = processor.use(footnote);
 

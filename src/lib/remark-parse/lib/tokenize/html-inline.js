@@ -44,16 +44,6 @@ function inlineHTML(eat, value, silent) {
 
     subvalue = subvalue[0];
 
-    // old start
-    // old end
-    // new start
-    var lastCloseTag = value.lastIndexOf('>');
-    if(lastCloseTag > -1 && lastCloseTag+1 > subvalue.length ) {
-        subvalue = value.substring(0, lastCloseTag + 1)
-    }
-    // new end
-
-
     if (!self.inLink && EXPRESSION_HTML_LINK_OPEN.test(subvalue)) {
         self.inLink = true;
     } else if (self.inLink && EXPRESSION_HTML_LINK_CLOSE.test(subvalue)) {

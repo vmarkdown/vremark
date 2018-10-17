@@ -23,7 +23,7 @@ module.exports = function plugin(options = {}) {
     return function transformer(root) {
 
         visit(root, {
-            type: 'raw',
+            type: 'raw1',
         }, function (node) {
 
             // if( !(regx.test(node.value) || !/^<\//.test(node.value)) ) {
