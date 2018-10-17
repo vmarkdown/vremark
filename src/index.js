@@ -13,7 +13,7 @@ const flowchart = require('./plugins/remark-flowchart');
 const sequence = require('./plugins/remark-sequence');
 const mermaid = require('./plugins/remark-mermaid');
 const plantuml = require('./plugins/remark-plantuml');
-
+// const g2 = require('./plugins/remark-g2');
 
 
 
@@ -41,7 +41,8 @@ const defaultOptions = {
     mermaid: true,
     plantuml: true,
     html2hast: true,
-    raw: true
+    raw: true,
+    g2: true
 };
 
 function createProcessor(options) {
@@ -73,6 +74,10 @@ function createProcessor(options) {
     if(options.plantuml) {
         processor = processor.use(plantuml, {});
     }
+
+    // if(options.g2) {
+    //     processor = processor.use(g2, {});
+    // }
 
     if(options.math) {
         processor = processor.use(math, {
