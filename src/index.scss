@@ -1,6 +1,8 @@
 @import "plugins/remark-flowchart/index";
 @import "plugins/remark-sequence/index";
 @import "plugins/remark-mermaid/index";
+@import "plugins/remark-plantuml/index";
+
 .vremark-body {
 
     .inlineMathDouble {
