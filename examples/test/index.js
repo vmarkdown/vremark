@@ -32,13 +32,20 @@ const app = new Vue({
 
         console.time('parse');
         const hast = vremark.parse(md, {
-            breaks: true,
-            hashid: true,
-            highlight: true,
+
+            breaks: false,
+            hashid: false,
+            highlight: false,
 
             math: {
-                katex: true,
+                katex: false,
             },
+
+            flowchart: false,
+            sequence: false,
+            mermaid: false,
+            plantuml: false,
+            html2hast: false
 
         });
         console.timeEnd('parse');

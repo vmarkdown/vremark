@@ -1,5 +1,8 @@
 'use strict';
 
+
+var fixTag= /<([A-Za-z0-9\\-]+)(\s*\w*?\s*=\s*".+?")*(\s*?>[\s\S]*?(<\/[A-Za-z0-9\\-]+>)+|\s*\/>)/i;
+
 var alphabetical = require('is-alphabetical');
 var locate = require('../locate/tag');
 var tag = require('../util/html').tag;
@@ -31,7 +34,13 @@ function inlineHTML(eat, value, silent) {
         return;
     }
 
-    subvalue = value.match(tag);
+    debugger
+    // old start
+    // subvalue = value.match(tag);
+    // old end
+    // new start
+    subvalue = value.match(fixTag);
+    // new end
 
     if (!subvalue) {
         return;
@@ -43,16 +52,6 @@ function inlineHTML(eat, value, silent) {
     }
 
     subvalue = subvalue[0];
-
-    // old start
-    // old end
-    // new start
-    var lastCloseTag = value.lastIndexOf('>');
-    if(lastCloseTag > -1 && lastCloseTag+1 > subvalue.length ) {
-        subvalue = value.substring(0, lastCloseTag + 1)
-    }
-    // new end
-
 
     if (!self.inLink && EXPRESSION_HTML_LINK_OPEN.test(subvalue)) {
         self.inLink = true;

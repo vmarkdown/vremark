@@ -1,10 +1,2 @@
-```plantuml
-@startuml
-
-User -> (Start)
-User --> (Use the application) : A small label
-
-:Main Admin: ---> (Use the application) : This is\nyet another\nlabel
-
-@enduml
-```
+# h1
+- <span> 发布：将当前的文稿生成固定链接，在网络上发布，分享

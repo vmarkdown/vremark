@@ -15,11 +15,15 @@ const mermaid = require('./plugins/remark-mermaid');
 const plantuml = require('./plugins/remark-plantuml');
 
 
+
+
 //rehype
 const remark2rehype = require('./lib/remark-rehype');
 const katex = require('rehype-katex');
 const highlight = require('rehype-highlight');
 const footnote = require('./plugins/rehype-footnote/index');
+const html2hast = require('./plugins/rehype-html2hast');
+
 
 const toVdom = require('hast-util-to-vdom');
 
@@ -35,7 +39,8 @@ const defaultOptions = {
     flowchart: true,
     sequence: true,
     mermaid: true,
-    plantuml: true
+    plantuml: true,
+    html2hast: true
 };
 
 function createProcessor(options) {
@@ -75,6 +80,9 @@ function createProcessor(options) {
         });
     }
 
+
+
+
     // if(options.hashid) {
     //     processor = processor.use(hashid, {
     //         c: 'content'
@@ -99,6 +107,10 @@ function createProcessor(options) {
             .use(highlight, {
                 ignoreMissing: true
             });
+    }
+
+    if(options.html2hast) {
+        processor = processor.use(html2hast, {});
     }
 
     processor = processor.use(footnote);
