@@ -12,5 +12,13 @@ function image(h, node) {
         props.title = node.title
     }
 
+    //.mp4, .m4v, .mov, .webm, and .ogv.
+    // var url = normalize(node.url);
+    // var tagName = 'img';
+    // if(url.endsWith('.mp4')) {
+    //     props.controls = "true";
+    //     tagName = 'video';
+    // }
+
     return h(node, 'img', props)
 }

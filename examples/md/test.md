@@ -1,20 +1,6 @@
 # h1
 
-<style>
-    .image-container{
-        text-align: center;
-    }
-    .image-container img{
-        width: 100px;
-    }
-</style>
+Here's a sample video:
 
-<div class="image-container">
+![Sample Video](https://docs.gitlab.com/ee/user/img/markdown_video.mp4)
 
-![cmd-markdown-logo](https://www.zybuluo.com/static/img/logo.png)
-
-</div>
-
-<center>
-<img src="https://www.zybuluo.com/static/img/logo.png" width="100" align="center">
-</center>
