@@ -22,7 +22,6 @@ const remark2rehype = require('./lib/remark-rehype');
 const katex = require('rehype-katex');
 const highlight = require('rehype-highlight');
 const footnote = require('./plugins/rehype-footnote/index');
-const html2hast = require('./plugins/rehype-html2hast');
 const raw = require('rehype-raw');
 
 
@@ -113,10 +112,6 @@ function createProcessor(options) {
                 ignoreMissing: true
             });
     }
-
-    // if(options.html2hast) {
-    //     processor = processor.use(html2hast, {});
-    // }
 
     processor = processor.use(footnote);
 
