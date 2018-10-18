@@ -74,9 +74,12 @@ module.exports = [
         },
         externals: {
             'flowchart.js': 'flowchart',
+            // 'highlight.js': 'hljs',
             'lowlight': 'lowlight',
             'katex': 'katex',
-            'underscore': '_'
+            'underscore': '_',
+            'mermaid': 'mermaid',
+            '@antv/g2': 'G2'
         },
         plugins: [
 
