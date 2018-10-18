@@ -79,11 +79,11 @@ function createProcessor(options) {
         });
     }
 
-    // if(options.hashid) {
-    //     processor = processor.use(hashid, {
-    //         c: 'content'
-    //     });
-    // }
+    if(options.hashid) {
+        processor = processor.use(hashid, {
+            c: 'content'
+        });
+    }
 
     // remark end
 
