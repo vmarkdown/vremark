@@ -50,7 +50,8 @@ const config = {
         'lowlight': 'lowlight',
         'katex': 'katex',
         'underscore': '_',
-        'mermaid': 'mermaid'
+        'mermaid': 'mermaid',
+        '@antv/g2': 'G2'
     },
     plugins: [
         new HtmlWebpackPlugin({

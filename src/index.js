@@ -13,9 +13,7 @@ const flowchart = require('./plugins/remark-flowchart');
 const sequence = require('./plugins/remark-sequence');
 const mermaid = require('./plugins/remark-mermaid');
 const plantuml = require('./plugins/remark-plantuml');
-// const g2 = require('./plugins/remark-g2');
-
-
+const G2 = require('./plugins/remark-g2');
 
 //rehype
 const remark2rehype = require('./lib/remark-rehype');
@@ -40,9 +38,8 @@ const defaultOptions = {
     sequence: true,
     mermaid: true,
     plantuml: true,
-    html2hast: true,
     raw: true,
-    g2: true
+    G2: true
 };
 
 function createProcessor(options) {
@@ -120,9 +117,11 @@ function createProcessor(options) {
 
     processor = processor.use(footnote);
 
+    if(options.G2) {
+        processor = processor.use(G2, {});
+    }
+
     // rehype end
-
-
 
 
     return processor;

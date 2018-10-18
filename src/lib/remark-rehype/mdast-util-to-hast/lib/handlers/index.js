@@ -1,6 +1,8 @@
 'use strict'
 
 module.exports = {
+    component: require('./component'),
+
     blockquote: require('./blockquote'),
     break: require('./break'),
     code: require('./code'),
