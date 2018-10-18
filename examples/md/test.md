@@ -8,6 +8,7 @@
     forceFit: true,
     legend: 'country',
     padding: [40, 40, 130, 40],
+    height: 500,
     coord: 'polar',
     source: {
         data:[{
@@ -115,19 +116,23 @@
 
 -------
 
-```G2.Chart1
+```G2.Chart
 {
     forceFit: true,
     legend: {
         position: 'top'
     },
+    height: 400,
     data:[
-         { genre: 'Sports', sold: 28875 },
+         { genre: 'Sports', sold: 275 },
          { genre: 'Strategy', sold: 115 },
          { genre: 'Action', sold: 120 },
          { genre: 'Shooter', sold: 350 },
          { genre: 'Other', sold: 150 }
-     ]
-
+    ],
+    interval: {
+        position: 'genre*sold',
+        color: 'genre'
+    }
 }
 ```

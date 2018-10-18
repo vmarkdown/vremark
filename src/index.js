@@ -39,7 +39,7 @@ const defaultOptions = {
     mermaid: true,
     plantuml: true,
     raw: true,
-    G2: true
+    G2: false
 };
 
 function createProcessor(options) {

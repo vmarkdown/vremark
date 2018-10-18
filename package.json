@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "dev": "webpack-dev-server --config ./examples/webpack.config.js --example g2",
+    "dev": "webpack-dev-server --config ./examples/webpack.config.js --example test",
     "build": "webpack --display-modules --config ./webpack.config.js",
     "dist": "NODE_ENV=production webpack -p --config ./webpack.config.js"
   },
