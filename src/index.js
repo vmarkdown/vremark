@@ -8,7 +8,7 @@ const unified = require('unified');
 const parse = require('./lib/remark-parse');
 const breaks  = require('remark-breaks');
 const hashid = require('./plugins/hashid/index');
-const math = require('remark-math');
+const math = require('./lib/remark-math');
 const flowchart = require('./plugins/remark-flowchart');
 const sequence = require('./plugins/remark-sequence');
 const mermaid = require('./plugins/remark-mermaid');
@@ -72,19 +72,12 @@ function createProcessor(options) {
         processor = processor.use(plantuml, {});
     }
 
-    // if(options.g2) {
-    //     processor = processor.use(g2, {});
-    // }
-
     if(options.math) {
         processor = processor.use(math, {
             inlineMathDouble: true,
             inlineMathDoubleDisplay: true
         });
     }
-
-
-
 
     // if(options.hashid) {
     //     processor = processor.use(hashid, {

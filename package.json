@@ -24,18 +24,18 @@
   },
   "dependencies": {
     "hashids": "^1.2.2",
-    "hast-util-to-vdom": "^0.0.7",
+    "hast-util-to-vdom": "^0.0.10",
     "plantuml-encoder": "^1.2.5",
     "rehype-highlight": "^2.2.0",
     "rehype-katex": "^1.1.1",
     "rehype-raw": "^3.0.0",
     "remark": "^9.0.0",
     "remark-breaks": "^1.0.1",
+    "remark-math": "^1.0.4",
     "remark-parse": "^5.0.0",
     "remark-rehype": "^3.0.1",
     "remark-render": "^0.0.16",
     "remark-vdom": "^6.0.0",
-    "remark-math": "^1.0.4",
     "unist-util-remove": "^1.0.1"
   }
 }
