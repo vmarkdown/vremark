@@ -126,6 +126,9 @@ function _parse(markdown, options = {}) {
     const mdast = processor.parse(markdown);
     console.log(mdast);
     const hast = processor.runSync(mdast);
+    if(options.raw){
+        hast.position = mdast.position;
+    }
     return hast;
 }
 

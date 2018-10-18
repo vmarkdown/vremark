@@ -45,7 +45,7 @@ const app = new Vue({
             sequence: false,
             mermaid: false,
             plantuml: false,
-            raw: false,
+            raw: true,
             G2: false,
 
         });

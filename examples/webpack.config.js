@@ -17,6 +17,7 @@ const config = {
     },
     resolve: {
         alias: {
+            // 'hast-util-raw': path.resolve(__dirname, '../src/lib/hast-util-raw/index.js'),
             // 'rehype-vdom': path.resolve(__dirname, '../src/lib/rehype-vdom.common.js'),
             // 'hast-util-to-vdom': path.resolve(__dirname, '../src/lib/hast-util-to-vdom.common.js')
         }
@@ -45,6 +46,7 @@ const config = {
         ]
     },
     externals: {
+
         'flowchart.js': 'flowchart',
         // 'highlight.js': 'hljs',
         'lowlight': 'lowlight',
