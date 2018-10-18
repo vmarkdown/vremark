@@ -73,13 +73,13 @@ module.exports = [
             vremark: './src/index.js'
         },
         externals: {
-            'flowchart.js': 'flowchart',
+            'flowchart.js': 'flowchart.js',
             // 'highlight.js': 'hljs',
             'lowlight': 'lowlight',
             'katex': 'katex',
-            'underscore': '_',
+            'underscore': 'underscore',
             'mermaid': 'mermaid',
-            '@antv/g2': 'G2'
+            '@antv/g2': '@antv/g2'
         },
         plugins: [
 

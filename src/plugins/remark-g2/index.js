@@ -1,9 +1,9 @@
 var visit = require('unist-util-visit');
-var CONTAINER_TMEP_CREATE_ID = 'vremark-g2-temp-create-container';
+
+const G2 = require('@antv/g2');
+G2.track(false);
 
 var G2Component = require('./g2-component');
-
-G2.track(false);
 
 module.exports = function plugin(options = {}) {
 
