@@ -38,7 +38,7 @@ const defaultOptions = {
     sequence: true,
     mermaid: true,
     plantuml: true,
-    raw: true,
+    raw: false,
     G2: false
 };
 

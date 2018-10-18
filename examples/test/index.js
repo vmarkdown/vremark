@@ -34,11 +34,11 @@ const app = new Vue({
         const hast = vremark.parse(md, {
 
             breaks: false,
-            hashid: true,
+            hashid: false,
             highlight: false,
 
             math: {
-                katex: true,
+                katex: false,
             },
 
             flowchart: false,
