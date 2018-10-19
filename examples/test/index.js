@@ -15,13 +15,13 @@ const app = new Vue({
 
             breaks: false,
             hashid: true,
-            highlight: false,
+            highlight: true,
 
-            // math: false,
+            math: false,
 
-            math: {
-                katex: true,
-            },
+            // math: {
+            //     katex: true,
+            // },
 
             flowchart: false,
             sequence: false,
@@ -36,9 +36,52 @@ const app = new Vue({
         console.time('render');
         const vdom = vremark.render(hast, {
             h: h,
-            mode: 'vue',
+            // mode: 'vue',
             rootTagName: 'main',
             rootClassName: 'markdown-body',
+            mode: function (node) {
+                var props = {
+                    attrs: {},
+                    domProps: {},
+                    props: {}
+                };
+
+                if(node.properties){
+
+                    if(node.properties.className) {
+                        props['class'] = node.properties.className;
+                    }
+
+                    if(node.properties.innerHTML) {
+                        props.domProps.innerHTML = node.properties.innerHTML;
+                    }
+
+                    Object.keys(node.properties).forEach(function (key) {
+                        if( key ==='className' || key==='innerHTML' ){
+                            return;
+                        }
+                        props.attrs[key] = node.properties[key];
+                    });
+
+                }
+
+                if(node.hasOwnProperty('key')){
+                    props.key = node.key;
+                }
+
+                if(node.data){
+                    if(node.data.props){
+                        props.props = node.data.props;
+                    }
+                }
+
+                if(node.type === 'component'){
+
+                }
+
+                return props;
+
+            },
             mode1: function (node) {
 
                 // debugger

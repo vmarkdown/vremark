@@ -46,6 +46,7 @@ const config = {
         ]
     },
     externals: {
+        'vue': 'Vue',
 
         'flowchart.js': 'flowchart',
         // 'highlight.js': 'hljs',

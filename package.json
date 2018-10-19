@@ -25,6 +25,7 @@
   "dependencies": {
     "hashids": "^1.2.2",
     "hast-util-to-vdom": "^0.0.11",
+    "highlight.js": "^9.13.1",
     "plantuml-encoder": "^1.2.5",
     "rehype-highlight": "^2.2.0",
     "rehype-katex": "^1.1.1",

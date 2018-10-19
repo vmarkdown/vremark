@@ -14,11 +14,12 @@ const sequence = require('./plugins/remark-sequence');
 const mermaid = require('./plugins/remark-mermaid');
 const plantuml = require('./plugins/remark-plantuml');
 const G2 = require('./plugins/remark-g2');
+const highlight = require('./plugins/remark-highlight.js');
 
 //rehype
 const remark2rehype = require('./lib/remark-rehype');
 const katex = require('rehype-katex');
-const highlight = require('rehype-highlight');
+// const highlight = require('rehype-highlight');
 const footnote = require('./plugins/rehype-footnote/index');
 // const raw = require('rehype-raw');
 
@@ -54,6 +55,12 @@ function createProcessor(options) {
 
     if(options.breaks) {
         processor = processor.use(breaks);
+    }
+
+    if(options.highlight) {
+        processor = processor.use(highlight, {
+
+        });
     }
 
     if(options.flowchart) {
@@ -101,12 +108,12 @@ function createProcessor(options) {
         processor = processor.use(katex);
     }
 
-    if(options.highlight) {
-        processor = processor.data('settings', {fragment: true})
-            .use(highlight, {
-                ignoreMissing: true
-            });
-    }
+    // if(options.highlight) {
+    //     processor = processor.data('settings', {fragment: true})
+    //         .use(highlight, {
+    //             ignoreMissing: true
+    //         });
+    // }
 
     processor = processor.use(footnote);
 
