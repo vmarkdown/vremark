@@ -1,20 +1,5 @@
-# h1
+## LaTeX
 
-```G2.Chart
-{
-    forceFit: true,
-    height : 500,
-    data:[
-         { genre: 'Sports', sold: 28875 },
-         { genre: 'Strategy', sold: 115 },
-         { genre: 'Action', sold: 120 },
-         { genre: 'Shooter', sold: 350 },
-         { genre: 'Other', sold: 150 }
-    ],
-    interval: {
-        position: 'genre*sold',
-        color: 'genre'
-    }
-
-}
-```
+$$
+|\vec{A}|=\sqrt{A_x^2 + A_y^2 + A_z^2}.
+$$(1)

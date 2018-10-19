@@ -17,8 +17,10 @@ const app = new Vue({
             hashid: true,
             highlight: false,
 
+            // math: false,
+
             math: {
-                katex: false,
+                katex: true,
             },
 
             flowchart: false,
@@ -26,7 +28,7 @@ const app = new Vue({
             mermaid: false,
             plantuml: false,
             raw: false,
-            G2: true,
+            G2: false,
 
         });
         console.timeEnd('parse');
@@ -101,33 +103,33 @@ const app = new Vue({
 });
 
 
-setTimeout(function () {
-    md = `# h1====
-
-\`\`\`G2.Chart
-{
-    forceFit: true,
-    height : 300,
-    data:[
-         { genre: 'Sports======', sold: 28875 },
-         { genre: 'Strategy', sold: 115 },
-         { genre: 'Action', sold: 120 },
-         { genre: 'Shooter', sold: 350 },
-         { genre: 'Other', sold: 150 }
-    ],
-    interval: {
-        position: 'genre*sold',
-        color: 'genre'
-    }
-
-}
-\`\`\`
-`;
-
-
-    console.log('----======');
-    app.$forceUpdate();
-}, 3000);
+// setTimeout(function () {
+//     md = `# h1====
+//
+// \`\`\`G2.Chart
+// {
+//     forceFit: true,
+//     height : 300,
+//     data:[
+//          { genre: 'Sports======', sold: 28875 },
+//          { genre: 'Strategy', sold: 115 },
+//          { genre: 'Action', sold: 120 },
+//          { genre: 'Shooter', sold: 350 },
+//          { genre: 'Other', sold: 150 }
+//     ],
+//     interval: {
+//         position: 'genre*sold',
+//         color: 'genre'
+//     }
+//
+// }
+// \`\`\`
+// `;
+//
+//
+//     console.log('----======');
+//     app.$forceUpdate();
+// }, 3000);
 
 
 // for(let i=0;i<10;i++){
