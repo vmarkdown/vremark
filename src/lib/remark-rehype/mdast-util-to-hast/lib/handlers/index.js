@@ -2,6 +2,10 @@
 
 module.exports = {
     component: require('./component'),
+    highlight: require('./highlight'),
+    math: require('./math'),
+    inlineMath: require('./inlineMath'),
+
 
     blockquote: require('./blockquote'),
     break: require('./break'),

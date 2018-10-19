@@ -1,20 +1,20 @@
-require('./index.scss');
+// require('./index.scss');
 
 const unified = require('unified');
 // const remarkParse = require('remark-parse');
 // const rehype = require('remark-rehype');
 
 //remark
-const parse = require('./lib/remark-parse');
+const markdown = require('./lib/remark-parse');
 const breaks  = require('remark-breaks');
-const hashid = require('./plugins/hashid/index');
+// const hashid = require('./plugins/hashid/index');
 const math = require('./lib/remark-math');
-const flowchart = require('./plugins/remark-flowchart');
-const sequence = require('./plugins/remark-sequence');
-const mermaid = require('./plugins/remark-mermaid');
-const plantuml = require('./plugins/remark-plantuml');
-const G2 = require('./plugins/remark-g2');
-const highlight = require('./plugins/remark-highlight.js');
+// const flowchart = require('./plugins/remark-flowchart');
+// const sequence = require('./plugins/remark-sequence');
+// const mermaid = require('./plugins/remark-mermaid');
+// const plantuml = require('./plugins/remark-plantuml');
+// const G2 = require('./plugins/remark-g2');
+const highlight = require('./plugins/remark-highlight');
 
 //rehype
 const remark2rehype = require('./lib/remark-rehype');
@@ -24,7 +24,7 @@ const footnote = require('./plugins/rehype-footnote/index');
 // const raw = require('rehype-raw');
 
 
-const toVdom = require('hast-util-to-vdom');
+// const toVdom = require('./lib/hast-util-to-vdom');
 
 const defaultOptions = {
     breaks: true,
@@ -48,7 +48,7 @@ function createProcessor(options) {
     let processor = unified();
 
     // remark start
-    processor = processor.use(parse, {
+    processor = processor.use(markdown, {
         footnotes: true,
         pedantic: true // fix md error
     });
@@ -63,34 +63,34 @@ function createProcessor(options) {
         });
     }
 
-    if(options.flowchart) {
-        processor = processor.use(flowchart, {});
-    }
-
-    if(options.sequence) {
-        processor = processor.use(sequence, {});
-    }
-
-    if(options.mermaid) {
-        processor = processor.use(mermaid, {});
-    }
-
-    if(options.plantuml) {
-        processor = processor.use(plantuml, {});
-    }
-
+    // if(options.flowchart) {
+    //     processor = processor.use(flowchart, {});
+    // }
+    //
+    // if(options.sequence) {
+    //     processor = processor.use(sequence, {});
+    // }
+    //
+    // if(options.mermaid) {
+    //     processor = processor.use(mermaid, {});
+    // }
+    //
+    // if(options.plantuml) {
+    //     processor = processor.use(plantuml, {});
+    // }
+    //
     if(options.math) {
         processor = processor.use(math, {
             inlineMathDouble: true,
             inlineMathDoubleDisplay: true
         });
     }
-
-    if(options.hashid) {
-        processor = processor.use(hashid, {
-            c: 'content'
-        });
-    }
+    //
+    // if(options.hashid) {
+    //     processor = processor.use(hashid, {
+    //         c: 'content'
+    //     });
+    // }
 
     // remark end
 
@@ -104,9 +104,9 @@ function createProcessor(options) {
     //     processor = processor.use(raw, {});
     // }
 
-    if(options.math && options.math.katex) {
-        processor = processor.use(katex);
-    }
+    // if(options.math && options.math.katex) {
+    //     processor = processor.use(katex);
+    // }
 
     // if(options.highlight) {
     //     processor = processor.data('settings', {fragment: true})
@@ -116,10 +116,10 @@ function createProcessor(options) {
     // }
 
     processor = processor.use(footnote);
-
-    if(options.G2) {
-        processor = processor.use(G2, {});
-    }
+    //
+    // if(options.G2) {
+    //     processor = processor.use(G2, {});
+    // }
 
     // rehype end
 
@@ -127,33 +127,41 @@ function createProcessor(options) {
     return processor;
 }
 
-function _parse(markdown, options = {}) {
+function parse(md, options = {}) {
     options = Object.assign({}, defaultOptions, options);
     const processor = createProcessor(options);
-    const mdast = processor.parse(markdown);
-    console.log(mdast);
+    const mdast = processor.parse(md);
     const hast = processor.runSync(mdast);
-    if(options.raw){
-        hast.position = mdast.position;
-    }
-    return hast;
+    hast.data = {
+        'class': 'markdown-body'
+    };
+    return { mdast, hast };
 }
 
-function render(hast, options) {
-    if(options.rootClassName) {
-        options.rootClassName = ['vremark-body'].concat(options.rootClassName);
-    }
-    return toVdom(hast, options);
-}
+// function run(mdast) {
+//     // const hast = processor.runSync(mdast);
+//     // if(options.raw){
+//     //     hast.position = mdast.position;
+//     // }
+//
+// }
+
+// function render(hast, options) {
+//     // if(options.rootClassName) {
+//     //     options.rootClassName = ['vremark-body'].concat(options.rootClassName);
+//     // }
+//     return toVdom(hast, options);
+// }
 
 function vremark(markdown, options) {
-    const hast = _parse(markdown);
+    const hast = parse(markdown);
     const vdom = render(hast, options);
     return vdom;
 }
 
-vremark.parse = _parse;
-vremark.render = render;
+vremark.parse = parse;
+// vremark.run = run;
+vremark.render = require('./render');
 
 module.exports = vremark;
 

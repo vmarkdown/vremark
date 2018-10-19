@@ -25,6 +25,10 @@ const config = {
     module: {
         rules: [
             {
+                test: /\.worker\.js$/,
+                use: { loader: 'worker-loader' }
+            },
+            {
                 test: /\.md$/,
                 use: 'text-loader'
             },
@@ -42,6 +46,16 @@ const config = {
                     "css-loader",
                     "sass-loader"
                 ]
+            },
+            {
+                test: /\.(woff|woff2|eot|ttf|otf)$/,
+                use: {
+                    loader:'file-loader',
+                    options: {
+                        name: '[path][name].[ext]',
+                        context:'src'
+                    }
+                }
             }
         ]
     },
@@ -51,7 +65,7 @@ const config = {
         'flowchart.js': 'flowchart',
         // 'highlight.js': 'hljs',
         'lowlight': 'lowlight',
-        'katex': 'katex',
+        // 'katex': 'katex',
         'underscore': '_',
         'mermaid': 'mermaid',
         '@antv/g2': 'G2'
