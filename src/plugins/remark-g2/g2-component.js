@@ -1,5 +1,32 @@
 const G2 = require('@antv/g2');
 
+function settings(chart, dimension, options) {
+
+    if(!options) {
+        return null;
+    }
+
+    var c = dimension();
+
+    if(options.position){
+        c = c.position(options.position);
+    }
+    if(options.color){
+        c = c.color(options.color);
+    }
+    if(options.label && options.label.field){
+        c = c.label(options.label.field, options.label.cfg || {});
+    }
+    if(options.style){
+        c = c.style(options.style);
+    }
+    if(options.size){
+        c = c.size(options.size);
+    }
+
+    return c;
+}
+
 const G2Component = Vue.extend({
     name: 'G2',
     props: {
@@ -109,6 +136,7 @@ const G2Component = Vue.extend({
     },
     template: '<div class="remark-g2"></div>',
     mounted () {
+
         var self = this;
 
         var options = {
@@ -170,77 +198,9 @@ const G2Component = Vue.extend({
             chart.tooltip(this.tooltip);
         }
 
-        if(this.interval) {
-            var interval = chart.interval();
-
-            if(this.interval.position){
-                interval = interval.position(this.interval.position);
-            }
-
-            if(this.interval.color){
-                interval = interval.color(this.interval.color);
-            }
-
-            if(this.interval.label && this.interval.label.field){
-                interval = interval.label(this.interval.label.field, this.interval.label.cfg || {});
-            }
-
-            if(this.interval.style){
-                interval = interval.style(this.interval.style);
-            }
-
-            if(this.interval.size){
-                interval = interval.size(this.interval.size);
-            }
-        }
-
-        if(this.area) {
-            var area = chart.area();
-
-            if(this.area.position){
-                area = area.position(this.area.position);
-            }
-
-            if(this.area.color){
-                area = area.color(this.area.color);
-            }
-
-            if(this.area.label && this.area.label.field){
-                area = area.label(this.area.label.field, this.area.label.cfg || {});
-            }
-
-            if(this.area.style){
-                area = area.style(this.area.style);
-            }
-
-            if(this.area.size){
-                area = area.size(this.area.size);
-            }
-        }
-
-        if(this.line) {
-            var line = chart.line();
-
-            if(this.line.position){
-                line = line.position(this.line.position);
-            }
-
-            if(this.line.color){
-                line = line.color(this.line.color);
-            }
-
-            if(this.line.label && this.line.label.field){
-                line = line.label(this.line.label.field, this.line.label.cfg || {});
-            }
-
-            if(this.line.style){
-                line = line.style(this.line.style);
-            }
-
-            if(this.line.size){
-                line = line.size(this.line.size);
-            }
-        }
+        settings(chart, chart.interval, this.interval);
+        settings(chart, chart.area, this.area);
+        settings(chart, chart.line, this.line);
 
         try {
             chart.render();

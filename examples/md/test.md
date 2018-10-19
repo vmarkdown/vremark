@@ -3,7 +3,7 @@
 ```G2.Chart
 {
     forceFit: true,
-    height : 300,
+    height : 500,
     data:[
          { genre: 'Sports', sold: 28875 },
          { genre: 'Strategy', sold: 115 },

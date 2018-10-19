@@ -5,6 +5,15 @@ G2.track(false);
 
 var G2Component = require('./g2-component');
 
+
+function hash(str) {
+    var hash = 5381, i = str.length;
+    while(i) {
+        hash = (hash * 33) ^ str.charCodeAt(--i);
+    }
+    return hash >>> 0;
+}
+
 module.exports = function plugin(options = {}) {
 
     return function transformer(root) {
@@ -36,6 +45,7 @@ module.exports = function plugin(options = {}) {
                 var type = code.properties.className[0].replace('language-G2.', '');
                 options.type = type;
                 var item = code.children[0];
+                node.key = hash(item.value);
                 var func = new Function('return '+item.value);
                 var _options = func();
                 Object.assign(options, _options);
@@ -45,6 +55,7 @@ module.exports = function plugin(options = {}) {
             }
 
 
+            // node.key = new Date().getTime();
             node.children = [];
             node.type = 'component';
             // node.type = 'raw';

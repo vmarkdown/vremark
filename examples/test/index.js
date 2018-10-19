@@ -4,26 +4,6 @@ const vremark = require('../../src/index');
 
 let md = require('../md/test.md');
 
-const timer = Vue.extend({
-    name: 'timer',
-    data: function () {
-        return {
-            time: ''
-        }
-    },
-    template: '<div>{{time}}</div>',
-    mounted () {
-        const self = this;
-        self.interval = setInterval(() => {
-            this.time = new Date;
-        }, 1000);
-    },
-    destroyed() {
-        const self = this;
-        self.interval && clearInterval(self.interval);
-    }
-});
-
 const app = new Vue({
     el: '#app',
     render(h) {
@@ -119,6 +99,36 @@ const app = new Vue({
 
     }
 });
+
+
+setTimeout(function () {
+    md = `# h1====
+
+\`\`\`G2.Chart
+{
+    forceFit: true,
+    height : 300,
+    data:[
+         { genre: 'Sports======', sold: 28875 },
+         { genre: 'Strategy', sold: 115 },
+         { genre: 'Action', sold: 120 },
+         { genre: 'Shooter', sold: 350 },
+         { genre: 'Other', sold: 150 }
+    ],
+    interval: {
+        position: 'genre*sold',
+        color: 'genre'
+    }
+
+}
+\`\`\`
+`;
+
+
+    console.log('----======');
+    app.$forceUpdate();
+}, 3000);
+
 
 // for(let i=0;i<10;i++){
 //     setTimeout(function () {
