@@ -20,7 +20,7 @@ const remark2rehype = require('./lib/remark-rehype');
 const katex = require('rehype-katex');
 const highlight = require('rehype-highlight');
 const footnote = require('./plugins/rehype-footnote/index');
-const raw = require('rehype-raw');
+// const raw = require('rehype-raw');
 
 
 const toVdom = require('hast-util-to-vdom');
@@ -90,12 +90,12 @@ function createProcessor(options) {
     // rehype start
 
     processor = processor.use(remark2rehype, {
-        allowDangerousHTML: true
+        allowDangerousHTML: false
     });
 
-    if(options.raw) {
-        processor = processor.use(raw, {});
-    }
+    // if(options.raw) {
+    //     processor = processor.use(raw, {});
+    // }
 
     if(options.math && options.math.katex) {
         processor = processor.use(katex);
