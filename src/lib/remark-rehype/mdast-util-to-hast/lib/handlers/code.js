@@ -20,5 +20,6 @@ function code(h, node) {
         return h(node, node.tagName || 'div', node.properties);
     }
 
-    return h(node.position, 'pre', [h(node, 'code', props, [u('text', {position: node.position}, value)])])
+    // return h(node.position, 'pre', [h(node, 'code', props, [u('text', {position: node.position}, value)])])
+    return h(node, 'pre', [h(node, 'code', props, [u('text', {position: node.position}, value)])])
 }

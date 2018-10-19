@@ -49,7 +49,7 @@ module.exports = function plugin(options = {}) {
             node.type = 'component';
             // node.type = 'raw';
             node.component = G2Component;
-            node.properties = options;
+            node.properties = Object.assign({}, node.properties, options );
 
         });
 

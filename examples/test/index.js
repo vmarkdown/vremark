@@ -34,7 +34,7 @@ const app = new Vue({
         const hast = vremark.parse(md, {
 
             breaks: false,
-            hashid: false,
+            hashid: true,
             highlight: false,
 
             math: {
