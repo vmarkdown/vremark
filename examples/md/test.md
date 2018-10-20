@@ -1,21 +1,7 @@
-```g2
-const data = [
-    { genre: 'Sports', sold: 275 },
-    { genre: 'Strategy', sold: 115 },
-    { genre: 'Action', sold: 120 },
-    { genre: 'Shooter', sold: 350 },
-    { genre: 'Other', sold: 150 }
-];
+以及时序图:
 
-const chart = new G2.Chart({
-    forceFit: true,
-    container: container,
-    height : 300
-});
-chart.source(data);
-chart.interval().position('genre*sold').color('genre')
-chart.render();
-
-return chart;
+```sequence
+Alice->Bob: Hello Bob, how are you?
+Note right of Bob: Bob thinks
+Bob-->Alice: I am good thanks!
 ```
-
