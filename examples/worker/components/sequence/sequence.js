@@ -1,8 +1,8 @@
 require('./sequence.scss');
-var Vue = require('vue');
+// var Vue = require('vue');
 var Diagram = require('./lib/sequence-diagram-min');
 
-module.exports = Vue.extend({
+module.exports = ({
     name: 'sequence',
     props: {
         'code': {

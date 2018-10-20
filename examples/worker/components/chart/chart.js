@@ -1,8 +1,8 @@
 require('./chart.scss');
-var Vue = require('vue');
+// var Vue = require('vue');
 var Chart = require('chart.js');
 
-module.exports = Vue.extend({
+module.exports = ({
     name: 'chart',
     props: {
         'code': {

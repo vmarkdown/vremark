@@ -1,9 +1,8 @@
 require('highlight.js/styles/github.css');
 var hljs = require('highlight.js');
+// var Vue = require('vue');
 
-var Vue = require('vue');
-
-var Component = Vue.extend({
+var Component = ({
     name: 'highlight',
     props: {
         'lang': {

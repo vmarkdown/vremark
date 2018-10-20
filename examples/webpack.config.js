@@ -60,8 +60,7 @@ const config = {
         ]
     },
     externals: {
-        'vue': 'Vue',
-
+        // 'vue': 'Vue',
         // 'flowchart.js': 'flowchart',
         // 'highlight.js': 'hljs',
         // 'lowlight': 'lowlight',

@@ -1,9 +1,9 @@
 // require('katex/dist/katex.css');
 require('./flowchart.scss');
 var flowchart = require('flowchart.js');
-var Vue = require('vue');
+// var Vue = require('vue');
 
-module.exports = Vue.extend({
+module.exports = ({
     name: 'flowchart',
     props: {
         'code': {

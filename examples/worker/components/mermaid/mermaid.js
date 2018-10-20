@@ -1,5 +1,5 @@
 require('./mermaid.scss');
-var Vue = require('vue');
+// var Vue = require('vue');
 var mermaid = require('mermaid');
 
 mermaid.initialize({
@@ -9,7 +9,7 @@ mermaid.initialize({
 });
 
 var index = 0;
-module.exports = Vue.extend({
+module.exports = ({
     name: 'mermaid',
     props: {
         'code': {

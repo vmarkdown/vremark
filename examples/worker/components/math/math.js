@@ -1,8 +1,8 @@
 require('katex/dist/katex.css');
 var katex = require('katex');
-var Vue = require('vue');
+// var Vue = require('vue');
 
-module.exports = Vue.extend({
+module.exports = ({
     name: 'math',
     props: {
         'inline': {

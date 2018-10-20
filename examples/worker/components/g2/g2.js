@@ -1,4 +1,6 @@
-const G2 = require('@antv/g2');
+// var Vue = require('vue');
+var G2 = require('@antv/g2');
+G2.track(false);
 
 function settings(chart, dimension, options) {
 
@@ -27,7 +29,7 @@ function settings(chart, dimension, options) {
     return c;
 }
 
-const G2Component = Vue.extend({
+const G2Component = ({
     name: 'G2',
     props: {
         code: {

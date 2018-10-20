@@ -1,3 +1,4 @@
+import Vue from 'vue';
 const render = require('../../src/render');
 import Worker from '../../src/vremark.worker';
 const PromiseWorker = require('promise-worker');

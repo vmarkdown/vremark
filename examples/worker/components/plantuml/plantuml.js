@@ -1,5 +1,5 @@
 require('./plantuml.scss');
-var Vue = require('vue');
+// var Vue = require('vue');
 var plantumlEncoder = require('plantuml-encoder');
 
 var FORMAT = {
@@ -7,7 +7,7 @@ var FORMAT = {
     'img': 'img'
 };
 
-module.exports = Vue.extend({
+module.exports = ({
     name: 'plantuml',
     props: {
         'code': {
