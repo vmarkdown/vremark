@@ -1,5 +1,13 @@
 var visit = require('unist-util-visit');
 
+function hash(str) {
+    var hash = 5381, i = str.length;
+    while(i) {
+        hash = (hash * 33) ^ str.charCodeAt(--i);
+    }
+    return hash >>> 0;
+}
+
 module.exports = function plugin(options = {}) {
 
     return function transformer(root) {
@@ -16,6 +24,7 @@ module.exports = function plugin(options = {}) {
             if( node.type === 'code' && node.lang ) {
 
                 node.data = node.data || {};
+                node.data.key = hash(node.value);
                 node.data.props = node.data.props || {};
                 Object.assign(node.data.props, {
                     lang: node.lang,

@@ -1,7 +1,10 @@
-以及时序图:
+```plantuml
+@startuml
 
-```sequence
-Alice->Bob: Hello Bob, how are you?
-Note right of Bob: Bob thinks
-Bob-->Alice: I am good thanks!
+User -> (Start)
+User --> (Use the application) : A small label
+
+:Main Admin: ---> (Use the application) : This is\nyet another\nlabel
+
+@enduml
 ```
