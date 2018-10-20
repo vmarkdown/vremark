@@ -5,6 +5,8 @@ const HighlightComponent = require('./components/highlight/highlight');
 const MathComponent = require('./components/math/math');
 const FlowChartComponent = require('./components/flowchart/flowchart');
 const SequenceComponent = require('./components/sequence/sequence');
+const MermaidComponent = require('./components/mermaid/mermaid');
+
 const PlantumlComponent = require('./components/plantuml/plantuml');
 
 const G2Component = require('./components/g2/g2');
@@ -56,6 +58,9 @@ async function compile(h, markdown) {
                     }
                     if( lang === 'plantuml'){
                         return h(PlantumlComponent, properties);
+                    }
+                    if( lang === 'mermaid'){
+                        return h(MermaidComponent, properties);
                     }
                     if( lang === 'g2' ){
                         return h(G2Component, properties);
