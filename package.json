@@ -7,6 +7,7 @@
   "devDependencies": {
     "css-loader": "^1.0.0",
     "file-loader": "^2.0.0",
+    "github-markdown-css": "^2.10.0",
     "github-slugger": "^1.2.0",
     "html-webpack-plugin": "^3.2.0",
     "mdast-util-to-string": "^1.0.5",
@@ -29,7 +30,6 @@
     "chart.js": "^2.7.3",
     "flowchart.js": "^1.11.3",
     "hashids": "^1.2.2",
-    "hast-util-to-vdom": "^0.0.11",
     "highlight.js": "^9.13.1",
     "katex": "^0.10.0-rc.1",
     "mermaid": "^8.0.0-rc.8",

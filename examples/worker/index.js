@@ -1,3 +1,5 @@
+require('github-markdown-css');
+
 import Vue from 'vue';
 const render = require('../../src/render');
 import Worker from '../../src/vremark.worker';
@@ -82,7 +84,7 @@ async function compile(h, markdown) {
 
             }
         },
-        rootTagName: 'main',
+        rootTagName: 'article',
         rootClassName: 'markdown-body'
     });
     console.timeEnd('render');

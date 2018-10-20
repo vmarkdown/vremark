@@ -1,4 +1,5 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+// const webpack = require('webpack');
 const path = require('path');
 const merge = require('webpack-merge');
 
@@ -11,6 +12,7 @@ const config = {
     output: {
         path: path.resolve(__dirname, 'www'),
         filename: '[name].js',
+        // chunkFilename: '[name].js',
         // libraryTarget: "umd",
         // library: "[name]",
         // libraryExport: 'default'
@@ -26,7 +28,11 @@ const config = {
         rules: [
             {
                 test: /\.worker\.js$/,
-                use: { loader: 'worker-loader' }
+                use: {
+                    loader: 'worker-loader',
+                    options: { name: '[name].js' }
+                    // options: { name: 'WorkerName.[hash].js' }
+                }
             },
             {
                 test: /\.md$/,
@@ -70,6 +76,11 @@ const config = {
         // '@antv/g2': 'G2'
     },
     plugins: [
+        // new webpack.optimize.CommonsChunkPlugin({
+        //     name: "vendor",
+        //     minChunks: Infinity
+        // }),
+
         new HtmlWebpackPlugin({
             filename: 'index.html',
             template: 'examples/'+example+'/index.html'
@@ -80,10 +91,23 @@ const config = {
         inline: false,
         hot: false,
         contentBase: path.join(__dirname, "www")
+    },
+    optimization: {
+        splitChunks: {
+            cacheGroups: {
+                commons: {
+                    test: /[\\/]node_modules[\\/]/,
+                    name: 'vendors',
+                    chunks: 'all'
+                }
+            }
+        }
     }
 };
 
-const entry = {};
+const entry = {
+    // vendor: ["vue"],
+};
 entry['example-'+example+'-main'] = path.resolve(__dirname, './'+example+'/index.js');
 
 module.exports = [
