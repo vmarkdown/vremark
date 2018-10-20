@@ -74,7 +74,9 @@ async function compile(h, markdown) {
                 }
 
             }
-        }
+        },
+        rootTagName: 'main',
+        rootClassName: 'markdown-body'
     });
     console.timeEnd('render');
 

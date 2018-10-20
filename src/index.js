@@ -55,37 +55,6 @@ function createProcessor(options) {
         processor = processor.use(component);
     }
 
-
-    // if(options.highlight) {
-    //     processor = processor.use(highlight, {
-    //
-    //     });
-    // }
-    //
-    // if(options.flowchart) {
-    //     processor = processor.use(flowchart, {});
-    // }
-
-    //
-    // if(options.sequence) {
-    //     processor = processor.use(sequence, {});
-    // }
-    //
-    // if(options.mermaid) {
-    //     processor = processor.use(mermaid, {});
-    // }
-    //
-    // if(options.plantuml) {
-    //     processor = processor.use(plantuml, {});
-    // }
-    //
-    // if(options.math) {
-    //     processor = processor.use(math, {
-    //         // inlineMathDouble: true,
-    //         // inlineMathDoubleDisplay: true
-    //     });
-    // }
-    //
     // if(options.hashid) {
     //     processor = processor.use(hashid, {
     //         c: 'content'

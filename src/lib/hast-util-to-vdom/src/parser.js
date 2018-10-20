@@ -44,11 +44,10 @@ Parser.prototype.parseNode = function(node, parent) {
 
 Parser.prototype.parse = function(root) {
     try {
-        root.properties = root.properties || {};
-        root.tagName = this.options.rootTagName?this.options.rootTagName:'div';
-        if( this.options.rootClassName ){
-            root.properties.className = this.options.rootClassName || '';
-        }
+        root.data = root.data || {};
+        root.data.class = ['vremark-body'].concat(this.options.rootClassName || '');
+        root.tagName = this.options.rootTagName || 'div';
+
         return this.parseNode(root);
     }
     catch (e) {
