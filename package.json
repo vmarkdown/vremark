@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "@antv/g2": "^3.3.1",
+    "chart.js": "^2.7.3",
     "flowchart.js": "^1.11.3",
     "hashids": "^1.2.2",
     "hast-util-to-vdom": "^0.0.11",

@@ -54,14 +54,14 @@ var Component = Vue.extend({
 });
 
 
-var languages = require('./languages');
-var languageKeys = {};
-languages.forEach(function (language) {
-    languageKeys[language] = true;
-});
-
-Component.hasLanguage = function(name) {
-    return languageKeys[name];
-};
+// var languages = require('./languages');
+// var languageKeys = {};
+// languages.forEach(function (language) {
+//     languageKeys[language] = true;
+// });
+//
+// Component.hasLanguage = function(name) {
+//     return languageKeys[name];
+// };
 
 module.exports = Component;

@@ -6,10 +6,12 @@ const MathComponent = require('./components/math/math');
 const FlowChartComponent = require('./components/flowchart/flowchart');
 const SequenceComponent = require('./components/sequence/sequence');
 const MermaidComponent = require('./components/mermaid/mermaid');
-
 const PlantumlComponent = require('./components/plantuml/plantuml');
-
 const G2Component = require('./components/g2/g2');
+const Chartomponent = require('./components/chart/chart');
+
+
+
 let md = require('../md/test.md');
 
 
@@ -65,12 +67,16 @@ async function compile(h, markdown) {
                     if( lang === 'g2' ){
                         return h(G2Component, properties);
                     }
+                    if( lang === 'chart' ){
+                        return h(Chartomponent, properties);
+                    }
                     // if( lang === 'G2.Chart' ){
                     //     return h(G2Component, properties);
                     // }
-                    if( HighlightComponent.hasLanguage(lang) ){
-                        return h(HighlightComponent, properties);
-                    }
+                    // if( HighlightComponent.hasLanguage(lang) ){
+                    //
+                    // }
+                    return h(HighlightComponent, properties);
                 }
 
             }

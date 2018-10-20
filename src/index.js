@@ -7,13 +7,31 @@ const markdown = require('./lib/remark-parse');
 const breaks  = require('remark-breaks');
 // const hashid = require('./plugins/hashid/index');
 const math = require('./lib/remark-math');
-const component = require('./plugins/remark-component');
+const component = require('./plugins/remark-code-component');
 
 
 //rehype
 const remark2rehype = require('./lib/remark-rehype');
 const footnote = require('./plugins/rehype-footnote/index');
 // const raw = require('rehype-raw');
+
+// const defaultOptions = {
+//     breaks: true,
+//     hashid: true,
+//     highlight: true,
+//
+//     math: {
+//         katex: true,
+//     },
+//
+//     flowchart: true,
+//     sequence: true,
+//     mermaid: true,
+//     plantuml: true,
+//     raw: false,
+//     G2: false,
+//     component: true
+// };
 
 const defaultOptions = {
     breaks: true,
@@ -29,9 +47,10 @@ const defaultOptions = {
     mermaid: true,
     plantuml: true,
     raw: false,
-    G2: false,
-    component: true
+    g2: false
 };
+
+
 
 function createProcessor(options) {
 
@@ -51,9 +70,11 @@ function createProcessor(options) {
         processor = processor.use(math, {});
     }
 
-    if(options.component) {
-        processor = processor.use(component);
-    }
+    processor = processor.use(component);
+
+    // if(options.component) {
+    //     processor = processor.use(component);
+    // }
 
     // if(options.hashid) {
     //     processor = processor.use(hashid, {
