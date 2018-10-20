@@ -1,0 +1,27 @@
+.remark-flowchart {
+    text-align: center;
+    margin-bottom: 1.1em
+}
+
+.remark-flowchart text {
+    //font-size: 15px;
+    font-family: "Helvetica Neue",Arial,"Hiragino Sans GB","STHeiti","Microsoft YaHei","WenQuanYi Micro Hei",SimSun,Song,sans-serif;
+}
+
+.remark-flowchart [stroke="#000000"] {
+    stroke: #2c3f51
+}
+
+.remark-flowchart text[stroke="#000000"] {
+    stroke: none
+}
+
+.remark-flowchart [fill="#000"],
+.remark-flowchart [fill="#000000"],
+.remark-flowchart [fill="black"] {
+    fill: #2c3f51
+}
+
+.inlineMathDouble {
+    display: block; text-align: center;
+}

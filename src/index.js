@@ -9,16 +9,19 @@ const markdown = require('./lib/remark-parse');
 const breaks  = require('remark-breaks');
 // const hashid = require('./plugins/hashid/index');
 const math = require('./lib/remark-math');
-// const flowchart = require('./plugins/remark-flowchart');
+const flowchart = require('./plugins/remark-flowchart');
 // const sequence = require('./plugins/remark-sequence');
 // const mermaid = require('./plugins/remark-mermaid');
 // const plantuml = require('./plugins/remark-plantuml');
 // const G2 = require('./plugins/remark-g2');
 const highlight = require('./plugins/remark-highlight');
 
+const component = require('./plugins/remark-component');
+
+
 //rehype
 const remark2rehype = require('./lib/remark-rehype');
-const katex = require('rehype-katex');
+// const katex = require('rehype-katex');
 // const highlight = require('rehype-highlight');
 const footnote = require('./plugins/rehype-footnote/index');
 // const raw = require('rehype-raw');
@@ -40,7 +43,8 @@ const defaultOptions = {
     mermaid: true,
     plantuml: true,
     raw: false,
-    G2: false
+    G2: false,
+    component: true
 };
 
 function createProcessor(options) {
@@ -57,15 +61,25 @@ function createProcessor(options) {
         processor = processor.use(breaks);
     }
 
-    if(options.highlight) {
-        processor = processor.use(highlight, {
-
-        });
+    if(options.math) {
+        processor = processor.use(math, {});
     }
 
+    if(options.component) {
+        processor = processor.use(component);
+    }
+
+
+    // if(options.highlight) {
+    //     processor = processor.use(highlight, {
+    //
+    //     });
+    // }
+    //
     // if(options.flowchart) {
     //     processor = processor.use(flowchart, {});
     // }
+
     //
     // if(options.sequence) {
     //     processor = processor.use(sequence, {});
@@ -79,12 +93,12 @@ function createProcessor(options) {
     //     processor = processor.use(plantuml, {});
     // }
     //
-    if(options.math) {
-        processor = processor.use(math, {
-            inlineMathDouble: true,
-            inlineMathDoubleDisplay: true
-        });
-    }
+    // if(options.math) {
+    //     processor = processor.use(math, {
+    //         // inlineMathDouble: true,
+    //         // inlineMathDoubleDisplay: true
+    //     });
+    // }
     //
     // if(options.hashid) {
     //     processor = processor.use(hashid, {

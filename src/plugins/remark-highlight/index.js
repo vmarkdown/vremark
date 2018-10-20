@@ -10,7 +10,7 @@ var languages = (function () {
     return keys;
 })();
 
-module.exports = function checkbox(options = {}) {
+module.exports = function plugin(options = {}) {
 
     return function transformer(root) {
 

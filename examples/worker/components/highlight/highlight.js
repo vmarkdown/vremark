@@ -3,7 +3,7 @@ var hljs = require('highlight.js');
 
 var Vue = require('vue');
 
-module.exports = Vue.extend({
+var Component = Vue.extend({
     name: 'highlight',
     props: {
         'lang': {
@@ -52,3 +52,16 @@ module.exports = Vue.extend({
         }, 0);
     }
 });
+
+
+var languages = require('./languages');
+var languageKeys = {};
+languages.forEach(function (language) {
+    languageKeys[language] = true;
+});
+
+Component.hasLanguage = function(name) {
+    return languageKeys[name];
+};
+
+module.exports = Component;

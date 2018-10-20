@@ -5,6 +5,7 @@ module.exports = {
     highlight: require('./highlight'),
     math: require('./math'),
     inlineMath: require('./inlineMath'),
+    flowchart: require('./flowchart'),
 
 
     blockquote: require('./blockquote'),

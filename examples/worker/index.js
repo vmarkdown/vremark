@@ -15,14 +15,16 @@ function parse(markdown, options) {
 }
 
 
-const HighlightComponent = require('./components/highlight-component');
-const MathComponent = require('./components/math-component');
+const HighlightComponent = require('./components/highlight/highlight');
+const MathComponent = require('./components/math/math');
+const FlowChartComponent = require('./components/flowchart/flowchart');
+const G2Component = require('./components/g2/g2');
 
 async function compile(h, markdown) {
 
-    console.time('parse');
+    console.time('worker parse');
     const {mdast, hast} = await parse(markdown, {});
-    console.timeEnd('parse');
+    console.timeEnd('worker parse');
 
     console.log(mdast);
 
@@ -34,14 +36,51 @@ async function compile(h, markdown) {
         mode: 'vue',
         h: h,
         renderer: {
-            highlight: function (h, node, properties) {
-                return h(HighlightComponent, properties);
-            },
+            // highlight: function (h, node, properties) {
+            //     return h(HighlightComponent, properties);
+            // },
             math: function (h, node, properties) {
                 return h(MathComponent, properties);
             },
             inlineMath: function (h, node, properties) {
                 return h(MathComponent, properties);
+            },
+            // flowchart: function (h, node, properties) {
+            //     return h(FlowChartComponent, properties);
+            // },
+            component: function (h, node, properties) {
+
+                if( node.data && node.data.props && node.data.props.lang ){
+                    var lang = node.data.props.lang;
+                    if( lang === 'flow' || lang === 'flowchart' ){
+                        return h(FlowChartComponent, properties);
+                    }
+                    if( lang === 'g2' ){
+                        return h(G2Component, properties);
+                    }
+                    // if( lang === 'G2.Chart' ){
+                    //     return h(G2Component, properties);
+                    // }
+                    if( HighlightComponent.hasLanguage(lang) ){
+                        return h(HighlightComponent, properties);
+                    }
+                }
+
+
+                // if( node.type === 'flow' || node.type === 'flowchart' ){
+                //     return h(FlowChartComponent, properties);
+                // }
+                //
+                // if( node.data && node.data.props && node.data.props.lang &&
+                //     HighlightComponent.hasLanguage(node.data.props.lang) ){
+                //     return h(HighlightComponent, properties);
+                // }
+
+                // if( node.type === 'flow' || node.type === 'flowchart' ){
+                //
+                // }
+
+
             }
         }
     });

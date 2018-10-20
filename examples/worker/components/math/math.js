@@ -21,7 +21,7 @@ module.exports = Vue.extend({
     },
     render(h) {
         return h(this.inline?'span':'p', {
-            'class': ['vremark-katex-inlineMath'],
+            'class': [this.inline?'vremark-katex-inlineMath':'vremark-katex-math'],
             domProps:{
                 innerHTML: this.result
             }

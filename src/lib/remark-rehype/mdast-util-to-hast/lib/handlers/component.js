@@ -16,5 +16,16 @@ function component(h, node) {
     // };
     //
     // return _node;
-    return node;
+
+
+    var n = {
+        type: node.type,
+        position: node.position,
+        properties: node.properties || {},
+        data: node.data,
+        children: []
+    };
+
+
+    return n;
 }

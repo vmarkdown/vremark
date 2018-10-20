@@ -62,13 +62,13 @@ const config = {
     externals: {
         'vue': 'Vue',
 
-        'flowchart.js': 'flowchart',
+        // 'flowchart.js': 'flowchart',
         // 'highlight.js': 'hljs',
-        'lowlight': 'lowlight',
+        // 'lowlight': 'lowlight',
         // 'katex': 'katex',
-        'underscore': '_',
-        'mermaid': 'mermaid',
-        '@antv/g2': 'G2'
+        // 'underscore': '_',
+        // 'mermaid': 'mermaid',
+        // '@antv/g2': 'G2'
     },
     plugins: [
         new HtmlWebpackPlugin({
