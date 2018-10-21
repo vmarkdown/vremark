@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+
+    <style>
+        html, body{
+            padding: 0;
+            margin: 0;
+            height: 100%;
+        }
+    </style>
+
+    <style>
+        .markdown-body {
+            box-sizing: border-box;
+            min-width: 200px;
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 45px;
+        }
+
+        @media (max-width: 767px) {
+            .markdown-body {
+                padding: 15px;
+            }
+        }
+    </style>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.js"></script>
+
+</head>
+<body>
+
+<div id="app"></div>
+
+<script>
+
+    Vue.component('async-component', function (resolve, reject) {
+        setTimeout(function () {
+            resolve({
+                template: '<div>I am async!</div>'
+            })
+        }, 1000)
+    });
+
+
+    const app = new Vue({
+        el: '#app',
+        render(h) {
+
+            return h('div',{},[
+                h({
+                    template: '<div>=========1</div>'
+                }),
+                h('async-component', {})
+                // h({
+                //     // template: '<async-component></async-component>'
+                //     render(h) {
+                //         return h('async-component');
+                //     }
+                // })
+            ]);
+
+            // return h(function (resolve, reject) {
+            //     setTimeout(function () {
+            //         resolve({
+            //             template: '<div>=========</div>'
+            //         });
+            //     }, 0);
+            // });
+
+
+        }
+    });
+
+
+
+
+
+</script>
+</body>
+</html>

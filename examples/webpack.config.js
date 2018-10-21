@@ -12,13 +12,14 @@ const config = {
     output: {
         path: path.resolve(__dirname, 'www'),
         filename: '[name].js',
-        // chunkFilename: '[name].js',
+        chunkFilename: '[name].js',
         // libraryTarget: "umd",
         // library: "[name]",
         // libraryExport: 'default'
     },
     resolve: {
         alias: {
+            // 'vue': path.resolve(__dirname, '../node_modules/vue/dist/vue.js'),
             // 'hast-util-raw': path.resolve(__dirname, '../src/lib/hast-util-raw/index.js'),
             // 'rehype-vdom': path.resolve(__dirname, '../src/lib/rehype-vdom.common.js'),
             // 'hast-util-to-vdom': path.resolve(__dirname, '../src/lib/hast-util-to-vdom.common.js')
@@ -92,17 +93,17 @@ const config = {
         hot: false,
         contentBase: path.join(__dirname, "www")
     },
-    optimization: {
-        splitChunks: {
-            cacheGroups: {
-                commons: {
-                    test: /[\\/]node_modules[\\/]/,
-                    name: 'vendors',
-                    chunks: 'all'
-                }
-            }
-        }
-    }
+    // optimization: {
+    //     splitChunks: {
+    //         cacheGroups: {
+    //             commons: {
+    //                 test: /[\\/]node_modules[\\/]/,
+    //                 name: 'vendors',
+    //                 chunks: 'all'
+    //             }
+    //         }
+    //     }
+    // }
 };
 
 const entry = {

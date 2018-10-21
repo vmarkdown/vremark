@@ -8,6 +8,7 @@ var wrap = require('./wrap')
 
 /* Transform all footnote definitions, if any. */
 function generateFootnotes(h) {
+
     var footnotes = h.footnotes
     var length = footnotes.length
     var index = -1
@@ -20,6 +21,11 @@ function generateFootnotes(h) {
 
     while (++index < length) {
         def = footnotes[index]
+
+        // if(def.children.length>0 && def.children[0].type === "paragraph") {
+        //     // debugger
+        //     def.children[0].tagName = 'span';
+        // }
 
         listItems[index] = {
             type: 'listItem',
@@ -35,6 +41,23 @@ function generateFootnotes(h) {
         }
     }
 
+
+
+    var footnoteList = list(h, {
+        type: 'list',
+        ordered: true,
+        children: listItems
+    });
+
+    footnoteList.children && footnoteList.children.forEach(function (listItem) {
+        if(listItem.type === "element"
+            && listItem.tagName === "li"
+            && listItem.children.length > 0 ) {
+            var item = listItem.children[0];
+            item.tagName = 'span';
+        }
+    });
+
     return h(
         null,
         'div',
@@ -42,13 +65,11 @@ function generateFootnotes(h) {
         wrap(
             [
                 thematicBreak(h),
-                list(h, {
-                    type: 'list',
-                    ordered: true,
-                    children: listItems
-                })
+                footnoteList
             ],
             true
         )
-    )
+    );
+
+
 }

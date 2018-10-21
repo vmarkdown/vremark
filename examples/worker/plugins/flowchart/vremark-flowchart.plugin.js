@@ -1,47 +1,39 @@
-// require('katex/dist/katex.css');
-require('./flowchart.scss');
+require('./vremark-flowchart.plugin.scss');
+import Vue from 'vue';
 var flowchart = require('flowchart.js');
-// var Vue = require('vue');
 
-module.exports = ({
-    name: 'flowchart',
+Vue.component('vremark-flowchart', {
+    name: 'vremark-flowchart',
     props: {
         'code': {
             type: String,
             required: true
         }
     },
-    data() {
-        return {
-            result: ''
-        }
-    },
     render(h) {
         return h('div', {
-            'class': ['remark-flowchart']
+            'class': ['vremark-flowchart']
         });
     },
     methods:{
         compile() {
             var self = this;
-            if(!self.code) {self.result = '';return;}
             try {
                 var diagram = flowchart.parse(self.code);
                 diagram.drawSVG(self.$el);
                 self.diagram = diagram;
             } catch (e) {
-
+                console.error(e);
             }
         }
     },
     mounted() {
         var self = this;
-        setTimeout(function () {
-            self.compile();
-        }, 0);
+        self.compile();
     },
     destroyed(){
         var self = this;
         self.diagram && self.diagram.clean();
     }
 });
+

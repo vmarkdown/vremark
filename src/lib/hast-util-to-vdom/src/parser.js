@@ -39,6 +39,10 @@ Parser.prototype.parseNode = function(node, parent) {
     if(this.dataFuc){
         properties = this.dataFuc(node);
     }
+
+    if(!this.renderer[node.type]){
+        throw new Error('renderer:'+node.type+' not found!');
+    }
     return this.renderer[node.type].apply(null, [h, node, properties, children, this.options]);
 };
 

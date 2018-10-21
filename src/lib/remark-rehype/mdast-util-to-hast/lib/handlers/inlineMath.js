@@ -2,7 +2,7 @@
 
 module.exports = function inlineMath(h, node) {
     return {
-        type: node.type,
+        type: 'component' || node.type,
         tagName: node.data.hName,
         position: node.position,
         properties: {} || node.data.hProperties,

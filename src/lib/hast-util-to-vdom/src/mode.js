@@ -23,52 +23,6 @@ var defaultModes = {
 
             return props;
 
-            // var props = {
-            //     attrs: {},
-            //     domProps: {},
-            //     props: {}
-            // };
-            //
-            // if(node.properties){
-            //
-            //     if(node.properties.className) {
-            //         props['class'] = node.properties.className;
-            //     }
-            //
-            //     if(node.properties.innerHTML) {
-            //         props.domProps.innerHTML = node.properties.innerHTML;
-            //     }
-            //
-            //     Object.keys(node.properties).forEach(function (key) {
-            //         if( key ==='className' || key==='innerHTML' ){
-            //             return;
-            //         }
-            //         props.attrs[key] = node.properties[key];
-            //     });
-            //
-            // }
-            //
-            // if(node.hasOwnProperty('key')){
-            //     props.key = node.key;
-            // }
-            //
-            // if(node.data){
-            //     if(node.data.key){
-            //         props.key = node.data.key;
-            //     }
-            //     if(node.data.attrs){
-            //         props.attrs = node.data.attrs;
-            //     }
-            //     if(node.data.domProps){
-            //         props.domProps = node.data.domProps;
-            //     }
-            //     if(node.data.props){
-            //         props.props = node.data.props;
-            //     }
-            // }
-            //
-            // return props;
-
         }
     },
 

@@ -1,124 +1,82 @@
 const unified = require('unified');
-// const remarkParse = require('remark-parse');
-// const rehype = require('remark-rehype');
 
 //remark
-const markdown = require('./lib/remark-parse');
+const parse = require('./lib/remark-parse');
 const breaks  = require('remark-breaks');
-// const hashid = require('./plugins/hashid/index');
 const math = require('./lib/remark-math');
-const component = require('./plugins/remark-code-component');
-
 
 //rehype
 const remark2rehype = require('./lib/remark-rehype');
-const footnote = require('./plugins/rehype-footnote/index');
-// const raw = require('rehype-raw');
+// const footnote = require('./lib/rehype-footnote/index');
 
-// const defaultOptions = {
-//     breaks: true,
-//     hashid: true,
-//     highlight: true,
-//
-//     math: {
-//         katex: true,
-//     },
-//
-//     flowchart: true,
-//     sequence: true,
-//     mermaid: true,
-//     plantuml: true,
-//     raw: false,
-//     G2: false,
-//     component: true
-// };
+// const stringify = require('rehype-stringify');
+const stringify = require('./lib/rehype-vdom');
 
 const defaultOptions = {
     breaks: true,
-    hashid: true,
-    highlight: true,
+    math: true,
+    allowDangerousHTML: true,
 
-    math: {
-        katex: true,
-    },
-
-    flowchart: true,
-    sequence: true,
-    mermaid: true,
-    plantuml: true,
-    raw: false,
-    g2: false
+    mode: 'vue',
+    h: function () {},
+    rootClassName: 'markdown-body',
+    rootTagName: 'div'
 };
 
 
+async function vremark(markdown, _options) {
 
-function createProcessor(options) {
+    const options = Object.assign({}, defaultOptions, _options);
 
-    let processor = unified();
-
-    // remark start
-    processor = processor.use(markdown, {
-        footnotes: true,
-        pedantic: true // fix md error
-    });
+    const plugins = [];
 
     if(options.breaks) {
-        processor = processor.use(breaks);
+        plugins.push([
+            breaks, {
+            }
+        ]);
     }
 
     if(options.math) {
-        processor = processor.use(math, {});
+        plugins.push([
+            math, {
+            }
+        ]);
     }
 
-    processor = processor.use(component);
+    // plugins.push([
+    //     function () {
+    //         return function (root) {
+    //             console.log(root);
+    //         }
+    //     }, {
+    //     }
+    // ]);
 
-    // if(options.component) {
-    //     processor = processor.use(component);
-    // }
+    plugins.push([remark2rehype, {
+        allowDangerousHTML: options.allowDangerousHTML
+    }]);
 
-    // if(options.hashid) {
-    //     processor = processor.use(hashid, {
-    //         c: 'content'
-    //     });
-    // }
+    const processor = unified()
+        .use(parse, {
+            footnotes: true,
+            pedantic: true
+        })
+        .use({
+            plugins: plugins,
+            settings: {}
+        })
+        .use(stringify, {
+            mode: 'vue',
+            h: options.h,
+            rootClassName: options.rootClassName,
+            rootTagName: options.rootTagName
+        });
 
-    // remark end
+    const file = await processor.process(markdown);
 
-    // rehype start
-
-    processor = processor.use(remark2rehype, {
-        allowDangerousHTML: false
-    });
-
-    // if(options.raw) {
-    //     processor = processor.use(raw, {});
-    // }
-    processor = processor.use(footnote);
-
-    // rehype end
-
-
-    return processor;
+    return file.contents;
 }
-
-function parse(md, options = {}) {
-    options = Object.assign({}, defaultOptions, options);
-    const processor = createProcessor(options);
-    const mdast = processor.parse(md);
-    const hast = processor.runSync(mdast);
-    // hast.data = {
-    //     'class': 'markdown-body'
-    // };
-    return { mdast, hast };
-}
-
-function vremark(markdown, options) {
-    const hast = parse(markdown);
-    return render(hast, options);
-}
-
-vremark.parse = parse;
-vremark.render = require('./render');
 
 module.exports = vremark;
 
