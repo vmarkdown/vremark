@@ -5,6 +5,8 @@ const parse = require('./lib/remark-parse');
 const breaks  = require('remark-breaks');
 const math = require('./lib/remark-math');
 
+const flowchart = require('./plugins/vremark-flowchart/vremark-flowchart.plugin');
+
 //rehype
 const remark2rehype = require('./lib/remark-rehype');
 // const footnote = require('./lib/rehype-footnote/index');
@@ -16,6 +18,13 @@ const defaultOptions = {
     breaks: true,
     math: true,
     allowDangerousHTML: true,
+
+
+    //plugins
+
+    flowchart: true,
+
+
 
     mode: 'vue',
     h: function () {},
@@ -44,18 +53,34 @@ async function vremark(markdown, _options) {
         ]);
     }
 
-    // plugins.push([
-    //     function () {
-    //         return function (root) {
-    //             console.log(root);
-    //         }
-    //     }, {
-    //     }
-    // ]);
+    if(options.flowchart) {
+        plugins.push([
+            flowchart, {
+            }
+        ]);
+    }
+
+    plugins.push([
+        function () {
+            return function (root) {
+                console.log(root);
+            }
+        }, {
+        }
+    ]);
 
     plugins.push([remark2rehype, {
         allowDangerousHTML: options.allowDangerousHTML
     }]);
+
+    plugins.push([
+        function () {
+            return function (root) {
+                console.log(root);
+            }
+        }, {
+        }
+    ]);
 
     const processor = unified()
         .use(parse, {

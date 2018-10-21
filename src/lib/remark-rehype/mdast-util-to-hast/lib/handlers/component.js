@@ -20,6 +20,7 @@ function component(h, node) {
 
     var n = {
         type: node.type,
+        component: node.component,
         position: node.position,
         properties: node.properties || {},
         data: node.data,
