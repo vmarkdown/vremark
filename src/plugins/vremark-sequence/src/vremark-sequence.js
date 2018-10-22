@@ -1,5 +1,12 @@
+require('../../../lib/js-sequence-diagrams/sequence-diagram.css');
 require('./vremark-sequence.scss');
-var Diagram = require('./lib/sequence-diagram-min');
+// var Diagram = require('./lib/sequence-diagram-min');
+
+// var Diagram = require('../../../../bower_components/js-sequence-diagrams/dist/sequence-diagram-snap.js');
+
+// var Diagram = require('imports-loader?_=underscore,Raphael=raphael!./lib/sequence-diagram');
+
+var Diagram = require('imports-loader?_=underscore,Raphael=raphael!js-sequence-diagrams');
 
 module.exports = ({
     name: 'vremark-sequence',

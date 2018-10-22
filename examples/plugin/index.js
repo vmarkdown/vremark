@@ -15,74 +15,94 @@ function sleep(time) {
 
 (async ()=>{
 
-    async function compile(h, md) {
-        console.time('compile');
-        const vdom = await vremark(md, {
-            mode: 'vue',
-            h: h,
-            rootClassName: 'markdown-body',
-            rootTagName: 'main'
-        });
-        console.timeEnd('compile');
-        console.log(vdom);
-        // await sleep(3000);
-        return vdom;
-    }
+    // async function compile(h, md) {
+    //     console.time('compile');
+    //     const vdom = await vremark(md, {
+    //         mode: 'vue',
+    //         h: h,
+    //         rootClassName: 'markdown-body',
+    //         rootTagName: 'main'
+    //     });
+    //     console.timeEnd('compile');
+    //     console.log(vdom);
+    //     // await sleep(3000);
+    //     return vdom;
+    // }
 
     const app = new Vue({
         el: '#app',
         data :function () {
             return {
-                md: md
+                vdom: null
             }
         },
-        beforeCreate(){
-            const self = this;
-            self.result = {
-                change: false,
-                compiling: false,
-                vdom: null
-            };
-            self.result.change = true;
-        },
+        // beforeCreate(){
+        //     const self = this;
+        //     self.result = {
+        //         change: false,
+        //         compiling: false,
+        //         vdom: null
+        //     };
+        //     self.result.change = true;
+        // },
         methods:{
-            setValue(md) {
+            async setValue(md) {
+                // const self = this;
+                // self.result.change = true;
+                // Vue.set(app, 'md', md);
+                // app.$forceUpdate();
+
                 const self = this;
-                self.result.change = true;
-                Vue.set(app, 'md', md);
-                app.$forceUpdate();
+                const h = self.$createElement;
+                console.time('compile');
+                const vdom = await vremark(md, {
+                    mode: 'vue',
+                    h: h,
+                    rootClassName: 'markdown-body',
+                    rootTagName: 'main'
+                });
+                console.timeEnd('compile');
+
+                self.vdom = vdom;
+
             }
         },
         render(h) {
-            // debugger
             const self = this;
+            return self.vdom || h('div', {}, 'loading');
 
-            if(self.result.compiling){
-                return self.result.vdom;
-            }
 
-            if(self.result.change) {
-                self.result.compiling = true;
-                compile(h, self.md).then( (vdom) => {
-                    self.result.vdom = vdom;
-                    self.result.compiling = false;
-                    self.result.change = false;
-                    self.$forceUpdate();
-                });
-            }
+            // debugger
+            // const self = this;
 
-            return self.result.vdom || h('div', {}, 'loading');
+            // if(self.result.compiling){
+            //     return self.result.vdom;
+            // }
+            //
+            // if(self.result.change) {
+            //     self.result.compiling = true;
+            //     compile(h, self.md).then( (vdom) => {
+            //         self.result.vdom = vdom;
+            //         self.result.compiling = false;
+            //         self.result.change = false;
+            //         self.$forceUpdate();
+            //     });
+            // }
+            //
+            // return self.result.vdom || h('div', {}, 'loading');
         }
     });
+
+    app.setValue(md);
 
     // setTimeout(function () {
     //     app.setValue(require('../md/test.md'));
     // }, 5000);
 
-    for(var i=0;i<20;i++){
-        await sleep(2000);
-        app.setValue(require('../md/test.md'));
-    }
+    // for(var i=0;i<20;i++){
+    //     await app.setValue(md);
+    //     await sleep(5000);
+    // }
 
 })();
 

@@ -20,6 +20,7 @@ const config = {
     resolve: {
         alias: {
             'vremark-util': path.resolve(__dirname, '../src/lib/vremark-util/index.js'),
+            'js-sequence-diagrams': path.resolve(__dirname, '../src/lib/js-sequence-diagrams/sequence-diagram.js'),
 
             // 'vue': path.resolve(__dirname, '../node_modules/vue/dist/vue.js'),
             // 'hast-util-raw': path.resolve(__dirname, '../src/lib/hast-util-raw/index.js'),
@@ -29,6 +30,10 @@ const config = {
     },
     module: {
         rules: [
+            {
+                test: require.resolve('snapsvg'),
+                loader: 'imports-loader?this=>window,fix=>module.exports=0'
+            },
             {
                 test: /\.worker\.js$/,
                 use: {
@@ -94,6 +99,9 @@ const config = {
         inline: false,
         hot: false,
         contentBase: path.join(__dirname, "www")
+    },
+    node: {
+        fs: 'empty'
     },
     // optimization: {
     //     splitChunks: {
