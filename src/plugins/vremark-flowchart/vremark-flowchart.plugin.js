@@ -13,7 +13,7 @@ function createKey(node) {
 const PLUGIN_NAME = 'vremark-flowchart';
 
 function isPlugin(node) {
-    return (node.lang === 'flow' || node.lang === 'flowchart' )
+    return node.lang && (node.lang === 'flow' || node.lang === 'flowchart' )
 }
 
 module.exports = function plugin(options = {}) {
@@ -25,9 +25,7 @@ module.exports = function plugin(options = {}) {
         var children = root.children;
         for(var i=0;i<children.length;i++) {
             var node = children[i];
-            if( node.type === 'code' && node.lang
-                && (node.lang === 'flow' || node.lang === 'flowchart' )
-            ){
+            if( node.type === 'code' && isPlugin(node) ){
 
                 node.data = node.data || {};
 
@@ -58,7 +56,6 @@ module.exports = function plugin(options = {}) {
             next();
             return;
         }
-
 
         let module = await import(
             /* webpackChunkName: "vremark-flowchart.plugin" */
