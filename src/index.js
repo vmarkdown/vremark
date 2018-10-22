@@ -4,6 +4,8 @@ const unified = require('unified');
 const parse = require('./lib/remark-parse');
 const breaks  = require('remark-breaks');
 const math = require('./lib/remark-math');
+const hashid = require('./lib/remark-hashid');
+
 
 const flowchart = require('./plugins/vremark-flowchart/vremark-flowchart.plugin');
 
@@ -69,6 +71,10 @@ async function vremark(markdown, _options) {
         }
     ]);
 
+
+
+
+
     plugins.push([remark2rehype, {
         allowDangerousHTML: options.allowDangerousHTML
     }]);
@@ -87,6 +93,7 @@ async function vremark(markdown, _options) {
             footnotes: true,
             pedantic: true
         })
+        .use(hashid)
         .use({
             plugins: plugins,
             settings: {}

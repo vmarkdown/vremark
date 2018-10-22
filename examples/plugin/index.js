@@ -54,6 +54,7 @@ function sleep(time) {
             }
         },
         render(h) {
+            // debugger
             const self = this;
 
             if(self.result.compiling){
@@ -74,9 +75,14 @@ function sleep(time) {
         }
     });
 
-    setTimeout(function () {
-        app.setValue(require('../md/large.md'));
-    }, 5000);
+    // setTimeout(function () {
+    //     app.setValue(require('../md/test.md'));
+    // }, 5000);
+
+    // for(var i=0;i<10;i++){
+    //     await sleep(3000);
+    //     app.setValue(require('../md/test.md'));
+    // }
 
 })();
 

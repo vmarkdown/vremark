@@ -2,12 +2,25 @@ const Vue = ((Module)=>Module.default||Module)(require('vue'));
 
 const util = require('vremark-util');
 
+function createKey(node) {
+    return util.hash(
+        node.position.start.line +':'+ node.position.start.column
+        +'-'+
+        node.position.end.line +':' + node.position.end.column
+    );
+}
+
+const PLUGIN_NAME = 'vremark-flowchart';
+
+function isPlugin(node) {
+    return (node.lang === 'flow' || node.lang === 'flowchart' )
+}
+
 module.exports = function plugin(options = {}) {
 
-    return function transformer(root) {
+    return async function transformer(root, file, next) {
 
-
-        let hasFlowChart = false;
+        let needLoadPlugin = false;
 
         var children = root.children;
         for(var i=0;i<children.length;i++) {
@@ -19,61 +32,44 @@ module.exports = function plugin(options = {}) {
                 node.data = node.data || {};
 
                 //key Duplicate keys (hash + num)
-                node.data.key = util.hash(node.value);
+                node.data.key = node.hashid; // || createKey(node);
 
                 node.data.props = node.data.props || {};
                 Object.assign(node.data.props, {
                     lang: node.lang,
                     code: node.value
                 });
-                node.component = 'vremark-flowchart';
+                node.component = PLUGIN_NAME;
                 node.type = 'component';
 
-                hasFlowChart = true;
+                needLoadPlugin = true;
             }
         }
 
 
-
-        if(!hasFlowChart) {
+        if(!needLoadPlugin) {
+            next();
             return;
         }
 
-        const component = Vue.component('vremark-flowchart');
+        let component = Vue.component(PLUGIN_NAME);
+
         if(component) {
+            next();
             return;
         }
 
-        const AsyncComponent = () => ({
-            component: import(
-                /* webpackChunkName: "vremark-flowchart.plugin" */
-                /* webpackMode: "lazy" */
-                './src/vremark-flowchart.js'
-            ),
-            loading: {
-                render(h) {
-                    return h('div', {}, 'loading');
-                }
-            },
-            error: {
-                render(h) {
-                    return h('div', {}, 'error');
-                }
-            },
-            delay: 200,
-            timeout: 30000
-        });
 
-        Vue.component('vremark-flowchart', AsyncComponent);
+        let module = await import(
+            /* webpackChunkName: "vremark-flowchart.plugin" */
+            /* webpackMode: "lazy" */
+            './src/'+PLUGIN_NAME
+        );
+        module = module.default || module;
 
-        // Vue.component(
-        //     'vremark-flowchart',
-        //     () => import(
-        //         /* webpackChunkName: "vremark-flowchart.plugin" */
-        //         /* webpackMode: "lazy" */
-        //         './src/vremark-flowchart.js'
-        //         )
-        // );
+        Vue.component(PLUGIN_NAME, module);
+
+        next();
 
     };
 

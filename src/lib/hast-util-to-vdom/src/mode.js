@@ -21,6 +21,12 @@ var defaultModes = {
 
             Object.assign(props.attrs, node.properties);
 
+            // if(node.hasOwnProperty('hashid')) {
+            //     Object.assign(props.attrs, {
+            //         id: node.hashid
+            //     });
+            // }
+
             return props;
 
         }
