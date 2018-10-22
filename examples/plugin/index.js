@@ -1,7 +1,5 @@
 require('github-markdown-css');
 
-
-
 import Vue from 'vue';
 const vremark = require('../../src/index');
 
@@ -17,44 +15,68 @@ function sleep(time) {
 
 (async ()=>{
 
-
-
+    async function compile(h, md) {
+        console.time('compile');
+        const vdom = await vremark(md, {
+            mode: 'vue',
+            h: h,
+            rootClassName: 'markdown-body',
+            rootTagName: 'main'
+        });
+        console.timeEnd('compile');
+        console.log(vdom);
+        // await sleep(3000);
+        return vdom;
+    }
 
     const app = new Vue({
         el: '#app',
-        data :{
-            md: '',
-            vdom: null
-        },
-        render() {
-            return this.vdom;
-        },
-        methods: {
-            async compile() {
-                const h = this.$createElement;
-
-                console.time('compile');
-                const vdom = await vremark(md.replace('马克飞象', +new Date), {
-                    mode: 'vue',
-                    h: h,
-                    rootClassName: 'markdown-body',
-                    rootTagName: 'main'
-                });
-                console.timeEnd('compile');
-
-                console.log(vdom);
-                this.vdom = vdom;
+        data :function () {
+            return {
+                md: md
             }
         },
-        async mounted(){
-            await this.compile();
-            // for(let i=0;i<10;i++) {
-            //     await this.compile();
-            //     await sleep(2000);
-            // }
+        beforeCreate(){
+            const self = this;
+            self.result = {
+                change: false,
+                compiling: false,
+                vdom: null
+            };
+            self.result.change = true;
+        },
+        methods:{
+            setValue(md) {
+                const self = this;
+                self.result.change = true;
+                Vue.set(app, 'md', md);
+                app.$forceUpdate();
+            }
+        },
+        render(h) {
+            const self = this;
+
+            if(self.result.compiling){
+                return self.result.vdom;
+            }
+
+            if(self.result.change) {
+                self.result.compiling = true;
+                compile(h, self.md).then( (vdom) => {
+                    self.result.vdom = vdom;
+                    self.result.compiling = false;
+                    self.result.change = false;
+                    self.$forceUpdate();
+                });
+            }
+
+            return self.result.vdom || h('div', {}, 'loading');
         }
     });
 
+    setTimeout(function () {
+        app.setValue(require('../md/large.md'));
+    }, 5000);
 
 })();
 

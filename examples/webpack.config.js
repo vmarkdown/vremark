@@ -19,6 +19,8 @@ const config = {
     },
     resolve: {
         alias: {
+            'vremark-util': path.resolve(__dirname, '../src/lib/vremark-util/index.js'),
+
             // 'vue': path.resolve(__dirname, '../node_modules/vue/dist/vue.js'),
             // 'hast-util-raw': path.resolve(__dirname, '../src/lib/hast-util-raw/index.js'),
             // 'rehype-vdom': path.resolve(__dirname, '../src/lib/rehype-vdom.common.js'),
