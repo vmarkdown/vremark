@@ -6,8 +6,10 @@ const breaks  = require('remark-breaks');
 const math = require('./lib/remark-math');
 const hashid = require('./lib/remark-hashid');
 
-
+const mathComponent = require('./plugins/vremark-math/plugin');
 const flowchart = require('./plugins/vremark-flowchart/plugin');
+const sequence = require('./plugins/vremark-sequence/plugin');
+const mermaid = require('./plugins/vremark-mermaid/plugin');
 const chart = require('./plugins/vremark-chart/plugin');
 const g2 = require('./plugins/vremark-g2/plugin');
 const highlight = require('./plugins/vremark-highlight/plugin');
@@ -26,12 +28,16 @@ const defaultOptions = {
 
 
     //plugins
-
     flowchart: true,
+    mermaid: true,
+    sequence: true,
+
     chart: true,
     g2: true,
 
+
     highlight: true,
+
 
     mode: 'vue',
     h: function () {},
@@ -58,11 +64,30 @@ async function vremark(markdown, _options) {
             math, {
             }
         ]);
+
+        plugins.push([
+            mathComponent, {
+            }
+        ]);
     }
 
     if(options.flowchart) {
         plugins.push([
             flowchart, {
+            }
+        ]);
+    }
+
+    if(options.sequence) {
+        plugins.push([
+            sequence, {
+            }
+        ]);
+    }
+
+    if(options.mermaid) {
+        plugins.push([
+            mermaid, {
             }
         ]);
     }
@@ -80,8 +105,6 @@ async function vremark(markdown, _options) {
             }
         ]);
     }
-
-
 
 
 

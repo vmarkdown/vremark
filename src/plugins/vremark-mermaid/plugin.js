@@ -1,19 +1,9 @@
 const Vue = ((Module)=>Module.default||Module)(require('vue'));
 
-const util = require('vremark-util');
-
-function createKey(node) {
-    return util.hash(
-        node.position.start.line +':'+ node.position.start.column
-        +'-'+
-        node.position.end.line +':' + node.position.end.column
-    );
-}
-
-const PLUGIN_NAME = 'vremark-flowchart';
+const PLUGIN_NAME = 'vremark-mermaid';
 
 function isPlugin(node) {
-    return node.lang && (node.lang === 'flow' || node.lang === 'flowchart' )
+    return node.lang && node.lang === 'mermaid';
 }
 
 module.exports = function plugin(options = {}) {
@@ -58,7 +48,7 @@ module.exports = function plugin(options = {}) {
         }
 
         let module = await import(
-            /* webpackChunkName: "vremark-flowchart.plugin" */
+            /* webpackChunkName: "vremark-mermaid.plugin" */
             /* webpackMode: "lazy" */
             './src/'+PLUGIN_NAME
         );
