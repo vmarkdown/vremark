@@ -1,9 +1,19 @@
 const Vue = ((Module)=>Module.default||Module)(require('vue'));
 
-const PLUGIN_NAME = 'vremark-chart';
+const util = require('vremark-util');
+
+function createKey(node) {
+    return util.hash(
+        node.position.start.line +':'+ node.position.start.column
+        +'-'+
+        node.position.end.line +':' + node.position.end.column
+    );
+}
+
+const PLUGIN_NAME = 'vremark-flowchart';
 
 function isPlugin(node) {
-    return node.lang && node.lang === 'chart';
+    return node.lang && (node.lang === 'flow' || node.lang === 'flowchart' )
 }
 
 module.exports = function plugin(options = {}) {

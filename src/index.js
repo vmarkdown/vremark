@@ -7,10 +7,10 @@ const math = require('./lib/remark-math');
 const hashid = require('./lib/remark-hashid');
 
 
-const flowchart = require('./plugins/vremark-flowchart/vremark-flowchart.plugin');
-const chart = require('./plugins/vremark-chart/vremark-chart.plugin');
+const flowchart = require('./plugins/vremark-flowchart/plugin');
+const chart = require('./plugins/vremark-chart/plugin');
 const g2 = require('./plugins/vremark-g2/plugin');
-
+const highlight = require('./plugins/vremark-highlight/plugin');
 
 //rehype
 const remark2rehype = require('./lib/remark-rehype');
@@ -30,6 +30,8 @@ const defaultOptions = {
     flowchart: true,
     chart: true,
     g2: true,
+
+    highlight: true,
 
     mode: 'vue',
     h: function () {},
@@ -75,6 +77,18 @@ async function vremark(markdown, _options) {
     if(options.g2) {
         plugins.push([
             g2, {
+            }
+        ]);
+    }
+
+
+
+
+
+
+    if(options.highlight) {
+        plugins.push([
+            highlight, {
             }
         ]);
     }
