@@ -37,7 +37,7 @@ module.exports = function hashid(options = {}) {
 
     return function transformer(root) {
 
-        console.time('hashid');
+        // console.time('hashid');
 
         var hashs = {};
 
@@ -64,7 +64,7 @@ module.exports = function hashid(options = {}) {
         one(root);
 
 
-        console.timeEnd('hashid');
+        // console.timeEnd('hashid');
 
     };
 

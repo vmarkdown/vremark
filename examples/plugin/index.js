@@ -79,10 +79,10 @@ function sleep(time) {
     //     app.setValue(require('../md/test.md'));
     // }, 5000);
 
-    // for(var i=0;i<10;i++){
-    //     await sleep(3000);
-    //     app.setValue(require('../md/test.md'));
-    // }
+    for(var i=0;i<20;i++){
+        await sleep(2000);
+        app.setValue(require('../md/test.md'));
+    }
 
 })();
 
