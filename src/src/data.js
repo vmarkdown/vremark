@@ -22,6 +22,8 @@ module.exports = function data(root, options) {
         data.attrs = data.attrs || {};
         data.props = data.props || {};
 
+        Object.assign(data.attrs, node.properties);
+
         if(node.hasOwnProperty('hash')) {
 
             options.hashid && Object.assign(data.attrs, {

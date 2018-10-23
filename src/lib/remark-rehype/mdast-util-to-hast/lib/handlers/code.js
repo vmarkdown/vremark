@@ -7,6 +7,13 @@ var u = require('unist-builder')
 
 /* Transform a code block. */
 function code(h, node) {
+
+    if( node.tagName ){
+        // return h(node, node.tagName, {data: node.data});
+        return h(node, node.tagName);
+    }
+
+
     var value = node.value ? detab(node.value + '\n') : ''
     var lang = node.lang && node.lang.match(/^[^ \t]+(?=[ \t]|$)/)
     var props = {}

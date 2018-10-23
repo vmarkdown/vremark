@@ -88,11 +88,6 @@ const config = {
         //     name: "vendor",
         //     minChunks: Infinity
         // }),
-
-        new HtmlWebpackPlugin({
-            filename: 'index.html',
-            template: 'examples/'+example+'/index.html'
-        })
     ],
     devServer: {
         // hotOnly: true,
@@ -126,7 +121,13 @@ module.exports = [
         entry: entry,
         externals: {
 
-        }
+        },
+        plugins: [
+            new HtmlWebpackPlugin({
+                filename: 'index.html',
+                template: 'examples/'+example+'/index.html'
+            })
+        ],
     }),
 
     merge(config, {

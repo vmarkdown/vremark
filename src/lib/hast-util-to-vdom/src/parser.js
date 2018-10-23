@@ -28,7 +28,14 @@ Parser.prototype.parseNode = function(node, parent) {
     if(!node) return null;
     var children = this.parseNodes(node.children, node);
     var h = this.h;
+    if(!this.renderer[node.type]){
+        // throw new Error('renderer:'+node.type+' not found!');
+        console.error('renderer:'+node.type+' not found!');
+        return null;
+    }
+    return this.renderer[node.type].apply(null, [h, node, node.data, children, this.options]);
 
+    /*
     var properties = {};
     if(!this.dataFuc){
         var data = mode(node, h, this.options.mode);
@@ -43,7 +50,7 @@ Parser.prototype.parseNode = function(node, parent) {
     if(!this.renderer[node.type]){
         throw new Error('renderer:'+node.type+' not found!');
     }
-    return this.renderer[node.type].apply(null, [h, node, properties, children, this.options]);
+    return this.renderer[node.type].apply(null, [h, node, properties, children, this.options]);*/
 };
 
 Parser.prototype.parse = function(root) {

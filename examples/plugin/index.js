@@ -58,6 +58,7 @@ const md = require('../md/test.md');
     console.log( components );
 
     await registerComponents(components, function register(name, component) {
+        console.log('加载插件', name);
         Vue.component(name, component);
     });
 

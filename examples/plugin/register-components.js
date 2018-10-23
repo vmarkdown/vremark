@@ -6,7 +6,7 @@ async function registerComponent(name, register) {
             register && register(name, component);
             resolve();
         }, function (e) {
-            console.error(e);
+            // console.error(e);
             resolve();
         })
     });

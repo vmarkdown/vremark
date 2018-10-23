@@ -59,6 +59,23 @@ function factory(tree, options) {
             }
         }
 
+        if(left){
+            if(left.tagName) {
+                right.tagName = left.tagName;
+            }
+            if(left.hash) {
+                right.hash = left.hash;
+            }
+            if(left.data) {
+
+                right.data = left.data;
+                if(right.data.hChildren) delete right.data.hChildren;
+                if(right.data.hName) delete right.data.hName;
+                if(right.data.hProperties) delete right.data.hProperties;
+
+            }
+        }
+
         return right
     }
 

@@ -12,9 +12,9 @@ module.exports = {
     comment: function () {
         
     },
-    component: function (h, node, data) {
-        return h(node.component, data);
-    },
+    // component: function (h, node, data) {
+    //     return h(node.component, data);
+    // },
     raw: function (h, node) {
         return node.value;
     }

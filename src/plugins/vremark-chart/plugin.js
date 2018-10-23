@@ -22,9 +22,9 @@ module.exports = function plugin(options = {}) {
                     lang: node.lang,
                     code: node.value
                 });
-                node.component = PLUGIN_NAME;
-                node.type = 'component';
-
+                // node.component = PLUGIN_NAME;
+                // node.type = 'component';
+                node.tagName = PLUGIN_NAME;
                 root.components[PLUGIN_NAME] = true;
 
             }
