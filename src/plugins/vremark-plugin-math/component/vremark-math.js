@@ -1,4 +1,4 @@
-require('katex/dist/katex.css');
+// require('katex/dist/katex.css');
 // var katex = require('katex');
 
 module.exports = ({
@@ -43,6 +43,7 @@ module.exports = ({
     mounted() {
         var self = this;
         require.ensure([], function(){
+            require('katex/dist/katex.css');
             var katex = require('katex');
             self.compile(katex);
         }, 'vremark-component-katex');

@@ -1,4 +1,3 @@
-require('highlight.js/styles/github.css');
 require('./vremark-highlight.scss');
 
 module.exports = {
@@ -43,6 +42,7 @@ module.exports = {
     mounted() {
         var self = this;
         require.ensure([], function(){
+            require('highlight.js/styles/github.css');
             var hljs = require('highlight.js');
             self.compile(hljs);
         }, 'vremark-component-highlight');

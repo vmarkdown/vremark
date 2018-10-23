@@ -1,4 +1,3 @@
-require('js-sequence-diagrams-css');
 require('./vremark-sequence.scss');
 // var Diagram = require('js-sequence-diagrams');
 
@@ -35,6 +34,7 @@ module.exports = ({
     mounted() {
         var self = this;
         require.ensure([], function(){
+            require('js-sequence-diagrams-css');
             var Diagram = require('js-sequence-diagrams');
             self.compile(Diagram);
         }, 'vremark-component-sequence');
