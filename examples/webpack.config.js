@@ -22,6 +22,10 @@ const config = {
             'vremark-util': path.resolve(__dirname, '../src/lib/vremark-util/index.js'),
             'js-sequence-diagrams': path.resolve(__dirname, '../src/lib/js-sequence-diagrams/sequence-diagram.js'),
 
+            'vremark-highlight': path.resolve(__dirname, '../src/plugins/vremark-highlight/component/vremark-highlight.js'),
+
+
+
             // 'vue': path.resolve(__dirname, '../node_modules/vue/dist/vue.js'),
             // 'hast-util-raw': path.resolve(__dirname, '../src/lib/hast-util-raw/index.js'),
             // 'rehype-vdom': path.resolve(__dirname, '../src/lib/rehype-vdom.common.js'),
@@ -130,6 +134,7 @@ module.exports = [
         ],
     }),
 
+    /*
     merge(config, {
         entry: {
             'vremark-chart.plugin': path.resolve(__dirname, '../src/plugins/vremark-chart/component/vremark-chart.js')
@@ -216,6 +221,7 @@ module.exports = [
         }
     }),
 
+*/
 
 
 

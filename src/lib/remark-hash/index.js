@@ -1,57 +1,5 @@
 var visit = require('unist-util-visit');
 var util = require('vremark-util');
-// const Hashids = ((Module)=>Module.default||Module)(require('hashids'));
-// var hashids = new Hashids("vremark");
-
-function all1(nodes, map) {
-    if(!nodes || nodes.length ===0 ) return 0;
-
-    var hashs = [];
-
-    nodes.map(function (node) {
-
-
-        if(node.hasOwnProperty('value') || node.hasOwnProperty('url')){
-            var value = node.value || node.url;
-
-            var hash = util.hash(String(value));
-
-            if(!map[hash]) {
-                map[hash] = 1;
-            }
-            else {
-                map[hash] = map[hash] + 1;
-                hash = util.hash(map[hash]+'-'+value);
-            }
-
-            // node.hash = hash;
-            hashs.push(hash);
-        }
-        // if(node.hasOwnProperty('hash')) {
-        //     hashs.push(node.hash);
-        // }
-        if(node.children && node.children.length>0){
-            var _hashs = all(node.children, map);
-            hashs.push(_hashs);
-            // _hashs && _hashs.length>0 && _hashs.forEach(function (h) {
-            //     if(h && h.length > 0){
-            //         h.forEach(function (i) {
-            //             hashs.push(i);
-            //         });
-            //     }
-            //     else {
-            //         hashs.push(h);
-            //     }
-            // });
-        }
-
-
-    });
-
-    var hash = hashs.length === 1?hashs[0]:util.hash(hashs.join(''));
-    // node.hash = hash;
-    return hash;
-}
 
 function all(nodes, map) {
     var hashs = [];
@@ -72,7 +20,6 @@ function all(nodes, map) {
 
     return hash;
 }
-
 
 function one(node, map) {
 
@@ -119,16 +66,10 @@ function one(node, map) {
 }
 
 module.exports = function hashid(options = {}) {
-
     return function transformer(root) {
-
-        console.time('hash');
-
+        // console.time('hash');
         var map = {};
         one(root, map);
-
-        console.timeEnd('hash');
-
+        // console.timeEnd('hash');
     };
-
 };

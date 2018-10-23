@@ -1,10 +1,6 @@
 require('highlight.js/styles/github.css');
 require('./vremark-highlight.scss');
 
-var hljs = require('highlight.js');
-
-
-
 var Component = ({
     name: 'vremark-highlight',
     props: {
@@ -19,7 +15,8 @@ var Component = ({
     },
     data() {
         return {
-            result: ''
+            lib: false,
+            result: this.code || ''
         }
     },
     render(h) {
@@ -33,12 +30,8 @@ var Component = ({
         ]);
     },
     methods:{
-        compile() {
+        compile(hljs) {
             var self = this;
-            if(!self.code) {
-                self.result = '';
-                return;
-            }
             try {
                 self.result = hljs.highlight(self.lang, self.code).value;
             }
@@ -49,7 +42,10 @@ var Component = ({
     },
     mounted() {
         var self = this;
-        self.compile();
+        require.ensure([], function(){
+            var hljs = require('highlight.js');
+            self.compile(hljs);
+        }, 'vremark-highlight');
     }
 });
 
