@@ -2,7 +2,7 @@ require('./vremark-g2.scss');
 var G2 = require('@antv/g2');
 G2.track(false);
 
-const G2Component = ({
+module.exports = {
     name: 'G2',
     props: {
         code: {
@@ -10,7 +10,6 @@ const G2Component = ({
             require: true
         }
     },
-    // template: '<div class="remark-g2"></div>',
     render(h) {
         return h('div',{
             class: 'remark-g2'
@@ -19,7 +18,6 @@ const G2Component = ({
     mounted () {
         var self = this;
         var code = self.code;
-
 
         try {
             var container = self.$el;
@@ -37,8 +35,6 @@ const G2Component = ({
                 container
             ]);
 
-            // var chart = func(container, G2);
-            // self.chart = chart;
         }
         catch (e) {
             console.error(e);
@@ -49,8 +45,4 @@ const G2Component = ({
         var self = this;
         self.chart && self.chart.destroy();
     }
-});
-
-// Vue.component('g2', timer);
-
-module.exports = G2Component;
+};
