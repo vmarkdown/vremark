@@ -3,6 +3,17 @@ require('github-markdown-css');
 const registerComponents = require('./register-components');
 
 import Vue from 'vue';
+
+// Vue.component('vremark-highlight',
+//     () => import(
+//         'vremark-highlight'
+//     )
+// );
+
+// Vue.component('vremark-highlight', function (resolve) {
+//     require(['vremark-highlight'], resolve)
+// });
+
 const vremark = require('../../src/index');
 
 function sleep(time) {
@@ -21,9 +32,14 @@ var promiseWorker = new PromiseWorker(worker);
 
 const md = require('../md/test.md');
 
-Vue.component('vremark-highlight', require('../../src/plugins/vremark-highlight/component/vremark-highlight'));
+// Vue.component('vremark-highlight', require('../../src/plugins/vremark-highlight/component/vremark-highlight'));
+Vue.component('vremark-highlight', require('vremark-highlight'));
+
+
 
 (async ()=>{
+
+
 
     function parse(markdown, options) {
         return promiseWorker.postMessage({
@@ -74,7 +90,7 @@ Vue.component('vremark-highlight', require('../../src/plugins/vremark-highlight/
                     h: h
                 });
                 console.timeEnd('render');
-                app.vdom = vdom;
+                self.vdom = vdom;
                 console.log( vdom )
 
 
@@ -82,7 +98,10 @@ Vue.component('vremark-highlight', require('../../src/plugins/vremark-highlight/
             }
         },
         render(h) {
-            return this.vdom || h('div', {a:1}, 'loading');
+            return this.vdom || h('div', {}, 'loading');
+        },
+        mounted() {
+            this.setValue(md);
         }
     });
 
@@ -92,22 +111,22 @@ Vue.component('vremark-highlight', require('../../src/plugins/vremark-highlight/
     // }
 
 
-    app.setValue(md);
 
-    setTimeout(function () {
-        app.setValue(`\`\`\` python
-@requires_authorization===========
-def somefunc(param1='', param2=0):
-    '''A docstring'''
-    if param1 > param2: # interesting
-        print 'Greater'
-    return (param2 - param1 + 1) or None
-class SomeClass:
-    pass
->>> message = '''interpreter
-... prompt'''
-\`\`\``);
-    }, 5000);
+
+//     setTimeout(function () {
+//         app.setValue(`\`\`\` python
+// @requires_authorization===========
+// def somefunc(param1='', param2=0):
+//     '''A docstring'''
+//     if param1 > param2: # interesting
+//         print 'Greater'
+//     return (param2 - param1 + 1) or None
+// class SomeClass:
+//     pass
+// >>> message = '''interpreter
+// ... prompt'''
+// \`\`\``);
+//     }, 5000);
 
 
 
