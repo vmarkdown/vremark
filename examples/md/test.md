@@ -1,203 +1,9 @@
-
-## 快速上手
-
-
-```g2
-const data = [
-    { genre: 'Sports', sold: 275 },
-    { genre: 'Strategy', sold: 115 },
-    { genre: 'Action', sold: 120 },
-    { genre: 'Shooter', sold: 350 },
-    { genre: 'Other', sold: 150 }
-];
-
-const chart = new G2.Chart({
-    forceFit: true,
-    container: container,
-    height : 300
-});
-chart.source(data);
-chart.interval().position('genre*sold').color('genre')
-chart.render();
-
-return chart;
-```
-
-
-## 基础折线图
-
-
-```g2
-var data = [{
-  year: '1991',
-  value: 3
-}, {
-  year: '1992',
-  value: 4
-}, {
-  year: '1993',
-  value: 3.5
-}, {
-  year: '1994',
-  value: 5
-}, {
-  year: '1995',
-  value: 4.9
-}, {
-  year: '1996',
-  value: 6
-}, {
-  year: '1997',
-  value: 7
-}, {
-  year: '1998',
-  value: 9
-}, {
-  year: '1999',
-  value: 13
-}];
-var chart = new G2.Chart({
-  container: container,
-  forceFit: true,
-  height: 400
-});
-chart.source(data);
-chart.scale('value', {
-  min: 0
-});
-chart.scale('year', {
-  range: [0, 1]
-});
-chart.tooltip({
-  crosshairs: {
-    type: 'line'
-  }
-});
-chart.line().position('year*value');
-chart.point().position('year*value').size(4).shape('circle').style({
-  stroke: '#fff',
-  lineWidth: 1
-});
-chart.render();
-
-return chart;
-```
-
-## 基础柱状图
-
-```g2
-var data = [{
-  year: '1951 年',
-  sales: 38
-}, {
-  year: '1952 年',
-  sales: 52
-}, {
-  year: '1956 年',
-  sales: 61
-}, {
-  year: '1957 年',
-  sales: 145
-}, {
-  year: '1958 年',
-  sales: 48
-}, {
-  year: '1959 年',
-  sales: 38
-}, {
-  year: '1960 年',
-  sales: 38
-}, {
-  year: '1962 年',
-  sales: 38
-}];
-var chart = new G2.Chart({
-  container: container,
-  forceFit: true,
-  height: 400
-});
-chart.source(data);
-chart.scale('sales', {
-  tickInterval: 20
-});
-chart.interval().position('year*sales');
-chart.render();
-
-return chart;
-```
-
-
-
-## 基础饼图
-
-```g2
-var data = [{
-  item: '事例一',
-  count: 40,
-  percent: 0.4
-}, {
-  item: '事例二',
-  count: 21,
-  percent: 0.21
-}, {
-  item: '事例三',
-  count: 17,
-  percent: 0.17
-}, {
-  item: '事例四',
-  count: 13,
-  percent: 0.13
-}, {
-  item: '事例五',
-  count: 9,
-  percent: 0.09
-}];
-var chart = new G2.Chart({
-  container: container,
-  forceFit: true,
-  height: window.innerHeight
-});
-chart.source(data, {
-  percent: {
-    formatter: function formatter(val) {
-      val = val * 100 + '%';
-      return val;
-    }
-  }
-});
-chart.coord('theta', {
-  radius: 0.75
-});
-chart.tooltip({
-  showTitle: false,
-  itemTpl: '<li><span style="background-color:{color};" class="g2-tooltip-marker"></span>{name}: {value}</li>'
-});
-chart.intervalStack().position('percent').color('item').label('percent', {
-  formatter: function formatter(val, item) {
-    return item.point.item + ': ' + val;
-  }
-}).tooltip('item*percent', function(item, percent) {
-  percent = percent * 100 + '%';
-  return {
-    name: item,
-    value: percent
-  };
-}).style({
-  lineWidth: 1,
-  stroke: '#fff'
-});
-chart.render();
-
-return chart;
-```
-
-
 # 欢迎使用马克飞象
 
 @(示例笔记本)[马克飞象|帮助|Markdown]
 
 **马克飞象**是一款专为印象笔记（Evernote）打造的Markdown编辑器，通过精心的设计与技术实现，配合印象笔记强大的存储和同步功能，带来前所未有的书写体验。特点概述：
-
+ 
 - **功能丰富** ：支持高亮代码块、*LaTeX* 公式、流程图，本地图片以及附件上传，甚至截图粘贴，工作学习好帮手；
 - **得心应手** ：简洁高效的编辑器，提供[桌面客户端][1]以及[离线Chrome App][2]，支持移动端 Web；
 - **深度整合** ：支持选择笔记本和添加标签，支持从印象笔记跳转编辑，轻松管理。
@@ -213,7 +19,7 @@ return chart;
 
 > Markdown 是一种轻量级标记语言，它允许人们使用易读易写的纯文本格式编写文档，然后转换成格式丰富的HTML页面。    —— [维基百科](https://zh.wikipedia.org/wiki/Markdown)
 
-正如您在阅读的这份文档，它使用简单的符号标识不同的标题，将某些文字标记为**粗体**或者*斜体*，创建一个[链接](http://www.example.com)或一个脚注[^demo]。下面列举了几个高级功能，更多语法请按`Cmd + /`查看帮助。
+正如您在阅读的这份文档，它使用简单的符号标识不同的标题，将某些文字标记为**粗体**或者*斜体*，创建一个[链接](http://www.example.com)或一个脚注[^demo]。下面列举了几个高级功能，更多语法请按`Cmd + /`查看帮助。 
 
 ### 代码块
 ``` python
@@ -232,8 +38,8 @@ class SomeClass:
 
 可以创建行内公式，例如 $\Gamma(n) = (n-1)!\quad\forall n\in\mathbb N$。或者块级公式：
 
-$$
-x = \dfrac{-b \pm \sqrt{b^2 - 4ac}}{2a}
+$$	
+x = \dfrac{-b \pm \sqrt{b^2 - 4ac}}{2a} 
 $$
 
 ### 表格
@@ -318,7 +124,7 @@ Bob-->Alice: I am good thanks!
 最大化编辑器    `Cmd + Enter`
 预览文档 `Cmd + Opt + Enter`
 文档管理    `Cmd + O`
-系统菜单    `Cmd + M`
+系统菜单    `Cmd + M` 
 
 加粗    `Cmd + B`
 插入图片    `Cmd + G`

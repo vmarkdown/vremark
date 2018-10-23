@@ -2,11 +2,10 @@
 
 module.exports = {
     component: require('./component'),
-    highlight: require('./highlight'),
-    math: require('./math'),
-    inlineMath: require('./inlineMath'),
-    flowchart: require('./flowchart'),
-
+    // highlight: require('./highlight'),
+    // math: require('./math'),
+    // inlineMath: require('./inlineMath'),
+    // flowchart: require('./flowchart'),
 
     blockquote: require('./blockquote'),
     break: require('./break'),

@@ -1,14 +1,9 @@
-const vremark = require('./index');
+const parse = require('./src/parse');
 const registerPromiseWorker = require('promise-worker/register');
 
-
-function parse(markdown, options) {
+registerPromiseWorker(function (message) {
     console.time('parse');
-    var r = vremark.parse(markdown, options);
+    const r = parse(message.markdown || '', message.options || {});
     console.timeEnd('parse');
     return r;
-}
-
-registerPromiseWorker(function (message) {
-    return parse(message.markdown, message.options);
 });

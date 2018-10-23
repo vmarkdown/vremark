@@ -48,10 +48,6 @@ Parser.prototype.parseNode = function(node, parent) {
 
 Parser.prototype.parse = function(root) {
     try {
-        root.data = root.data || {};
-        root.data.class = ['vremark-body'].concat(this.options.rootClassName || '');
-        root.tagName = this.options.rootTagName || 'div';
-
         return this.parseNode(root);
     }
     catch (e) {
