@@ -42,7 +42,8 @@ const defaultOptions = {
     mode: 'vue',
     h: function () {},
     rootClassName: 'markdown-body',
-    rootTagName: 'div'
+    rootTagName: 'div',
+    hashid: true
 };
 
 
@@ -156,7 +157,8 @@ async function vremark(markdown, _options) {
             mode: 'vue',
             h: options.h,
             rootClassName: options.rootClassName,
-            rootTagName: options.rootTagName
+            rootTagName: options.rootTagName,
+            hashid:  options.hashid
         });
 
     const file = await processor.process(markdown);

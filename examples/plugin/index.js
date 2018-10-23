@@ -61,7 +61,8 @@ function sleep(time) {
                     mode: 'vue',
                     h: h,
                     rootClassName: 'markdown-body',
-                    rootTagName: 'main'
+                    rootTagName: 'main',
+                    hashid: true
                 });
                 console.timeEnd('compile');
 
@@ -95,16 +96,16 @@ function sleep(time) {
         }
     });
 
-    // app.setValue(md);
+    app.setValue(md);
 
     // setTimeout(function () {
     //     app.setValue(require('../md/test.md'));
     // }, 5000);
 
-    for(var i=0;i<20;i++){
-        await app.setValue(md);
-        await sleep(5000);
-    }
+    // for(var i=0;i<20;i++){
+    //     await app.setValue(md);
+    //     await sleep(5000);
+    // }
 
 })();
 

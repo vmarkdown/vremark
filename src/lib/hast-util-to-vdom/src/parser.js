@@ -37,7 +37,7 @@ Parser.prototype.parseNode = function(node, parent) {
         }
     }
     if(this.dataFuc){
-        properties = this.dataFuc(node);
+        properties = this.dataFuc(node, this.options);
     }
 
     if(!this.renderer[node.type]){

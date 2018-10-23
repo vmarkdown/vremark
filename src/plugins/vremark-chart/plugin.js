@@ -21,7 +21,7 @@ module.exports = function plugin(options = {}) {
                 node.data = node.data || {};
 
                 //key Duplicate keys (hash + num)
-                node.data.key = node.hash || util.createKey(node);
+                // node.data.key = node.hash || util.createKey(node);
 
                 node.data.props = node.data.props || {};
                 Object.assign(node.data.props, {

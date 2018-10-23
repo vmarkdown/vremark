@@ -18,6 +18,12 @@ function all(h, parent) {
         result = one(h, nodes[index], parent)
 
         if (result) {
+
+            if(nodes[index] && nodes[index].hasOwnProperty('hash')) {
+                result.hash = nodes[index].hash;
+            }
+
+
             if (index && nodes[index - 1].type === 'break') {
                 if (result.value) {
                     result.value = trim.left(result.value)

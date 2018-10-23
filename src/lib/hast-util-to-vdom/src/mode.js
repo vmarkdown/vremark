@@ -13,7 +13,7 @@ var defaultModes = {
         test: function (h) {
             return h && h.toString().indexOf('vm') > -1;
         },
-        data: function (node) {
+        data: function (node, options) {
 
             var props = node.data || {};
 
@@ -21,11 +21,15 @@ var defaultModes = {
 
             Object.assign(props.attrs, node.properties);
 
-            // if(node.hasOwnProperty('hashid')) {
-            //     Object.assign(props.attrs, {
-            //         id: node.hashid
-            //     });
-            // }
+            if(node.hasOwnProperty('hash')) {
+                options.hashid && Object.assign(props.attrs, {
+                    id: node.hash
+                });
+
+                Object.assign(props, {
+                    key: node.hash
+                });
+            }
 
             return props;
 
@@ -58,9 +62,9 @@ module.exports = function (node, h, mode) {
     var list = Object.keys(defaultModes);
     for (var i=0;i<list.length;i++) {
         var item = list[i];
-        var _mode = defaultModes[item];
-        if( _mode.test(h) ) {
-            return _mode.data;
+        var m = defaultModes[item];
+        if( m.test(h) ) {
+            return m.data;
         }
     }
 

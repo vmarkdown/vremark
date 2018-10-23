@@ -20,7 +20,7 @@ module.exports = function plugin(options = {}) {
         }, function (node) {
 
             node.data = node.data || {};
-            node.data.key = node.hash || util.createKey(node);
+            // node.data.key = node.hash || util.createKey(node);
 
             node.data.props = node.data.props || {};
             Object.assign(node.data.props, {
