@@ -1,8 +1,7 @@
 require('./vremark-chart.scss');
-var Chart = require('chart.js');
 
 module.exports = ({
-    name: 'chart',
+    name: 'vremark-component-chart',
     props: {
         'code': {
             type: String,
@@ -20,12 +19,12 @@ module.exports = ({
         );
     },
     methods:{
-        compile() {
+        compile(Chart) {
             var self = this;
             if(!self.code) {self.result = '';return;}
             try {
                 var options = JSON.parse(self.code);
-                var chart = new Chart(self.$el, options);
+                self.chart = new Chart(self.$el, options);
             } catch (e) {
                 console.error(e);
             }
@@ -33,11 +32,13 @@ module.exports = ({
     },
     mounted() {
         var self = this;
-        setTimeout(function () {
-            self.compile();
-        }, 0);
+        require.ensure([], function(){
+            var Chart = require('chart.js');
+            self.compile(Chart);
+        }, 'vremark-component-chart');
     },
     destroyed(){
         var self = this;
+        self.chart && self.chart.destroy();
     }
 });

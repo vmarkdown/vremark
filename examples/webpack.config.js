@@ -21,6 +21,7 @@ const config = {
         alias: {
             'vremark-util': path.resolve(__dirname, '../src/lib/vremark-util/index.js'),
             'js-sequence-diagrams': path.resolve(__dirname, '../src/lib/js-sequence-diagrams/sequence-diagram.js'),
+            'js-sequence-diagrams-css': path.resolve(__dirname, '../src/lib/js-sequence-diagrams/sequence-diagram.css'),
 
             'vremark-component-math': path.resolve(__dirname, '../src/plugins/vremark-plugin-math/component/vremark-math.js'),
             'vremark-component-flowchart': path.resolve(__dirname, '../src/plugins/vremark-plugin-flowchart/component/vremark-flowchart.js'),
@@ -44,6 +45,10 @@ const config = {
             {
                 test: require.resolve('snapsvg'),
                 loader: 'imports-loader?this=>window,fix=>module.exports=0'
+            },
+            {
+                test: require.resolve(path.resolve(__dirname, '../src/lib/js-sequence-diagrams/sequence-diagram.js')),
+                loader: 'imports-loader?_=underscore,Raphael=raphael'
             },
             {
                 test: /\.worker\.js$/,

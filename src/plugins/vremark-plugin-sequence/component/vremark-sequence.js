@@ -1,6 +1,6 @@
-require('../../../lib/js-sequence-diagrams/sequence-diagram.css');
+require('js-sequence-diagrams-css');
 require('./vremark-sequence.scss');
-var Diagram = require('imports-loader?_=underscore,Raphael=raphael!js-sequence-diagrams');
+// var Diagram = require('js-sequence-diagrams');
 
 module.exports = ({
     name: 'vremark-component-sequence',
@@ -12,7 +12,7 @@ module.exports = ({
     },
     data() {
         return {
-            result: ''
+            result: this.code
         }
     },
     render(h) {
@@ -21,25 +21,23 @@ module.exports = ({
         });
     },
     methods:{
-        compile() {
+        compile(Diagram) {
             var self = this;
-            if(!self.code) {self.result = '';return;}
             try {
                 var diagram = Diagram.parse(self.code);
                 var options = {theme: 'simple'};
                 diagram.drawSVG(self.$el, options);
             } catch (e) {
-
+                console.error(e);
             }
         }
     },
     mounted() {
         var self = this;
-        self.compile();
-        // require.ensure([], function(){
-        //     var flowchart = require('flowchart.js');
-        //     self.compile(flowchart);
-        // }, 'vremark-component-flowchart');
+        require.ensure([], function(){
+            var Diagram = require('js-sequence-diagrams');
+            self.compile(Diagram);
+        }, 'vremark-component-sequence');
     },
     destroyed(){
         var self = this;
