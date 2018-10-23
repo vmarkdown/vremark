@@ -9,6 +9,8 @@ module.exports = function plugin(options = {}) {
 
     return async function transformer(root) {
 
+        root.components = root.components || {};
+
         visit(root, function (node) {
             return isPlugin(node);
         }, function (node) {
@@ -22,6 +24,8 @@ module.exports = function plugin(options = {}) {
             });
             node.component = PLUGIN_NAME;
             node.type = 'component';
+
+            root.components[PLUGIN_NAME] = true;
 
         });
 

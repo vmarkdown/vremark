@@ -127,6 +127,96 @@ module.exports = [
         externals: {
 
         }
-    })
+    }),
+
+    merge(config, {
+        entry: {
+            'vremark-chart.plugin': path.resolve(__dirname, '../src/plugins/vremark-chart/component/vremark-chart.js')
+        },
+        output: {
+            libraryTarget: "amd",
+        },
+        externals: {
+
+        }
+    }),
+
+    merge(config, {
+        entry: {
+            'vremark-flowchart.plugin': path.resolve(__dirname, '../src/plugins/vremark-flowchart/component/vremark-flowchart.js')
+        },
+        output: {
+            libraryTarget: "amd",
+        },
+        externals: {
+
+        }
+    }),
+
+    merge(config, {
+        entry: {
+            'vremark-g2.plugin': path.resolve(__dirname, '../src/plugins/vremark-g2/component/vremark-g2.js')
+        },
+        output: {
+            libraryTarget: "amd",
+        },
+        externals: {
+
+        }
+    }),
+
+    merge(config, {
+        entry: {
+            'vremark-highlight.plugin': path.resolve(__dirname, '../src/plugins/vremark-highlight/component/vremark-highlight.js')
+        },
+        output: {
+            libraryTarget: "amd",
+        },
+        externals: {
+
+        }
+    }),
+
+    merge(config, {
+        entry: {
+            'vremark-math.plugin': path.resolve(__dirname, '../src/plugins/vremark-math/component/vremark-math.js')
+        },
+        output: {
+            libraryTarget: "amd",
+        },
+        externals: {
+
+        }
+    }),
+
+
+    merge(config, {
+        entry: {
+            'vremark-mermaid.plugin': path.resolve(__dirname, '../src/plugins/vremark-mermaid/component/vremark-mermaid.js')
+        },
+        output: {
+            libraryTarget: "amd",
+        },
+        externals: {
+
+        }
+    }),
+
+
+    merge(config, {
+        entry: {
+            'vremark-sequence.plugin': path.resolve(__dirname, '../src/plugins/vremark-sequence/component/vremark-sequence.js')
+        },
+        output: {
+            libraryTarget: "amd",
+        },
+        externals: {
+
+        }
+    }),
+
+
+
+
 ];
 

@@ -1,7 +1,7 @@
 const PLUGIN_NAME = 'vremark-highlight';
 
 var languages = (function () {
-    var languages = require('./src/languages');
+    var languages = require('./languages');
     var keys = {};
     languages.forEach(function (language) {
         keys[language] = true;
@@ -17,6 +17,8 @@ module.exports = function plugin(options = {}) {
 
     return async function transformer(root) {
 
+        root.components = root.components || {};
+
         var children = root.children;
         for(var i=0;i<children.length;i++) {
             var node = children[i];
@@ -30,6 +32,8 @@ module.exports = function plugin(options = {}) {
                 });
                 node.component = PLUGIN_NAME;
                 node.type = 'component';
+
+                root.components[PLUGIN_NAME] = true;
 
             }
         }

@@ -8,6 +8,8 @@ module.exports = function plugin(options = {}) {
 
     return async function transformer(root) {
 
+        root.components = root.components || {};
+
         var children = root.children;
 
         for(var i=0;i<children.length;i++) {
@@ -22,6 +24,8 @@ module.exports = function plugin(options = {}) {
                 });
                 node.component = PLUGIN_NAME;
                 node.type = 'component';
+
+                root.components[PLUGIN_NAME] = true;
 
             }
         }
