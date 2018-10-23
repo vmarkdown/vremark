@@ -1,4 +1,5 @@
 const Vue = ((Module)=>Module.default||Module)(require('vue'));
+const util = require('vremark-util');
 
 const PLUGIN_NAME = 'vremark-chart';
 
@@ -20,7 +21,7 @@ module.exports = function plugin(options = {}) {
                 node.data = node.data || {};
 
                 //key Duplicate keys (hash + num)
-                node.data.key = node.hashid; // || createKey(node);
+                node.data.key = node.hash || util.createKey(node);
 
                 node.data.props = node.data.props || {};
                 Object.assign(node.data.props, {

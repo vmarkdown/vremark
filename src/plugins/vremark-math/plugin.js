@@ -1,4 +1,5 @@
 var visit = require('unist-util-visit');
+const util = require('vremark-util');
 
 const Vue = ((Module)=>Module.default||Module)(require('vue'));
 
@@ -19,7 +20,7 @@ module.exports = function plugin(options = {}) {
         }, function (node) {
 
             node.data = node.data || {};
-            node.data.key = node.hashid;
+            node.data.key = node.hash || util.createKey(node);
 
             node.data.props = node.data.props || {};
             Object.assign(node.data.props, {

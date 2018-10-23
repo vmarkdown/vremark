@@ -1,4 +1,5 @@
 const Vue = ((Module)=>Module.default||Module)(require('vue'));
+const util = require('vremark-util');
 
 const PLUGIN_NAME = 'vremark-highlight';
 
@@ -28,7 +29,7 @@ module.exports = function plugin(options = {}) {
 
                 node.data = node.data || {};
 
-                node.data.key = node.hashid;
+                node.data.key = node.hash || util.createKey(node);
 
                 node.data.props = node.data.props || {};
                 Object.assign(node.data.props, {

@@ -4,7 +4,7 @@ const unified = require('unified');
 const parse = require('./lib/remark-parse');
 const breaks  = require('remark-breaks');
 const math = require('./lib/remark-math');
-const hashid = require('./lib/remark-hashid');
+const hash = require('./lib/remark-hash');
 
 const mathComponent = require('./plugins/vremark-math/plugin');
 const flowchart = require('./plugins/vremark-flowchart/plugin');
@@ -147,7 +147,7 @@ async function vremark(markdown, _options) {
             footnotes: true,
             pedantic: true
         })
-        .use(hashid)
+        .use(hash)
         .use({
             plugins: plugins,
             settings: {}

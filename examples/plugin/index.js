@@ -5,6 +5,8 @@ const vremark = require('../../src/index');
 
 const md = require('../md/test.md');
 
+console.log(md.length)
+
 function sleep(time) {
     return new Promise(function (resolve) {
         setTimeout(function () {
@@ -93,16 +95,16 @@ function sleep(time) {
         }
     });
 
-    app.setValue(md);
+    // app.setValue(md);
 
     // setTimeout(function () {
     //     app.setValue(require('../md/test.md'));
     // }, 5000);
 
-    // for(var i=0;i<20;i++){
-    //     await app.setValue(md);
-    //     await sleep(5000);
-    // }
+    for(var i=0;i<20;i++){
+        await app.setValue(md);
+        await sleep(5000);
+    }
 
 })();
 
