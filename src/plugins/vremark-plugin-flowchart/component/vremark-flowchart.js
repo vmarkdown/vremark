@@ -1,8 +1,8 @@
 require('./vremark-flowchart.scss');
-var flowchart = require('flowchart.js');
+// var flowchart = require('flowchart.js');
 
 module.exports = {
-    name: 'vremark-flowchart',
+    name: 'vremark-component-flowchart',
     props: {
         'code': {
             type: String,
@@ -15,7 +15,7 @@ module.exports = {
         });
     },
     methods:{
-        compile() {
+        compile(flowchart) {
             var self = this;
             try {
                 var diagram = flowchart.parse(self.code);
@@ -28,7 +28,12 @@ module.exports = {
     },
     mounted() {
         var self = this;
-        self.compile();
+        // self.compile();
+        require.ensure([], function(){
+            var flowchart = require('flowchart.js');
+            self.compile(flowchart);
+        }, 'vremark-component-flowchart');
+
     },
     destroyed(){
         var self = this;

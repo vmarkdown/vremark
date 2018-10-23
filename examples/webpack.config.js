@@ -22,8 +22,15 @@ const config = {
             'vremark-util': path.resolve(__dirname, '../src/lib/vremark-util/index.js'),
             'js-sequence-diagrams': path.resolve(__dirname, '../src/lib/js-sequence-diagrams/sequence-diagram.js'),
 
-            'vremark-highlight': path.resolve(__dirname, '../src/plugins/vremark-highlight/component/vremark-highlight.js'),
+            'vremark-component-math': path.resolve(__dirname, '../src/plugins/vremark-plugin-math/component/vremark-math.js'),
+            'vremark-component-flowchart': path.resolve(__dirname, '../src/plugins/vremark-plugin-flowchart/component/vremark-flowchart.js'),
+            'vremark-component-sequence': path.resolve(__dirname, '../src/plugins/vremark-plugin-sequence/component/vremark-sequence.js'),
+            'vremark-component-mermaid': path.resolve(__dirname, '../src/plugins/vremark-plugin-mermaid/component/vremark-mermaid.js'),
 
+            'vremark-component-highlight': path.resolve(__dirname, '../src/plugins/vremark-plugin-highlight/component/vremark-highlight.js'),
+
+            'vremark-component-g2': path.resolve(__dirname, '../src/plugins/vremark-plugin-g2/component/vremark-g2.js'),
+            'vremark-component-chart': path.resolve(__dirname, '../src/plugins/vremark-plugin-chart/component/vremark-chart.js'),
 
 
             // 'vue': path.resolve(__dirname, '../node_modules/vue/dist/vue.js'),

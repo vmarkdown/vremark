@@ -1,14 +1,15 @@
-const PLUGIN_NAME = 'vremark-g2';
+const PLUGIN_NAME = 'vremark-plugin-mermaid';
+const COMPONENT_NAME = 'vremark-component-mermaid';
 
 function isPlugin(node) {
-    return node.lang && node.lang === 'g2';
+    return node.lang && node.lang === 'mermaid';
 }
 
-module.exports = function plugin(options = {}) {
+function plugin(options = {}) {
 
     return async function transformer(root) {
 
-        root.components = root.components || {};
+        // root.components = root.components || {};
 
         var children = root.children;
         for(var i=0;i<children.length;i++) {
@@ -23,12 +24,16 @@ module.exports = function plugin(options = {}) {
                 });
                 // node.component = PLUGIN_NAME;
                 // node.type = 'component';
-                node.tagName = PLUGIN_NAME;
-                root.components[PLUGIN_NAME] = true;
+                node.tagName = COMPONENT_NAME;
+                // root.components[PLUGIN_NAME] = true;
 
             }
         }
 
     };
 
-};
+}
+
+plugin.COMPONENT_NAME = COMPONENT_NAME;
+
+module.exports = plugin;

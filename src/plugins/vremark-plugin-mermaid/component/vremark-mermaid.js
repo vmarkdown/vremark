@@ -1,15 +1,15 @@
 require('./vremark-mermaid.scss');
-var mermaid = require('mermaid');
-
-mermaid.initialize({
-    startOnLoad: false,
-    theme: 'default',
-    gantt: {}
-});
+// var mermaid = require('mermaid');
+//
+// mermaid.initialize({
+//     startOnLoad: false,
+//     theme: 'default',
+//     gantt: {}
+// });
 
 var index = 0;
 module.exports = ({
-    name: 'vremark-mermaid',
+    name: 'vremark-component-mermaid',
     props: {
         'code': {
             type: String,
@@ -35,7 +35,7 @@ module.exports = ({
         );
     },
     methods:{
-        compile() {
+        compile(mermaid) {
             var self = this;
             if(!self.code) {self.result = '';return;}
             try {
@@ -50,7 +50,19 @@ module.exports = ({
     },
     mounted() {
         var self = this;
-        self.compile();
+        // self.compile();
+
+        require.ensure([], function(){
+            var mermaid = require('mermaid');
+
+            mermaid.initialize({
+                startOnLoad: false,
+                theme: 'default',
+                gantt: {}
+            });
+
+            self.compile(mermaid);
+        }, 'vremark-component-mermaid');
     },
     destroyed(){
         var self = this;

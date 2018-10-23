@@ -1,16 +1,18 @@
-const PLUGIN_NAME = 'vremark-flowchart';
+const PLUGIN_NAME = 'vremark-plugin-chart';
+const COMPONENT_NAME = 'vremark-component-chart';
 
 function isPlugin(node) {
-    return node.lang && (node.lang === 'flow' || node.lang === 'flowchart' )
+    return node.lang && node.lang === 'chart';
 }
 
-module.exports = function plugin(options = {}) {
+function plugin(options = {}) {
 
     return async function transformer(root) {
 
-        root.components = root.components || {};
+        // root.components = root.components || {};
 
         var children = root.children;
+
         for(var i=0;i<children.length;i++) {
             var node = children[i];
             if( node.type === 'code' && isPlugin(node) ){
@@ -23,13 +25,17 @@ module.exports = function plugin(options = {}) {
                 });
                 // node.component = PLUGIN_NAME;
                 // node.type = 'component';
-                node.tagName = PLUGIN_NAME;
-
-                root.components[PLUGIN_NAME] = true;
+                node.tagName = COMPONENT_NAME;
+                // root.components[PLUGIN_NAME] = true;
 
             }
         }
 
+
     };
 
-};
+}
+
+plugin.COMPONENT_NAME = COMPONENT_NAME;
+
+module.exports = plugin;

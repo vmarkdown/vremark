@@ -33,7 +33,15 @@ var promiseWorker = new PromiseWorker(worker);
 const md = require('../md/test.md');
 
 // Vue.component('vremark-highlight', require('../../src/plugins/vremark-highlight/component/vremark-highlight'));
-Vue.component('vremark-highlight', require('vremark-highlight'));
+
+Vue.component('vremark-component-math', require('vremark-component-math'));
+Vue.component('vremark-component-flowchart', require('vremark-component-flowchart'));
+Vue.component('vremark-component-sequence', require('vremark-component-sequence'));
+Vue.component('vremark-component-mermaid', require('vremark-component-mermaid'));
+Vue.component('vremark-component-highlight', require('vremark-component-highlight'));
+Vue.component('vremark-component-g2', require('vremark-component-g2'));
+Vue.component('vremark-component-chart', require('vremark-component-chart'));
+
 
 
 

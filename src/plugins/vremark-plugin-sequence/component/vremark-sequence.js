@@ -1,15 +1,9 @@
 require('../../../lib/js-sequence-diagrams/sequence-diagram.css');
 require('./vremark-sequence.scss');
-// var Diagram = require('./lib/sequence-diagram-min');
-
-// var Diagram = require('../../../../bower_components/js-sequence-diagrams/dist/sequence-diagram-snap.js');
-
-// var Diagram = require('imports-loader?_=underscore,Raphael=raphael!./lib/sequence-diagram');
-
 var Diagram = require('imports-loader?_=underscore,Raphael=raphael!js-sequence-diagrams');
 
 module.exports = ({
-    name: 'vremark-sequence',
+    name: 'vremark-component-sequence',
     props: {
         'code': {
             type: String,
@@ -42,6 +36,10 @@ module.exports = ({
     mounted() {
         var self = this;
         self.compile();
+        // require.ensure([], function(){
+        //     var flowchart = require('flowchart.js');
+        //     self.compile(flowchart);
+        // }, 'vremark-component-flowchart');
     },
     destroyed(){
         var self = this;

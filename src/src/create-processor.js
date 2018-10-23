@@ -7,13 +7,13 @@ const math = require('../lib/remark-math');
 const hash = require('../lib/remark-hash');
 
 // plugins
-const mathComponent = require('../plugins/vremark-math/plugin');
-const flowchart = require('../plugins/vremark-flowchart/plugin');
-const sequence = require('../plugins/vremark-sequence/plugin');
-const mermaid = require('../plugins/vremark-mermaid/plugin');
-const chart = require('../plugins/vremark-chart/plugin');
-const g2 = require('../plugins/vremark-g2/plugin');
-const highlight = require('../plugins/vremark-highlight/plugin');
+const mathComponent = require('../plugins/vremark-plugin-math/plugin');
+const highlight = require('../plugins/vremark-plugin-highlight/plugin');
+const flowchart = require('../plugins/vremark-plugin-flowchart/plugin');
+const sequence = require('../plugins/vremark-plugin-sequence/plugin');
+const mermaid = require('../plugins/vremark-plugin-mermaid/plugin');
+const g2 = require('../plugins/vremark-plugin-g2/plugin');
+const chart = require('../plugins/vremark-plugin-chart/plugin');
 
 //rehype
 const remark2rehype = require('../lib/remark-rehype');

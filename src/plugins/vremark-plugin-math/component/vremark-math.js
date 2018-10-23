@@ -1,5 +1,5 @@
 require('katex/dist/katex.css');
-var katex = require('katex');
+// var katex = require('katex');
 
 module.exports = ({
     name: 'vremark-math',
@@ -15,7 +15,7 @@ module.exports = ({
     },
     data() {
         return {
-            result: ''
+            result: this.code || ''
         }
     },
     render(h) {
@@ -27,12 +27,8 @@ module.exports = ({
         });
     },
     methods:{
-        compile() {
+        compile(katex) {
             var self = this;
-            if(!self.code) {
-                self.result = '';
-                return;
-            }
             try {
                 var renderedValue = katex.renderToString(self.code, {
                     displayMode: !this.inline,
@@ -46,6 +42,9 @@ module.exports = ({
     },
     mounted() {
         var self = this;
-        self.compile();
+        require.ensure([], function(){
+            var katex = require('katex');
+            self.compile(katex);
+        }, 'vremark-component-katex');
     }
 });
