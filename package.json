@@ -25,7 +25,9 @@
     "webpack-cli": "^3.1.2",
     "webpack-dev-server": "^3.1.10",
     "webpack-merge": "^4.1.4",
-    "worker-loader": "^2.0.0"
+    "worker-loader": "^2.0.0",
+    "promise-worker": "^2.0.0",
+    "vue": "^2.5.17"
   },
   "dependencies": {
     "@antv/g2": "^3.3.1",
@@ -37,7 +39,6 @@
     "lodash": "^4.17.11",
     "mermaid": "^8.0.0-rc.8",
     "plantuml-encoder": "^1.2.5",
-    "promise-worker": "^2.0.0",
     "rehype-raw": "^3.0.0",
     "remark": "^9.0.0",
     "remark-breaks": "^1.0.1",
@@ -47,7 +48,6 @@
     "remark-render": "^0.0.16",
     "snapsvg": "^0.5.1",
     "underscore": "^1.9.1",
-    "unist-util-remove": "^1.0.1",
-    "vue": "^2.5.17"
+    "unist-util-remove": "^1.0.1"
   }
 }
