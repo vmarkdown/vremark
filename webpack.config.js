@@ -16,10 +16,10 @@ const config = {
 
         library: "[name]",
         // libraryExport: 'default'
-
-
-        filename: production?'[name].min.js':'[name].js',
+        // filename: production?'[name].min.js':'[name].js',
         // libraryTarget: "umd"
+
+        ilename: production?'[name].common.min.js':'[name].common.js',
         libraryTarget: "commonjs2"
     },
     module: {
@@ -74,6 +74,18 @@ module.exports = [
         plugins: [
 
         ]
+    }),
+
+    merge(base, config, {
+        entry:{
+            'vremark-parse': path.resolve(__dirname, './src/core/parse.js')
+        }
+    }),
+
+    merge(base, config, {
+        entry:{
+            'vremark-render': path.resolve(__dirname, './src/core/render.js')
+        }
     }),
 
     merge(base, config, {
