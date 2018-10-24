@@ -3,20 +3,11 @@ require('github-markdown-css');
 // const registerComponents = require('./register-components');
 const loadPlugins = require('./load-plugins');
 
-
 import Vue from 'vue';
 
-// Vue.component('vremark-highlight',
-//     () => import(
-//         'vremark-highlight'
-//     )
-// );
+// const vremark = require('../../src/index');
+const render = require('../../src/core/render');
 
-// Vue.component('vremark-highlight', function (resolve) {
-//     require(['vremark-highlight'], resolve)
-// });
-
-const vremark = require('../../src/index');
 
 function sleep(time) {
     return new Promise(function (resolve) {
@@ -32,7 +23,6 @@ const PromiseWorker = require('promise-worker');
 const worker = new Worker();
 var promiseWorker = new PromiseWorker(worker);
 
-const md = require('../md/test.md');
 
 
 // Vue.component('vremark-component-math', require('vremark-component-math'));
@@ -168,7 +158,7 @@ const md = require('../md/test.md');
                 const h = self.$createElement;
 
                 console.time('render');
-                const vdom = vremark.render(hast, {
+                const vdom = render(hast, {
                     h: h
                 });
                 console.timeEnd('render');
@@ -178,23 +168,24 @@ const md = require('../md/test.md');
             }
         },
         render(h) {
-            return this.vdom || h('div', {}, 'loading');
+            return this.vdom || h('div', {
+                    style:{
+                        'text-align':'center'
+                    }
+                }, 'loading');
         },
-        mounted() {
-            this.setValue(md);
-        }
-    });
+        async mounted() {
+            const self = this;
 
-    // for(var i=0;i<20;i++){
-    //     await app.setValue(md);
-    //     await sleep(5000);
-    // }
-
-
-
-
-//     setTimeout(function () {
-//         app.setValue(`\`\`\` python
+            const md = await import('../md/test.md');
+            // const md = require('../md/test.md');
+            self.setValue(md.default);
+            // for(var i=0;i<20;i++){
+            //     await this.setValue(md);
+            //     await sleep(5000);
+            // }
+//             setTimeout(function () {
+//                     self.setValue(`\`\`\` python
 // @requires_authorization===========
 // def somefunc(param1='', param2=0):
 //     '''A docstring'''
@@ -206,7 +197,16 @@ const md = require('../md/test.md');
 // >>> message = '''interpreter
 // ... prompt'''
 // \`\`\``);
-//     }, 5000);
+//             }, 5000);
+
+        }
+    });
+
+
+
+
+
+
 
 
 

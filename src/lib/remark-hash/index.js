@@ -53,10 +53,13 @@ function one(node, map) {
         map[hash] = 1;
     }
     else{
-        while (map[hash]) {
+        var nhash = hash;
+        while (map[nhash]) {
             map[hash] = map[hash] + 1;
-            hash = hash + map[hash];
+            nhash = nhash + map[hash];
         }
+        hash = nhash;
+        map[hash] = 1;
     }
 
     node.hash = hash;
@@ -67,9 +70,9 @@ function one(node, map) {
 
 module.exports = function hashid(options = {}) {
     return function transformer(root) {
-        // console.time('hash');
+        console.time('hash');
         var map = {};
         one(root, map);
-        // console.timeEnd('hash');
+        console.timeEnd('hash');
     };
 };

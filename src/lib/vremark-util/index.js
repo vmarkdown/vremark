@@ -10,6 +10,14 @@ function hash(string) {
     return smi(hash);
 }
 
+function hash1(str) {
+    var hash = 5381, i = str.length;
+    while(i) {
+        hash = (hash * 33) ^ str.charCodeAt(--i);
+    }
+    return hash >>> 0;
+}
+
 function createKey(node) {
     if(node.hasOwnProperty('value') || node.hasOwnProperty('url')){
         var value0 = node.value || node.url;
@@ -23,7 +31,9 @@ function createKey(node) {
     return hash(value1);
 }
 
+
+
 module.exports = {
-    hash: hash,
+    hash: hash1,
     createKey: createKey
 };
