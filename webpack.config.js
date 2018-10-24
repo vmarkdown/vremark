@@ -77,8 +77,14 @@ module.exports = [
 
     merge(base, config, {
         entry:{
-            'vremark-component-chart': path.resolve(__dirname, './src/plugins' ,'vremark-plugin-chart/component/vremark-chart.js'),
-            'vremark-component-flowchart': path.resolve(__dirname, './src/plugins' ,'vremark-plugin-flowchart/component/vremark-flowchart.js')
+            'vremark-chart': path.resolve(__dirname, './src/plugins' ,'vremark-plugin-chart/component/vremark-chart.js'),
+            'vremark-flowchart': path.resolve(__dirname, './src/plugins' ,'vremark-plugin-flowchart/component/vremark-flowchart.js'),
+            'vremark-g2': path.resolve(__dirname, './src/plugins' ,'vremark-plugin-g2/component/vremark-g2.js'),
+            'vremark-highlight': path.resolve(__dirname, './src/plugins' ,'vremark-plugin-highlight/component/vremark-highlight.js'),
+            'vremark-math': path.resolve(__dirname, './src/plugins' ,'vremark-plugin-math/component/vremark-math.js'),
+            'vremark-mermaid': path.resolve(__dirname, './src/plugins' ,'vremark-plugin-mermaid/component/vremark-mermaid.js'),
+            'vremark-sequence': path.resolve(__dirname, './src/plugins' ,'vremark-plugin-sequence/component/vremark-sequence.js'),
+
 
         },
         output: {
