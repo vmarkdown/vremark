@@ -1,5 +1,4 @@
 const PLUGIN_NAME = 'vremark-plugin-math';
-const COMPONENT_NAME = 'vremark-math';
 
 var visit = require('unist-util-visit');
 function isPlugin(node) {
@@ -11,7 +10,6 @@ function plugin(options = {}) {
     return async function transformer(root) {
 
         root.plugins = root.plugins || {};
-        // root.components = root.components || {};
 
         visit(root, function (node) {
             return isPlugin(node);
@@ -24,23 +22,16 @@ function plugin(options = {}) {
                 inline: (node.type === "inlineMath"),
                 code: node.value
             });
-            // node.component = PLUGIN_NAME;
-            // node.type = 'component';
+
             node.type = 'code';
-            node.tagName = COMPONENT_NAME;
+            node.tagName = PLUGIN_NAME;
 
-            // root.components[PLUGIN_NAME] = true;
-
-            root.plugins[PLUGIN_NAME] = {
-                component: COMPONENT_NAME
-            };
+            root.plugins[PLUGIN_NAME] = true;
 
         });
 
     };
 
 }
-
-plugin.COMPONENT_NAME = COMPONENT_NAME;
 
 module.exports = plugin;

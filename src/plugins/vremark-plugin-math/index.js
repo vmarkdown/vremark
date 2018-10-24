@@ -1,7 +1,7 @@
-require('./vremark-math.scss');
+require('./index.scss');
 
-module.exports = ({
-    name: 'vremark-math',
+module.exports = {
+    name: 'vremark-plugin-math',
     props: {
         'inline': {
             type: Boolean,
@@ -19,7 +19,7 @@ module.exports = ({
     },
     render(h) {
         return h(this.inline?'span':'p', {
-            'class': ['vremark-math', this.inline?'vremark-katex-inlineMath':'vremark-katex-math'],
+            'class': ['vremark-plugin-math', this.inline?'vremark-katex-inlineMath':'vremark-katex-math'],
             domProps:{
                 innerHTML: this.result
             }
@@ -45,6 +45,6 @@ module.exports = ({
             require('katex/dist/katex.css');
             var katex = require('katex');
             self.compile(katex);
-        }, 'vremark-math-libs');
+        }, 'vremark-plugin-math-libs');
     }
-});
+};

@@ -7,7 +7,7 @@ const math = require('../lib/remark-math');
 const hash = require('../lib/remark-hash');
 
 // plugins
-const mathComponent = require('../plugins/vremark-plugin-math/plugin');
+const mathComponent = require('../lib/vremark-math');
 const flowchart = require('../plugins/vremark-plugin-flowchart/plugin');
 const sequence = require('../plugins/vremark-plugin-sequence/plugin');
 const mermaid = require('../plugins/vremark-plugin-mermaid/plugin');

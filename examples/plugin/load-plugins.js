@@ -50,7 +50,8 @@ async function loadPlugin(plugin, has, load, register) {
 module.exports = async function loadPlugins(plugins, has, load, register) {
 
     const loads = Object.keys(plugins).map(function (name) {
-        const plugin = plugins[name];
+        // const plugin = plugins[name];
+        const plugin = name;
         return loadPlugin(plugin, has, load, register);
     });
 

@@ -19,6 +19,12 @@ module.exports = {
 
             'vremark-g2': path.resolve(__dirname, '../src/plugins/vremark-plugin-g2/component/vremark-g2.js'),
             'vremark-chart': path.resolve(__dirname, '../src/plugins/vremark-plugin-chart/component/vremark-chart.js'),
+
+
+            'vremark-plugin-math': path.resolve(__dirname, '../src/plugins/vremark-plugin-math/', 'index.js'),
+
+
+
         }
     },
     module: {

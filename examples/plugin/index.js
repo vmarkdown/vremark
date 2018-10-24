@@ -87,49 +87,56 @@ var promiseWorker = new PromiseWorker(worker);
 
                         let component = null;
 
-                        switch (plugin.component) {
-                            case 'vremark-math' :
+                        switch (plugin) {
+
+                            case 'vremark-plugin-math' :
                                 component = await import(
-                                    /* webpackChunkName: "vremark-component-math" */
-                                    'vremark-math'
-                                );
+                                    /* webpackChunkName: "vremark-plugin-math" */
+                                    'vremark-plugin-math'
+                                    );
                                 break;
-                            case 'vremark-chart' :
-                                component = await import(
-                                    /* webpackChunkName: "vremark-component-chart" */
-                                    'vremark-chart'
-                                );
-                                break;
-                            case 'vremark-flowchart' :
-                                component = await import(
-                                    /* webpackChunkName: "vremark-component-flowchart" */
-                                    'vremark-flowchart'
-                                );
-                                break;
-                            case 'vremark-g2' :
-                                component = await import(
-                                    /* webpackChunkName: "vremark-component-g2" */
-                                    'vremark-g2'
-                                );
-                                break;
-                            case 'vremark-highlight' :
-                                component = await import(
-                                    /* webpackChunkName: "vremark-component-highlight" */
-                                    'vremark-highlight'
-                                );
-                                break;
-                            case 'vremark-mermaid' :
-                                component = await import(
-                                    /* webpackChunkName: "vremark-component-mermaid" */
-                                    'vremark-mermaid'
-                                );
-                                break;
-                            case 'vremark-sequence' :
-                                component = await import(
-                                    /* webpackChunkName: "vremark-component-sequence" */
-                                    'vremark-sequence'
-                                );
-                                break;
+                            // case 'vremark-math' :
+                            //     component = await import(
+                            //         /* webpackChunkName: "vremark-component-math" */
+                            //         'vremark-math'
+                            //     );
+                            //     break;
+                            // case 'vremark-chart' :
+                            //     component = await import(
+                            //         /* webpackChunkName: "vremark-component-chart" */
+                            //         'vremark-chart'
+                            //     );
+                            //     break;
+                            // case 'vremark-flowchart' :
+                            //     component = await import(
+                            //         /* webpackChunkName: "vremark-component-flowchart" */
+                            //         'vremark-flowchart'
+                            //     );
+                            //     break;
+                            // case 'vremark-g2' :
+                            //     component = await import(
+                            //         /* webpackChunkName: "vremark-component-g2" */
+                            //         'vremark-g2'
+                            //     );
+                            //     break;
+                            // case 'vremark-highlight' :
+                            //     component = await import(
+                            //         /* webpackChunkName: "vremark-component-highlight" */
+                            //         'vremark-highlight'
+                            //     );
+                            //     break;
+                            // case 'vremark-mermaid' :
+                            //     component = await import(
+                            //         /* webpackChunkName: "vremark-component-mermaid" */
+                            //         'vremark-mermaid'
+                            //     );
+                            //     break;
+                            // case 'vremark-sequence' :
+                            //     component = await import(
+                            //         /* webpackChunkName: "vremark-component-sequence" */
+                            //         'vremark-sequence'
+                            //     );
+                            //     break;
                         }
 
                         resolve(component.default || component);
