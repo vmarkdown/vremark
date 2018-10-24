@@ -1,8 +1,10 @@
 // require('katex/dist/katex.css');
 // var katex = require('katex');
 
+require('./vremark-math.scss');
+
 module.exports = ({
-    name: 'vremark-math',
+    name: 'vremark-component-math',
     props: {
         'inline': {
             type: Boolean,
@@ -26,7 +28,7 @@ module.exports = ({
             }
         });
     },
-    methods:{
+    methods: {
         compile(katex) {
             var self = this;
             try {

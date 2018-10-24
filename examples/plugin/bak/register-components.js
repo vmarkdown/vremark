@@ -1,17 +1,22 @@
-async function registerComponent(name, has, register) {
+async function registerComponent(name, has, load, register) {
+
+    // const plguin
     if(has(name)){
         return true;
     }
+
     return new Promise(function (resolve, reject) {
 
-        requirejs([name+'.plugin'], function (module) {
-            const component = module.default || module;
-            register && register(name, component);
-            resolve(component);
-        }, function (e) {
-            // console.error(e);
-            resolve();
-        });
+
+
+        // requirejs([name+'.plugin'], function (module) {
+        //     const component = module.default || module;
+        //     register && register(name, component);
+        //     resolve(component);
+        // }, function (e) {
+        //     // console.error(e);
+        //     resolve();
+        // });
 
 
 
@@ -39,10 +44,10 @@ async function registerComponent(name, has, register) {
 }
 
 
-module.exports = async function registerComponents(components, has, register) {
+module.exports = async function registerComponents(components, has, load, register) {
 
     const loads = Object.keys(components).map(function (name) {
-        return registerComponent(name, has, register);
+        return registerComponent(name, has, load, register);
     });
 
     return await Promise.all(loads);

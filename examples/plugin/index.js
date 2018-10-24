@@ -1,6 +1,8 @@
 require('github-markdown-css');
 
-const registerComponents = require('./register-components');
+// const registerComponents = require('./register-components');
+const loadPlugins = require('./load-plugins');
+
 
 import Vue from 'vue';
 
@@ -32,15 +34,14 @@ var promiseWorker = new PromiseWorker(worker);
 
 const md = require('../md/test.md');
 
-// Vue.component('vremark-highlight', require('../../src/plugins/vremark-highlight/component/vremark-highlight'));
 
-Vue.component('vremark-component-math', require('vremark-component-math'));
-Vue.component('vremark-component-flowchart', require('vremark-component-flowchart'));
-Vue.component('vremark-component-sequence', require('vremark-component-sequence'));
-Vue.component('vremark-component-mermaid', require('vremark-component-mermaid'));
-Vue.component('vremark-component-highlight', require('vremark-component-highlight'));
-Vue.component('vremark-component-g2', require('vremark-component-g2'));
-Vue.component('vremark-component-chart', require('vremark-component-chart'));
+// Vue.component('vremark-component-math', require('vremark-component-math'));
+// Vue.component('vremark-component-flowchart', require('vremark-component-flowchart'));
+// Vue.component('vremark-component-sequence', require('vremark-component-sequence'));
+// Vue.component('vremark-component-mermaid', require('vremark-component-mermaid'));
+// Vue.component('vremark-component-highlight', require('vremark-component-highlight'));
+// Vue.component('vremark-component-g2', require('vremark-component-g2'));
+// Vue.component('vremark-component-chart', require('vremark-component-chart'));
 
 
 
@@ -67,7 +68,7 @@ Vue.component('vremark-component-chart', require('vremark-component-chart'));
                 const self = this;
 
                 console.time('worker');
-                const {mdast, hast, components} = await parse(value, {
+                const {mdast, hast, plugins} = await parse(value, {
                     rootClassName: 'markdown-body',
                     rootTagName: 'main',
                     hashid: true
@@ -75,11 +76,9 @@ Vue.component('vremark-component-chart', require('vremark-component-chart'));
                 console.timeEnd('worker');
 
 
-
-
                 console.log( mdast );
                 console.log( hast );
-                console.log( components );
+                console.log( plugins );
 
                 // await registerComponents(components, function has(name) {
                 //         return !!Vue.component(name);
@@ -91,6 +90,81 @@ Vue.component('vremark-component-chart', require('vremark-component-chart'));
                 //         Vue.component(name, component);
                 // });
 
+                await loadPlugins(plugins, function has(plugin) {
+                    return !!Vue.component(plugin.component);
+                }, function load(plugin) {
+                    return new Promise(async function (resolve, reject) {
+
+                        let component = null;
+
+                        switch (plugin.component) {
+                            case 'vremark-component-math' :
+                                component = await import(
+                                    /* webpackChunkName: "vremark-component-math" */
+                                    'vremark-component-math'
+                                );
+                                break;
+                            case 'vremark-component-chart' :
+                                component = await import(
+                                    /* webpackChunkName: "vremark-component-chart" */
+                                    'vremark-component-chart'
+                                );
+                                break;
+                            case 'vremark-component-flowchart' :
+                                component = await import(
+                                    /* webpackChunkName: "vremark-component-flowchart" */
+                                    'vremark-component-flowchart'
+                                );
+                                break;
+                            case 'vremark-component-g2' :
+                                component = await import(
+                                    /* webpackChunkName: "vremark-component-g2" */
+                                    'vremark-component-g2'
+                                );
+                                break;
+                            case 'vremark-component-highlight' :
+                                component = await import(
+                                    /* webpackChunkName: "vremark-component-highlight" */
+                                    'vremark-component-highlight'
+                                );
+                                break;
+                            case 'vremark-component-mermaid' :
+                                component = await import(
+                                    /* webpackChunkName: "vremark-component-mermaid" */
+                                    'vremark-component-mermaid'
+                                );
+                                break;
+                            case 'vremark-component-sequence' :
+                                component = await import(
+                                    /* webpackChunkName: "vremark-component-sequence" */
+                                    'vremark-component-sequence'
+                                );
+                                break;
+                        }
+
+                        resolve(component.default || component);
+
+                        // require.ensure(['../../src/plugins/vremark-component-math/plugin'], function(){
+                        //     const component = require(plugin.component);
+                        //     // debugger
+                        //     // Vue.component(component.name, component);
+                        //     success(component);
+                        // }, plugin.component);
+
+                        // debugger
+                        //
+                        // const component = await import(
+                        //     plugin.component
+                        // );
+                        //
+                        // success(component);
+
+                    });
+                }, function register(component) {
+                    Vue.component(component.name, component);
+                });
+
+
                 const h = self.$createElement;
 
                 console.time('render');
@@ -99,9 +173,7 @@ Vue.component('vremark-component-chart', require('vremark-component-chart'));
                 });
                 console.timeEnd('render');
                 self.vdom = vdom;
-                console.log( vdom )
-
-
+                console.log( vdom );
 
             }
         },

@@ -3,7 +3,7 @@ require('./vremark-g2.scss');
 // G2.track(false);
 
 module.exports = {
-    name: 'G2',
+    name: 'vremark-component-g2',
     props: {
         code: {
             type: String,

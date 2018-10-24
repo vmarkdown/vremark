@@ -1,6 +1,6 @@
 require('./vremark-chart.scss');
 
-module.exports = ({
+module.exports = {
     name: 'vremark-component-chart',
     props: {
         'code': {
@@ -15,7 +15,7 @@ module.exports = ({
     },
     render(h) {
         return h('canvas',
-            {'class': ['remark-chart']}
+            {'class': ['vremark-chart']}
         );
     },
     methods:{
@@ -41,4 +41,4 @@ module.exports = ({
         var self = this;
         self.chart && self.chart.destroy();
     }
-});
+};

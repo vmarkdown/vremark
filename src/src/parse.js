@@ -11,9 +11,9 @@ async function parse(markdown, option) {
 
     data(hast, option);
 
-    const components = mdast.components || {};
+    const plugins = mdast.plugins || {};
 
-    return {mdast, hast, components};
+    return {mdast, hast, plugins};
 }
 
 module.exports = parse;

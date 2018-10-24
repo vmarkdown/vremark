@@ -10,6 +10,7 @@ function plugin(options = {}) {
 
     return async function transformer(root) {
 
+        root.plugins = root.plugins || {};
         // root.components = root.components || {};
 
         visit(root, function (node) {
@@ -27,7 +28,12 @@ function plugin(options = {}) {
             // node.type = 'component';
             node.type = 'code';
             node.tagName = COMPONENT_NAME;
+
             // root.components[PLUGIN_NAME] = true;
+
+            root.plugins[PLUGIN_NAME] = {
+                component: COMPONENT_NAME
+            };
 
         });
 
