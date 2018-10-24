@@ -1,4 +1,4 @@
-const parse = require('./src/parse');
+const parse = require('./core/parse');
 const registerPromiseWorker = require('promise-worker/register');
 
 registerPromiseWorker(function (message) {

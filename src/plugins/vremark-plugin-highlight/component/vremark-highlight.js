@@ -1,7 +1,7 @@
 require('./vremark-highlight.scss');
 
 module.exports = {
-    name: 'vremark-component-highlight',
+    name: 'vremark-highlight',
     props: {
         'lang': {
             type: String,
@@ -45,7 +45,7 @@ module.exports = {
             require('highlight.js/styles/github.css');
             var hljs = require('highlight.js');
             self.compile(hljs);
-        }, 'vremark-component-highlight');
+        }, 'vremark-highlight-libs');
     }
 };
 

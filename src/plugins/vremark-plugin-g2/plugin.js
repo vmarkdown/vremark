@@ -1,5 +1,5 @@
 const PLUGIN_NAME = 'vremark-plugin-g2';
-const COMPONENT_NAME = 'vremark-component-g2';
+const COMPONENT_NAME = 'vremark-g2';
 
 function isPlugin(node) {
     return node.lang && node.lang === 'g2';

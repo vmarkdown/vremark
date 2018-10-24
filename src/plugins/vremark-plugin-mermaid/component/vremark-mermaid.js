@@ -9,7 +9,7 @@ require('./vremark-mermaid.scss');
 
 var index = 0;
 module.exports = ({
-    name: 'vremark-component-mermaid',
+    name: 'vremark-mermaid',
     props: {
         'code': {
             type: String,
@@ -50,19 +50,15 @@ module.exports = ({
     },
     mounted() {
         var self = this;
-        // self.compile();
-
         require.ensure([], function(){
             var mermaid = require('mermaid');
-
             mermaid.initialize({
                 startOnLoad: false,
                 theme: 'default',
                 gantt: {}
             });
-
             self.compile(mermaid);
-        }, 'vremark-component-mermaid');
+        }, 'vremark-mermaid-libs');
     },
     destroyed(){
         var self = this;

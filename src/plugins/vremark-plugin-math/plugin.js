@@ -1,5 +1,5 @@
 const PLUGIN_NAME = 'vremark-plugin-math';
-const COMPONENT_NAME = 'vremark-component-math';
+const COMPONENT_NAME = 'vremark-math';
 
 var visit = require('unist-util-visit');
 function isPlugin(node) {

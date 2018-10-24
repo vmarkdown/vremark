@@ -98,46 +98,46 @@ const md = require('../md/test.md');
                         let component = null;
 
                         switch (plugin.component) {
-                            case 'vremark-component-math' :
+                            case 'vremark-math' :
                                 component = await import(
                                     /* webpackChunkName: "vremark-component-math" */
-                                    'vremark-component-math'
+                                    'vremark-math'
                                 );
                                 break;
-                            case 'vremark-component-chart' :
+                            case 'vremark-chart' :
                                 component = await import(
                                     /* webpackChunkName: "vremark-component-chart" */
-                                    'vremark-component-chart'
+                                    'vremark-chart'
                                 );
                                 break;
-                            case 'vremark-component-flowchart' :
+                            case 'vremark-flowchart' :
                                 component = await import(
                                     /* webpackChunkName: "vremark-component-flowchart" */
-                                    'vremark-component-flowchart'
+                                    'vremark-flowchart'
                                 );
                                 break;
-                            case 'vremark-component-g2' :
+                            case 'vremark-g2' :
                                 component = await import(
                                     /* webpackChunkName: "vremark-component-g2" */
-                                    'vremark-component-g2'
+                                    'vremark-g2'
                                 );
                                 break;
-                            case 'vremark-component-highlight' :
+                            case 'vremark-highlight' :
                                 component = await import(
                                     /* webpackChunkName: "vremark-component-highlight" */
-                                    'vremark-component-highlight'
+                                    'vremark-highlight'
                                 );
                                 break;
-                            case 'vremark-component-mermaid' :
+                            case 'vremark-mermaid' :
                                 component = await import(
                                     /* webpackChunkName: "vremark-component-mermaid" */
-                                    'vremark-component-mermaid'
+                                    'vremark-mermaid'
                                 );
                                 break;
-                            case 'vremark-component-sequence' :
+                            case 'vremark-sequence' :
                                 component = await import(
                                     /* webpackChunkName: "vremark-component-sequence" */
-                                    'vremark-component-sequence'
+                                    'vremark-sequence'
                                 );
                                 break;
                         }

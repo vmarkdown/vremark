@@ -1,5 +1,5 @@
 const PLUGIN_NAME = 'vremark-plugin-flowchart';
-const COMPONENT_NAME = 'vremark-component-flowchart';
+const COMPONENT_NAME = 'vremark-flowchart';
 
 function isPlugin(node) {
     return node.lang && (node.lang === 'flow' || node.lang === 'flowchart' )

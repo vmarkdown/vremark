@@ -1,5 +1,5 @@
 const PLUGIN_NAME = 'vremark-plugin-highlight';
-const COMPONENT_NAME = 'vremark-component-highlight';
+const COMPONENT_NAME = 'vremark-highlight';
 
 
 var languages = (function () {

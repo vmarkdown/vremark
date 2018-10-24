@@ -1,5 +1,5 @@
 const PLUGIN_NAME = 'vremark-plugin-mermaid';
-const COMPONENT_NAME = 'vremark-component-mermaid';
+const COMPONENT_NAME = 'vremark-mermaid';
 
 function isPlugin(node) {
     return node.lang && node.lang === 'mermaid';

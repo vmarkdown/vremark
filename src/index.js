@@ -1,5 +1,5 @@
-const parse = require('./src/parse');
-const render = require('./src/render');
+const parse = require('./core/parse');
+const render = require('./core/render');
 
 async function vremark(markdown, options) {
 

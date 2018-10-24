@@ -2,7 +2,7 @@ require('./vremark-sequence.scss');
 // var Diagram = require('js-sequence-diagrams');
 
 module.exports = ({
-    name: 'vremark-component-sequence',
+    name: 'vremark-sequence',
     props: {
         'code': {
             type: String,
@@ -37,7 +37,7 @@ module.exports = ({
             require('js-sequence-diagrams-css');
             var Diagram = require('js-sequence-diagrams');
             self.compile(Diagram);
-        }, 'vremark-component-sequence');
+        }, 'vremark-sequence-libs');
     },
     destroyed(){
         var self = this;

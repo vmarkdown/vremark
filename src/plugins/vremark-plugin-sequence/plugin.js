@@ -1,5 +1,5 @@
 const PLUGIN_NAME = 'vremark-plugin-sequence';
-const COMPONENT_NAME = 'vremark-component-sequence';
+const COMPONENT_NAME = 'vremark-sequence';
 
 function isPlugin(node) {
     return node.lang && (node.lang === 'seq' || node.lang === 'sequence' )

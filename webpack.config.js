@@ -3,6 +3,7 @@ const merge = require('webpack-merge');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const production = (process.env.NODE_ENV === 'production');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const base = require('./config/webpack.config.base');
 
 const config = {
     mode: 'none',
@@ -20,28 +21,23 @@ const config = {
         filename: production?'[name].min.js':'[name].js',
         libraryTarget: "umd"
     },
-    resolve: {
-        alias: {
-            // 'hast-util-to-vdom': path.resolve(__dirname, 'src/lib/hast-util-to-vdom.common.js')
-        }
-    },
     module: {
         rules: [
-            {
-                test: /\.css$/,
-                use: [
-                    MiniCssExtractPlugin.loader,
-                    "css-loader"
-                ]
-            },
-            {
-                test: /\.(sa|sc|c)ss$/,
-                use: [
-                    MiniCssExtractPlugin.loader,
-                    'css-loader',
-                    'sass-loader',
-                ]
-            }
+            // {
+            //     test: /\.css$/,
+            //     use: [
+            //         MiniCssExtractPlugin.loader,
+            //         "css-loader"
+            //     ]
+            // },
+            // {
+            //     test: /\.(sa|sc|c)ss$/,
+            //     use: [
+            //         MiniCssExtractPlugin.loader,
+            //         'css-loader',
+            //         'sass-loader',
+            //     ]
+            // }
         ]
     },
     // externals: {
@@ -68,27 +64,27 @@ const config = {
 };
 
 module.exports = [
-    merge(config, {
+    merge(base, config, {
         entry:{
-            vremark: './src/index.js'
+            vremark: path.resolve(__dirname, './src/index.js')
         },
         externals: {
-            'flowchart.js': 'flowchart.js',
-            // 'highlight.js': 'hljs',
-            'lowlight': 'lowlight',
-            'katex': 'katex',
-            'underscore': 'underscore',
-            'mermaid': 'mermaid',
-            '@antv/g2': '@antv/g2'
         },
         plugins: [
 
         ]
     }),
-    merge(config, {
+
+    merge(base, config, {
         entry:{
-            'lowlight': path.resolve(__dirname, 'src/lib/lowlight.js')
+            'vremark-component-chart': path.resolve(__dirname, './src/plugins' ,'vremark-plugin-chart/component/vremark-chart.js'),
+            'vremark-component-flowchart': path.resolve(__dirname, './src/plugins' ,'vremark-plugin-flowchart/component/vremark-flowchart.js')
+
         },
-    })
+        output: {
+            libraryTarget: "commonjs2"
+        }
+    }),
+
 ];
 
