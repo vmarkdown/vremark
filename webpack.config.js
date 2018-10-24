@@ -19,7 +19,7 @@ const config = {
         // filename: production?'[name].min.js':'[name].js',
         // libraryTarget: "umd"
 
-        ilename: production?'[name].common.min.js':'[name].common.js',
+        filename: production?'[name].common.min.js':'[name].common.js',
         libraryTarget: "commonjs2"
     },
     module: {
