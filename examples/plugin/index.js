@@ -39,8 +39,15 @@ function sleep(time) {
                         resolve(component);
                         success();
                     }, function (e) {
+                        // reject();
+                        resolve({
+                            render(h) {
+                                return h('pre', {}, [
+                                    h('code', {}, e.message)
+                                ])
+                            }
+                        });
                         console.error(e);
-                        reject();
                         fail();
                     });
                 });
