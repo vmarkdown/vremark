@@ -1,10 +1,10 @@
 require('github-markdown-css');
-
-const loadPlugins = require('./load-plugins');
-
 import Vue from 'vue';
+const PromiseWorker = require('promise-worker');
 
+const PluginManager = require('../../src/plugin-manager');
 const render = require('../../src/core/render');
+import Worker from '../../src/vremark.worker';
 
 function sleep(time) {
     return new Promise(function (resolve) {
@@ -14,21 +14,10 @@ function sleep(time) {
     });
 }
 
-import Worker from '../../src/vremark.worker';
-const PromiseWorker = require('promise-worker');
-
-const worker = new Worker();
-var promiseWorker = new PromiseWorker(worker);
-
 (async ()=>{
 
-    function load(plugin) {
-        return new Promise(function (resolve, reject) {
-            requirejs([plugin], function(component){
-                resolve(component);
-            });
-        });
-    }
+    const worker = new Worker();
+    const promiseWorker = new PromiseWorker(worker);
 
     function parse(markdown, options) {
         return promiseWorker.postMessage({
@@ -37,6 +26,27 @@ var promiseWorker = new PromiseWorker(worker);
         });
     }
 
+    const pluginManager = new PluginManager({
+        loader: function (plugin) {
+
+            return new Promise(function (success, fail) {
+
+                Vue.component(plugin, function (resolve, reject) {
+                    requirejs([plugin], function(component){
+                        resolve(component);
+                        success();
+                    }, function (e) {
+                        console.error(e);
+                        reject();
+                        fail();
+                    });
+                });
+
+            });
+
+        }
+    });
+    
     const app = new Vue({
         el: '#app',
         data: {
@@ -70,33 +80,9 @@ var promiseWorker = new PromiseWorker(worker);
                 console.log( hast );
                 console.log( plugins );
 
-                function refresh() {
+
+                pluginManager.load(plugins, function () {
                     self.refresh(hast);
-                }
-
-                loadPlugins(plugins, function has(plugin) {
-                    return !!Vue.component(plugin);
-                }, function register(plugin) {
-                    console.log('加载插件', plugin);
-
-                    Vue.component(plugin, function (resolve, reject) {
-                        requirejs([plugin], function(component){
-                            resolve(component);
-                            refresh();
-                        }, function (e) {
-                            console.error(e);
-                            reject();
-                        });
-
-                        // const component = await load(plugin);
-                        // if(component){
-                        //     resolve(component);
-                        //     refresh();
-                        // }
-                        // else {
-                        //     reject();
-                        // }
-                    });
                 });
 
                 const h = self.$createElement;
