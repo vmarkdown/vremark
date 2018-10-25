@@ -1,7 +1,7 @@
-require('./vremark-g2.scss');
+require('./index.scss');
 
 module.exports = {
-    name: 'vremark-g2',
+    name: 'vremark-plugin-g2',
     props: {
         code: {
             type: String,
@@ -10,7 +10,7 @@ module.exports = {
     },
     render(h) {
         return h('div',{
-            class: 'vremark-g2'
+            class: 'vremark-plugin-g2'
         })
     },
     methods:{
@@ -46,7 +46,7 @@ module.exports = {
             var G2 = require('@antv/g2');
             G2.track(false);
             self.compile(G2);
-        }, 'vremark-g2-libs');
+        }, 'vremark-plugin-g2-libs');
     },
     destroyed() {
         var self = this;

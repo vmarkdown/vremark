@@ -120,6 +120,22 @@ module.exports = [
                 template: 'examples/'+example+'/index.html'
             })
         ],
+    }),
+
+    merge(base, config, {
+        entry: {
+            'vremark-plugin-math': 'vremark-plugin-math',
+            'vremark-plugin-flowchart': 'vremark-plugin-flowchart',
+            'vremark-plugin-sequence': 'vremark-plugin-sequence',
+            'vremark-plugin-mermaid': 'vremark-plugin-mermaid',
+            'vremark-plugin-highlight': 'vremark-plugin-highlight',
+            'vremark-plugin-g2': 'vremark-plugin-g2',
+            'vremark-plugin-chart': 'vremark-plugin-chart'
+        },
+        output: {
+            libraryTarget: "amd"
+        }
     })
+
 ];
 

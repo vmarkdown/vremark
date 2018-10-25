@@ -10,18 +10,27 @@ module.exports = {
             'js-sequence-diagrams': path.resolve(__dirname, '../src/lib/js-sequence-diagrams/sequence-diagram.js'),
             'js-sequence-diagrams-css': path.resolve(__dirname, '../src/lib/js-sequence-diagrams/sequence-diagram.css'),
 
-            'vremark-math': path.resolve(__dirname, '../src/plugins/vremark-plugin-math/component/vremark-math.js'),
-            'vremark-flowchart': path.resolve(__dirname, '../src/plugins/vremark-plugin-flowchart/component/vremark-flowchart.js'),
-            'vremark-sequence': path.resolve(__dirname, '../src/plugins/vremark-plugin-sequence/component/vremark-sequence.js'),
-            'vremark-mermaid': path.resolve(__dirname, '../src/plugins/vremark-plugin-mermaid/component/vremark-mermaid.js'),
+            // 'vremark-math': path.resolve(__dirname, '../src/plugins/vremark-plugin-math/component/vremark-math.js'),
+            // 'vremark-flowchart': path.resolve(__dirname, '../src/plugins/vremark-plugin-flowchart/component/vremark-flowchart.js'),
+            // 'vremark-sequence': path.resolve(__dirname, '../src/plugins/vremark-plugin-sequence/component/vremark-sequence.js'),
+            // 'vremark-mermaid': path.resolve(__dirname, '../src/plugins/vremark-plugin-mermaid/component/vremark-mermaid.js'),
+            //
+            // 'vremark-highlight': path.resolve(__dirname, '../src/plugins/vremark-plugin-highlight/component/vremark-highlight.js'),
+            //
+            // 'vremark-g2': path.resolve(__dirname, '../src/plugins/vremark-plugin-g2/component/vremark-g2.js'),
+            // 'vremark-chart': path.resolve(__dirname, '../src/plugins/vremark-plugin-chart/component/vremark-chart.js'),
 
-            'vremark-highlight': path.resolve(__dirname, '../src/plugins/vremark-plugin-highlight/component/vremark-highlight.js'),
 
-            'vremark-g2': path.resolve(__dirname, '../src/plugins/vremark-plugin-g2/component/vremark-g2.js'),
-            'vremark-chart': path.resolve(__dirname, '../src/plugins/vremark-plugin-chart/component/vremark-chart.js'),
+
 
 
             'vremark-plugin-math': path.resolve(__dirname, '../src/plugins/vremark-plugin-math/', 'index.js'),
+            'vremark-plugin-flowchart': path.resolve(__dirname, '../src/plugins/vremark-plugin-flowchart/', 'index.js'),
+            'vremark-plugin-sequence': path.resolve(__dirname, '../src/plugins/vremark-plugin-sequence/', 'index.js'),
+            'vremark-plugin-mermaid': path.resolve(__dirname, '../src/plugins/vremark-plugin-mermaid/', 'index.js'),
+            'vremark-plugin-highlight': path.resolve(__dirname, '../src/plugins/vremark-plugin-highlight/', 'index.js'),
+            'vremark-plugin-g2': path.resolve(__dirname, '../src/plugins/vremark-plugin-g2/', 'index.js'),
+            'vremark-plugin-chart': path.resolve(__dirname, '../src/plugins/vremark-plugin-chart/', 'index.js'),
 
 
 

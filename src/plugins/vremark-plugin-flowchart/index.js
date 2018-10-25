@@ -1,7 +1,7 @@
-require('./vremark-flowchart.scss');
+require('./index.scss');
 
 module.exports = {
-    name: 'vremark-flowchart',
+    name: 'vremark-plugin-flowchart',
     props: {
         'code': {
             type: String,
@@ -10,7 +10,7 @@ module.exports = {
     },
     render(h) {
         return h('div', {
-            'class': ['vremark-flowchart']
+            'class': ['vremark-plugin-flowchart']
         });
     },
     methods:{
@@ -30,7 +30,7 @@ module.exports = {
         require.ensure([], function(){
             var flowchart = require('flowchart.js');
             self.compile(flowchart);
-        }, 'vremark-flowchart-libs');
+        }, 'vremark-plugin-flowchart-libs');
     },
     destroyed(){
         var self = this;

@@ -1,8 +1,7 @@
-const PLUGIN_NAME = 'vremark-plugin-sequence';
-const COMPONENT_NAME = 'vremark-sequence';
+const PLUGIN_NAME = 'vremark-plugin-mermaid';
 
 function isPlugin(node) {
-    return node.lang && (node.lang === 'seq' || node.lang === 'sequence' )
+    return node.lang && node.lang === 'mermaid';
 }
 
 function plugin(options = {}) {
@@ -10,7 +9,6 @@ function plugin(options = {}) {
     return async function transformer(root) {
 
         root.plugins = root.plugins || {};
-        // root.components = root.components || {};
 
         var children = root.children;
         for(var i=0;i<children.length;i++) {
@@ -23,21 +21,14 @@ function plugin(options = {}) {
                     lang: node.lang,
                     code: node.value
                 });
-                // node.component = PLUGIN_NAME;
-                // node.type = 'component';
-                node.tagName = COMPONENT_NAME;
-                // root.components[PLUGIN_NAME] = true;
-                root.plugins[PLUGIN_NAME] = {
-                    component: COMPONENT_NAME
-                };
 
+                node.tagName = PLUGIN_NAME;
+                root.plugins[PLUGIN_NAME] = true;
             }
         }
 
     };
 
 }
-
-plugin.COMPONENT_NAME = COMPONENT_NAME;
 
 module.exports = plugin;

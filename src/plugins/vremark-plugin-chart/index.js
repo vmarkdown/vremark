@@ -1,7 +1,7 @@
-require('./vremark-chart.scss');
+require('./index.scss');
 
 module.exports = {
-    name: 'vremark-chart',
+    name: 'vremark-plugin-chart',
     props: {
         'code': {
             type: String,
@@ -15,7 +15,7 @@ module.exports = {
     },
     render(h) {
         return h('canvas',
-            {'class': ['vremark-chart']}
+            {'class': ['vremark-plugin-chart']}
         );
     },
     methods:{
@@ -35,7 +35,7 @@ module.exports = {
         require.ensure([], function(){
             var Chart = require('chart.js');
             self.compile(Chart);
-        }, 'vremark-chart-libs');
+        }, 'vremark-plugin-chart-libs');
     },
     destroyed(){
         var self = this;

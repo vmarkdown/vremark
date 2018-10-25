@@ -1,6 +1,4 @@
 const PLUGIN_NAME = 'vremark-plugin-highlight';
-const COMPONENT_NAME = 'vremark-highlight';
-
 
 var languages = (function () {
     var languages = require('./languages');
@@ -20,7 +18,6 @@ function plugin(options = {}) {
     return async function transformer(root) {
 
         root.plugins = root.plugins || {};
-        // root.components = root.components || {};
 
         var children = root.children;
         for(var i=0;i<children.length;i++) {
@@ -33,21 +30,14 @@ function plugin(options = {}) {
                     lang: node.lang,
                     code: node.value
                 });
-                // node.component = PLUGIN_NAME;
-                // node.type = 'component';
-                node.tagName = COMPONENT_NAME;
-                // root.components[PLUGIN_NAME] = true;
-                root.plugins[PLUGIN_NAME] = {
-                    component: COMPONENT_NAME
-                };
 
+                node.tagName = PLUGIN_NAME;
+                root.plugins[PLUGIN_NAME] = true;
             }
         }
 
     };
 
 }
-
-plugin.COMPONENT_NAME = COMPONENT_NAME;
 
 module.exports = plugin;

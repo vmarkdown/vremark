@@ -1,8 +1,8 @@
-require('./vremark-sequence.scss');
+require('./index.scss');
 // var Diagram = require('js-sequence-diagrams');
 
 module.exports = ({
-    name: 'vremark-sequence',
+    name: 'vremark-plugin-sequence',
     props: {
         'code': {
             type: String,
@@ -16,7 +16,7 @@ module.exports = ({
     },
     render(h) {
         return h('div', {
-            'class': ['vremark-sequence']
+            'class': ['vremark-plugin-sequence']
         });
     },
     methods:{
@@ -37,7 +37,7 @@ module.exports = ({
             require('js-sequence-diagrams-css');
             var Diagram = require('js-sequence-diagrams');
             self.compile(Diagram);
-        }, 'vremark-sequence-libs');
+        }, 'vremark-plugin-sequence-libs');
     },
     destroyed(){
         var self = this;

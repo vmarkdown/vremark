@@ -1,4 +1,4 @@
-require('./vremark-mermaid.scss');
+require('./index.scss');
 // var mermaid = require('mermaid');
 //
 // mermaid.initialize({
@@ -9,7 +9,7 @@ require('./vremark-mermaid.scss');
 
 var index = 0;
 module.exports = ({
-    name: 'vremark-mermaid',
+    name: 'vremark-plugin-mermaid',
     props: {
         'code': {
             type: String,
@@ -23,7 +23,7 @@ module.exports = ({
     },
     render(h) {
         return h('pre',
-            {'class': ['vremark-mermaid', 'mermaid']},
+            {'class': ['vremark-plugin-mermaid', 'mermaid']},
             [
                 h('code', {
                     'class': ['lang-mermaid'],
@@ -58,7 +58,7 @@ module.exports = ({
                 gantt: {}
             });
             self.compile(mermaid);
-        }, 'vremark-mermaid-libs');
+        }, 'vremark-plugin-mermaid-libs');
     },
     destroyed(){
         var self = this;

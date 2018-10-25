@@ -1,7 +1,7 @@
-require('./vremark-highlight.scss');
+require('./index.scss');
 
 module.exports = {
-    name: 'vremark-highlight',
+    name: 'vremark-plugin-highlight',
     props: {
         'lang': {
             type: String,
@@ -14,12 +14,13 @@ module.exports = {
     },
     data() {
         return {
-            lib: false,
             result: this.code || ''
         }
     },
     render(h) {
-        return h('pre', {}, [
+        return h('pre', {
+            'class': ['vremark-plugin-highlight']
+        }, [
             h('code', {
                 'class': ['hljs', this.lang],
                 domProps:{
@@ -45,7 +46,7 @@ module.exports = {
             require('highlight.js/styles/github.css');
             var hljs = require('highlight.js');
             self.compile(hljs);
-        }, 'vremark-highlight-libs');
+        }, 'vremark-plugin-highlight-libs');
     }
 };
 
