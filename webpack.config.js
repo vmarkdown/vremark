@@ -3,7 +3,10 @@ const merge = require('webpack-merge');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const production = (process.env.NODE_ENV === 'production');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const AssetsPlugin = require('assets-webpack-plugin');
+
 const base = require('./config/webpack.config.base');
+
 
 const config = {
     mode: 'none',
@@ -90,12 +93,15 @@ module.exports = [
 
     merge(base, config, {
         entry:{
+            'vremark-plugin-math': 'vremark-plugin-math',
+            'vremark-plugin-flowchart': 'vremark-plugin-flowchart',
+            'vremark-plugin-sequence': 'vremark-plugin-sequence',
+            'vremark-plugin-mermaid': 'vremark-plugin-mermaid',
+            'vremark-plugin-highlight': 'vremark-plugin-highlight',
+            'vremark-plugin-g2': 'vremark-plugin-g2',
+            'vremark-plugin-chart': 'vremark-plugin-chart'
 
-
-            'vremark-plugin-math': path.resolve(__dirname, './src/plugins' ,'vremark-plugin-math/index.js'),
-
-
-
+            // 'vremark-plugin-math': path.resolve(__dirname, './src/plugins' ,'vremark-plugin-math/index.js'),
             // 'vremark-chart': path.resolve(__dirname, './src/plugins' ,'vremark-plugin-chart/component/vremark-chart.js'),
             // 'vremark-flowchart': path.resolve(__dirname, './src/plugins' ,'vremark-plugin-flowchart/component/vremark-flowchart.js'),
             // 'vremark-g2': path.resolve(__dirname, './src/plugins' ,'vremark-plugin-g2/component/vremark-g2.js'),
@@ -105,9 +111,16 @@ module.exports = [
             // 'vremark-sequence': path.resolve(__dirname, './src/plugins' ,'vremark-plugin-sequence/component/vremark-sequence.js'),
         },
         output: {
-            filename: production?'[name].[hash].common.min.js':'[name].common.js',
-            libraryTarget: "commonjs2"
-        }
+            filename: production?'[name].[hash].min.js':'[name].js',
+            libraryTarget: "amd"
+        },
+        plugins: [
+            new AssetsPlugin({
+                filename: 'plugins.json',
+                path: path.join(__dirname, 'dist'),
+                prettyPrint: true
+            })
+        ]
     }),
 
 ];
