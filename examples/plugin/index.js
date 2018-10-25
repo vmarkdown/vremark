@@ -2,7 +2,7 @@ require('github-markdown-css');
 import Vue from 'vue';
 const PromiseWorker = require('promise-worker');
 
-const PluginManager = require('../../src/plugin-manager');
+// const PluginManager = require('../../src/plugin-manager');
 const render = require('../../src/core/render');
 import Worker from '../../src/vremark.worker';
 
@@ -13,6 +13,9 @@ function sleep(time) {
         }, time || 1000);
     });
 }
+
+
+
 
 (async ()=>{
 
@@ -26,7 +29,7 @@ function sleep(time) {
         });
     }
 
-    const pluginManager = new PluginManager({
+    const pluginManager = new render.PluginManager({
         loader: function (plugin) {
 
             return new Promise(function (success, fail) {
@@ -46,7 +49,11 @@ function sleep(time) {
 
         }
     });
-    
+
+
+
+
+
     const app = new Vue({
         el: '#app',
         data: {
@@ -79,7 +86,6 @@ function sleep(time) {
                 console.log( mdast );
                 console.log( hast );
                 console.log( plugins );
-
 
                 pluginManager.load(plugins, function () {
                     self.refresh(hast);

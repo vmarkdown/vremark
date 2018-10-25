@@ -54,39 +54,3 @@ class PluginManager {
 }
 
 module.exports = PluginManager;
-
-
-// function loadPlugin(plugin, has, register) {
-//
-//     if(!has) return false;
-//
-//     // const plguin
-//     if(has(plugin)){
-//         return true;
-//     }
-//
-//     // const component = await load(plugin);
-//     //
-//     // if(!component) {
-//     //     return false;
-//     // }
-//
-//     register && register(plugin);
-//
-//
-//
-// }
-//
-// module.exports = async function loadPlugins(plugins, has, register) {
-//
-//     const loads = Object.keys(plugins).map(function (name) {
-//         // const plugin = plugins[name];
-//         const plugin = name;
-//         return loadPlugin(plugin, has, register);
-//     });
-//
-//     Promise.all(loads);
-//
-//     // return await Promise.all(loads);
-//
-// };
