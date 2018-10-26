@@ -3,6 +3,7 @@
 var whitespace = require('is-whitespace-character');
 var normalize = require('../util/normalize');
 
+
 module.exports = footnoteDefinition;
 footnoteDefinition.notInList = true;
 footnoteDefinition.notInBlock = true;
@@ -18,7 +19,22 @@ var C_COLON = ':';
 
 var EXPRESSION_INITIAL_TAB = /^( {4}|\t)?/gm;
 
+
+function trimTrailingLines(value) {
+    var val = String(value);
+    var index = val.length;
+
+    var c = val.charAt(--index);
+    while (c === ' ' || c === '\n') {
+        c = val.charAt(--index);
+    }
+
+    return val.slice(0, index + 1)
+}
+
+
 function footnoteDefinition(eat, value, silent) {
+
     var self = this;
     var offsets = self.offset;
     var index;
@@ -138,9 +154,27 @@ function footnoteDefinition(eat, value, silent) {
             while (index < length) {
                 character = value.charAt(index);
 
+                //============================================
+                // debugger
+                if (
+                    value.charAt(index) === C_BRACKET_OPEN && value.charAt(index + 1) !== C_CARET
+                ) {
+                    var a = value.substring(index);
+                    if(/^\[[\s\S]+\]:/.test(a)){
+                        character = '';
+                        index = length;
+                        console.log( value.charAt(index + 1) )
+                        break;
+                    }
+                }
+                //============================================
+
+
                 if (character !== C_SPACE) {
                     break;
                 }
+
+
 
                 subqueue += character;
                 index++;
@@ -162,6 +196,7 @@ function footnoteDefinition(eat, value, silent) {
         index++;
     }
 
+    content = trimTrailingLines(content);
     subvalue += content;
 
     content = content.replace(EXPRESSION_INITIAL_TAB, function (line) {
