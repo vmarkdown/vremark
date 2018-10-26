@@ -11,7 +11,7 @@ const config = {
     mode: 'none',
     output: {
         path: path.resolve(__dirname, 'dist'),
-        publicPath: 'vremark',
+        publicPath: 'vremark/',
         // filename: '[name].common.js',
         // filename: production?'[name].common.min.js':'[name].common.js',
         // libraryTarget: "umd",

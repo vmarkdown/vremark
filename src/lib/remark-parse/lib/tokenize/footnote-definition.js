@@ -162,7 +162,7 @@ function footnoteDefinition(eat, value, silent) {
                     if(/^\[[\s\S]+\]:/.test(a)){
                         character = '';
                         index = length;
-                        console.log( value.charAt(index + 1) )
+                        // console.log( value.charAt(index + 1) )
                         break;
                     }
                 }
