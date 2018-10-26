@@ -155,7 +155,6 @@ function footnoteDefinition(eat, value, silent) {
                 character = value.charAt(index);
 
                 //============================================
-                // debugger
                 if (
                     value.charAt(index) === C_BRACKET_OPEN && value.charAt(index + 1) !== C_CARET
                 ) {
@@ -195,8 +194,9 @@ function footnoteDefinition(eat, value, silent) {
         content += character;
         index++;
     }
-
+    //============================================
     content = trimTrailingLines(content);
+    //============================================
     subvalue += content;
 
     content = content.replace(EXPRESSION_INITIAL_TAB, function (line) {
