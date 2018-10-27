@@ -86,6 +86,7 @@ function createProcessor(_options) {
     if(options.highlight) {
         plugins.push([
             highlight, {
+                lineNumbers: options.lineNumbers
             }
         ]);
     }

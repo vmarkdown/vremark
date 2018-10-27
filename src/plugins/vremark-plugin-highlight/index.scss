@@ -1,3 +1,16 @@
-.vremark-plugin-highlight {
+pre.vremark-plugin-highlight {
+  font-size: 0.8em;
+
+  .vremark-hljs-line{
+  }
+
+  .vremark-hljs-line-number{
+    text-align: right;
+    display: inline-block;
+    min-width: 30px;
+    margin-right: 10px;
+    margin-left: -10px;
+    color: rgba(27,31,35,0.3);
+  }
 
 }

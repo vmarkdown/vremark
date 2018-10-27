@@ -1,12 +1,7 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 const merge = require('webpack-merge');
-
 const base = require('../config/webpack.config.base');
-
-const example = process.argv.slice(-1)[0];
-
-console.log('example:', example);
 
 const config = {
     output: {
@@ -19,71 +14,12 @@ const config = {
     },
     module: {
         rules: [
-            /*
-            {
-                test: require.resolve('snapsvg'),
-                loader: 'imports-loader?this=>window,fix=>module.exports=0'
-            },
-            {
-                test: require.resolve(path.resolve(__dirname, '../src/lib/js-sequence-diagrams/sequence-diagram.js')),
-                loader: 'imports-loader?_=underscore,Raphael=raphael'
-            },
-            {
-                test: /\.worker\.js$/,
-                use: {
-                    loader: 'worker-loader',
-                    options: { name: '[name].js' }
-                    // options: { name: 'WorkerName.[hash].js' }
-                }
-            },
-            {
-                test: /\.md$/,
-                use: 'text-loader'
-            },
-            {
-                test: /\.css$/,
-                use: [
-                    "style-loader",
-                    "css-loader"
-                ]
-            },
-            {
-                test: /\.scss$/,
-                use: [
-                    "style-loader",
-                    "css-loader",
-                    "sass-loader"
-                ]
-            },
-            {
-                test: /\.(woff|woff2|eot|ttf|otf)$/,
-                use: {
-                    loader:'file-loader',
-                    options: {
-                        name: '[path][name].[ext]',
-                        context:'src'
-                    }
-                }
-            }
-            */
         ]
     },
     externals: {
-        'vue': 'Vue',
-        // 'flowchart.js': 'flowchart',
-        // 'highlight.js': 'hljs',
-        // 'lowlight': 'lowlight',
-        // 'katex': 'katex',
-        // 'underscore': '_',
-        // 'mermaid': 'mermaid',
-        // '@antv/g2': 'G2'
+        'vue': 'Vue'
     },
-    plugins: [
-        // new webpack.optimize.CommonsChunkPlugin({
-        //     name: "vendor",
-        //     minChunks: Infinity
-        // }),
-    ],
+    plugins: [],
     devServer: {
         // hotOnly: true,
         inline: false,
@@ -103,14 +39,17 @@ const config = {
     // }
 };
 
-const entry = {
-    // vendor: ["vue"],
-};
-entry['example-'+example+'-main'] = path.resolve(__dirname, './'+example+'/index.js');
+
 
 module.exports = [
     merge(base, config, {
-        entry: entry,
+        entry: (function () {
+            const entry = {};
+            const example = process.argv.slice(-1)[0];
+            console.log('example:', example);
+            entry['example-'+example+'-main'] = path.resolve(__dirname, './'+example+'/index.js');
+            return entry;
+        })(),
         externals: {
 
         },

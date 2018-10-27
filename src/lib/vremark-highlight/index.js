@@ -28,7 +28,8 @@ function plugin(options = {}) {
                 node.data.props = node.data.props || {};
                 Object.assign(node.data.props, {
                     lang: node.lang,
-                    code: node.value
+                    code: node.value,
+                    lineNumbers: options.lineNumbers
                 });
 
                 node.tagName = PLUGIN_NAME;

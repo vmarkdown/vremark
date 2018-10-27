@@ -58,9 +58,6 @@ function sleep(time) {
     });
 
 
-
-
-
     const app = new Vue({
         el: '#app',
         data: {
@@ -85,7 +82,8 @@ function sleep(time) {
                 const {mdast, hast, plugins} = await parse(value, {
                     rootClassName: 'markdown-body',
                     rootTagName: 'main',
-                    hashid: true
+                    hashid: true,
+                    lineNumbers: false
                 });
                 console.timeEnd('worker');
 
