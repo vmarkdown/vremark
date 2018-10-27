@@ -58,13 +58,14 @@ module.exports = {
                 test: /\.md$/,
                 use: 'text-loader'
             },
-            {
-                test: /\.css$/,
-                use: [
-                    "style-loader",
-                    "css-loader"
-                ]
-            },
+
+            // {
+            //     test: /^(?!highlight)[\s\S]*\.css/,
+            //     use: [
+            //         "style-loader",
+            //         "css-loader"
+            //     ]
+            // },
             {
                 test: /\.scss$/,
                 use: [
@@ -75,6 +76,16 @@ module.exports = {
             },
             {
                 test: /\.(woff|woff2|eot|ttf|otf)$/,
+                use: {
+                    loader:'file-loader',
+                    options: {
+                        name: '[path][name].[ext]',
+                        context:'src'
+                    }
+                }
+            },
+            {
+                test: /\.(jpg|png|gif)$/,
                 use: {
                     loader:'file-loader',
                     options: {

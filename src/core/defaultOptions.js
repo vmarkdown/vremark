@@ -17,7 +17,7 @@ module.exports = {
     // render
     mode: 'vue',
     h: function () {},
-    rootClassName: 'remark-body',
+    rootClassName: 'vremark-body',
     rootTagName: 'div',
     hashid: true
 };

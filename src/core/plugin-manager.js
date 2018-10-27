@@ -19,8 +19,8 @@ class PluginManager {
         }
 
         try {
-            await this.options.loader(plugin);
-            this.plugins[plugin] = true;
+            const component = await this.options.loader(plugin);
+            this.plugins[plugin] = component;
         }
         catch (e) {
             return false;

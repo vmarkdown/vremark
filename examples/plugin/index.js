@@ -30,14 +30,14 @@ function sleep(time) {
     }
 
     const pluginManager = new render.PluginManager({
-        loader: function (plugin) {
+        loader: function (pluginName) {
 
             return new Promise(function (success, fail) {
 
-                Vue.component(plugin, function (resolve, reject) {
-                    requirejs([plugin], function(component){
-                        resolve(component);
-                        success();
+                Vue.component(pluginName, function (resolve, reject) {
+                    requirejs([pluginName], function(plugin){
+                        resolve(plugin.component || plugin);
+                        success(plugin);
                     }, function (e) {
                         // reject();
                         resolve({
@@ -81,9 +81,9 @@ function sleep(time) {
                 console.time('worker');
                 const {mdast, hast, plugins} = await parse(value, {
                     rootClassName: 'markdown-body',
-                    rootTagName: 'main',
+                    // rootTagName: 'main',
                     hashid: true,
-                    lineNumbers: false
+                    lineNumbers: true
                 });
                 console.timeEnd('worker');
 
@@ -148,6 +148,34 @@ function sleep(time) {
 
 
 
+    const theme = new Vue({
+        el: '#theme',
+        data() {
+            return {
+                theme: 'default',
+                themes: [
+                    'default',
+                    'github',
+                    'monokai-sublime',
+                    'darcula'
+                ]
+            }
+        },
+        methods: {
+            setTheme(theme) {
+                // console.log(theme);
+                // console.log(pluginManager.plugins);
+
+                if(!pluginManager.plugins.hasOwnProperty('vremark-plugin-highlight')){
+                    return;
+                }
+                const plugin = pluginManager.plugins['vremark-plugin-highlight'];
+
+                plugin.setTheme(theme);
+
+            }
+        }
+    });
 
 
 

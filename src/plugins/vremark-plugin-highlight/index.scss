@@ -1,5 +1,7 @@
 pre.vremark-plugin-highlight {
   font-size: 0.8em;
+  //background-color: rgba(26, 26, 26, 0.6) !important;
+  //background-color: #2b2b2b;
 
   .vremark-hljs-line{
   }
@@ -8,7 +10,7 @@ pre.vremark-plugin-highlight {
     text-align: right;
     display: inline-block;
     min-width: 30px;
-    margin-right: 10px;
+    margin-right: 16px;
     margin-left: -10px;
     color: rgba(27,31,35,0.3);
   }
