@@ -2,7 +2,7 @@ require('github-markdown-css');
 import Vue from 'vue';
 const PromiseWorker = require('promise-worker');
 
-// const PluginManager = require('../../src/plugin-manager');
+const PluginManager = require('../../src/core/plugin-manager');
 const render = require('../../src/core/render');
 import Worker from '../../src/vremark.worker';
 
@@ -29,7 +29,23 @@ function sleep(time) {
         });
     }
 
-    const pluginManager = new render.PluginManager({
+    const pluginManager = new PluginManager({
+        config: {
+            paths: {
+                'highlight': '//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min'
+            }
+        },
+        onBeforeLoad: function (pluginName) {
+            Vue.component(pluginName, function (resolve, reject) {
+
+
+            });
+            return false;
+        },
+        onOneLoaded: function (plugin) {
+            const component = plugin.component || plugin;
+            Vue.component(component.name, component);
+        },
         loader: function (pluginName) {
 
             return new Promise(function (success, fail) {
@@ -83,18 +99,19 @@ function sleep(time) {
                     rootClassName: 'markdown-body',
                     // rootTagName: 'main',
                     hashid: true,
-                    lineNumbers: true
+                    lineNumbers: true,
+                    plugins: Object.keys(pluginManager.plugins)
                 });
                 console.timeEnd('worker');
 
 
                 console.log( mdast );
                 console.log( hast );
-                console.log( plugins );
+                // console.log( plugins );
 
-                pluginManager.load(plugins, function () {
-                    self.refresh(hast);
-                });
+                // pluginManager.load(plugins, function () {
+                //     self.refresh(hast);
+                // });
 
                 const h = self.$createElement;
 
@@ -105,6 +122,16 @@ function sleep(time) {
                 console.timeEnd('render');
                 self.vdom = vdom;
                 console.log( vdom );
+
+
+
+                const isRefresh = await pluginManager.detect(mdast, hast);
+
+
+                if(isRefresh) {
+                    self.setValue(value);
+                }
+
 
             }
         },

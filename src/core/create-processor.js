@@ -23,9 +23,15 @@ const stringify = require('../lib/rehype-vdom');
 
 const defaultOptions = require('./defaultOptions.js');
 
+function hasPlugin(name, plugins) {
+    // return !!plugins.hasOwnProperty(name);
+    return plugins.indexOf(name) > -1;
+}
+
 function createProcessor(_options) {
     const options = Object.assign({}, defaultOptions, _options);
 
+    // const hasPlugins = options.plugins;
     const plugins = [];
 
     if(options.breaks) {
@@ -83,7 +89,7 @@ function createProcessor(_options) {
         ]);
     }
 
-    if(options.highlight) {
+    if(options.highlight && hasPlugin('vremark-plugin-highlight', options.plugins)) {
         plugins.push([
             highlight, {
                 lineNumbers: options.lineNumbers

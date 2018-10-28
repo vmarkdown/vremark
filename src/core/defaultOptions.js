@@ -6,11 +6,12 @@ module.exports = {
     hash: true,
 
     //plugins
-    flowchart: true,
-    mermaid: true,
-    sequence: true,
-    chart: true,
-    g2: true,
+    plugins: {},
+    flowchart: false,
+    mermaid: false,
+    sequence: false,
+    chart: false,
+    g2: false,
     highlight: true,
 
 

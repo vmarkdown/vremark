@@ -47,6 +47,7 @@
     "remark-parse": "^5.0.0",
     "remark-rehype": "^3.0.1",
     "remark-render": "^0.0.16",
+    "requirejs": "^2.3.6",
     "snapsvg": "^0.5.1",
     "underscore": "^1.9.1",
     "unist-util-remove": "^1.0.1"
