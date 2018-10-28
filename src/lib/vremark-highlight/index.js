@@ -48,4 +48,6 @@ function plugin(options = {}) {
 
 }
 
+plugin.PLUGIN_NAME = PLUGIN_NAME;
+
 module.exports = plugin;

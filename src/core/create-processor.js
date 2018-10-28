@@ -23,8 +23,8 @@ const stringify = require('../lib/rehype-vdom');
 
 const defaultOptions = require('./defaultOptions.js');
 
-function hasPlugin(name, plugins) {
-    return !!plugins.hasOwnProperty(name);
+function hasPlugin(plugin, plugins) {
+    return !!plugins.hasOwnProperty(plugin.PLUGIN_NAME);
 }
 
 function createProcessor(_options) {
@@ -40,68 +40,67 @@ function createProcessor(_options) {
         ]);
     }
 
-    // if(options.math) {
-    //     plugins.push([
-    //         math, {
-    //         }
-    //     ]);
-    //
-    //     plugins.push([
-    //         mathComponent, {
-    //         }
-    //     ]);
-    // }
-    //
-    //
-    // if(options.flowchart) {
-    //     plugins.push([
-    //         flowchart, {
-    //         }
-    //     ]);
-    // }
-    //
-    // if(options.sequence) {
-    //     plugins.push([
-    //         sequence, {
-    //         }
-    //     ]);
-    // }
-    //
-    // if(options.mermaid) {
-    //     plugins.push([
-    //         mermaid, {
-    //         }
-    //     ]);
-    // }
-    //
-    // if(options.chart) {
-    //     plugins.push([
-    //         chart, {
-    //         }
-    //     ]);
-    // }
-    //
-    // if(options.g2) {
-    //     plugins.push([
-    //         g2, {
-    //         }
-    //     ]);
-    // }
+    if(options.math) {
+        plugins.push([
+            math, {
+            }
+        ]);
 
-    // if(options.plugins['vremark-plugin-highlight']) {
-        // plugins.push([
-        //     highlight, {
-        //         lineNumbers: options.lineNumbers
-        //     }
-        // ]);
-    // }
-    plugins.push([
-        highlight, {
-            enable: !!options.plugins['vremark-plugin-highlight'],
-            lineNumbers: options.lineNumbers
-        }
-    ]);
+        plugins.push([
+            mathComponent, {
+                enable: hasPlugin(mathComponent, options.plugins),
+            }
+        ]);
+    }
 
+    if(options.flowchart) {
+        plugins.push([
+            flowchart, {
+                enable: hasPlugin(flowchart, options.plugins),
+            }
+        ]);
+    }
+
+    if(options.sequence) {
+        plugins.push([
+            sequence, {
+                enable: hasPlugin(sequence, options.plugins),
+            }
+        ]);
+    }
+
+    if(options.mermaid) {
+        plugins.push([
+            mermaid, {
+                enable: hasPlugin(mermaid, options.plugins),
+            }
+        ]);
+    }
+
+    if(options.chart) {
+        plugins.push([
+            chart, {
+                enable: hasPlugin(chart, options.plugins),
+            }
+        ]);
+    }
+
+    if(options.g2) {
+        plugins.push([
+            g2, {
+                enable: hasPlugin(g2, options.plugins),
+            }
+        ]);
+    }
+
+    if(options.highlight) {
+        plugins.push([
+            highlight, {
+                enable: hasPlugin(highlight, options.plugins),
+                lineNumbers: options.lineNumbers
+            }
+        ]);
+    }
 
     if(options.hash) {
         plugins.push([

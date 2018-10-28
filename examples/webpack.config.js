@@ -103,13 +103,13 @@ module.exports = [
 
     merge(base, config, {
         entry: {
-            // 'vremark-plugin-math': 'vremark-plugin-math',
-            // 'vremark-plugin-flowchart': 'vremark-plugin-flowchart',
-            // 'vremark-plugin-sequence': 'vremark-plugin-sequence',
-            // 'vremark-plugin-mermaid': 'vremark-plugin-mermaid',
+            'vremark-plugin-math': 'vremark-plugin-math',
+            'vremark-plugin-flowchart': 'vremark-plugin-flowchart',
+            'vremark-plugin-sequence': 'vremark-plugin-sequence',
+            'vremark-plugin-mermaid': 'vremark-plugin-mermaid',
             'vremark-plugin-highlight': 'vremark-plugin-highlight',
-            // 'vremark-plugin-g2': 'vremark-plugin-g2',
-            // 'vremark-plugin-chart': 'vremark-plugin-chart'
+            'vremark-plugin-g2': 'vremark-plugin-g2',
+            'vremark-plugin-chart': 'vremark-plugin-chart'
         },
         output: {
             libraryTarget: "amd"
@@ -138,18 +138,15 @@ module.exports = [
                             loader: "sass-loader"
                         }
                     ]
-                }
+                },
 
-
-
-
-                // {
-                //     test: /\.css$/,
-                //     use: [
-                //         "style-loader",
-                //         "css-loader"
-                //     ]
-                // },
+                {
+                    test: /\.css$/,
+                    use: [
+                        "style-loader",
+                        "css-loader"
+                    ]
+                },
                 // {
                 //     test: /\.less$/,
                 //     use: [

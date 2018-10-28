@@ -7,13 +7,20 @@ function isPlugin(node) {
 
 function plugin(options = {}) {
 
+    var enable = options.enable;
+
     return async function transformer(root) {
 
-        root.plugins = root.plugins || {};
+        root.plugins = root.plugins || [];
 
         visit(root, function (node) {
             return isPlugin(node);
         }, function (node) {
+
+            if(!enable) {
+                root.plugins.push(PLUGIN_NAME);
+                return false;
+            }
 
             node.data = node.data || {};
 
@@ -26,12 +33,14 @@ function plugin(options = {}) {
             node.type = 'code';
             node.tagName = PLUGIN_NAME;
 
-            root.plugins[PLUGIN_NAME] = true;
+            // root.plugins[PLUGIN_NAME] = true;
 
         });
 
     };
 
 }
+
+plugin.PLUGIN_NAME = PLUGIN_NAME;
 
 module.exports = plugin;
