@@ -15,8 +15,6 @@ function sleep(time) {
 }
 
 
-
-
 (async ()=>{
 
     const worker = new Worker();
@@ -30,46 +28,17 @@ function sleep(time) {
     }
 
     const pluginManager = new PluginManager({
+        plugins: [
+
+        ],
         config: {
             paths: {
                 'highlight': '//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min'
             }
         },
-        onBeforeLoad: function (pluginName) {
-            Vue.component(pluginName, function (resolve, reject) {
-
-
-            });
-            return false;
-        },
         onOneLoaded: function (plugin) {
             const component = plugin.component || plugin;
             Vue.component(component.name, component);
-        },
-        loader: function (pluginName) {
-
-            return new Promise(function (success, fail) {
-
-                Vue.component(pluginName, function (resolve, reject) {
-                    requirejs([pluginName], function(plugin){
-                        resolve(plugin.component || plugin);
-                        success(plugin);
-                    }, function (e) {
-                        // reject();
-                        resolve({
-                            render(h) {
-                                return h('pre', {}, [
-                                    h('code', {}, e.message)
-                                ])
-                            }
-                        });
-                        console.error(e);
-                        fail();
-                    });
-                });
-
-            });
-
         }
     });
 
@@ -90,7 +59,7 @@ function sleep(time) {
                 console.timeEnd('refresh');
                 self.vdom = vdom;
             },
-            async setValue(value) {
+            async setValue(value, noDetect) {
 
                 const self = this;
 
@@ -100,14 +69,14 @@ function sleep(time) {
                     // rootTagName: 'main',
                     hashid: true,
                     lineNumbers: true,
-                    plugins: Object.keys(pluginManager.plugins)
+                    plugins: pluginManager.getPlugins()
                 });
                 console.timeEnd('worker');
 
 
                 console.log( mdast );
                 console.log( hast );
-                // console.log( plugins );
+                console.log( plugins );
 
                 // pluginManager.load(plugins, function () {
                 //     self.refresh(hast);
@@ -123,15 +92,23 @@ function sleep(time) {
                 self.vdom = vdom;
                 console.log( vdom );
 
+                if( !noDetect && plugins.length > 0 ){
+                    // pluginManager.detect(mdast, hast).then(function (isRefresh) {
+                    //     if(isRefresh) {
+                    //         self.setValue(value, true);
+                    //     }
+                    // });
+
+                    pluginManager.load(plugins).then(function (loaded) {
+                        var isRefresh = loaded?loaded.length>0:false;
+                        if(isRefresh) {
+                            self.setValue(value, true);
+                        }
+                    });
 
 
-                const isRefresh = await pluginManager.detect(mdast, hast);
 
-
-                if(isRefresh) {
-                    self.setValue(value);
                 }
-
 
             }
         },
@@ -145,16 +122,23 @@ function sleep(time) {
         async mounted() {
             const self = this;
 
-            const md = await import(
+            const md = (await import(
                 /* webpackChunkName: "md" */
                 '../md/test.md'
-                );
+                )).default;
+
+            // debugger
             // const md = require('../md/test.md');
-            self.setValue(md.default);
+            self.setValue(md);
+
             // for(var i=0;i<20;i++){
-            //     await this.setValue(md);
+            //     await self.setValue(md);
             //     await sleep(5000);
             // }
+
+
+
+
 //             setTimeout(function () {
 //                     self.setValue(`\`\`\` python
 // @requires_authorization===========
@@ -190,16 +174,11 @@ function sleep(time) {
         },
         methods: {
             setTheme(theme) {
-                // console.log(theme);
-                // console.log(pluginManager.plugins);
-
-                if(!pluginManager.plugins.hasOwnProperty('vremark-plugin-highlight')){
+                if(!pluginManager.has('vremark-plugin-highlight')){
                     return;
                 }
-                const plugin = pluginManager.plugins['vremark-plugin-highlight'];
-
+                const plugin = pluginManager.get('vremark-plugin-highlight');
                 plugin.setTheme(theme);
-
             }
         },
         mounted(){

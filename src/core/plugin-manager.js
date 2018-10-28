@@ -1,37 +1,5 @@
 const loader = require('./loader');
 
-var languages = (function () {
-    var languages = require('./languages');
-    var keys = {};
-    languages.forEach(function (language) {
-        keys[language] = true;
-    });
-    return keys;
-})();
-
-function isHighlightPlugin(node) {
-    return node.lang && languages[node.lang];
-}
-
-function detectTree(root, pluginManager) {
-    const plugins = {};
-
-    var children = root.children;
-    for(var i=0;i<children.length;i++) {
-        var node = children[i];
-        if( node.type === 'code' ){
-
-            if( !pluginManager.has('vremark-plugin-highlight') && isHighlightPlugin(node) ){
-                // plugins.push('vremark-plugin-highlight');
-                plugins['vremark-plugin-highlight'] = true;
-            }
-
-        }
-    }
-
-    return plugins;
-}
-
 class PluginManager {
 
     constructor(options) {
@@ -55,6 +23,18 @@ class PluginManager {
         return this.plugins[name];
     }
 
+    push(plugin) {
+        this.plugins[plugin.name] = plugin;
+    }
+
+    getPlugins() {
+        var plugins = {};
+        Object.keys(this.plugins).forEach(function (p) {
+            plugins[p] = true;
+        });
+        return plugins;
+    }
+
     async _loadPlugin(name) {
 
         if(this.has(name)){
@@ -62,18 +42,12 @@ class PluginManager {
         }
 
         try {
-            // const component = await this.options.loader(plugin);
-            // this.plugins[plugin] = component;
-            // const plugin = await loader(name);
-            // const plugin = loader(name);
-            // this.options.onOneLoaded && this.options.onOneLoaded(plugin);
-
             const plugin = await loader(name);
-            // debugger
 
             this.options.onOneLoaded && this.options.onOneLoaded(plugin);
 
-            // this.plugins[name] = plugin;
+            this.push(plugin);
+
             return plugin;
         }
         catch (e) {
@@ -90,47 +64,17 @@ class PluginManager {
 
         const self = this;
 
-        const loads = Object.keys(plugins).map(function (plugin) {
+        const loads = plugins.map(function (plugin) {
             return self._loadPlugin(plugin);
         });
 
-        // Promise.all(loads).then(function (_plugins) {
-        //     callback && callback(_plugins);
-        // });
-
-        const _plugins = await Promise.all(loads);
-        // debugger
-        // Object.assign(self.plugins, _plugins);
-        _plugins.forEach(function (p) {
-            // debugger
-            // Object.assign(self.plugins, p);
-            self.plugins[p.name] = p;
-        });
-
-        return _plugins;
+        return await Promise.all(loads);
     }
 
     unload(plugins) {
 
     }
 
-    async detect(mdast, hast) {
-        const self = this;
-
-        if(mdast) {
-            const plugins = detectTree(mdast, self);
-            const length = Object.keys(plugins).length;
-            if(length > 0) {
-                await self.load(plugins);
-            }
-
-            return length > 0;
-            // debugger
-        }
-
-        return false;
-
-    }
 }
 
 module.exports = PluginManager;

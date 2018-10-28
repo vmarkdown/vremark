@@ -1,6 +1,10 @@
 const createProcessor = require('./create-processor.js');
 const data = require('./data.js');
 
+function detect() {
+
+}
+
 async function parse(markdown, option) {
 
     const processor = createProcessor(option);
@@ -11,7 +15,7 @@ async function parse(markdown, option) {
 
     data(hast, option);
 
-    const plugins = mdast.plugins || {};
+    const plugins = mdast.plugins || hast.plugins || {};
 
     return {mdast, hast, plugins};
 }
