@@ -174,6 +174,12 @@ function sleep(time) {
                 plugin.setTheme(theme);
 
             }
+        },
+        mounted(){
+            const self = this;
+            // setTimeout(function () {
+            //     self.setTheme('monokai-sublime');
+            // }, 1000);
         }
     });
 

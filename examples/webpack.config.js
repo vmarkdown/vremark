@@ -103,37 +103,64 @@ module.exports = [
 
     merge(base, config, {
         entry: {
-            'vremark-plugin-math': 'vremark-plugin-math',
-            'vremark-plugin-flowchart': 'vremark-plugin-flowchart',
-            'vremark-plugin-sequence': 'vremark-plugin-sequence',
-            'vremark-plugin-mermaid': 'vremark-plugin-mermaid',
+            // 'vremark-plugin-math': 'vremark-plugin-math',
+            // 'vremark-plugin-flowchart': 'vremark-plugin-flowchart',
+            // 'vremark-plugin-sequence': 'vremark-plugin-sequence',
+            // 'vremark-plugin-mermaid': 'vremark-plugin-mermaid',
             'vremark-plugin-highlight': 'vremark-plugin-highlight',
-            'vremark-plugin-g2': 'vremark-plugin-g2',
-            'vremark-plugin-chart': 'vremark-plugin-chart'
+            // 'vremark-plugin-g2': 'vremark-plugin-g2',
+            // 'vremark-plugin-chart': 'vremark-plugin-chart'
         },
         output: {
             libraryTarget: "amd"
         },
+        externals: {
+            'highlight.js': 'highlight'
+        },
         module: {
             rules: [
-                {
-                    test: /\.css$/,
-                    use: [
-                        "style-loader",
-                        "css-loader"
-                    ]
-                },
+
+
                 {
                     test: /\.less$/,
                     use: [
                         {
-                            loader: "style-loader/useable" //,  options: { attrs: { id: 'id' } }
+                            loader: "style-loader/useable" ,
+                            options: {
+                                // singleton: true,
+                                // attrs: {}
+                            }
                         },
                         {
                             loader: "css-loader"
+                        },
+                        {
+                            loader: "sass-loader"
                         }
                     ]
                 }
+
+
+
+
+                // {
+                //     test: /\.css$/,
+                //     use: [
+                //         "style-loader",
+                //         "css-loader"
+                //     ]
+                // },
+                // {
+                //     test: /\.less$/,
+                //     use: [
+                //         {
+                //             loader: "style-loader/useable" //,  options: { attrs: { id: 'id' } }
+                //         },
+                //         {
+                //             loader: "css-loader"
+                //         }
+                //     ]
+                // }
 
                 // {
                 //     // test: /highlight[\s\S]*\.css$/,
