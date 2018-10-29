@@ -54,7 +54,6 @@
 }
 ```
 
-<br/>
 
 [Documentation for Line Chart](http://www.chartjs.org/docs/#line-chart)
 
@@ -107,7 +106,6 @@
 }
 ```
 
-<br/>
 
 [Documentation for Bar Chart](http://www.chartjs.org/docs/#bar-chart)
 
@@ -169,7 +167,6 @@
 }
 ```
 
-<br/>
 
 [Documentation for Radar Chart](http://www.chartjs.org/docs/#radar-chart)
 
@@ -210,7 +207,6 @@
 }
 ```
 
-<br/>
 
 [Documentation for Polar Area Chart](http://www.chartjs.org/docs/#polar-area-chart)
 
@@ -249,7 +245,6 @@
 }
 ```
 
-<br/>
 
 [Documentation for Pie Chart](http://www.chartjs.org/docs/#doughnut-pie-chart)
 
@@ -288,7 +283,6 @@
 }
 ```
 
-<br/>
 
 [Documentation for Doughnut Chart](http://www.chartjs.org/docs/#doughnut-pie-chart)
 
@@ -322,6 +316,5 @@
 }
 ```
 
-<br/>
 
 [Documentation for Bubble Chart](http://www.chartjs.org/docs/#bubble-chart)

@@ -27,6 +27,34 @@ const config = {
     },
     module: {
         rules: [
+
+            {
+                test: /\.css$/,
+                use: [
+                    "style-loader",
+                    "css-loader"
+                ]
+            },
+            {
+                test: /\.less$/,
+                use: [
+                    {
+                        loader: "style-loader/useable" ,
+                        options: {
+                            // singleton: true,
+                            // attrs: {}
+                        }
+                    },
+                    {
+                        loader: "css-loader"
+                    },
+                    {
+                        loader: "sass-loader"
+                    }
+                ]
+            },
+
+
             // {
             //     test: /\.css$/,
             //     use: [
@@ -88,6 +116,12 @@ module.exports = [
     merge(base, config, {
         entry:{
             'vremark-render': path.resolve(__dirname, './src/core/render.js')
+        }
+    }),
+
+    merge(base, config, {
+        entry:{
+            'vremark-plugin-manager': path.resolve(__dirname, './src/core/plugin-manager.js')
         }
     }),
 

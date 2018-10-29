@@ -51,6 +51,7 @@ class PluginManager {
             return plugin;
         }
         catch (e) {
+            console.error(e);
             return null;
         }
 
@@ -65,7 +66,12 @@ class PluginManager {
         const self = this;
 
         const loads = plugins.map(function (plugin) {
+            if(self.has(plugin)){
+                return null;
+            }
             return self._loadPlugin(plugin);
+        }).filter(function (p) {
+            return p !== null;
         });
 
         return await Promise.all(loads);

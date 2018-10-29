@@ -33,8 +33,23 @@ function sleep(time) {
         ],
         config: {
             paths: {
-                'highlight': '//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min'
-            }
+                // 'highlight': '//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min',
+                // 'g2': '//gw.alipayobjects.com/os/antv/pkg/_antv.g2-3.3.2/dist/g2.min',
+                // 'chart': '//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min',
+                // 'katex': '//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min',
+                // // 'katex-css': '//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css',
+                // 'flowchart': '//cdnjs.cloudflare.com/ajax/libs/flowchart/1.11.3/flowchart.min',
+                // 'Raphael': '//cdnjs.cloudflare.com/ajax/libs/raphael/2.2.7/raphael.min',
+                // 'mermaid': '//cdnjs.cloudflare.com/ajax/libs/mermaid/7.1.2/mermaid.min'
+
+            },
+            // shim : {
+            //     katex: {
+            //         deps: [
+            //             'css!//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css'
+            //         ]
+            //     },
+            // }
         },
         onOneLoaded: function (plugin) {
             const component = plugin.component || plugin;
@@ -132,7 +147,7 @@ function sleep(time) {
             self.setValue(md);
 
             // for(var i=0;i<20;i++){
-            //     await self.setValue(md);
+            //     await self.setValue(md.replace('马克飞象', ''+new Date().getTime()));
             //     await sleep(5000);
             // }
 

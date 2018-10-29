@@ -17,6 +17,14 @@ const config = {
         rules: [
 
 
+            {
+                test: /\.css$/,
+                use: [
+                    "style-loader",
+                    "css-loader"
+                ]
+            }
+
             // {
             //     test: /^(?!highlight.js\/styles)[a-zA-Z-_0-9\./]+\.css/,
             //     use: [
@@ -90,32 +98,52 @@ module.exports = [
         ],
         module: {
             rules: [
-                {
-                    test: /\.css$/,
-                    use: [
-                        "style-loader",
-                        "css-loader"
-                    ]
-                }
             ]
+        }
+    }),
+
+
+
+    merge(base, config, {
+        entry: {
+            'vremark-plugin-math-libs':         path.join(__dirname, '../src/plugins/', 'vremark-plugin-math','/libs.js'),
+            'vremark-plugin-flowchart-libs':    path.join(__dirname, '../src/plugins/', 'vremark-plugin-flowchart','/libs.js'),
+            'vremark-plugin-sequence-libs':     path.join(__dirname, '../src/plugins/', 'vremark-plugin-sequence','/libs.js'),
+            'vremark-plugin-mermaid-libs':      path.join(__dirname, '../src/plugins/', 'vremark-plugin-mermaid','/libs.js'),
+            'vremark-plugin-g2-libs':           path.join(__dirname, '../src/plugins/', 'vremark-plugin-g2','/libs.js'),
+            'vremark-plugin-chart-libs':        path.join(__dirname, '../src/plugins/', 'vremark-plugin-chart','/libs.js'),
+            'vremark-plugin-highlight-libs':    path.join(__dirname, '../src/plugins/', 'vremark-plugin-highlight','/libs.js'),
+        },
+        output: {
+            libraryTarget: "amd"
         }
     }),
 
     merge(base, config, {
         entry: {
-            'vremark-plugin-math': 'vremark-plugin-math',
+
+            'vremark-plugin-math':      'vremark-plugin-math',
             'vremark-plugin-flowchart': 'vremark-plugin-flowchart',
-            'vremark-plugin-sequence': 'vremark-plugin-sequence',
-            'vremark-plugin-mermaid': 'vremark-plugin-mermaid',
+            'vremark-plugin-sequence':  'vremark-plugin-sequence',
+            'vremark-plugin-mermaid':   'vremark-plugin-mermaid',
+            'vremark-plugin-g2':        'vremark-plugin-g2',
+            'vremark-plugin-chart':     'vremark-plugin-chart',
             'vremark-plugin-highlight': 'vremark-plugin-highlight',
-            'vremark-plugin-g2': 'vremark-plugin-g2',
-            'vremark-plugin-chart': 'vremark-plugin-chart'
+
         },
         output: {
             libraryTarget: "amd"
         },
         externals: {
-            'highlight.js': 'highlight'
+
+            'vremark-plugin-math-libs':         'vremark-plugin-math-libs',
+            'vremark-plugin-flowchart-libs':    'vremark-plugin-flowchart-libs',
+            'vremark-plugin-sequence-libs':     'vremark-plugin-sequence-libs',
+            'vremark-plugin-mermaid-libs':      'vremark-plugin-mermaid-libs',
+            'vremark-plugin-g2-libs':           'vremark-plugin-g2-libs',
+            'vremark-plugin-chart-libs':        'vremark-plugin-chart-libs',
+            'vremark-plugin-highlight-libs':    'vremark-plugin-highlight-libs',
+
         },
         module: {
             rules: [
@@ -140,13 +168,6 @@ module.exports = [
                     ]
                 },
 
-                {
-                    test: /\.css$/,
-                    use: [
-                        "style-loader",
-                        "css-loader"
-                    ]
-                },
                 // {
                 //     test: /\.less$/,
                 //     use: [

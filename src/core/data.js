@@ -38,10 +38,13 @@ module.exports = function data(root, options) {
             //         });
             //     }
             // }
+            var id = data.attrs.id || node.hash;
 
-            options.hashid && Object.assign(data.attrs, {
-                'data-id': node.hash
-            });
+            if(options.hashid && id) {
+                options.hashid && Object.assign(data.attrs, {
+                    'id': id
+                });
+            }
 
             Object.assign(data, {
                 key: node.hash

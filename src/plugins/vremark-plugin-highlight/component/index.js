@@ -1,6 +1,6 @@
-require('./index.scss');
+const { hljs } = require('vremark-plugin-highlight-libs');
 
-const hljs = require('highlight.js');
+require('./index.scss');
 
 var BREAK_LINE_REGEXP = /\r\n|\r|\n/g;
 
