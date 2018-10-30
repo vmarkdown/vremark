@@ -1,4 +1,6 @@
 {
+  "name": "vremark",
+  "version": "0.0.1",
   "scripts": {
     "dev": "webpack-dev-server --config ./examples/webpack.config.js --example plugin",
     "build": "webpack --display-modules --config ./webpack.config.js",
