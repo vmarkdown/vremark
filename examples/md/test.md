@@ -1,13 +1,7 @@
-### 代码块
-``` python
-@requires_authorization
-def somefunc(param1='', param2=0):
-    '''A docstring'''
-    if param1 > param2: # interesting
-        print 'Greater'
-    return (param2 - param1 + 1) or None
-class SomeClass:
-    pass
->>> message = '''interpreter
-... prompt'''
-```
+## Lists
+
+The following list **must** begin with the number 1:
+1. Only lists that start with 1 are allowed to interrupt paragraphs.
+1. Subsequent numbering is irrelevant.
+0. You can start a new line with any number as long as you use the same delimiter character.
+2) This item uses a different delimiter and starts a new ordered list, starting with the number 2.
