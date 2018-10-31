@@ -1,7 +1,7 @@
 const PLUGIN_NAME = 'vremark-plugin-mermaid';
 
 function isPlugin(node) {
-    return node.lang && node.lang === 'mermaid';
+    return node.lang && (node.lang === 'mermaid' || node.lang === 'gantt');
 }
 
 function plugin(options = {}) {
@@ -28,6 +28,12 @@ function plugin(options = {}) {
                     lang: node.lang,
                     code: node.value
                 });
+
+                if(node.lang === 'gantt') {
+                    Object.assign(node.data.props, {
+                        code: 'gantt' +'\n'+ node.value
+                    });
+                }
 
                 node.tagName = PLUGIN_NAME;
                 // root.plugins[PLUGIN_NAME] = true;

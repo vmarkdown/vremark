@@ -2,7 +2,8 @@ const PLUGIN_NAME = 'vremark-plugin-math';
 
 var visit = require('unist-util-visit');
 function isPlugin(node) {
-    return (node.type === 'math' || node.type === 'inlineMath' )
+    return (node.type === 'math' || node.type === 'inlineMath' ) ||
+    (node.lang && (node.lang === 'math' || node.lang === 'katex' || node.lang === 'latex' ))
 }
 
 function plugin(options = {}) {

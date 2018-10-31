@@ -158,7 +158,7 @@ module.exports = [
 
         },
         output: {
-            filename: production?'[name].[hash].min.js':'[name].js',
+            filename: production?'[name].[contenthash].min.js':'[name].js',
             libraryTarget: "amd"
         },
         externals: {

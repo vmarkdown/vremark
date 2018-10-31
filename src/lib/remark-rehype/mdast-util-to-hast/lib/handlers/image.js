@@ -12,6 +12,10 @@ function image(h, node) {
         props.title = node.title
     }
 
+    if (node.align !== null && node.align !== undefined) {
+        return h(null, 'p', {style:'text-align:'+node.align},[h(node, 'img', props)]);
+    }
+
     //.mp4, .m4v, .mov, .webm, and .ogv.
     // var url = normalize(node.url);
     // var tagName = 'img';

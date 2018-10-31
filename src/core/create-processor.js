@@ -16,6 +16,10 @@ const chart = require('../lib/vremark-chart');
 const highlight = require('../lib/vremark-highlight');
 
 
+// custom
+const imageSize = require('../lib/vremark-yinxiang-image-size');
+
+
 //rehype
 const remark2rehype = require('../lib/remark-rehype');
 
@@ -105,6 +109,13 @@ function createProcessor(_options) {
     if(options.hash) {
         plugins.push([
             hash, {
+            }
+        ]);
+    }
+
+    if(options.yinxiang && options.yinxiang.imageSize) {
+        plugins.push([
+            imageSize, {
             }
         ]);
     }

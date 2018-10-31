@@ -14,6 +14,9 @@ module.exports = {
     g2: true,
     highlight: true,
 
+    yinxiang: {
+        imageSize: false
+    },
 
     // render
     mode: 'vue',

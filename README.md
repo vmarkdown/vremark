@@ -17,7 +17,14 @@ footnote
 Breaks support
 
 
+math
+$ $$
 katex
+latex
+
+
+
+
 
 
 
@@ -40,3 +47,15 @@ tag
 dynamic load plugin 
 
 math $$ display mode
+
+
+
+
+## plugins
+
+
+### vremark-plugin-yinxiang-image
+
+#### image
+782d277a1dbc7dea8480267cf5f87ebd.png@w=300
+

@@ -84,7 +84,11 @@ function sleep(time) {
                     // rootTagName: 'main',
                     hashid: true,
                     lineNumbers: true,
-                    plugins: pluginManager.getPlugins()
+                    plugins: pluginManager.getPlugins(),
+
+                    yinxiang: {
+                        imageSize: true
+                    }
                 });
                 console.timeEnd('worker');
 

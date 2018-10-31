@@ -60,6 +60,9 @@ function factory(tree, options) {
         }
 
         if(left){
+            if(left.align) {
+                right.align = left.align;
+            }
             if(left.tagName) {
                 right.tagName = left.tagName;
             }
