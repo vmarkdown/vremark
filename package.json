@@ -44,6 +44,7 @@
     "plantuml-encoder": "^1.2.5",
     "rehype-raw": "^3.0.0",
     "remark": "^9.0.0",
+    "remark-attr": "^0.7.1",
     "remark-breaks": "^1.0.1",
     "remark-math": "^1.0.4",
     "remark-parse": "^5.0.0",

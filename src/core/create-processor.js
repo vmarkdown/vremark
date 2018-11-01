@@ -5,6 +5,8 @@ const parse = require('../lib/remark-parse');
 const breaks = require('remark-breaks');
 const math = require('../lib/remark-math');
 const hash = require('../lib/remark-hash');
+const attrs = require('../lib/remark-attrs');
+
 
 // plugins
 const mathComponent = require('../lib/vremark-math');
@@ -37,12 +39,20 @@ function createProcessor(_options) {
     // const hasPlugins = options.plugins;
     const plugins = [];
 
+    if(options.attrs) {
+        plugins.push([
+            attrs, options.attrs || {}
+        ]);
+    }
+
     if(options.breaks) {
         plugins.push([
             breaks, {
             }
         ]);
     }
+
+
 
     if(options.math) {
         plugins.push([

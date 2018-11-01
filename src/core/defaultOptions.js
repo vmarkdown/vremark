@@ -1,6 +1,12 @@
 module.exports = {
     // parse
     breaks: true,
+    attrs: {
+        header: true,
+        link: false,
+        fenced_code: false,
+        inline_code: false,
+    },
     math: true,
     allowDangerousHTML: true,
     hash: true,
