@@ -1,5 +1,5 @@
 var visit = require('unist-util-visit');
-const parseAttr = require('md-attr-parser');
+const parseAttr = require('./attr-parser');
 
 function plugin(options = {}) {
 

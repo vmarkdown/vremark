@@ -11,9 +11,11 @@ async function parse(markdown, option) {
 
     const mdast = processor.parse(markdown);
 
+    data.parse(mdast, option);
+
     const hast = await processor.run(mdast);
 
-    data(hast, option);
+    data.run(hast, option);
 
     const plugins = mdast.plugins || hast.plugins || {};
 

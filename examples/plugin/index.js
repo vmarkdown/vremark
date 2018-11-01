@@ -1,4 +1,7 @@
-require('github-markdown-css');
+// require('github-markdown-css');
+
+require('./gitbook.css');
+
 import Vue from 'vue';
 const PromiseWorker = require('promise-worker');
 
@@ -80,8 +83,18 @@ function sleep(time) {
 
                 console.time('worker');
                 const {mdast, hast, plugins} = await parse(value, {
-                    rootClassName: 'markdown-body',
-                    // rootTagName: 'main',
+                    // rootClassName: 'normal markdown-section',
+                    // rootTagName: 'section',
+                    data: {
+                        root: {
+                            'class': ['normal', 'markdown-section'],
+                            tagName: 'section'
+                        },
+                        paragraph: {
+                            'class': ['comments-section']
+                        }
+                    },
+
                     hashid: true,
                     lineNumbers: true,
                     plugins: pluginManager.getPlugins(),
