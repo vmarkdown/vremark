@@ -88,13 +88,13 @@ function sleep(time) {
                     data: {
                         root: {
                             'class': ['markdown-body'],
-                            tagName: 'main'
+                            tagName: 'article'
                             // 'class': ['normal', 'markdown-section'],
                             // tagName: 'section'
                         },
-                        paragraph: {
-                            'class': ['comments-section']
-                        }
+                        // paragraph: {
+                        //     'class': ['comments-section']
+                        // }
                     },
 
                     hashid: true,
