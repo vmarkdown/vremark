@@ -1,6 +1,6 @@
-// require('github-markdown-css');
+require('github-markdown-css');
 
-require('./gitbook.css');
+// require('./gitbook.css');
 
 import Vue from 'vue';
 const PromiseWorker = require('promise-worker');
@@ -87,8 +87,10 @@ function sleep(time) {
                     // rootTagName: 'section',
                     data: {
                         root: {
-                            'class': ['normal', 'markdown-section'],
-                            tagName: 'section'
+                            'class': ['markdown-body'],
+                            tagName: 'main'
+                            // 'class': ['normal', 'markdown-section'],
+                            // tagName: 'section'
                         },
                         paragraph: {
                             'class': ['comments-section']
