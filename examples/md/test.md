@@ -1,9 +1,10 @@
-Apple
-:   Pomaceous fruit of plants of the genus Malus in 
-the family Rosaceae.
+Here's a definition list:
 
-Orange2
-:   The fruit of an evergreen tree of the genus Citrus.
+apples
+  : Good for making applesauce.
 
-Orange1
-:   The fruit of a1n evergreen tree of the genus Citrus.
+oranges
+  : Citrus!
+
+tomatoes
+  : There's no "e" in tomatoe.
