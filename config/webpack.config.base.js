@@ -19,6 +19,15 @@ module.exports = {
             'vremark-plugin-g2': path.resolve(__dirname, '../src/plugins/vremark-plugin-g2/', 'index.js'),
             'vremark-plugin-chart': path.resolve(__dirname, '../src/plugins/vremark-plugin-chart/', 'index.js'),
 
+
+
+
+
+            'unist-util-data': path.resolve(__dirname, '../node_modules/vremark-parse/packages/', 'unist-util-data', 'index.js'),
+            'mdast-util-to-hast': path.resolve(__dirname, '../node_modules/vremark-parse/packages/', 'mdast-util-to-hast', 'index.js'),
+
+
+
         }
     },
     module: {

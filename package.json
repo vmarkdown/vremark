@@ -2,7 +2,7 @@
   "name": "vremark",
   "version": "0.0.1",
   "scripts": {
-    "dev": "webpack-dev-server --config ./examples/webpack.config.js --example plugin",
+    "dev": "webpack-dev-server --config ./examples/webpack.config.js --example vremark-parse",
     "build": "webpack --display-modules --config ./webpack.config.js",
     "dist": "NODE_ENV=production webpack --progress -p --config ./webpack.config.js"
   },
@@ -53,6 +53,7 @@
     "requirejs": "^2.3.6",
     "snapsvg": "^0.5.1",
     "underscore": "^1.9.1",
-    "unist-util-remove": "^1.0.1"
+    "unist-util-remove": "^1.0.1",
+    "vremark-parse": "^0.0.1"
   }
 }
