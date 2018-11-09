@@ -8,22 +8,29 @@ const Vue = require('vue');
 //     'vremark-plugin-math': require('./plugins/vremark-plugin-math')
 // };
 
+const plugins = {
+    // 'vremark-plugin-math': require('../../src/plugins/vremark-plugin-math')
+};
+
+
+
+
 const app = new Vue({
     el: '#app',
     methods: {
         async update(md) {
             const h = this.$createElement;
             console.time('process');
-            const file = await processor.data('settings', {
+            const { mdast, hast , contents} = await processor.data('settings', {
                 h:h,
-                // plugins: plugins
+                plugins: plugins
             }).process(md);
             console.timeEnd('process');
-            this.vdom = file.contents;
+            this.vdom = contents;
 
-            console.log(file.mdast);
-            console.log(file.hast);
-            console.log(this.vdom);
+            console.log(mdast);
+            console.log(hast);
+            console.log(contents);
 
             this.$forceUpdate();
         }
@@ -37,7 +44,14 @@ const parse = require('vremark-parse');
 const processor = unified().use(parse);
 
 (async ()=>{
-    app.update(md);
+
+    requirejs(['vremark-plugin-math'], function (plugin) {
+        plugins[plugin.name] = plugin;
+
+        app.update(md);
+    });
+
+
 })();
 
 
