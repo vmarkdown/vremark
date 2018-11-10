@@ -109,23 +109,21 @@ module.exports = [
 
     merge(base, config, {
         entry:{
-            'vremark-parse': path.resolve(__dirname, './src/core/parse.js')
+            'vremark-parse': path.resolve(__dirname, './src/', 'vremark-parse.js')
         }
     }),
 
     merge(base, config, {
         entry:{
-            'vremark-render': path.resolve(__dirname, './src/core/render.js')
+            'vremark-render': path.resolve(__dirname, './src/', 'vremark-render.js')
         }
     }),
 
-    merge(base, config, {
-        entry:{
-            'vremark-plugin-manager': path.resolve(__dirname, './src/core/plugin-manager.js')
-        }
-    }),
-
-
+    // merge(base, config, {
+    //     entry:{
+    //         'vremark-plugin-manager': path.resolve(__dirname, './src/core/plugin-manager.js')
+    //     }
+    // }),
 
     // merge(base, config, {
     //     entry: {

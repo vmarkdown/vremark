@@ -54,6 +54,6 @@
     "snapsvg": "^0.5.1",
     "underscore": "^1.9.1",
     "unist-util-remove": "^1.0.1",
-    "vremark-parse": "^0.0.5"
+    "vremark-parse": "^0.0.6"
   }
 }

@@ -74,8 +74,9 @@ module.exports = {
                     loader:'file-loader',
                     options: {
                         // name: '[path][name].[ext]',
-                        name: production?'fonts/[name].[hash].[ext]':'[path][name].[ext]',
-                        context:'src'
+                        // name: production?'fonts/[name].[hash].[ext]':'[path][name].[ext]',
+                        name: 'fonts/[name].[hash].[ext]',
+                        context: 'src'
                     }
                 }
             },
