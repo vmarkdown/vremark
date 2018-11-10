@@ -45,11 +45,31 @@ const processor = unified().use(parse);
 
 (async ()=>{
 
-    requirejs(['vremark-plugin-math'], function (plugin) {
-        plugins[plugin.name] = plugin;
+    // requirejs(['vremark-plugin-math'], function (plugin) {
+    //     plugins[plugin.name] = plugin;
+    //
+    //     app.update(md);
+    // });
 
+
+
+
+    requirejs([
+        'vremark-plugin-math',
+        'vremark-plugin-flowchart',
+        'vremark-plugin-mermaid',
+        'vremark-plugin-sequence',
+        'vremark-plugin-g2',
+        'vremark-plugin-chart',
+        'vremark-plugin-highlight'
+
+    ], function () {
+        Array.prototype.slice.call(arguments).forEach(function (plugin) {
+            plugins[plugin.name] = plugin;
+        });
         app.update(md);
     });
+
 
 
 })();
