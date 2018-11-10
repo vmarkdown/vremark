@@ -1,6 +1,6 @@
 require('github-markdown-css');
 
-const unified = require('unified');
+// const unified = require('unified');
 const md = require('../md/test.md');
 const Vue = require('vue');
 
@@ -15,22 +15,46 @@ const plugins = {
 
 
 
+// const PromiseWorker = require('promise-worker');
+// import Worker from '../../src/vremark.worker';
+// const worker = new Worker();
+// const promiseWorker = new PromiseWorker(worker);
+//
+// function parse(markdown, options) {
+//     return promiseWorker.postMessage({
+//         markdown: markdown,
+//         options: options
+//     });
+// }
+
+const parse = require('../../src/vremark.parse');
+
+const toVDom = require('vremark-parse/packages/hast-util-to-vdom');
+
 const app = new Vue({
     el: '#app',
     methods: {
         async update(md) {
+            // const h = this.$createElement;
+            // console.time('process');
+            // const { mdast, hast , contents} = await processor.data('settings', {
+            //     h:h,
+            //     plugins: plugins
+            // }).process(md);
+            // console.timeEnd('process');
+            // this.vdom = contents;
+            //
+            // console.log(mdast);
+            // console.log(hast);
+            // console.log(contents);
+
             const h = this.$createElement;
-            console.time('process');
-            const { mdast, hast , contents} = await processor.data('settings', {
+            const { mdast, hast } = await parse(md);
+
+            this.vdom = toVDom(hast, {
                 h:h,
                 plugins: plugins
-            }).process(md);
-            console.timeEnd('process');
-            this.vdom = contents;
-
-            console.log(mdast);
-            console.log(hast);
-            console.log(contents);
+            });
 
             this.$forceUpdate();
         }
@@ -40,8 +64,8 @@ const app = new Vue({
     }
 });
 
-const parse = require('vremark-parse');
-const processor = unified().use(parse);
+// const parse = require('vremark-parse');
+// const processor = unified().use(parse);
 
 (async ()=>{
 
@@ -53,6 +77,7 @@ const processor = unified().use(parse);
 
 
 
+    app.update(md);
 
     requirejs([
         'vremark-plugin-math',
@@ -67,7 +92,10 @@ const processor = unified().use(parse);
         Array.prototype.slice.call(arguments).forEach(function (plugin) {
             plugins[plugin.name] = plugin;
         });
-        app.update(md);
+
+        setTimeout(function () {
+            app.update(md);
+        }, 5000);
     });
 
 
