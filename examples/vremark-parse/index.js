@@ -21,11 +21,11 @@ const app = new Vue({
                         tagName: 'main',
                         className: 'markdown-body'
                     }
-                }
+                },
+                plugins: plugins
             });
             this.vdom = render(hast, {
-                h:h,
-                plugins: plugins
+                h:h
             });
             this.$forceUpdate();
         }
@@ -56,7 +56,11 @@ const app = new Vue({
 
     ], function () {
         Array.prototype.slice.call(arguments).forEach(function (plugin) {
-            plugins[plugin.name] = plugin;
+            // plugins[plugin.name] = plugin;
+            Vue.component(plugin.component.name, plugin.component);
+            plugins[plugin.name] = {
+                component: plugin.component.name
+            }
         });
 
         setTimeout(function () {
