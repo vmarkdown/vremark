@@ -1,11 +1,11 @@
-const PromiseWorker = require('promise-worker');
-const Worker = require('./vremark.worker');
-const worker = new Worker();
-const promiseWorker = new PromiseWorker(worker);
+const markdown = require('vremark-parse');
+const stringify = require('./lib/vrehype-stringify');
+const unified = require('unified');
+const processor = unified().use(markdown).use(stringify).freeze();
 
-module.exports = function parse(markdown, options) {
-    return promiseWorker.postMessage({
-        markdown: markdown,
-        options: options
-    });
+module.exports = async function parse(text, options) {
+    console.time('parse');
+    const file = await processor().data('settings', options).process(text);
+    console.timeEnd('parse');
+    return file;
 };

@@ -3,19 +3,18 @@ require('github-markdown-css');
 const md = require('../md/test.md');
 const Vue = require('vue');
 
-const plugins = {
-};
+const plugins = {};
 
-const parse = require('../../src/vremark-parse');
+// const parse = require('../../src/vremark-parse');
+const parse = require('../../src/vremark-worker');
 const render = require('../../src/vremark-render');
-// const toVDom = require('vremark-parse/packages/hast-util-to-vdom');
 
 const app = new Vue({
     el: '#app',
     methods: {
         async update(md) {
             const h = this.$createElement;
-            const { mdast, hast } = await parse(md, {
+            const { hast } = await parse(md, {
                 config: {
                     root: {
                         tagName: 'main',
@@ -44,6 +43,7 @@ const app = new Vue({
     // });
 
     app.update(md);
+
 
     requirejs([
         'vremark-plugin-math',

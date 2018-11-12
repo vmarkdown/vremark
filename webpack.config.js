@@ -109,9 +109,15 @@ module.exports = [
 
     merge(base, config, {
         entry:{
-            'vremark-parse': path.resolve(__dirname, './src/', 'vremark-parse.js')
+            'vremark-worker': path.resolve(__dirname, './src/', 'vremark-worker.js')
         }
     }),
+
+    // merge(base, config, {
+    //     entry:{
+    //         'vremark-parse': path.resolve(__dirname, './src/', 'vremark-parse.js')
+    //     }
+    // }),
 
     merge(base, config, {
         entry:{
@@ -157,7 +163,9 @@ module.exports = [
         },
         output: {
             filename: production?'[name].[contenthash].min.js':'[name].js',
-            libraryTarget: "amd"
+            libraryTarget: "amd",
+            path: path.resolve(__dirname, 'dist/plugins'),
+            publicPath: 'vremark/plugins/',
         },
         externals: {
 
