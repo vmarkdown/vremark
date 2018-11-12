@@ -15,7 +15,14 @@ const app = new Vue({
     methods: {
         async update(md) {
             const h = this.$createElement;
-            const { mdast, hast } = await parse(md);
+            const { mdast, hast } = await parse(md, {
+                config: {
+                    root: {
+                        tagName: 'main',
+                        className: 'markdown-body'
+                    }
+                }
+            });
             this.vdom = render(hast, {
                 h:h,
                 plugins: plugins
