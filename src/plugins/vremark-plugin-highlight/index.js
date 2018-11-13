@@ -1,11 +1,12 @@
 const themes = {
     'default':require('./themes/default.less'),
     'github':require('./themes/github.less'),
+    'github-rouge':require('./themes/github-rouge.less'),
     'monokai-sublime':require('./themes/monokai-sublime.less'),
     'darcula':require('./themes/darcula.less')
 };
 
-let style = themes.default;
+let style = themes['github-rouge'];
 style.use();
 
 const plugin = {

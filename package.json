@@ -42,6 +42,7 @@
     "lodash": "^4.17.11",
     "mermaid": "^8.0.0-rc.8",
     "plantuml-encoder": "^1.2.5",
+    "prismjs": "^1.15.0",
     "rehype-raw": "^3.0.0",
     "remark": "^9.0.0",
     "remark-attr": "^0.7.1",
@@ -54,6 +55,6 @@
     "snapsvg": "^0.5.1",
     "underscore": "^1.9.1",
     "unist-util-remove": "^1.0.1",
-    "vremark-parse": "^0.0.13"
+    "vremark-parse": "^0.0.14"
   }
 }

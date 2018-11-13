@@ -1,4 +1,6 @@
-require('github-markdown-css');
+// require('github-markdown-css');
+require('./framework.css');
+require('./github.css');
 
 const md = require('../md/test.md');
 const Vue = require('vue');
@@ -17,7 +19,7 @@ const app = new Vue({
             const { hast } = await parse(md, {
                 config: {
                     root: {
-                        tagName: 'main',
+                        tagName: 'article',
                         className: 'markdown-body'
                     }
                 },
@@ -46,12 +48,12 @@ const app = new Vue({
 
 
     requirejs([
-        'vremark-plugin-math',
-        'vremark-plugin-flowchart',
-        'vremark-plugin-mermaid',
-        'vremark-plugin-sequence',
-        'vremark-plugin-g2',
-        'vremark-plugin-chart',
+        // 'vremark-plugin-math',
+        // 'vremark-plugin-flowchart',
+        // 'vremark-plugin-mermaid',
+        // 'vremark-plugin-sequence',
+        // 'vremark-plugin-g2',
+        // 'vremark-plugin-chart',
         'vremark-plugin-highlight'
 
     ], function () {
@@ -65,7 +67,7 @@ const app = new Vue({
 
         setTimeout(function () {
             app.update(md);
-        }, 5000);
+        }, 0);
     });
 
 

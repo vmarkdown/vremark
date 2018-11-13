@@ -47,8 +47,86 @@
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.js"></script>
 
+
+    <style>
+
+        .container {
+            margin-left: auto;
+            margin-right: auto;
+            width: 980px;
+        }
+
+        .file-header {
+            background-color: #fafbfc;
+            border-bottom: 1px solid #e1e4e8;
+            border-top-left-radius: 2px;
+            border-top-right-radius: 2px;
+            padding: 5px 10px;
+        }
+
+        .application-main .file {
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            margin-bottom: 16px;
+            margin-top: 16px;
+            position: relative;
+            margin-bottom:  100px;
+        }
+
+    </style>
 </head>
 <body>
-<div id="app"></div>
+
+<div class="application-main">
+
+    <div class="container">
+        <div class="repository-content">
+            <div class="file">
+                <div class="file-header">
+                    <div class="file-actions">
+
+
+                        <div class="BtnGroup">
+                            <a id="raw-url" class="btn btn-sm BtnGroup-item" href="#">Raw</a>
+                            <a class="btn btn-sm js-update-url-with-hash BtnGroup-item" data-hotkey="b" href="#">Blame</a>
+                            <a rel="nofollow" class="btn btn-sm BtnGroup-item" href="#">History</a>
+                        </div>
+
+                        <a class="btn-octicon tooltipped tooltipped-nw" href="#" aria-label="Open this file in GitHub Desktop" data-ga-click="Repository, open with desktop, type:mac">
+                            <svg class="octicon octicon-device-desktop" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M15 2H1c-.55 0-1 .45-1 1v9c0 .55.45 1 1 1h5.34c-.25.61-.86 1.39-2.34 2h8c-1.48-.61-2.09-1.39-2.34-2H15c.55 0 1-.45 1-1V3c0-.55-.45-1-1-1zm0 9H1V3h14v8z"></path></svg>
+                        </a>
+
+                        <!-- '"` --><!-- </textarea></xmp> --><form class="inline-form js-update-url-with-hash" action="#" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="✓"><input type="hidden" name="authenticity_token" value="3bUXUvTZPUqEk2uJllhG/qkySFn1awFw9i2/75AnNOucSzh/cr70jikFDCDCcWBOl6h1XDhXg+vjR7Zfwmro9g==">
+                        <button class="btn-octicon tooltipped tooltipped-nw" type="submit" aria-label="Fork this project and edit the file" data-hotkey="e" data-disable-with="">
+                            <svg class="octicon octicon-pencil" viewBox="0 0 14 16" version="1.1" width="14" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M0 12v3h3l8-8-3-3-8 8zm3 2H1v-2h1v1h1v1zm10.3-9.3L12 6 9 3l1.3-1.3a.996.996 0 0 1 1.41 0l1.59 1.59c.39.39.39 1.02 0 1.41z"></path></svg>
+                        </button>
+                    </form>
+                        <!-- '"` --><!-- </textarea></xmp> --><form class="inline-form" action="#" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="✓"><input type="hidden" name="authenticity_token" value="D1gx+ilWC7vd24z1b/6VXCVNsJUg/sBkGgS219pZoV7fR6QVBv6e+UXYzAgtipzbN4f0zm2PRkFRxGgzIbrbAg==">
+                        <button class="btn-octicon btn-octicon-danger tooltipped tooltipped-nw" type="submit" aria-label="Fork this project and delete the file" data-disable-with="">
+                            <svg class="octicon octicon-trashcan" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M11 2H9c0-.55-.45-1-1-1H5c-.55 0-1 .45-1 1H2c-.55 0-1 .45-1 1v1c0 .55.45 1 1 1v9c0 .55.45 1 1 1h7c.55 0 1-.45 1-1V5c.55 0 1-.45 1-1V3c0-.55-.45-1-1-1zm-1 12H3V5h1v8h1V5h1v8h1V5h1v8h1V5h1v9zm1-10H2V3h9v1z"></path></svg>
+                        </button>
+                    </form>  </div>
+
+                    <div class="file-info">
+                        <h3 class="Box-title pr-3">
+                            <svg class="octicon octicon-book" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M3 5h4v1H3V5zm0 3h4V7H3v1zm0 2h4V9H3v1zm11-5h-4v1h4V5zm0 2h-4v1h4V7zm0 2h-4v1h4V9zm2-6v9c0 .55-.45 1-1 1H9.5l-1 1-1-1H2c-.55 0-1-.45-1-1V3c0-.55.45-1 1-1h5.5l1 1 1-1H15c.55 0 1 .45 1 1zm-8 .5L7.5 3H2v9h6V3.5zm7-.5H9.5l-.5.5V12h6V3z"></path></svg>
+                            README.md
+                        </h3>
+                    </div>
+                </div>
+
+                <div class="readme blob instapaper_body">
+                    <div id="app"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+
+
+
 </body>
 </html>
