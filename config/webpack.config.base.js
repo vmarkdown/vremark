@@ -15,8 +15,8 @@ module.exports = {
             'vremark-plugin-flowchart': path.resolve(__dirname, '../src/plugins/vremark-plugin-flowchart/', 'index.js'),
             'vremark-plugin-sequence': path.resolve(__dirname, '../src/plugins/vremark-plugin-sequence/', 'index.js'),
             'vremark-plugin-mermaid': path.resolve(__dirname, '../src/plugins/vremark-plugin-mermaid/', 'index.js'),
-            // 'vremark-plugin-highlight': path.resolve(__dirname, '../src/plugins/vremark-plugin-highlight/', 'index.js'),
-            'vremark-plugin-highlight': path.resolve(__dirname, '../src/plugins/vremark-plugin-prism/', 'index.js'),
+            'vremark-plugin-highlight': path.resolve(__dirname, '../src/plugins/vremark-plugin-highlight/', 'index.js'),
+            // 'vremark-plugin-highlight': path.resolve(__dirname, '../src/plugins/vremark-plugin-prism/', 'index.js'),
 
             'vremark-plugin-g2': path.resolve(__dirname, '../src/plugins/vremark-plugin-g2/', 'index.js'),
             'vremark-plugin-chart': path.resolve(__dirname, '../src/plugins/vremark-plugin-chart/', 'index.js'),
