@@ -1,8 +1,6 @@
-const component = require('./component/index');
-
 const plugin = {
-    name: component.name,
-    component: component
+    name: 'vremark-plugin-flowchart',
+    component: require('./component')
 };
 
 module.exports = plugin;

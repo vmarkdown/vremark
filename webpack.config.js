@@ -1,9 +1,10 @@
 const path = require('path');
 const merge = require('webpack-merge');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-const production = (process.env.NODE_ENV === 'production');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const AssetsPlugin = require('assets-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+const production = (process.env.NODE_ENV === 'production');
 
 const base = require('./config/webpack.config.base');
 
@@ -22,7 +23,9 @@ const config = {
         // filename: production?'[name].min.js':'[name].js',
         // libraryTarget: "umd"
 
-        filename: production?'[name].min.js':'[name].js',
+        filename: production?'[name].[contenthash].min.js':'[name].js',
+        chunkFilename: production?'[name].[contenthash].min.js':'[name].js',
+        // filename: production?'[name].min.js':'[name].js',
         libraryTarget: "commonjs2"
     },
     module: {
@@ -78,6 +81,7 @@ const config = {
     //     // 'vremark-plugin-katex': 'vremarkPluginKatex'
     // },
     plugins: [
+        new CleanWebpackPlugin(production?['dist/*.*']:[]),
         new MiniCssExtractPlugin({
             filename: '[name].css'
         })
@@ -110,6 +114,9 @@ module.exports = [
     merge(base, config, {
         entry:{
             'vremark-worker': path.resolve(__dirname, './src/', 'vremark-worker.js')
+        },
+        output: {
+            filename: production?'[name].min.js':'[name].js',
         }
     }),
 
@@ -122,6 +129,9 @@ module.exports = [
     merge(base, config, {
         entry:{
             'vremark-render': path.resolve(__dirname, './src/', 'vremark-render.js')
+        },
+        output: {
+            filename: production?'[name].min.js':'[name].js',
         }
     }),
 
@@ -140,6 +150,19 @@ module.exports = [
     //         libraryTarget: "amd"
     //     }
     // }),
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     merge(base, config, {
         entry: {
@@ -210,42 +233,6 @@ module.exports = [
 
 
 
-
-
-    // merge(base, config, {
-    //     entry:{
-    //         'vremark-plugin-math': 'vremark-plugin-math',
-    //         'vremark-plugin-flowchart': 'vremark-plugin-flowchart',
-    //         'vremark-plugin-sequence': 'vremark-plugin-sequence',
-    //         'vremark-plugin-mermaid': 'vremark-plugin-mermaid',
-    //         'vremark-plugin-highlight': 'vremark-plugin-highlight',
-    //         'vremark-plugin-g2': 'vremark-plugin-g2',
-    //         'vremark-plugin-chart': 'vremark-plugin-chart'
-    //     },
-    //     output: {
-    //         filename: production?'[name].[hash].min.js':'[name].js',
-    //         libraryTarget: "amd"
-    //     },
-    //     plugins: [
-    //         new AssetsPlugin({
-    //             filename: 'plugins.json',
-    //             path: path.join(__dirname, 'dist'),
-    //             prettyPrint: true,
-    //             processOutput: function (assets) {
-    //                 var plugins = {};
-    //                 Object.keys(assets).forEach(function (asset) {
-    //                     if(!asset || asset.startsWith('vendors') || asset.endsWith('-libs')) return;
-    //                     var plugin = assets[asset];
-    //                     if(plugin.js){
-    //                         var map = plugin.js.replace('.js','');
-    //                         plugins[asset] = map;
-    //                     }
-    //                 });
-    //                 return JSON.stringify(plugins);
-    //             }
-    //         })
-    //     ]
-    // }),
 
 ];
 
