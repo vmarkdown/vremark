@@ -81,7 +81,7 @@ const config = {
     //     // 'vremark-plugin-katex': 'vremarkPluginKatex'
     // },
     plugins: [
-        new CleanWebpackPlugin(production?['dist/*.*']:[]),
+        new CleanWebpackPlugin(production?['dist']:[]),
         new MiniCssExtractPlugin({
             filename: '[name].css'
         })
