@@ -1,4 +1,4 @@
-``` resume
+``` resume {theme="short"}
 {
   "basics": {
     "name": "Richard Hendriks",
@@ -131,3 +131,7 @@
 }
 
 ```
+
+
+
+#### h1

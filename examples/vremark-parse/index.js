@@ -16,7 +16,7 @@ const app = new Vue({
     methods: {
         async update(md) {
             const h = this.$createElement;
-            const { hast } = await parse(md, {
+            const { mdast, hast } = await parse(md, {
                 config: {
                     root: {
                         tagName: 'article',
@@ -25,6 +25,10 @@ const app = new Vue({
                 },
                 plugins: plugins
             });
+
+            console.log(mdast);
+            console.log(hast);
+
             this.vdom = render(hast, {
                 h:h
             });

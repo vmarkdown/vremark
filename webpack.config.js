@@ -182,6 +182,7 @@ module.exports = [
             'vremark-plugin-g2':        'vremark-plugin-g2',
             'vremark-plugin-chart':     'vremark-plugin-chart',
             'vremark-plugin-highlight': 'vremark-plugin-highlight',
+            'vremark-plugin-resume':    'vremark-plugin-resume',
 
         },
         output: {

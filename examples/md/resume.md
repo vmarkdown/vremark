@@ -1,6 +1,10 @@
-## RESUME.JSON
+## RESUME
 
-``` resume
+[JSON Resume](https://jsonresume.org)
+
+[Themes](https://jsonresume.org/themes/)
+
+``` resume {theme="short"}
 {
   "basics": {
     "name": "John Doe",
