@@ -1,137 +1,54 @@
-``` resume {theme="short"}
-{
-  "basics": {
-    "name": "Richard Hendriks",
-    "label": "Programmer",
-    "picture": "",
-    "email": "richard.hendriks@gmail.com",
-    "phone": "(912) 555-4321",
-    "website": "http://richardhendricks.com",
-    "summary": "Richard hails from Tulsa. He has earned degrees from the University of Oklahoma and Stanford. (Go Sooners and Cardinals!) Before starting Pied Piper, he worked for Hooli as a part time software developer. While his work focuses on applied information theory, mostly optimizing lossless compression schema of both the length-limited and adaptive variants, his non-work interests range widely, everything from quantum computing to chaos theory. He could tell you about it, but THAT would NOT be a “length-limited” conversation!",
-    "location": {
-      "address": "2712 Broadway St",
-      "postalCode": "CA 94115",
-      "city": "San Francisco",
-      "countryCode": "US",
-      "region": "California"
-    },
-    "profiles": [
-      {
-        "network": "Twitter",
-        "username": "neutralthoughts",
-        "url": ""
-      },
-      {
-        "network": "SoundCloud",
-        "username": "dandymusicnl",
-        "url": "https://soundcloud.com/dandymusicnl"
-      }
-    ]
-  },
-  "work": [
-    {
-      "company": "Pied Piper",
-      "position": "CEO/President",
-      "website": "http://piedpiper.com",
-      "startDate": "2013-12-01",
-      "endDate": "2014-12-01",
-      "summary": "Pied Piper is a multi-platform technology based on a proprietary universal compression algorithm that has consistently fielded high Weisman Scores™ that are not merely competitive, but approach the theoretical limit of lossless compression.",
-      "highlights": [
-        "Build an algorithm for artist to detect if their music was violating copy right infringement laws",
-        "Successfully won Techcrunch Disrupt",
-        "Optimized an algorithm that holds the current world record for Weisman Scores"
-      ]
-    }
-  ],
-  "volunteer": [
-    {
-      "organization": "CoderDojo",
-      "position": "Teacher",
-      "website": "http://coderdojo.com/",
-      "startDate": "2012-01-01",
-      "endDate": "2013-01-01",
-      "summary": "Global movement of free coding clubs for young people.",
-      "highlights": [
-        "Awarded 'Teacher of the Month'"
-      ]
-    }
-  ],
-  "education": [
-    {
-      "institution": "University of Oklahoma",
-      "area": "Information Technology",
-      "studyType": "Bachelor",
-      "startDate": "2011-06-01",
-      "endDate": "2014-01-01",
-      "gpa": "4.0",
-      "courses": [
-        "DB1101 - Basic SQL",
-        "CS2011 - Java Introduction"
-      ]
-    }
-  ],
-  "awards": [
-    {
-      "title": "Digital Compression Pioneer Award",
-      "date": "2014-11-01",
-      "awarder": "Techcrunch",
-      "summary": "There is no spoon."
-    }
-  ],
-  "publications": [
-    {
-      "name": "Video compression for 3d media",
-      "publisher": "Hooli",
-      "releaseDate": "2014-10-01",
-      "website": "http://en.wikipedia.org/wiki/Silicon_Valley_(TV_series)",
-      "summary": "Innovative middle-out compression algorithm that changes the way we store data."
-    }
-  ],
-  "skills": [
-    {
-      "name": "Web Development",
-      "level": "Master",
-      "keywords": [
-        "HTML",
-        "CSS",
-        "Javascript"
-      ]
-    },
-    {
-      "name": "Compression",
-      "level": "Master",
-      "keywords": [
-        "Mpeg",
-        "MP4",
-        "GIF"
-      ]
-    }
-  ],
-  "languages": [
-    {
-      "language": "English",
-      "fluency": "Native speaker"
-    }
-  ],
-  "interests": [
-    {
-      "name": "Wildlife",
-      "keywords": [
-        "Ferrets",
-        "Unicorns"
-      ]
-    }
-  ],
-  "references": [
-    {
-      "name": "Erlich Bachman",
-      "reference": "It is my pleasure to recommend Richard, his performance working as a consultant for Main St. Company proved that he will be a valuable addition to any company."
-    }
-  ]
-}
 
-```
+cool tikz-pictures:
 
+$$\usetikzlibrary{decorations.pathmorphing}
+\begin{tikzpicture}[line width=0.2mm,scale=1.0545]\small
+\tikzset{>=stealth}
+\tikzset{snake it/.style={->,semithick,
+decoration={snake,amplitude=.3mm,segment length=2.5mm,post length=0.9mm},decorate}}
+\def\h{3}
+\def\d{0.2}
+\def\ww{1.4}
+\def\w{1+\ww}
+\def\p{1.5}
+\def\r{0.7}
+\coordinate[label=below:$A_1$] (A1) at (\ww,\p);
+\coordinate[label=above:$B_1$] (B1) at (\ww,\p+\h);
+\coordinate[label=below:$A_2$] (A2) at (\w,\p);
+\coordinate[label=above:$B_2$] (B2) at (\w,\p+\h);
+\coordinate[label=left:$C$] (C1) at (0,0);
+\coordinate[label=left:$D$] (D) at (0,\h);
+\draw[fill=blue!14](A2)--(B2)-- ++(\d,0)-- ++(0,-\h)--cycle;
+\draw[gray,thin](C1)-- +(\w+\d,0);
+\draw[dashed,gray,fill=blue!5](A1)-- (B1)-- ++(\d,0)-- ++(0,-\h)-- cycle;
+\draw[dashed,line width=0.14mm](A1)--(C1)--(D)--(B1);
+\draw[snake it](C1)--(A2) node[pos=0.6,below] {$c\Delta t$};
+\draw[->,semithick](\ww,\p+0.44*\h)-- +(\w-\ww,0) node[pos=0.6,above] {$v\Delta t$};
+\draw[snake it](D)--(B2);
+\draw[thin](\r,0) arc (0:atan2(\p,\w):\r) node[midway,right,yshift=0.06cm] {$\theta$};
+\draw[opacity=0](-0.40,-0.14)-- ++(0,5.06);
+\end{tikzpicture}$$
 
+plots:
 
-#### h1
+$$\begin{tikzpicture}[scale=1.0544]\small
+\begin{axis}[axis line style=gray,
+	samples=120,
+	width=9.0cm,height=6.4cm,
+	xmin=-1.5, xmax=1.5,
+	ymin=0, ymax=1.8,
+	restrict y to domain=-0.2:2,
+	ytick={1},
+	xtick={-1,1},
+	axis equal,
+	axis x line=center,
+	axis y line=center,
+	xlabel=$x$,ylabel=$y$]
+\addplot[red,domain=-2:1,semithick]{exp(x)};
+\addplot[black]{x+1};
+\addplot[] coordinates {(1,1.5)} node{$y=x+1$};
+\addplot[red] coordinates {(-1,0.6)} node{$y=e^x$};
+\path (axis cs:0,0) node [anchor=north west,yshift=-0.07cm] {0};
+\end{axis}
+\end{tikzpicture}$$
+

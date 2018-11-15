@@ -107,6 +107,8 @@ module.exports = [
 
     merge(base, config, {
         entry: {
+            'vremark-plugin-common-libs':       path.join(__dirname, '../src/plugins/', '/libs.js'),
+
             'vremark-plugin-math-libs':         path.join(__dirname, '../src/plugins/', 'vremark-plugin-math','/libs.js'),
             'vremark-plugin-flowchart-libs':    path.join(__dirname, '../src/plugins/', 'vremark-plugin-flowchart','/libs.js'),
             'vremark-plugin-sequence-libs':     path.join(__dirname, '../src/plugins/', 'vremark-plugin-sequence','/libs.js'),
@@ -139,6 +141,7 @@ module.exports = [
         },
         externals: {
 
+            'vremark-plugin-common-libs':       'vremark-plugin-common-libs',
             'vremark-plugin-math-libs':         'vremark-plugin-math-libs',
             'vremark-plugin-flowchart-libs':    'vremark-plugin-flowchart-libs',
             'vremark-plugin-sequence-libs':     'vremark-plugin-sequence-libs',
