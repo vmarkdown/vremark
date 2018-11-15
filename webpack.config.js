@@ -120,11 +120,11 @@ module.exports = [
         }
     }),
 
-    // merge(base, config, {
-    //     entry:{
-    //         'vremark-parse': path.resolve(__dirname, './src/', 'vremark-parse.js')
-    //     }
-    // }),
+    merge(base, config, {
+        entry:{
+            'vremark-parse': path.resolve(__dirname, './src/', 'vremark-parse.js')
+        }
+    }),
 
     merge(base, config, {
         entry:{
