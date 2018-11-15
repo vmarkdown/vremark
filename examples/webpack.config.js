@@ -20,6 +20,7 @@ const config = {
             {
                 test: /\.css$/,
                 use: [
+                    'vue-style-loader',
                     "style-loader",
                     "css-loader"
                 ]
@@ -129,6 +130,8 @@ module.exports = [
             'vremark-plugin-g2':        'vremark-plugin-g2',
             'vremark-plugin-chart':     'vremark-plugin-chart',
             'vremark-plugin-highlight': 'vremark-plugin-highlight',
+            'vremark-plugin-resume':    'vremark-plugin-resume',
+
 
         },
         output: {

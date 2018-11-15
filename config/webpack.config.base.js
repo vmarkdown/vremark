@@ -1,5 +1,6 @@
 const path = require('path');
 const production = (process.env.NODE_ENV === 'production');
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 module.exports = {
     mode: 'none',
@@ -21,6 +22,7 @@ module.exports = {
             'vremark-plugin-g2': path.resolve(__dirname, '../src/plugins/vremark-plugin-g2/', 'index.js'),
             'vremark-plugin-chart': path.resolve(__dirname, '../src/plugins/vremark-plugin-chart/', 'index.js'),
 
+            'vremark-plugin-resume': path.resolve(__dirname, '../src/plugins/vremark-plugin-resume/', 'index.js'),
 
 
 
@@ -65,6 +67,7 @@ module.exports = {
             {
                 test: /\.scss$/,
                 use: [
+                    'vue-style-loader',
                     "style-loader",
                     "css-loader",
                     "sass-loader"
@@ -91,12 +94,17 @@ module.exports = {
                         context:'src'
                     }
                 }
+            },
+            {
+                test: /\.vue$/,
+                loader: 'vue-loader'
             }
         ]
     },
     externals: {
     },
     plugins: [
+        new VueLoaderPlugin()
     ],
     node: {
         fs: 'empty'
