@@ -1,9 +1,10 @@
 const { flowchart } = require('vremark-plugin-flowchart-libs');
+const COMPONENT_NAME = 'vremark-component-flowchart';
 
 require('./index.scss');
 
 module.exports = {
-    name: 'vremark-plugin-flowchart',
+    name: COMPONENT_NAME,
     props: {
         'code': {
             type: String,
@@ -12,7 +13,7 @@ module.exports = {
     },
     render(h) {
         return h('div', {
-            'class': ['vremark-plugin-flowchart']
+            'class': [COMPONENT_NAME]
         });
     },
     methods:{

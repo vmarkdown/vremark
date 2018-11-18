@@ -1,9 +1,10 @@
 const { Diagram } = require('vremark-plugin-sequence-libs');
+const COMPONENT_NAME = 'vremark-component-sequence';
 
 require('./index.scss');
 
 module.exports = ({
-    name: 'vremark-plugin-sequence',
+    name: COMPONENT_NAME,
     props: {
         'code': {
             type: String,
@@ -17,7 +18,7 @@ module.exports = ({
     },
     render(h) {
         return h('div', {
-            'class': ['vremark-plugin-sequence']
+            'class': [COMPONENT_NAME]
         });
     },
     methods:{

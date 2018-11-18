@@ -4,10 +4,18 @@ require('./github.css');
 
 const md = require('../md/test.md');
 const Vue = require('vue');
+// const plugins = {};
 
-const plugins = {
-
-};
+function loader(names) {
+    return new Promise(function (resolve, reject) {
+        requirejs(names, function () {
+            const Plugins = Array.prototype.slice.call(arguments);
+            resolve(Plugins);
+        }, function () {
+            reject();
+        });
+    });
+}
 
 // const parse = require('../../src/vremark-parse');
 const parse = require('../../src/vremark-worker');
@@ -32,7 +40,8 @@ const app = new Vue({
             const h = this.$createElement;
             this.vdom = await render(hast, {
                 h:h,
-                plugins: plugins
+                loader: loader,
+                Vue: Vue
             });
 
             this.$forceUpdate();
@@ -45,42 +54,37 @@ const app = new Vue({
 
 (async ()=>{
 
-    // requirejs(['vremark-plugin-math'], function (plugin) {
-    //     plugins[plugin.name] = plugin;
+
+    app.update(md);
+
+
+    // requirejs([
+    //     // 'vremark-plugin-math',
+    //     'vremark-plugin-flowchart',
+    //     // 'vremark-plugin-mermaid',
+    //     // 'vremark-plugin-sequence',
+    //     // 'vremark-plugin-g2',
+    //     // 'vremark-plugin-chart',
+    //     // 'vremark-plugin-highlight'
+    //     // 'vremark-plugin-resume'
     //
-    //     app.update(md);
+    // ], function () {
+    //     Array.prototype.slice.call(arguments).forEach(function (plugin) {
+    //         // plugins[plugin.name] = plugin;
+    //         Vue.component(plugin.component.name, plugin.component);
+    //         plugins[plugin.name] = plugin;
+    //         // plugins[plugin.name] = {
+    //         //     component: plugin.component.name
+    //         // }
+    //         // plugins[plugin.name] = {
+    //         //     component: plugin.component.name
+    //         // }
+    //     });
+    //
+    //     setTimeout(function () {
+    //         app.update(md);
+    //     }, 0);
     // });
-
-    // app.update(md);
-
-
-    requirejs([
-        'vremark-plugin-math',
-        // 'vremark-plugin-flowchart',
-        // 'vremark-plugin-mermaid',
-        // 'vremark-plugin-sequence',
-        // 'vremark-plugin-g2',
-        // 'vremark-plugin-chart',
-        // 'vremark-plugin-highlight'
-        // 'vremark-plugin-resume'
-
-    ], function () {
-        Array.prototype.slice.call(arguments).forEach(function (plugin) {
-            // plugins[plugin.name] = plugin;
-            Vue.component(plugin.component.name, plugin.component);
-            plugins[plugin.name] = plugin;
-            // plugins[plugin.name] = {
-            //     component: plugin.component.name
-            // }
-            // plugins[plugin.name] = {
-            //     component: plugin.component.name
-            // }
-        });
-
-        setTimeout(function () {
-            app.update(md);
-        }, 0);
-    });
 
 
 

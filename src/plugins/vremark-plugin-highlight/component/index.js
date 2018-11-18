@@ -28,7 +28,7 @@ function format(html) {
 
 
 module.exports = {
-    name: 'vremark-plugin-highlight',
+    name: 'vremark-component-highlight',
     props: {
         'lang': {
             type: String,
@@ -54,7 +54,7 @@ module.exports = {
     },
     render(h) {
         return h('pre', {
-            'class': ['vremark-plugin-highlight']
+            'class': ['vremark-component-highlight']
         }, [
             h('code', {
                 'class': ['hljs', this.lang],

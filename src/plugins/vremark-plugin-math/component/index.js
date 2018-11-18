@@ -27,7 +27,7 @@ function crawl() {
 
 
 module.exports = {
-    name: 'vremark-plugin-math',
+    name: 'vremark-component-math',
     props: {
         'inline': {
             type: Boolean,
@@ -47,7 +47,7 @@ module.exports = {
     render(h) {
 
         return h(this.inline?'span':'p', {
-            'class': ['vremark-plugin-math', this.inline?'vremark-katex-inlineMath':'vremark-katex-math'],
+            'class': ['vremark-component-math', this.inline?'vremark-katex-inlineMath':'vremark-katex-math'],
             domProps:{
                 innerHTML: this.result
             }
