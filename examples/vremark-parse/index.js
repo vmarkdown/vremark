@@ -5,7 +5,9 @@ require('./github.css');
 const md = require('../md/test.md');
 const Vue = require('vue');
 
-const plugins = {};
+const plugins = {
+
+};
 
 // const parse = require('../../src/vremark-parse');
 const parse = require('../../src/vremark-worker');
@@ -15,23 +17,24 @@ const app = new Vue({
     el: '#app',
     methods: {
         async update(md) {
-            const h = this.$createElement;
             const { mdast, hast } = await parse(md, {
                 config: {
                     root: {
                         tagName: 'article',
                         className: 'markdown-body'
                     }
-                },
-                plugins: plugins
+                }
             });
 
             console.log(mdast);
             console.log(hast);
 
-            this.vdom = render(hast, {
-                h:h
+            const h = this.$createElement;
+            this.vdom = await render(hast, {
+                h:h,
+                plugins: plugins
             });
+
             this.$forceUpdate();
         }
     },
@@ -48,7 +51,7 @@ const app = new Vue({
     //     app.update(md);
     // });
 
-    app.update(md);
+    // app.update(md);
 
 
     requirejs([
@@ -65,9 +68,13 @@ const app = new Vue({
         Array.prototype.slice.call(arguments).forEach(function (plugin) {
             // plugins[plugin.name] = plugin;
             Vue.component(plugin.component.name, plugin.component);
-            plugins[plugin.name] = {
-                component: plugin.component.name
-            }
+            plugins[plugin.name] = plugin;
+            // plugins[plugin.name] = {
+            //     component: plugin.component.name
+            // }
+            // plugins[plugin.name] = {
+            //     component: plugin.component.name
+            // }
         });
 
         setTimeout(function () {

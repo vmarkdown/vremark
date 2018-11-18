@@ -33,7 +33,13 @@
     "webpack-cli": "^3.1.2",
     "webpack-dev-server": "^3.1.10",
     "webpack-merge": "^4.1.4",
-    "worker-loader": "^2.0.0"
+    "worker-loader": "^2.0.0",
+    "remark": "^9.0.0",
+    "remark-attr": "^0.7.1",
+    "remark-breaks": "^1.0.1",
+    "remark-math": "^1.0.4",
+    "remark-parse": "^5.0.0",
+    "remark-rehype": "^3.0.1"
   },
   "dependencies": {
     "@antv/g2": "^3.3.4",
@@ -48,16 +54,10 @@
     "plantuml-encoder": "^1.2.5",
     "prismjs": "^1.15.0",
     "rehype-raw": "^3.0.0",
-    "remark": "^9.0.0",
-    "remark-attr": "^0.7.1",
-    "remark-breaks": "^1.0.1",
-    "remark-math": "^1.0.4",
-    "remark-parse": "^5.0.0",
-    "remark-rehype": "^3.0.1",
     "requirejs": "^2.3.6",
     "snapsvg": "^0.5.1",
     "underscore": "^1.9.1",
     "unist-util-remove": "^1.0.1",
-    "vremark-parse": "^0.0.25"
+    "vremark-parse": "^0.0.26"
   }
 }
