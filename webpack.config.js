@@ -1,6 +1,6 @@
 const path = require('path');
 const merge = require('webpack-merge');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+// const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const AssetsPlugin = require('assets-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
@@ -86,20 +86,72 @@ const config = {
             filename: '[name].css'
         })
     ],
-    optimization: {
-        minimizer: [
-            new UglifyJsPlugin({
-                uglifyOptions: {
-                    output: {
-                        comments: false
-                    }
-                }
-            })
-        ]
-    }
+    // optimization: {
+    //     minimizer: [
+    //         new UglifyJsPlugin({
+    //             uglifyOptions: {
+    //                 output: {
+    //                     comments: false
+    //                 }
+    //             }
+    //         })
+    //     ]
+    // }
 };
 
 module.exports = [
+
+
+    merge(base, config, {
+        entry:{
+            'vremark-worker': path.resolve(__dirname, './src/', 'vremark-worker.js')
+        },
+        // output: {
+        //     filename: production?'[name].min.js':'[name].js',
+        // }
+    }),
+
+    // merge(base, config, {
+    //     entry:{
+    //         'vremark-parse': path.resolve(__dirname, './src/', 'vremark-parse.js')
+    //     }
+    // }),
+
+    merge(base, config, {
+        entry:{
+            'vremark-render': path.resolve(__dirname, './src/', 'vremark-render.js')
+        },
+        // output: {
+        //     filename: production?'[name].min.js':'[name].js',
+        // }
+    }),
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     // merge(base, config, {
     //     entry:{
     //         vremark: path.resolve(__dirname, './src/index.js')
@@ -111,29 +163,7 @@ module.exports = [
     //     ]
     // }),
 
-    merge(base, config, {
-        entry:{
-            'vremark-worker': path.resolve(__dirname, './src/', 'vremark-worker.js')
-        },
-        output: {
-            filename: production?'[name].min.js':'[name].js',
-        }
-    }),
 
-    merge(base, config, {
-        entry:{
-            'vremark-parse': path.resolve(__dirname, './src/', 'vremark-parse.js')
-        }
-    }),
-
-    merge(base, config, {
-        entry:{
-            'vremark-render': path.resolve(__dirname, './src/', 'vremark-render.js')
-        },
-        output: {
-            filename: production?'[name].min.js':'[name].js',
-        }
-    }),
 
     // merge(base, config, {
     //     entry:{
@@ -162,8 +192,7 @@ module.exports = [
 
 
 
-
-
+    /*
     merge(base, config, {
         entry: {
 
@@ -231,8 +260,7 @@ module.exports = [
 
 
     })
-
-
+    */
 
 
 
