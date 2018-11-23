@@ -104,6 +104,7 @@ module.exports = [
     }),
 
 
+    /*
 
     merge(base, config, {
         entry: {
@@ -209,6 +210,6 @@ module.exports = [
             ]
         }
     })
-
+*/
 ];
 

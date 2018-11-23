@@ -7,5 +7,6 @@ module.exports = async function parse(text, options) {
     console.time('parse');
     const file = await processor().data('settings', options).process(text);
     console.timeEnd('parse');
-    return file;
+    // return file;
+    return file.contents;
 };
