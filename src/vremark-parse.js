@@ -1,5 +1,5 @@
 const markdown = require('vremark-parse');
-const stringify = require('./lib/vrehype-stringify');
+const stringify = require('vremark-parse/packages/vremark-stringify');
 const unified = require('unified');
 const processor = unified().use(markdown).use(stringify).freeze();
 
