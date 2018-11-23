@@ -65,6 +65,6 @@
     "underscore": "^1.9.1",
     "unist-util-remove": "^1.0.1",
     "vremark-parse": "^0.0.30",
-    "vremark-render": "^0.0.2"
+    "vremark-render": "^0.0.3"
   }
 }

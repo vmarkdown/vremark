@@ -18,7 +18,8 @@ class Plugin extends BasePlugin {
         });
         data.props = props;
         node.data = data;
-        node.tagName = Plugin.COMPONENT_NAME;
+        node.type = 'component';
+        node.component = Plugin.COMPONENT_NAME;
         node.children = [];
     }
 
