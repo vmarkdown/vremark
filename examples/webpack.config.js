@@ -15,8 +15,6 @@ const config = {
     },
     module: {
         rules: [
-
-
             {
                 test: /\.css$/,
                 use: [
@@ -25,34 +23,6 @@ const config = {
                     "css-loader"
                 ]
             }
-
-            // {
-            //     test: /^(?!highlight.js\/styles)[a-zA-Z-_0-9\./]+\.css/,
-            //     use: [
-            //         "style-loader",
-            //         "css-loader"
-            //     ]
-            // },
-            // {
-            //     test: /^(?!highlight)[\s\S]*\.css/,
-            //     use: [
-            //         // "style-loader",
-            //         "css-loader"
-            //     ]
-            // }
-
-
-            // {
-            //     test: /\.css$/,
-            //     use: [
-            //         { loader: "style-loader" },
-            //         { loader: "css-loader" },
-            //     ],
-            // },
-
-
-
-
         ]
     },
     externals: {
