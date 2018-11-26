@@ -31,10 +31,6 @@ module.exports = {
     mounted() {
         var self = this;
         self.compile();
-        // require.ensure([], function(){
-        //     var flowchart = require('flowchart.js');
-        //     self.compile(flowchart);
-        // }, 'vremark-plugin-flowchart-libs');
     },
     destroyed(){
         var self = this;

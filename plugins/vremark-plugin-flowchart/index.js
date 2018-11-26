@@ -13,9 +13,25 @@ class Plugin extends BasePlugin {
     static transformer(node) {
         const data = node.data || {};
         const props = data.props || {};
-        Object.assign(props, {
-            code: node.value
-        });
+
+        if( node.children && node.children[0]
+            && node.children[0].children
+            && node.children[0].children[0].value) {
+            Object.assign(props, {
+                code: node.children[0].children[0].value
+            });
+        }
+        // if(node.value){
+        //     Object.assign(props, {
+        //         code: node.value
+        //     });
+        // }
+        // else{
+        //     Object.assign(props, {
+        //         code: node.children[0].children[0].value
+        //     });
+        // }
+
         data.props = props;
         node.data = data;
         node.type = 'component';
