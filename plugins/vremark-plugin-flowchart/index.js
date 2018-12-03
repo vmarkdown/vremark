@@ -1,6 +1,7 @@
 const xtend = require('xtend');
 const visitChildren = require('unist-util-visit-children');
 const COMPONENT_NAME = 'vremark-component-flowchart';
+const SETTINGS_NAME = 'flowchart';
 
 function test(node) {
     return node.lang &&
@@ -72,7 +73,7 @@ module.exports = function plugin(options = {}) {
 
     return async function transformer(root, file, next) {
 
-        if(!settings.hasOwnProperty('flowchart') || !settings.flowchart ) {
+        if(!settings.hasOwnProperty(SETTINGS_NAME) || !settings[SETTINGS_NAME] ) {
             next();
             return root;
         }

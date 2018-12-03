@@ -23,7 +23,9 @@ const render = require('../../src/vremark-render');
 const plugins = require('../../plugins/index');
 
 const settings = {
-    flowchart: false
+    flowchart: {
+
+    }
 };
 
 const app = new Vue({
@@ -65,11 +67,11 @@ const app = new Vue({
 
     setTimeout(function () {
         app.update(require('./1.md'));
-    }, 100);
+    }, 0);
 
-    // setTimeout(function () {
-    //     app.update(require('./2.md'));
-    // }, 5000);
+    setTimeout(function () {
+        app.update(require('./2.md'));
+    }, 5000);
 
 })();
 
