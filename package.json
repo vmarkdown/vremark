@@ -63,7 +63,7 @@
     "unist-util-remove": "^1.0.1"
   },
   "dependencies": {
-    "vremark-parse": "^0.0.33",
+    "vremark-parse": "^0.0.34",
     "vremark-render": "^0.0.4"
   }
 }

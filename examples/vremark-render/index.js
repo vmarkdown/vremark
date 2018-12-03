@@ -2,7 +2,7 @@
 require('./framework.css');
 require('./github.css');
 
-const md = require('../md/test.md');
+// const md = require('../md/test.md');
 const Vue = require('vue');
 
 function register(component) {
@@ -12,13 +12,15 @@ function register(component) {
 const parse = require('../../src/vremark-worker');
 const render = require('../../src/vremark-render');
 
-const Plugins = require('../../plugins');
+// const Plugins = require('../../plugins');
+//
+// const plugins = [];
+// Plugins.forEach(function (Plugin) {
+//     const plugin = new Plugin();
+//     plugins.push(plugin);
+// });
 
-const plugins = [];
-Plugins.forEach(function (Plugin) {
-    const plugin = new Plugin();
-    plugins.push(plugin);
-});
+const plugins = require('../../plugins/index');
 
 const app = new Vue({
     el: '#app',
@@ -39,10 +41,10 @@ const app = new Vue({
             console.log(vast);
 
             const h = this.$createElement;
-            this.vdom = await render(vast, {
+            this.vdom = await render(vast, plugins,{
                 register: register,
                 h:h,
-                plugins: plugins
+                // plugins: plugins
             });
 
             this.$forceUpdate();
@@ -55,12 +57,15 @@ const app = new Vue({
 
 (async ()=>{
 
+    // app.update(md);
 
-    app.update(md);
+    setTimeout(function () {
+        app.update(require('./1.md'));
+    }, 100);
 
-
-
-
+    // setTimeout(function () {
+    //     app.update(require('./2.md'));
+    // }, 5000);
 
 })();
 
