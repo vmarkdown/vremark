@@ -22,6 +22,10 @@ const render = require('../../src/vremark-render');
 
 const plugins = require('../../plugins/index');
 
+const settings = {
+    flowchart: false
+};
+
 const app = new Vue({
     el: '#app',
     methods: {
@@ -37,15 +41,15 @@ const app = new Vue({
                 }
             });
             console.timeEnd('worker');
-
             console.log(vast);
 
             const h = this.$createElement;
-            this.vdom = await render(vast, plugins,{
-                register: register,
-                h:h,
-                // plugins: plugins
-            });
+            this.vdom = await render(vast, plugins,
+                Object.assign({}, settings, {
+                    register: register,
+                    h:h,
+                })
+            );
 
             this.$forceUpdate();
         }

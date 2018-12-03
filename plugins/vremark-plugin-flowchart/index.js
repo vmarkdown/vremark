@@ -45,7 +45,7 @@ function process(node) {
     node.children = [];
 }
 
-async function main(root, file, register) {
+async function main(root, file, settings) {
     var isLoadComponent = false;
 
     visitChildren(function (node) {
@@ -55,6 +55,8 @@ async function main(root, file, register) {
         isLoadComponent = true;
         process(node);
     })(root);
+
+    const register = settings.register;
 
     if(isLoadComponent){
         const component = await loadComponent();
@@ -67,11 +69,16 @@ async function main(root, file, register) {
 module.exports = function plugin(options = {}) {
 
     const settings = xtend(options, this.data('settings'));
-    const register = settings.register;
 
     return async function transformer(root, file, next) {
+
+        if(!settings.hasOwnProperty('flowchart') || !settings.flowchart ) {
+            next();
+            return root;
+        }
+
         try {
-            await main(root, file, register);
+            await main(root, file, settings);
         }
         catch (e) {
             console.error(e);
@@ -80,4 +87,5 @@ module.exports = function plugin(options = {}) {
             next();
         }
     };
+
 };
