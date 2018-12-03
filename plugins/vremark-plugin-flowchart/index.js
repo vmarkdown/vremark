@@ -1,5 +1,5 @@
 const xtend = require('xtend');
-
+const visitChildren = require('unist-util-visit-children');
 const COMPONENT_NAME = 'vremark-component-flowchart';
 
 function test(node) {
@@ -8,6 +8,22 @@ function test(node) {
             node.lang === 'flow' || node.lang === 'flowchart'
         )
         && node.tagName === "pre" && node.type === "element";
+}
+
+async function loadComponent() {
+    // const component = await import(
+    //     /* webpackChunkName: "vremark-component-flowchart" */
+    //     './component');
+    // return component;
+
+    // require.ensure([], function () {
+    //     const component = require('./component');
+    //     return component;
+    // }, COMPONENT_NAME);
+
+    return await import(
+        /* webpackChunkName: "vremark-component-flowchart" */
+        './component');
 }
 
 function process(node) {
@@ -29,41 +45,39 @@ function process(node) {
     node.children = [];
 }
 
+async function main(root, file, register) {
+    var isLoadComponent = false;
+
+    visitChildren(function (node) {
+        if(!test(node)){
+            return;
+        }
+        isLoadComponent = true;
+        process(node);
+    })(root);
+
+    if(isLoadComponent){
+        const component = await loadComponent();
+        if(register){
+            register(component.default || component);
+        }
+    }
+}
+
 module.exports = function plugin(options = {}) {
 
     const settings = xtend(options, this.data('settings'));
     const register = settings.register;
 
     return async function transformer(root, file, next) {
-
-        var isLoadPlugin = false;
-
-        var children = root.children;
-
-        for(var i=0;i<children.length;i++) {
-            var node = children[i];
-            if(test(node)){
-                isLoadPlugin = true;
-                process(node);
-            }
+        try {
+            await main(root, file, register);
         }
-
-
-        if(!isLoadPlugin){
+        catch (e) {
+            console.error(e);
+        }
+        finally {
             next();
         }
-
-        const component = await import(
-            /* webpackChunkName: "vremark-component-flowchart" */
-        './component');
-
-        if(register){
-            register(component.default || component);
-        }
-
-        next();
-
-
-
     };
 };
