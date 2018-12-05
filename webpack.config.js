@@ -128,6 +128,28 @@ module.exports = [
 
 
 
+    merge(base, config, {
+        entry:{
+            'vremark-plugins': path.resolve(__dirname, './plugins/', 'index.js')
+        }
+    }),
+
+
+
+
+
+
+
+
+
+
+
+
+    // merge(base, config, {
+    //     entry:{
+    //         'vremark-plugin-flowchart': path.resolve(__dirname, './plugins/', 'vremark-plugin-flowchart', 'index.js')
+    //     }
+    // }),
 
 
 

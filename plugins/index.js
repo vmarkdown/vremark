@@ -3,6 +3,9 @@
 // ];
 
 exports.settings = {
+    flowchart: {
+
+    }
 };
 
 exports.plugins = [
